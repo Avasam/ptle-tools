@@ -1,0 +1,433 @@
+{
+  "watchList": [
+    {
+      "address": "80417F30",
+      "baseIndex": 1,
+      "label": "Current Area",
+      "typeIndex": 2,
+      "unsigned": false
+    },
+    {
+      "address": "80167382",
+      "baseIndex": 1,
+      "label": "Starting Area",
+      "typeIndex": 1,
+      "unsigned": false
+    },
+    {
+      "address": "8016738A",
+      "baseIndex": 1,
+      "label": "Starting Area",
+      "typeIndex": 1,
+      "unsigned": false
+    },
+    {
+      "groupEntries": [
+        {
+          "address": "80459A10",
+          "baseIndex": 0,
+          "label": "Play as Nicole",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "80459A14",
+          "baseIndex": 0,
+          "label": "Play as Native",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "80459A2C",
+          "baseIndex": 0,
+          "label": "Play as Retro Harry",
+          "typeIndex": 2,
+          "unsigned": false
+        }
+      ],
+      "groupName": "Character Selection"
+    },
+    {
+      "groupEntries": [
+        {
+          "address": "80459A24",
+          "baseIndex": 0,
+          "label": "Slow motion",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "80459A40",
+          "baseIndex": 0,
+          "label": "Super Punches",
+          "typeIndex": 2,
+          "unsigned": false
+        }
+      ],
+      "groupName": "Cheats"
+    },
+    {
+      "groupEntries": [
+        {
+          "address": "80423408",
+          "baseIndex": 0,
+          "label": "A/B/X/Y/Start",
+          "typeIndex": 0,
+          "unsigned": false
+        },
+        {
+          "address": "80423409",
+          "baseIndex": 0,
+          "label": "L/R/Z/Dpad",
+          "typeIndex": 0,
+          "unsigned": false
+        },
+        {
+          "address": "8042340E",
+          "baseIndex": 0,
+          "label": "L Analog",
+          "typeIndex": 0,
+          "unsigned": false
+        },
+        {
+          "address": "8042340F",
+          "baseIndex": 0,
+          "label": "R Analog",
+          "typeIndex": 0,
+          "unsigned": false
+        },
+        {
+          "address": "8042340A",
+          "baseIndex": 0,
+          "label": "L Stick X",
+          "typeIndex": 0,
+          "unsigned": false
+        },
+        {
+          "address": "8042340B",
+          "baseIndex": 0,
+          "label": "L Stick Y",
+          "typeIndex": 0,
+          "unsigned": false
+        },
+        {
+          "address": "8042340C",
+          "baseIndex": 0,
+          "label": "C Stick X",
+          "typeIndex": 0,
+          "unsigned": false
+        },
+        {
+          "address": "8042340D",
+          "baseIndex": 0,
+          "label": "C Stick Y",
+          "typeIndex": 0,
+          "unsigned": false
+        }
+      ],
+      "groupName": "Input"
+    },
+    {
+      "groupEntries": [
+        {
+          "groupEntries": [
+            {
+              "address": "80417EC8",
+              "baseIndex": 0,
+              "label": "Amount",
+              "pointerOffsets": [
+                "65C"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "80417EC8",
+              "baseIndex": 0,
+              "label": "Capacity",
+              "pointerOffsets": [
+                "658"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            }
+          ],
+          "groupName": "Health"
+        },
+        {
+          "groupEntries": [
+            {
+              "address": "8041655C",
+              "baseIndex": 0,
+              "label": "Amount",
+              "pointerOffsets": [
+                "5C"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041655C",
+              "baseIndex": 0,
+              "label": "Capacity",
+              "pointerOffsets": [
+                "60"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            }
+          ],
+          "groupName": "Canteen Slots"
+        },
+        {
+          "groupEntries": [
+            {
+              "groupEntries": [
+                {
+                  "address": "80417EC8",
+                  "baseIndex": 0,
+                  "label": "Value",
+                  "pointerOffsets": [
+                    "3D0"
+                  ],
+                  "typeIndex": 2,
+                  "unsigned": false
+                },
+                {
+                  "groupEntries": [],
+                  "groupName": "01 -> Floor (can't move)"
+                },
+                {
+                  "groupEntries": [],
+                  "groupName": "02 -> Normal floor"
+                },
+                {
+                  "groupEntries": [],
+                  "groupName": "04 -> Sinking"
+                }
+              ],
+              "groupName": "Collide state"
+            },
+            {
+              "address": "80417EC8",
+              "baseIndex": 0,
+              "label": "Floor has friction",
+              "pointerOffsets": [
+                "3E4"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "80417EC8",
+              "baseIndex": 0,
+              "label": "Is not in movement",
+              "pointerOffsets": [
+                "3DC"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "80417EC8",
+              "baseIndex": 0,
+              "label": "Is in cutscene",
+              "pointerOffsets": [
+                "680"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "80417EC8",
+              "baseIndex": 0,
+              "label": "Is not on vines",
+              "pointerOffsets": [
+                "708"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "80417EC8",
+              "baseIndex": 0,
+              "label": "Can't swing on vines",
+              "pointerOffsets": [
+                "710"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "80417EC8",
+              "baseIndex": 0,
+              "label": "Is Harry visible",
+              "pointerOffsets": [
+                "418"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            }
+          ],
+          "groupName": "Flags"
+        },
+        {
+          "groupEntries": [
+            {
+              "address": "80417EC8",
+              "baseIndex": 0,
+              "label": "Rising Strike",
+              "pointerOffsets": [
+                "1960"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "80417EC8",
+              "baseIndex": 0,
+              "label": "Smash Strike",
+              "pointerOffsets": [
+                "1988"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "80417EC8",
+              "baseIndex": 0,
+              "label": "Breakdance",
+              "pointerOffsets": [
+                "1970"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "80417EC8",
+              "baseIndex": 0,
+              "label": "Heroic Dash",
+              "pointerOffsets": [
+                "1978"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "80417EC8",
+              "baseIndex": 0,
+              "label": "Heroic Dive",
+              "pointerOffsets": [
+                "1980"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "80417EC8",
+              "baseIndex": 0,
+              "label": "Super Sling",
+              "pointerOffsets": [
+                "1968"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            }
+          ],
+          "groupName": "Skills"
+        },
+        {
+          "groupEntries": [
+            {
+              "address": "8041656C",
+              "baseIndex": 0,
+              "label": "Canteen",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "80416550",
+              "baseIndex": 0,
+              "label": "Gas Mask",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "804164E0",
+              "baseIndex": 0,
+              "label": "Pickaxes",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "80416534",
+              "baseIndex": 0,
+              "label": "Raft",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "80416518",
+              "baseIndex": 0,
+              "label": "Shield",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "804164A8",
+              "baseIndex": 0,
+              "label": "Slingshot",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "804164FC",
+              "baseIndex": 0,
+              "label": "TNT",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "804164C4",
+              "baseIndex": 0,
+              "label": "Torch",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "80417EC8",
+              "baseIndex": 0,
+              "label": "Idols",
+              "pointerOffsets": [
+                "195C"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            }
+          ],
+          "groupName": "Inventory"
+        }
+      ],
+      "groupName": "Player"
+    },
+    {
+      "groupEntries": [
+        {
+          "address": "80E9C1DC",
+          "baseIndex": 1,
+          "label": "Item to choose (Inv. Menu)",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "8012FE56",
+          "baseIndex": 0,
+          "label": "Explorer Idol Reward",
+          "typeIndex": 1,
+          "unsigned": false
+        }
+      ],
+      "groupName": "Misc"
+    }
+  ]
+}
