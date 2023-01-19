@@ -70,14 +70,14 @@
       "groupEntries": [
         {
           "address": "80427408",
-          "baseIndex": 0,
+          "baseIndex": 3,
           "label": "A/B/X/Y/Start",
           "typeIndex": 0,
           "unsigned": true
         },
         {
           "address": "80427409",
-          "baseIndex": 0,
+          "baseIndex": 3,
           "label": "L/R/Z/Dpad",
           "typeIndex": 0,
           "unsigned": false
@@ -203,6 +203,10 @@
                 },
                 {
                   "groupEntries": [],
+                  "groupName": "03 -> Fall through floor"
+                },
+                {
+                  "groupEntries": [],
                   "groupName": "04 -> Sinking"
                 }
               ],
@@ -264,6 +268,16 @@
               "label": "Is Harry visible",
               "pointerOffsets": [
                 "418"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041BE4C",
+              "baseIndex": 0,
+              "label": "Is Grounded",
+              "pointerOffsets": [
+                "120"
               ],
               "typeIndex": 2,
               "unsigned": false
@@ -395,6 +409,13 @@
               "unsigned": false
             },
             {
+              "address": "804CB694",
+              "baseIndex": 0,
+              "label": "Item Swap (inverted)",
+              "typeIndex": 2,
+              "unsigned": true
+            },
+            {
               "address": "8041BE4C",
               "baseIndex": 0,
               "label": "Idols",
@@ -413,11 +434,36 @@
     {
       "groupEntries": [
         {
-          "address": "80962688",
-          "baseIndex": 0,
-          "label": "Menu ID",
-          "typeIndex": 2,
-          "unsigned": false
+          "groupEntries": [
+            {
+              "address": "80962688",
+              "baseIndex": 0,
+              "label": "Value",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "groupEntries": [],
+              "groupName": "01 -> Open Handbook"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "03 -> Heroic Handbook"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "03 -> Close Handbook"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "04 -> New Item dialog"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "06 -> Item Swap"
+            }
+          ],
+          "groupName": "Menu ID"
         },
         {
           "address": "80132CEE",
