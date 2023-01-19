@@ -1,0 +1,22 @@
+// Keep in alphabetical order
+{
+  "recommendations": [
+    "bierner.github-markdown-preview",
+    "davidanson.vscode-markdownlint",
+],
+"unwantedRecommendations": [
+    /*
+     * Don't recommend by default for this workspace
+    */
+    // Not a web project
+    "christian-kohler.npm-intellisense",
+    "ms-edgedevtools.vscode-edge-devtools",
+    /*
+     * Must disable in this workspace
+     * https://github.com/microsoft/vscode/issues/40239
+    */
+    // VSCode has implemented an optimized version
+    "coenraads.bracket-pair-colorizer",
+    "coenraads.bracket-pair-colorizer-2",
+  ],
+}

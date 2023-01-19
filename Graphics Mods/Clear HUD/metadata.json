@@ -1,0 +1,65 @@
+{
+  "meta": {
+    "title": "Clear HUD",
+    "description": "Hides the bare minimum UI elements to take clean screenshots.",
+    "author": "Avasam"
+  },
+  "groups": [
+    {
+      "name": "Main HUD",
+      "targets": [
+        {
+          "type": "draw_started",
+          "prettyname": "boss health",
+          "texture_filename": "tex1_32x32_a69d240a0fb67c44_14"
+        },
+        {
+          "type": "draw_started",
+          "prettyname": "player health",
+          "texture_filename": "tex1_32x32_dc6e4373271e2b12_14"
+        },
+        {
+          "type": "draw_started",
+          "prettyname": "bamboo",
+          "texture_filename": "tex1_64x32_a2da40e2d4f7984c_cca81e998285ea57_8"
+        },
+        {
+          "type": "draw_started",
+          "prettyname": "canteen glass",
+          "texture_filename": "tex1_32x32_2b3ac610a8acc9b1_14"
+        },
+        {
+          "type": "draw_started",
+          "prettyname": "canteen water",
+          "texture_filename": "tex1_32x16_9a0d8a4f892be29d_bea82fd26d2e4be1_8"
+        },
+        {
+          "type": "draw_started",
+          "prettyname": "canteen bamboo",
+          "texture_filename": "tex1_64x32_86460661db2a40c5_f47d06d1703569f6_8"
+        },
+        {
+          "type": "draw_started",
+          "prettyname": "items knot",
+          "texture_filename": "tex1_16x16_f9bf70c300f01307_14"
+        },
+        {
+          "type": "draw_started",
+          "prettyname": "items pane",
+          "texture_filename": "tex1_32x32_03b78338b5e8f2f2_14"
+        },
+        {
+          "type": "draw_started",
+          "prettyname": "crosshair",
+          "texture_filename": "tex1_16x16_63c0750152f77939_047e4a4317e1a9a4_8"
+        }
+      ]
+    }
+  ],
+  "features": [
+    {
+      "group": "Main HUD",
+      "action": "skip"
+    }
+  ]
+}
