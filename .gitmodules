@@ -1,3 +1,6 @@
 [submodule "PitfallARCTool"]
 	path = PitfallARCTool
 	url = https://github.com/UltiNaruto/PitfallARCTool
+[submodule "TexConvert"]
+	path = TexConvert
+	url = https://github.com/Helco/Pitfall.git

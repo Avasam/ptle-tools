@@ -24,6 +24,12 @@ Unarchive and re-archive `.arc` gamefiles.
 
 Repository: <https://github.com/UltiNaruto/PitfallARCTool>
 
+## TexConvert
+
+A tool to convert unarchived Pitfall TEX format textures into a workable format.
+
+Releases: <https://github.com/Helco/Pitfall/releases>
+
 ## AutoSplitter
 
 A memory-based LiveSplit AutoSplitter for the PC version.
