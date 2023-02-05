@@ -1,0 +1,323 @@
+{
+  "Jungle": [
+    {
+      "id": 0,
+      "asset_id": 8456236,
+      "area_name": "Chameleon Temple"
+    },
+    {
+      "id": 5,
+      "asset_id": 132959285,
+      "area_name": "Mama-Oullo Tower"
+    },
+    {
+      "id": 7,
+      "asset_id": 161214792,
+      "area_name": "Mysterious Temple"
+    },
+    {
+      "id": 9,
+      "asset_id": 183618815,
+      "area_name": "Native Jungle"
+    },
+    {
+      "id": 14,
+      "asset_id": 251016529,
+      "area_name": "Bittenbinder's Camp"
+    },
+    {
+      "id": 23,
+      "asset_id": 848475849,
+      "area_name": "The Great Tree"
+    },
+    {
+      "id": 24,
+      "asset_id": 952610429,
+      "area_name": "Punchau Shrine"
+    },
+    {
+      "id": 31,
+      "asset_id": 1245593688,
+      "area_name": "Plane Cockpit"
+    },
+    {
+      "id": 37,
+      "asset_id": 1637749030,
+      "area_name": "Ladder of Miles"
+    },
+    {
+      "id": 39,
+      "asset_id": 1777389026,
+      "area_name": "Battered Bridge"
+    },
+    {
+      "id": 43,
+      "asset_id": 1894513827,
+      "area_name": "Altar of Huitaca"
+    },
+    {
+      "id": 49,
+      "asset_id": 2056992880,
+      "area_name": "Jungle Trail"
+    },
+    {
+      "id": 55,
+      "asset_id": 2482543941,
+      "area_name": "Gates of El Dorado"
+    },
+    {
+      "id": 61,
+      "asset_id": 2824480659,
+      "area_name": "Statues of Ayar"
+    },
+    {
+      "id": 62,
+      "asset_id": 2883046616,
+      "area_name": "The Altar of Ages"
+    },
+    {
+      "id": 64,
+      "asset_id": 3101019782,
+      "area_name": "Mouth of Inti"
+    },
+    {
+      "id": 75,
+      "asset_id": 3738855868,
+      "area_name": "Jungle Canyon"
+    },
+    {
+      "id": 85,
+      "asset_id": 4002375936,
+      "area_name": "Crash Site"
+    },
+    {
+      "id": 86,
+      "asset_id": 4042890328,
+      "area_name": "Fire-bombed Towers"
+    }
+  ],
+  "Native Territory": [
+    {
+      "id": 1,
+      "asset_id": 46642805,
+      "area_name": "Monkey Temple (Monkey)"
+    },
+    {
+      "id": 4,
+      "asset_id": 95056492,
+      "area_name": "Native Village"
+    },
+    {
+      "id": 10,
+      "asset_id": 203177543,
+      "area_name": "Renegade Fort"
+    },
+    {
+      "id": 18,
+      "asset_id": 481379117,
+      "area_name": "Renegade Headquarters"
+    },
+    {
+      "id": 20,
+      "asset_id": 597303653,
+      "area_name": "Turtle Monument"
+    },
+    {
+      "id": 25,
+      "asset_id": 981536804,
+      "area_name": "Flooded Cave"
+    },
+    {
+      "id": 45,
+      "asset_id": 1923957498,
+      "area_name": "St. Claire's Excavation Camp (Prisoner)"
+    },
+    {
+      "id": 66,
+      "asset_id": 3130224863,
+      "area_name": "St. Claire's Excavation Camp (Escape)"
+    },
+    {
+      "id": 71,
+      "asset_id": 3449045065,
+      "area_name": "Butterfly Glade"
+    },
+    {
+      "id": 74,
+      "asset_id": 3729935782,
+      "area_name": "Outpost Underwater Cave"
+    },
+    {
+      "id": 79,
+      "asset_id": 3870888842,
+      "area_name": "Twin Outposts"
+    },
+    {
+      "id": 84,
+      "asset_id": 3972650841,
+      "area_name": "Flooded Courtyard"
+    },
+    {
+      "id": 87,
+      "asset_id": 4088716430,
+      "area_name": "Monkey Temple (Harry)"
+    }
+  ],
+  "Lost Caverns": [
+    {
+      "id": 2,
+      "asset_id": 50715714,
+      "area_name": "Scorpion Temple (Scorpion)"
+    },
+    {
+      "id": 13,
+      "asset_id": 232674416,
+      "area_name": "Crystal Cavern"
+    },
+    {
+      "id": 32,
+      "asset_id": 1258863595,
+      "area_name": "Scorpion Temple (Harry)"
+    },
+    {
+      "id": 53,
+      "asset_id": 2424064299,
+      "area_name": "Mountain Overlook"
+    },
+    {
+      "id": 57,
+      "asset_id": 2584514040,
+      "area_name": "Eyes of Doom"
+    },
+    {
+      "id": 58,
+      "asset_id": 2640398817,
+      "area_name": "Underground Dam"
+    },
+    {
+      "id": 83,
+      "asset_id": 3932584311,
+      "area_name": "Abandoned Cavern"
+    }
+  ],
+  "Snowy Mountains": [
+    {
+      "id": 6,
+      "asset_id": 149145153,
+      "area_name": "Valley of the Spirits"
+    },
+    {
+      "id": 15,
+      "asset_id": 357809121,
+      "area_name": "Penguin Den"
+    },
+    {
+      "id": 16,
+      "asset_id": 454159476,
+      "area_name": "Penguin Temple (Harry)"
+    },
+    {
+      "id": 17,
+      "asset_id": 461910995,
+      "area_name": "Mountain Sled Run"
+    },
+    {
+      "id": 19,
+      "asset_id": 522420018,
+      "area_name": "Penguin Temple (Penguin)"
+    },
+    {
+      "id": 28,
+      "asset_id": 1048504354,
+      "area_name": "Ekkeko Ice Cavern"
+    },
+    {
+      "id": 35,
+      "asset_id": 1427227756,
+      "area_name": "Apu Illapu Shrine"
+    },
+    {
+      "id": 38,
+      "asset_id": 1649707895,
+      "area_name": "White Valley"
+    },
+    {
+      "id": 42,
+      "asset_id": 1867090877,
+      "area_name": "Viracocha Monoliths"
+    },
+    {
+      "id": 47,
+      "asset_id": 1985133308,
+      "area_name": "Spinja Lair"
+    },
+    {
+      "id": 50,
+      "asset_id": 2168973969,
+      "area_name": "Copacanti Lake"
+    },
+    {
+      "id": 51,
+      "asset_id": 2335649346,
+      "area_name": "Cavern Lake"
+    },
+    {
+      "id": 80,
+      "asset_id": 3895865183,
+      "area_name": "Viracocha Monoliths (Cutscene)"
+    }
+  ],
+  "Minigame": [
+    {
+      "id": 8,
+      "asset_id": 169813286,
+      "area_name": "Whack-A-Tuco"
+    },
+    {
+      "id": 12,
+      "asset_id": 225632575,
+      "area_name": "Tuco Shoot"
+    },
+    {
+      "id": 48,
+      "asset_id": 2054541737,
+      "area_name": "Pickaxe Race"
+    },
+    {
+      "id": 54,
+      "asset_id": 2467722396,
+      "area_name": "Raft Bowling"
+    },
+    {
+      "id": 78,
+      "asset_id": 3826336778,
+      "area_name": "KaBOOM!"
+    }
+  ],
+  "Prologue": [
+    {
+      "id": 34,
+      "asset_id": 1394962713,
+      "area_name": "Plane Crash"
+    }
+  ],
+  "Ending": [
+    {
+      "id": 56,
+      "asset_id": 2575849878,
+      "area_name": "Ruins of El Dorado"
+    },
+    {
+      "id": 72,
+      "asset_id": 3486711312,
+      "area_name": "Ancient El Dorado"
+    }
+  ],
+  "Warp": [
+    {
+      "id": 81,
+      "asset_id": 3917263996,
+      "area_name": "Teleport"
+    }
+  ]
+}
