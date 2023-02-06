@@ -4,21 +4,24 @@
       "address": "8041BEB4",
       "baseIndex": 1,
       "label": "Current Area",
-      "typeIndex": 2,
+      "length": 4,
+      "typeIndex": 6,
       "unsigned": true
     },
     {
       "address": "8016A136",
       "baseIndex": 1,
       "label": "Starting Area",
-      "typeIndex": 1,
+      "length": 2,
+      "typeIndex": 6,
       "unsigned": false
     },
     {
       "address": "8016A13E",
       "baseIndex": 1,
       "label": "Starting Area",
-      "typeIndex": 1,
+      "length": 2,
+      "typeIndex": 6,
       "unsigned": false
     },
     {

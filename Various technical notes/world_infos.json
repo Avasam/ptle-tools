@@ -3,96 +3,115 @@
     {
       "id": 0,
       "asset_id": 8456236,
+      "asset_crc32": "0081 082C",
       "area_name": "Chameleon Temple"
     },
     {
       "id": 5,
       "asset_id": 132959285,
+      "asset_crc32": "07EC CC35",
       "area_name": "Mama-Oullo Tower"
     },
     {
       "id": 7,
       "asset_id": 161214792,
+      "asset_crc32": "099B F148",
       "area_name": "Mysterious Temple"
     },
     {
       "id": 9,
       "asset_id": 183618815,
+      "asset_crc32": "0AF1 CCFF",
       "area_name": "Native Jungle"
     },
     {
       "id": 14,
       "asset_id": 251016529,
+      "asset_crc32": "0EF6 3551",
       "area_name": "Bittenbinder's Camp"
     },
     {
       "id": 23,
       "asset_id": 848475849,
+      "asset_crc32": "3292 B6C9",
       "area_name": "The Great Tree"
     },
     {
       "id": 24,
       "asset_id": 952610429,
+      "asset_crc32": "38C7 AE7D",
       "area_name": "Punchau Shrine"
     },
     {
       "id": 31,
       "asset_id": 1245593688,
+      "asset_crc32": "4A3E 4058",
       "area_name": "Plane Cockpit"
     },
     {
       "id": 37,
       "asset_id": 1637749030,
+      "asset_crc32": "619E 1126",
       "area_name": "Ladder of Miles"
     },
     {
       "id": 39,
       "asset_id": 1777389026,
+      "asset_crc32": "69F0 CDE2",
       "area_name": "Battered Bridge"
     },
     {
       "id": 43,
       "asset_id": 1894513827,
+      "asset_crc32": "70EB FCA3",
       "area_name": "Altar of Huitaca"
     },
     {
       "id": 49,
       "asset_id": 2056992880,
+      "asset_crc32": "7A9B 3870",
       "area_name": "Jungle Trail"
     },
     {
       "id": 55,
       "asset_id": 2482543941,
+      "asset_crc32": "93F8 9D45",
       "area_name": "Gates of El Dorado"
     },
     {
       "id": 61,
       "asset_id": 2824480659,
+      "asset_crc32": "A85A 2793",
       "area_name": "Statues of Ayar"
     },
     {
       "id": 62,
       "asset_id": 2883046616,
+      "asset_crc32": "A85A 2793",
       "area_name": "The Altar of Ages"
     },
     {
       "id": 64,
       "asset_id": 3101019782,
+      "asset_crc32": "B8D5 CE86",
       "area_name": "Mouth of Inti"
     },
     {
       "id": 75,
       "asset_id": 3738855868,
+      "asset_crc32": "DEDA 69BC",
       "area_name": "Jungle Canyon"
     },
     {
       "id": 85,
       "asset_id": 4002375936,
+      "asset_crc32": "EE8F 6900",
       "area_name": "Crash Site"
     },
     {
       "id": 86,
       "asset_id": 4042890328,
+      "asset_crc32": "F0F9 9C58",
       "area_name": "Fire-bombed Towers"
     }
   ],
@@ -100,66 +119,79 @@
     {
       "id": 1,
       "asset_id": 46642805,
+      "asset_crc32": "02C7 B675",
       "area_name": "Monkey Temple (Monkey)"
     },
     {
       "id": 4,
       "asset_id": 95056492,
+      "asset_crc32": "05AA 726C",
       "area_name": "Native Village"
     },
     {
       "id": 10,
       "asset_id": 203177543,
+      "asset_crc32": "0C1C 3E47",
       "area_name": "Renegade Fort"
     },
     {
       "id": 18,
       "asset_id": 481379117,
+      "asset_crc32": "1CB1 432D",
       "area_name": "Renegade Headquarters"
     },
     {
       "id": 20,
       "asset_id": 597303653,
+      "asset_crc32": "239A 2165",
       "area_name": "Turtle Monument"
     },
     {
       "id": 25,
       "asset_id": 981536804,
+      "asset_crc32": "3A81 1024",
       "area_name": "Flooded Cave"
     },
     {
       "id": 45,
       "asset_id": 1923957498,
+      "asset_crc32": "72AD 42FA",
       "area_name": "St. Claire's Excavation Camp (Prisoner)"
     },
     {
       "id": 66,
       "asset_id": 3130224863,
+      "asset_crc32": "BA93 70DF",
       "area_name": "St. Claire's Excavation Camp (Escape)"
     },
     {
       "id": 71,
       "asset_id": 3449045065,
+      "asset_crc32": "CD94 4049",
       "area_name": "Butterfly Glade"
     },
     {
       "id": 74,
       "asset_id": 3729935782,
+      "asset_crc32": "DE52 4DA6",
       "area_name": "Outpost Underwater Cave"
     },
     {
       "id": 79,
       "asset_id": 3870888842,
+      "asset_crc32": "E6B9 138A",
       "area_name": "Twin Outposts"
     },
     {
       "id": 84,
       "asset_id": 3972650841,
+      "asset_crc32": "ECC9 D759",
       "area_name": "Flooded Courtyard"
     },
     {
       "id": 87,
       "asset_id": 4088716430,
+      "asset_crc32": "F3B4 DC8E",
       "area_name": "Monkey Temple (Harry)"
     }
   ],
@@ -167,36 +199,43 @@
     {
       "id": 2,
       "asset_id": 50715714,
+      "asset_crc32": "0305 DC42",
       "area_name": "Scorpion Temple (Scorpion)"
     },
     {
       "id": 13,
       "asset_id": 232674416,
+      "asset_crc32": "0DDE 5470",
       "area_name": "Crystal Cavern"
     },
     {
       "id": 32,
       "asset_id": 1258863595,
+      "asset_crc32": "4B08 BBEB",
       "area_name": "Scorpion Temple (Harry)"
     },
     {
       "id": 53,
       "asset_id": 2424064299,
+      "asset_crc32": "907C 492B",
       "area_name": "Mountain Overlook"
     },
     {
       "id": 57,
       "asset_id": 2584514040,
+      "asset_crc32": "9A0C 8DF8",
       "area_name": "Eyes of Doom"
     },
     {
       "id": 58,
       "asset_id": 2640398817,
+      "asset_crc32": "9D61 49E1",
       "area_name": "Underground Dam"
     },
     {
       "id": 83,
       "asset_id": 3932584311,
+      "asset_crc32": "EA66 7977",
       "area_name": "Abandoned Cavern"
     }
   ],
@@ -204,66 +243,79 @@
     {
       "id": 6,
       "asset_id": 149145153,
+      "asset_crc32": "08E3 C641",
       "area_name": "Valley of the Spirits"
     },
     {
       "id": 15,
       "asset_id": 357809121,
+      "asset_crc32": "1553 BBE1",
       "area_name": "Penguin Den"
     },
     {
       "id": 16,
       "asset_id": 454159476,
+      "asset_crc32": "1B11 EC74",
       "area_name": "Penguin Temple (Harry)"
     },
     {
       "id": 17,
       "asset_id": 461910995,
+      "asset_crc32": "1B88 33D3",
       "area_name": "Mountain Sled Run"
     },
     {
       "id": 19,
       "asset_id": 522420018,
+      "asset_crc32": "1F23 7F32",
       "area_name": "Penguin Temple (Penguin)"
     },
     {
       "id": 28,
       "asset_id": 1048504354,
+      "asset_crc32": "3E7E E822",
       "area_name": "Ekkeko Ice Cavern"
     },
     {
       "id": 35,
       "asset_id": 1427227756,
+      "asset_crc32": "5511 C46C",
       "area_name": "Apu Illapu Shrine"
     },
     {
       "id": 38,
       "asset_id": 1649707895,
+      "asset_crc32": "6254 8B77",
       "area_name": "White Valley"
     },
     {
       "id": 42,
       "asset_id": 1867090877,
+      "asset_crc32": "6F49 8BBD",
       "area_name": "Viracocha Monoliths"
     },
     {
       "id": 47,
       "asset_id": 1985133308,
+      "asset_crc32": "7652 BAFC",
       "area_name": "Spinja Lair"
     },
     {
       "id": 50,
       "asset_id": 2168973969,
+      "asset_crc32": "8147 EA91",
       "area_name": "Copacanti Lake"
     },
     {
       "id": 51,
       "asset_id": 2335649346,
+      "asset_crc32": "8B37 2E42",
       "area_name": "Cavern Lake"
     },
     {
       "id": 80,
       "asset_id": 3895865183,
+      "asset_crc32": "E836 2F5F",
       "area_name": "Viracocha Monoliths (Cutscene)"
     }
   ],
@@ -271,26 +323,31 @@
     {
       "id": 8,
       "asset_id": 169813286,
+      "asset_crc32": "0A1F 2526",
       "area_name": "Whack-A-Tuco"
     },
     {
       "id": 12,
       "asset_id": 225632575,
+      "asset_crc32": "0D72 E13F",
       "area_name": "Tuco Shoot"
     },
     {
       "id": 48,
       "asset_id": 2054541737,
+      "asset_crc32": "7A75 D1A9",
       "area_name": "Pickaxe Race"
     },
     {
       "id": 54,
       "asset_id": 2467722396,
+      "asset_crc32": "9316 749C",
       "area_name": "Raft Bowling"
     },
     {
       "id": 78,
       "asset_id": 3826336778,
+      "asset_crc32": "E411 440A",
       "area_name": "KaBOOM!"
     }
   ],
@@ -298,6 +355,7 @@
     {
       "id": 34,
       "asset_id": 1394962713,
+      "asset_crc32": "5325 7119",
       "area_name": "Plane Crash"
     }
   ],
@@ -305,11 +363,13 @@
     {
       "id": 56,
       "asset_id": 2575849878,
+      "asset_crc32": "9988 5996",
       "area_name": "Ruins of El Dorado"
     },
     {
       "id": 72,
       "asset_id": 3486711312,
+      "asset_crc32": "CFD2 FE10",
       "area_name": "Ancient El Dorado"
     }
   ],
@@ -317,6 +377,7 @@
     {
       "id": 81,
       "asset_id": 3917263996,
+      "asset_crc32": "E97C B47C",
       "area_name": "Teleport"
     }
   ]
