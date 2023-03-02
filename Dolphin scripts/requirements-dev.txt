@@ -1,0 +1,3 @@
+add-trailing-comma>=2.3.0  # Added support for with statement
+autopep8>=2.0.0 # New checks
+ruff
