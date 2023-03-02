@@ -1,0 +1,707 @@
+{
+  "//": [
+    {
+      "area_id": "CRC32 of the *capitalized* asset name as two 2-bytes Hexadecimal string. Used by the game to reference levels.",
+      "area_name": "Canonical human-readable name",
+      "default_entrance": "The area ID Harry spawns near to when using a non-intended load transition",
+      "exits": [
+        {
+          "area_id": "ID of the area this exit leads to",
+          "area_name": "Canonical human-readable name",
+          "requires": [
+            [
+              "see https://docs.google.com/spreadsheets/d/1NKVnWaJ3GNRyg4xnFV_zQFu2xYZjqSfS3P9DpTJUlq4 for all 'logic' items",
+              "list of options of logic requirements to reach that exit from the default entrance.",
+              "each list is a different option (OR)",
+              "inside each list is a different set of requirements (AND)",
+              "ex:"
+            ],
+            [
+              "this",
+              "and that"
+            ],
+            [
+              "OR this",
+              "and that"
+            ],
+            [
+              "pickaxes",
+              "SPEEDRUN"
+            ],
+            [
+              "dash"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "Jungle": [
+    {
+      "area_id": "0x0081082C",
+      "area_name": "Chameleon Temple",
+      "default_entrance": "0xDEDA69BC",
+      "exits": [
+        {
+          "area_id": "0xDEDA69BC",
+          "area_name": "Jungle Canyon",
+          "requires": null
+        }
+      ]
+    },
+    {
+      "area_id": "0x07ECCC35",
+      "area_name": "Mama-Oullo Tower",
+      "default_entrance": "0x69F0CDE2",
+      "exits": [
+        {
+          "area_id": "0x69F0CDE2",
+          "area_name": "Battered Bridge",
+          "requires": null
+        },
+        {
+          "area_id": "0x7A9B3870",
+          "area_name": "Jungle Trail",
+          "requires": null
+        },
+        {
+          "area_id": "0x619E1126",
+          "area_name": "Ladder of Miles",
+          "requires": null
+        },
+        {
+          "area_id": "0xF0F99C58",
+          "area_name": "Fire-bombed Towers",
+          "requires": [
+            [
+              "pickaxes"
+            ],
+            [
+              "dash"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "area_id": "0x099BF148",
+      "area_name": "Mysterious Temple",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x0AF1CCFF",
+      "area_name": "Native Jungle",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x0EF63551",
+      "area_name": "Bittenbinder's Camp",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x3292B6C9",
+      "area_name": "The Great Tree",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x38C7AE7D",
+      "area_name": "Punchau Shrine",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x4A3E4058",
+      "area_name": "Plane Cockpit",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x619E1126",
+      "area_name": "Ladder of Miles",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x69F0CDE2",
+      "area_name": "Battered Bridge",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x70EBFCA3",
+      "area_name": "Altar of Huitaca",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x7A9B3870",
+      "area_name": "Jungle Trail",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x93F89D45",
+      "area_name": "Gates of El Dorado",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0xA85A2793",
+      "area_name": "Statues of Ayar",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0xA85A2793",
+      "area_name": "The Altar of Ages",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0xB8D5CE86",
+      "area_name": "Mouth of Inti",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0xDEDA69BC",
+      "area_name": "Jungle Canyon",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0xEE8F6900",
+      "area_name": "Crash Site",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0xF0F99C58",
+      "area_name": "Fire-bombed Towers",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    }
+  ],
+  "Native Territory": [
+    {
+      "area_id": "0x02C7B675",
+      "area_name": "Monkey Temple (Monkey)",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x05AA726C",
+      "area_name": "Native Village",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x0C1C3E47",
+      "area_name": "Renegade Fort",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x1CB1432D",
+      "area_name": "Renegade Headquarters",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x239A2165",
+      "area_name": "Turtle Monument",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x3A811024",
+      "area_name": "Flooded Cave",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x72AD42FA",
+      "area_name": "St. Claire's Excavation Camp (Prisoner)",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0xBA9370DF",
+      "area_name": "St. Claire's Excavation Camp (Escape)",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0xCD944049",
+      "area_name": "Butterfly Glade",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0xDE524DA6",
+      "area_name": "Outpost Underwater Cave",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0xE6B9138A",
+      "area_name": "Twin Outposts",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0xECC9D759",
+      "area_name": "Flooded Courtyard",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0xF3B4DC8E",
+      "area_name": "Monkey Temple (Harry)",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    }
+  ],
+  "Lost Caverns": [
+    {
+      "area_id": "0x0305DC42",
+      "area_name": "Scorpion Temple (Scorpion)",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x0DDE5470",
+      "area_name": "Crystal Cavern",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x4B08BBEB",
+      "area_name": "Scorpion Temple (Harry)",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x907C492B",
+      "area_name": "Mountain Overlook",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x9A0C8DF8",
+      "area_name": "Eyes of Doom",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x9D6149E1",
+      "area_name": "Underground Dam",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0xEA667977",
+      "area_name": "Abandoned Cavern",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    }
+  ],
+  "Snowy Mountains": [
+    {
+      "area_id": "0x08E3C641",
+      "area_name": "Valley of the Spirits",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x1553BBE1",
+      "area_name": "Penguin Den",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x1B11EC74",
+      "area_name": "Penguin Temple (Harry)",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x1B8833D3",
+      "area_name": "Mountain Sled Run",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x1F237F32",
+      "area_name": "Penguin Temple (Penguin)",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x3E7EE822",
+      "area_name": "Ekkeko Ice Cavern",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x5511C46C",
+      "area_name": "Apu Illapu Shrine",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x62548B77",
+      "area_name": "White Valley",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x6F498BBD",
+      "area_name": "Viracocha Monoliths",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x7652BAFC",
+      "area_name": "Spinja Lair",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x8147EA91",
+      "area_name": "Copacanti Lake",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0x8B372E42",
+      "area_name": "Cavern Lake",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0xE8362F5F",
+      "area_name": "Viracocha Monoliths (Cutscene)",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    }
+  ],
+  "Warp": [
+    {
+      "area_id": "0xE97CB47C",
+      "area_name": "Teleport",
+      "default_entrance": "",
+      "exits": [
+        {
+          "area_id": "",
+          "area_name": "",
+          "requires": []
+        }
+      ]
+    }
+  ]
+}

@@ -6,7 +6,7 @@
   },
   "files.associations": {
     "**.dmw": "json"
-},
+  },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
@@ -36,5 +36,6 @@
       "source.fixAll": true
     },
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
-},
+  },
+  "python.analysis.stubPath": "Dolphin scripts/typings",
 }
