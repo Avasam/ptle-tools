@@ -35,10 +35,6 @@ seed_string = hex(seed).upper() if isinstance(seed, int) else seed
 print("Seed set to:", seed_string)
 
 
-# transition_mapping = {area_id: None for area_id in ALL_TRANSITION_AREAS}
-ALL_TRANSITION_AREAS_LENGHT = len(ALL_TRANSITION_AREAS)
-
-
 # Initialize a few values to be used in loop
 current_area_old = 0
 """Area ID of teh previous frame"""
@@ -72,7 +68,7 @@ def highjack_transition_chaos():
 
         random.seed(f"{current_area_old}{current_area_new}{seed}")
         redirect = possible_redirections[
-            random.randint(0, ALL_TRANSITION_AREAS_LENGHT - 2)
+            random.randint(0, len(possible_redirections) - 1)
         ]
         print(
             "highjack_transition_chaos |",
@@ -116,6 +112,10 @@ while True:
     current_area_new = memory.read_u32(CURRENT_AREA_ADDR)
     draw_text(f"Current area ID: {hex(current_area_new).upper()}")
     draw_text(f"Seed: {seed_string}")
+
+    # Always re-enable Item Swap.
+    if memory.read_u32(ITEM_SWAP_ADDR) == 1:
+        memory.write_u32(ITEM_SWAP_ADDR, 0)
 
     # Skip the intro fight and cutscene
     if highjack_transition(0x0, JAGUAR, CRASH_SITE):
