@@ -290,18 +290,6 @@
   ],
   "Native Territory": [
     {
-      "area_id": "0x02C7B675",
-      "area_name": "Monkey Temple (Monkey)",
-      "default_entrance": "",
-      "exits": [
-        {
-          "area_id": "",
-          "area_name": "",
-          "requires": []
-        }
-      ]
-    },
-    {
       "area_id": "0x05AA726C",
       "area_name": "Native Village",
       "default_entrance": "",
@@ -363,7 +351,7 @@
     },
     {
       "area_id": "0x72AD42FA",
-      "area_name": "St. Claire's Excavation Camp (Prisoner)",
+      "area_name": "St. Claire's Excavation Camp (Night)",
       "default_entrance": "",
       "exits": [
         {
@@ -375,7 +363,7 @@
     },
     {
       "area_id": "0xBA9370DF",
-      "area_name": "St. Claire's Excavation Camp (Escape)",
+      "area_name": "St. Claire's Excavation Camp (Day)",
       "default_entrance": "",
       "exits": [
         {
@@ -447,18 +435,6 @@
     }
   ],
   "Lost Caverns": [
-    {
-      "area_id": "0x0305DC42",
-      "area_name": "Scorpion Temple (Scorpion)",
-      "default_entrance": "",
-      "exits": [
-        {
-          "area_id": "",
-          "area_name": "",
-          "requires": []
-        }
-      ]
-    },
     {
       "area_id": "0x0DDE5470",
       "area_name": "Crystal Cavern",
@@ -582,18 +558,6 @@
       ]
     },
     {
-      "area_id": "0x1F237F32",
-      "area_name": "Penguin Temple (Penguin)",
-      "default_entrance": "",
-      "exits": [
-        {
-          "area_id": "",
-          "area_name": "",
-          "requires": []
-        }
-      ]
-    },
-    {
       "area_id": "0x3E7EE822",
       "area_name": "Ekkeko Ice Cavern",
       "default_entrance": "",
@@ -668,18 +632,6 @@
     {
       "area_id": "0x8B372E42",
       "area_name": "Cavern Lake",
-      "default_entrance": "",
-      "exits": [
-        {
-          "area_id": "",
-          "area_name": "",
-          "requires": []
-        }
-      ]
-    },
-    {
-      "area_id": "0xE8362F5F",
-      "area_name": "Viracocha Monoliths (Cutscene)",
       "default_entrance": "",
       "exits": [
         {
