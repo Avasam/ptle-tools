@@ -1,11 +1,12 @@
 {
-  // Don't format on save for formatters we don't explicitely control
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": false
+    "source.fixAll": true
   },
   "files.associations": {
-    "**.dmw": "json"
+    "*.dmw": "json",
+    "pyrightconfig*.json": "jsonc",
+    ".flake8": "properties",
   },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
@@ -24,18 +25,103 @@
     ]
   },
   "[json][jsonc]": {
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-      "source.fixAll": true
-    },
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[markdown]": {
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-      "source.fixAll": true
-    },
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
   },
   "python.analysis.stubPath": "Dolphin scripts/typings",
+  "files.exclude": {
+    "**/.mypy_cache": true,
+    "**/__pycache__": true,
+  },
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "ms-python.autopep8",
+    "editor.codeActionsOnSave": {
+      // We prefer this false in JS/TS
+      "source.organizeImports": true
+    },
+  },
+  // Use the new dedicated extensions instead
+  "python.formatting.provider": "none",
+  "python.linting.flake8Enabled": false,
+  "python.linting.pycodestyleEnabled": false,
+  "python.linting.prospectorEnabled": false,
+  "python.linting.pylamaEnabled": false,
+  "python.linting.pylintEnabled": false,
+  // Bandit doesn't have a standalone extension
+  "python.linting.banditEnabled": true,
+  // mypy doesn't have a standalone extension yet (https://github.com/microsoft/vscode-python/issues/20648)
+  // Turn on if you are developing a public library, otherwise pyright/Pylance is sufficient
+  "python.linting.mypyEnabled": false,
+  "python.linting.enabled": true,
+  "python.analysis.fixAll": [
+    // unusedImports can be really annoying when temporarily commenting out code
+    // "source.unusedImports",
+    "source.convertImportFormat"
+  ],
+  // Set this to true if you're using untyped libraries and don't want to generate your own stubs
+  "python.analysis.useLibraryCodeForTypes": false,
+  // Change this to "openFilesOnly" if your project is too big and workspace diagnostics causes slowdowns
+  "python.analysis.diagnosticMode": "workspace",
+  // Follows [tool.pylint.REPORTS].evaluation setting
+  "pylint.severity": {
+    "convention": "Warning",
+    "error": "Error",
+    "fatal": "Error",
+    "refactor": "Information",
+    "warning": "Warning",
+    "info": "Information"
+  },
+  // Ensure this project's configs are used, and not user's VSCode settings
+  // "flake8.args": [
+  //   "--config=.flake8"
+  // ],
+  // Partial codes don't work yet: https://github.com/microsoft/vscode-flake8/issues/7
+  "flake8.severity": {
+    "convention": "Warning",
+    "error": "Error",
+    "fatal": "Error",
+    "refactor": "Warning",
+    "warning": "Warning",
+    "info": "Warning",
+    // builtins
+    "A": "Warning",
+    // mccabe
+    "C": "Warning",
+    // class attributes order
+    "CCE": "Warning",
+    // pycodestyles
+    "E": "Warning",
+    "E9": "Error", // Runtime
+    "W": "Warning",
+    "W6": "Error", // Deprecation warning
+    // Pyflakes
+    "F": "Warning",
+    // PEP8 Naming convention
+    "N": "Warning",
+    // Simplify
+    "SIM": "Warning",
+    "SIM9": "Information",
+    // PYI
+    "Y": "Warning",
+  },
+  "flake8.importStrategy": "fromEnvironment",
+  "isort.check": true,
+  "isort.importStrategy": "fromEnvironment",
+  "black-formatter.importStrategy": "fromEnvironment",
+  // If using autopep8
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": "\\.pyi?",
+        "cmd": "unify ${file} --in-place --quote=\"\\\"\""
+      },
+      {
+        "match": "\\.pyi?",
+        "cmd": "add-trailing-comma \"${file}\" --py36-plus"
+      },
+    ]
+  },
 }

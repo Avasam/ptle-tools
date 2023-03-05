@@ -5,6 +5,7 @@ from transition_infos import transition_infos
 DRAW_TEXT_STEP = 24
 DRAW_TEXT_OFFSET_X = 272
 
+TRANSITION_INFOS_DICT = {area.id: area for area in chain(*transition_infos)}
 ALL_TRANSITION_AREAS = [area.id for area in chain(*transition_infos)]
 
 CURRENT_AREA_ADDR = 0x8041BEB4

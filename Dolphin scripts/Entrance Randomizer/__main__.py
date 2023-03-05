@@ -7,8 +7,9 @@ import os
 import pathlib
 import random
 import sys
-from typing import TYPE_CHECKING, Union, cast
 
+import CONFIGS
+from constants import *  # pylint: disable=unused-wildcard-import,wildcard-import
 from dolphin import event  # pyright: ignore[reportMissingModuleSource]
 from dolphin import gui, memory  # pyright: ignore[reportMissingModuleSource]
 
@@ -18,22 +19,19 @@ real_scripts_path = os.path.realpath(dolphin_path / "Scripts")
 print("Real Scripts path:", real_scripts_path)
 sys.path.append(f"{real_scripts_path}/Entrance Randomizer")
 
-from constants import *  # pylint: disable=unused-wildcard-import,wildcard-import
 
-if TYPE_CHECKING:
-    from typing_extensions import TypeAlias
-
-    SeedType: TypeAlias = Union[int, float, str, bytes, bytearray, None]
-else:
-    SeedType = None
-
-# Generate the seed or use your own SEED
-SEED: SeedType = None
-seed = cast(SeedType, SEED) if SEED else random.randrange(sys.maxsize)
+# Sets the seed
+seed = CONFIGS.SEED if CONFIGS.SEED else random.randrange(sys.maxsize)
 random.seed(seed)
 seed_string = hex(seed).upper() if isinstance(seed, int) else seed
 print("Seed set to:", seed_string)
 
+
+starting_area = (
+    CONFIGS.STARTING_AREA
+    if CONFIGS.STARTING_AREA
+    else ALL_TRANSITION_AREAS[random.randrange(len(ALL_TRANSITION_AREAS))]
+)
 
 # Initialize a few values to be used in loop
 current_area_old = 0
@@ -46,7 +44,7 @@ justOverwrote = False
 """Prevent the rando from trigerring on its own change"""
 
 
-# a hacky first demo, total chaos! (but seeded)
+# A hacky first demo, total chaos! (but seeded)
 def highjack_transition_chaos():
     if (
         current_area_old != current_area_new
@@ -59,17 +57,18 @@ def highjack_transition_chaos():
             # Prevent looping on itself
             if area != current_area_old
             # Prevent unintended entrances to Crash Site (resets most progression!)
-            # Going from Cockpit or Canyon to Crash Site is OK.
             and (
-                (area != current_area_new == CRASH_SITE)
-                or current_area_old in {PLANE_COCKPIT, JUNGLE_CANYON}
+                area != CRASH_SITE
+                # Going from Cockpit or Canyon to Crash Site is OK.
+                or (
+                    current_area_old in {PLANE_COCKPIT, JUNGLE_CANYON}
+                    and current_area_new == CRASH_SITE
+                )
             )
         ]
 
         random.seed(f"{current_area_old}{current_area_new}{seed}")
-        redirect = possible_redirections[
-            random.randint(0, len(possible_redirections) - 1)
-        ]
+        redirect = possible_redirections[random.randrange(len(possible_redirections))]
         print(
             "highjack_transition_chaos |",
             f"From: {hex(current_area_old)},",
@@ -110,7 +109,7 @@ while True:
     current_area_old = current_area_new
     await event.frameadvance()  # pyright: ignore
     current_area_new = memory.read_u32(CURRENT_AREA_ADDR)
-    draw_text(f"Current area ID: {hex(current_area_new).upper()}")
+    draw_text(f"Current area: {hex(current_area_new).upper()} ({TRANSITION_INFOS_DICT[current_area_new].name})")
     draw_text(f"Seed: {seed_string}")
 
     # Always re-enable Item Swap.
@@ -118,7 +117,7 @@ while True:
         memory.write_u32(ITEM_SWAP_ADDR, 0)
 
     # Skip the intro fight and cutscene
-    if highjack_transition(0x0, JAGUAR, CRASH_SITE):
+    if highjack_transition(0x0, JAGUAR, starting_area):
         continue
 
     # Standardize the Viracocha Monoliths cutscene
