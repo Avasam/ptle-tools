@@ -8,8 +8,6 @@ import pathlib
 import random
 import sys
 
-import CONFIGS
-from constants import *  # pylint: disable=unused-wildcard-import,wildcard-import
 from dolphin import event  # pyright: ignore[reportMissingModuleSource]
 from dolphin import gui, memory  # pyright: ignore[reportMissingModuleSource]
 
@@ -19,6 +17,8 @@ real_scripts_path = os.path.realpath(dolphin_path / "Scripts")
 print("Real Scripts path:", real_scripts_path)
 sys.path.append(f"{real_scripts_path}/Entrance Randomizer")
 
+import CONFIGS  # noqa: E402
+from constants import *  # noqa: E402  # pylint: disable=unused-wildcard-import,wildcard-import
 
 # Sets the seed
 seed = CONFIGS.SEED if CONFIGS.SEED else random.randrange(sys.maxsize)
@@ -109,7 +109,8 @@ while True:
     current_area_old = current_area_new
     await event.frameadvance()  # pyright: ignore
     current_area_new = memory.read_u32(CURRENT_AREA_ADDR)
-    draw_text(f"Current area: {hex(current_area_new).upper()} ({TRANSITION_INFOS_DICT[current_area_new].name})")
+    current_area = TRANSITION_INFOS_DICT.get(current_area_new)
+    draw_text(f"Current area: {hex(current_area_new).upper()} {f'({current_area.name})' if current_area else ''}")
     draw_text(f"Seed: {seed_string}")
 
     # Always re-enable Item Swap.
