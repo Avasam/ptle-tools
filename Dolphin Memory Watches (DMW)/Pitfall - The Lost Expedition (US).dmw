@@ -12,16 +12,14 @@
       "address": "8016A136",
       "baseIndex": 1,
       "label": "Starting Area",
-      "length": 2,
-      "typeIndex": 6,
+      "typeIndex": 1,
       "unsigned": false
     },
     {
       "address": "8016A13E",
       "baseIndex": 1,
       "label": "Starting Area",
-      "length": 2,
-      "typeIndex": 6,
+      "typeIndex": 1,
       "unsigned": false
     },
     {
