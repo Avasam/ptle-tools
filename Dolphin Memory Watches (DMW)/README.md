@@ -4,14 +4,21 @@ Dolphin Memory Engine (DME) documentation: <https://github.com/aldelaro5/Dolphin
 
 To use, download the `.dmw` file for your game version (US, FR, etc.). Open Dolphin. Open DME. Go under "File > Open..." and select the `.dmw` file you downloaded.
 
-## Action Replay Codes
+## Action Replay / Gecko Codes
 
 <!--
 Finally found a guide that seems pretty complete for Action Replay codes.
 It even explains how to deal with dynamic pointers, which is my current issue with Infinite Jump: https://www.reddit.com/r/learnprogramming/comments/6kqbcr/making_an_action_replay_code/
 -->
 
-Both codes below are for NTSC Gamecube only
+All codes below are for NTSC Gamecube only
+
+Start in Test Level (by Avasam):
+
+```txt
+0216A136 0000E980
+0216A13E 00009967
+```
 
 Infinite Jumps (by Avasam):
 
