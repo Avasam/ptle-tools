@@ -20,6 +20,16 @@ sys.path.append(f"{real_scripts_path}/Entrance Randomizer")
 import CONFIGS  # noqa: E402
 from constants import *  # noqa: E402  # pylint: disable=unused-wildcard-import,wildcard-import
 
+__version__ = "0.2"
+"""
+Major: New major feature or functionality
+
+Minor: Affects seed
+
+Patch: Does't affect seed (assuming same settings)
+"""
+print(f"Rando version: {__version__}")
+
 # Sets the seed
 seed = CONFIGS.SEED if CONFIGS.SEED else random.randrange(sys.maxsize)
 random.seed(seed)
@@ -40,8 +50,6 @@ current_area_new = 0
 """Area ID of the current frame"""
 draw_text_index = 0
 """Count how many times draw_text has been called this frame"""
-justOverwrote = False
-"""Prevent the rando from trigerring on its own change"""
 
 
 # A hacky first demo, total chaos! (but seeded)
@@ -76,7 +84,7 @@ def highjack_transition_chaos():
             f"Redirecting to: {hex(redirect)}",
         )
         memory.write_u32(CURRENT_AREA_ADDR, redirect)
-        return True
+        return redirect
     return False
 
 
@@ -103,33 +111,40 @@ def draw_text(text: str):
     draw_text_index += 1
 
 
-while True:
-    # Read memory, setup loop values, print debug to screen
-    draw_text_index = 0
-    current_area_old = current_area_new
-    await event.frameadvance()  # pyright: ignore
-    current_area_new = memory.read_u32(CURRENT_AREA_ADDR)
-    current_area = TRANSITION_INFOS_DICT.get(current_area_new)
-    draw_text(f"Current area: {hex(current_area_new).upper()} {f'({current_area.name})' if current_area else ''}")
-    draw_text(f"Seed: {seed_string}")
+async def main():
+    global current_area_old
+    global current_area_new
+    global draw_text_index
+    while True:
+        # Read memory, setup loop values, print debug to screen
+        draw_text_index = 0
+        current_area_old = current_area_new
+        await event.frameadvance()
+        current_area_new = memory.read_u32(CURRENT_AREA_ADDR)
+        current_area = TRANSITION_INFOS_DICT.get(current_area_new)
+        draw_text(f"Rando version: {__version__}")
+        draw_text(f"Current area: {hex(current_area_new).upper()} {f'({current_area.name})' if current_area else ''}")
+        draw_text(f"Seed: {seed_string}")
 
-    # Always re-enable Item Swap.
-    if memory.read_u32(ITEM_SWAP_ADDR) == 1:
-        memory.write_u32(ITEM_SWAP_ADDR, 0)
+        # Always re-enable Item Swap.
+        if memory.read_u32(ITEM_SWAP_ADDR) == 1:
+            memory.write_u32(ITEM_SWAP_ADDR, 0)
 
-    # Skip the intro fight and cutscene
-    if highjack_transition(0x0, JAGUAR, starting_area):
-        continue
+        # Skip the intro fight and cutscene
+        if highjack_transition(0x0, JAGUAR, starting_area):
+            continue
 
-    # Standardize the Viracocha Monoliths cutscene
-    if highjack_transition(
-        current_area_old,
-        VIRACOCHA_MONOLITHS_CUTSCENE,
-        VIRACOCHA_MONOLITHS,
-    ):
-        current_area_new = VIRACOCHA_MONOLITHS
+        # Standardize the Viracocha Monoliths cutscene
+        if highjack_transition(
+            current_area_old,
+            VIRACOCHA_MONOLITHS_CUTSCENE,
+            VIRACOCHA_MONOLITHS,
+        ):
+            current_area_new = VIRACOCHA_MONOLITHS
 
-    if justOverwrote:
-        justOverwrote = False
-    elif highjack_transition_chaos():
-        justOverwrote = True
+        redirect = highjack_transition_chaos()
+        if redirect:
+            current_area_new = redirect
+
+
+await main()  # pyright: ignore
