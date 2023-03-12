@@ -8,6 +8,10 @@
     "pyrightconfig*.json": "jsonc",
     ".flake8": "properties",
   },
+  "files.exclude": {
+    "**/.mypy_cache": true,
+    "**/__pycache__": true,
+  },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
@@ -31,97 +35,72 @@
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
   },
   "python.analysis.stubPath": "Dolphin scripts/typings",
-  "files.exclude": {
-    "**/.mypy_cache": true,
-    "**/__pycache__": true,
-  },
   "[python]": {
+    // Ruff is not yet a formatter: https://github.com/charliermarsh/ruff/issues/1904
+    // Cannot use autotpep8 until https://github.com/microsoft/vscode-autopep8/issues/32 is fixed
+    "editor.defaultFormatter": "ms-python.python",
     "editor.tabSize": 4,
-    "editor.defaultFormatter": "ms-python.autopep8",
+    "editor.rulers": [
+      72, // PEP8-17 docstrings
+      // 79, // PEP8-17 default max
+      // 88, // Black default
+      // 99, // PEP8-17 acceptable max
+      120, // Our hard rule
+    ],
     "editor.codeActionsOnSave": {
-      // We prefer this false in JS/TS
-      "source.organizeImports": true
+      // TODO: Ruff is supposed to be able to take care of this
+      "source.organizeImports": false,
     },
   },
-  // Use the new dedicated extensions instead
-  "python.formatting.provider": "none",
+  // Important to follow the config in pyrightconfig.json
+  "python.analysis.useLibraryCodeForTypes": false,
+  "python.analysis.diagnosticMode": "workspace",
+  "python.formatting.provider": "autopep8",
+  "python.linting.enabled": true,
+  "ruff.importStrategy": "fromEnvironment",
+  // Use the Ruff extension instead
+  "isort.check": false,
+  "python.linting.banditEnabled": false,
   "python.linting.flake8Enabled": false,
-  "python.linting.pycodestyleEnabled": false,
   "python.linting.prospectorEnabled": false,
+  "python.linting.pycodestyleEnabled": false,
   "python.linting.pylamaEnabled": false,
   "python.linting.pylintEnabled": false,
-  // Bandit doesn't have a standalone extension
-  "python.linting.banditEnabled": true,
-  // mypy doesn't have a standalone extension yet (https://github.com/microsoft/vscode-python/issues/20648)
-  // Turn on if you are developing a public library, otherwise pyright/Pylance is sufficient
+  // Use Pyright/Pylance instead
   "python.linting.mypyEnabled": false,
-  "python.linting.enabled": true,
-  "python.analysis.fixAll": [
-    // unusedImports can be really annoying when temporarily commenting out code
-    // "source.unusedImports",
-    "source.convertImportFormat"
-  ],
-  // Set this to true if you're using untyped libraries and don't want to generate your own stubs
-  "python.analysis.useLibraryCodeForTypes": false,
-  // Change this to "openFilesOnly" if your project is too big and workspace diagnostics causes slowdowns
-  "python.analysis.diagnosticMode": "workspace",
-  // Follows [tool.pylint.REPORTS].evaluation setting
-  "pylint.severity": {
-    "convention": "Warning",
-    "error": "Error",
-    "fatal": "Error",
-    "refactor": "Information",
-    "warning": "Warning",
-    "info": "Information"
-  },
-  // Ensure this project's configs are used, and not user's VSCode settings
-  // "flake8.args": [
-  //   "--config=.flake8"
-  // ],
-  // Partial codes don't work yet: https://github.com/microsoft/vscode-flake8/issues/7
-  "flake8.severity": {
-    "convention": "Warning",
-    "error": "Error",
-    "fatal": "Error",
-    "refactor": "Warning",
-    "warning": "Warning",
-    "info": "Warning",
-    // builtins
-    "A": "Warning",
-    // mccabe
-    "C": "Warning",
-    // class attributes order
-    "CCE": "Warning",
-    // pycodestyles
-    "E": "Warning",
-    "E9": "Error", // Runtime
-    "W": "Warning",
-    "W6": "Error", // Deprecation warning
-    // Pyflakes
-    "F": "Warning",
-    // PEP8 Naming convention
-    "N": "Warning",
-    // Simplify
-    "SIM": "Warning",
-    "SIM9": "Information",
-    // PYI
-    "Y": "Warning",
-  },
-  "flake8.importStrategy": "fromEnvironment",
-  "isort.check": true,
-  "isort.importStrategy": "fromEnvironment",
-  "black-formatter.importStrategy": "fromEnvironment",
-  // If using autopep8
   "emeraldwalk.runonsave": {
     "commands": [
-      {
-        "match": "\\.pyi?",
-        "cmd": "unify ${file} --in-place --quote=\"\\\"\""
-      },
       {
         "match": "\\.pyi?",
         "cmd": "add-trailing-comma \"${file}\" --py36-plus"
       },
     ]
   },
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml",
+  },
+  "evenBetterToml.formatter.alignComments": false,
+  "evenBetterToml.formatter.alignEntries": false,
+  "evenBetterToml.formatter.allowedBlankLines": 1,
+  "evenBetterToml.formatter.arrayAutoCollapse": true,
+  "evenBetterToml.formatter.arrayAutoExpand": true,
+  "evenBetterToml.formatter.arrayTrailingComma": true,
+  "evenBetterToml.formatter.columnWidth": 120,
+  "evenBetterToml.formatter.compactArrays": true,
+  "evenBetterToml.formatter.compactEntries": false,
+  "evenBetterToml.formatter.compactInlineTables": false,
+  "evenBetterToml.formatter.indentEntries": false,
+  "evenBetterToml.formatter.indentTables": false,
+  "evenBetterToml.formatter.inlineTableExpand": false,
+  "evenBetterToml.formatter.reorderArrays": true,
+  "evenBetterToml.formatter.reorderKeys": true,
+  "evenBetterToml.formatter.trailingNewline": true,
+  "powershell.codeFormatting.pipelineIndentationStyle": "IncreaseIndentationForFirstPipeline",
+  "powershell.codeFormatting.autoCorrectAliases": true,
+  "powershell.codeFormatting.trimWhitespaceAroundPipe": true,
+  "powershell.codeFormatting.useConstantStrings": true,
+  "powershell.codeFormatting.useCorrectCasing": true,
+  "powershell.codeFormatting.whitespaceBetweenParameters": true,
+  "powershell.integratedConsole.showOnStartup": false,
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
 }

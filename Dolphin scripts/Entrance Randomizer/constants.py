@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from itertools import chain
 
 from transition_infos import transition_infos
@@ -5,8 +7,8 @@ from transition_infos import transition_infos
 DRAW_TEXT_STEP = 24
 DRAW_TEXT_OFFSET_X = 272
 
-TRANSITION_INFOS_DICT = {area.id: area for area in chain(*transition_infos)}
-ALL_TRANSITION_AREAS = [area.id for area in chain(*transition_infos)]
+TRANSITION_INFOS_DICT = {area.area_id: area for area in chain(*transition_infos)}
+ALL_TRANSITION_AREAS = [area.area_id for area in chain(*transition_infos)]
 
 CURRENT_AREA_ADDR = 0x8041BEB4
 ITEM_SWAP_ADDR = 0x804CB694
@@ -19,3 +21,6 @@ JUNGLE_CANYON = 0xDEDA69BC
 MAMA_OULLO_TOWER = 0x07ECCC35
 VIRACOCHA_MONOLITHS = 0x6F498BBD
 VIRACOCHA_MONOLITHS_CUTSCENE = 0xE8362F5F
+ALTAR_OF_AGES = 0xABD7CCD8
+BITTENBINDERS_CAMP = 0x0EF63551
+MYSTERIOUS_TEMPLE = 0x099BF148

@@ -20,7 +20,9 @@ class AreaJSON(TypedDict):
 
 
 if TYPE_CHECKING:
-    from typing_extensions import Literal, TypeAlias
+    from typing import Literal
+
+    from typing_extensions import TypeAlias
 
     TransitionInfosJSON: TypeAlias = dict[
         Literal[
@@ -28,7 +30,6 @@ if TYPE_CHECKING:
             "Native Territory",
             "Lost Caverns",
             "Snowy Mountains",
-            "Warp",
         ],
         list[AreaJSON],
     ]
@@ -45,7 +46,7 @@ class Exit:
 
 @dataclass
 class Area:
-    id: int
+    area_id: int
     name: str
     default_entrance: int
     exits: list[Exit]
@@ -56,7 +57,6 @@ class MajorAreas(NamedTuple):
     native_territory: list[Area]
     lost_caverns: list[Area]
     snowy_mountains: list[Area]
-    warp: list[Area]
 
 
 def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):

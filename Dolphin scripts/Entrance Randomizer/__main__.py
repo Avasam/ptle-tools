@@ -1,6 +1,5 @@
 # https://github.com/Felk/dolphin/tree/scripting-preview2
 
-# pylint: disable=await-outside-async,undefined-variable,global-statement
 from __future__ import annotations
 
 import os
@@ -8,8 +7,7 @@ import pathlib
 import random
 import sys
 
-from dolphin import event  # pyright: ignore[reportMissingModuleSource]
-from dolphin import gui, memory  # pyright: ignore[reportMissingModuleSource]
+from dolphin import event, gui, memory  # pyright: ignore[reportMissingModuleSource]
 
 dolphin_path = pathlib.Path().absolute()
 print("Dolphin path:", dolphin_path)
@@ -17,8 +15,8 @@ real_scripts_path = os.path.realpath(dolphin_path / "Scripts")
 print("Real Scripts path:", real_scripts_path)
 sys.path.append(f"{real_scripts_path}/Entrance Randomizer")
 
-import CONFIGS  # noqa: E402
-from constants import *  # noqa: E402  # pylint: disable=unused-wildcard-import,wildcard-import
+import CONFIGS
+from constants import *  # noqa: F403
 
 __version__ = "0.2"
 """
@@ -35,7 +33,6 @@ seed = CONFIGS.SEED if CONFIGS.SEED else random.randrange(sys.maxsize)
 random.seed(seed)
 seed_string = hex(seed).upper() if isinstance(seed, int) else seed
 print("Seed set to:", seed_string)
-
 
 starting_area = (
     CONFIGS.STARTING_AREA
@@ -60,8 +57,7 @@ def highjack_transition_chaos():
         and current_area_new in ALL_TRANSITION_AREAS
     ):
         possible_redirections = [
-            area
-            for area in ALL_TRANSITION_AREAS
+            area for area in ALL_TRANSITION_AREAS
             # Prevent looping on itself
             if area != current_area_old
             # Prevent unintended entrances to Crash Site (resets most progression!)
@@ -88,7 +84,9 @@ def highjack_transition_chaos():
     return False
 
 
-def highjack_transition(from_: int, to: int, redirect: int):
+def highjack_transition(from_: int | None, to: int, redirect: int):
+    if from_ is None:
+        from_ = current_area_old
     if from_ == current_area_old and to == current_area_new:
         print(
             "highjack_transition |",
@@ -111,40 +109,40 @@ def draw_text(text: str):
     draw_text_index += 1
 
 
-async def main():
+async def main_loop():
     global current_area_old
     global current_area_new
     global draw_text_index
-    while True:
-        # Read memory, setup loop values, print debug to screen
-        draw_text_index = 0
-        current_area_old = current_area_new
-        await event.frameadvance()
-        current_area_new = memory.read_u32(CURRENT_AREA_ADDR)
-        current_area = TRANSITION_INFOS_DICT.get(current_area_new)
-        draw_text(f"Rando version: {__version__}")
-        draw_text(f"Current area: {hex(current_area_new).upper()} {f'({current_area.name})' if current_area else ''}")
-        draw_text(f"Seed: {seed_string}")
 
-        # Always re-enable Item Swap.
-        if memory.read_u32(ITEM_SWAP_ADDR) == 1:
-            memory.write_u32(ITEM_SWAP_ADDR, 0)
+    # Read memory, setup loop values, print debug to screen
+    draw_text_index = 0
+    current_area_old = current_area_new
+    await event.frameadvance()
+    current_area_new = memory.read_u32(CURRENT_AREA_ADDR)
+    current_area = TRANSITION_INFOS_DICT.get(current_area_new)
+    draw_text(f"Rando version: {__version__}")
+    draw_text(f"Current area: {hex(current_area_new).upper()} {f'({current_area.name})' if current_area else ''}")
+    draw_text(f"Seed: {seed_string}")
 
-        # Skip the intro fight and cutscene
-        if highjack_transition(0x0, JAGUAR, starting_area):
-            continue
+    # Always re-enable Item Swap.
+    if memory.read_u32(ITEM_SWAP_ADDR) == 1:
+        memory.write_u32(ITEM_SWAP_ADDR, 0)
 
-        # Standardize the Viracocha Monoliths cutscene
-        if highjack_transition(
-            current_area_old,
-            VIRACOCHA_MONOLITHS_CUTSCENE,
-            VIRACOCHA_MONOLITHS,
-        ):
-            current_area_new = VIRACOCHA_MONOLITHS
+    # Skip the intro fight and cutscene
+    if highjack_transition(0x0, JAGUAR, starting_area):
+        return
 
-        redirect = highjack_transition_chaos()
-        if redirect:
-            current_area_new = redirect
+    # Standardize the Altar of Ages exit
+    if highjack_transition(ALTAR_OF_AGES, BITTENBINDERS_CAMP, MYSTERIOUS_TEMPLE):
+        current_area_new = MYSTERIOUS_TEMPLE
 
+    # Standardize the Viracocha Monoliths cutscene
+    if highjack_transition(None, VIRACOCHA_MONOLITHS_CUTSCENE, VIRACOCHA_MONOLITHS):
+        current_area_new = VIRACOCHA_MONOLITHS
 
-await main()  # pyright: ignore
+    redirect = highjack_transition_chaos()
+    if redirect:
+        current_area_new = redirect
+
+while True:
+    await main_loop()  # noqa: F704  # pyright: ignore
