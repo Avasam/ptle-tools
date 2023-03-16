@@ -15,3 +15,10 @@ The ID of the Area to start in. `None` for random, `0xEE8F6900` for Crash Site.
 
 See `transition_infos.json` for all available IDs
 """
+
+LINKED_TRANSITIONS: bool = False
+"""
+Whether the new destination will contain an exit back to the area you came from.
+
+(Doesn't really work yet. Use at your own risks 😜)
+"""

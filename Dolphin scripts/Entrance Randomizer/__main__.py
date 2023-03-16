@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 import os
-import pathlib
 import random
 import sys
+from pathlib import Path
+from typing import Iterable
 
 from dolphin import event, gui, memory  # pyright: ignore[reportMissingModuleSource]
 
-dolphin_path = pathlib.Path().absolute()
+dolphin_path = Path().absolute()
 print("Dolphin path:", dolphin_path)
 real_scripts_path = os.path.realpath(dolphin_path / "Scripts")
 print("Real Scripts path:", real_scripts_path)
@@ -18,7 +19,7 @@ sys.path.append(f"{real_scripts_path}/Entrance Randomizer")
 import CONFIGS
 from constants import *  # noqa: F403
 
-__version__ = "0.2"
+__version__ = "0.3"
 """
 Major: New major feature or functionality
 
@@ -34,10 +35,17 @@ random.seed(seed)
 seed_string = hex(seed).upper() if isinstance(seed, int) else seed
 print("Seed set to:", seed_string)
 
+_possible_starting_areas = [
+    area for area in ALL_TRANSITION_AREAS
+    # Remove impossible start areas + Don't immediatly give TNT
+    if area not in {APU_ILLAPU_SHRINE, SCORPION_TEMPLE, ST_CLAIRE_DAY}
+    # Add back areas removed from transitions because of issues
+] + [CRASH_SITE, TELEPORTERS]
+
 starting_area = (
     CONFIGS.STARTING_AREA
     if CONFIGS.STARTING_AREA
-    else ALL_TRANSITION_AREAS[random.randrange(len(ALL_TRANSITION_AREAS))]
+    else random.choice(_possible_starting_areas)
 )
 
 # Initialize a few values to be used in loop
@@ -47,46 +55,37 @@ current_area_new = 0
 """Area ID of the current frame"""
 draw_text_index = 0
 """Count how many times draw_text has been called this frame"""
+visited_altar_of_ages = False
 
 
-# A hacky first demo, total chaos! (but seeded)
-def highjack_transition_chaos():
-    if (
-        current_area_old != current_area_new
-        and current_area_old in ALL_TRANSITION_AREAS
-        and current_area_new in ALL_TRANSITION_AREAS
-    ):
-        possible_redirections = [
-            area for area in ALL_TRANSITION_AREAS
-            # Prevent looping on itself
-            if area != current_area_old
-            # Prevent unintended entrances to Crash Site (resets most progression!)
-            and (
-                area != CRASH_SITE
-                # Going from Cockpit or Canyon to Crash Site is OK.
-                or (
-                    current_area_old in {PLANE_COCKPIT, JUNGLE_CANYON}
-                    and current_area_new == CRASH_SITE
-                )
-            )
-        ]
+def highjack_transition_rando():
+    # Early reaturn, faster check
+    if current_area_old == current_area_new:
+        return False
 
-        random.seed(f"{current_area_old}{current_area_new}{seed}")
-        redirect = possible_redirections[random.randrange(len(possible_redirections))]
-        print(
-            "highjack_transition_chaos |",
-            f"From: {hex(current_area_old)},",
-            f"To: {hex(current_area_new)}.",
-            f"Redirecting to: {hex(redirect)}",
-        )
-        memory.write_u32(CURRENT_AREA_ADDR, redirect)
-        return redirect
-    return False
+    redirect = transitions_map.get(current_area_old, {}).get(current_area_new)
+    if not redirect:
+        return False
+
+    # Apply Altar of Ages logic
+    if redirect in {ST_CLAIRE_DAY, ST_CLAIRE_NIGHT}:
+        redirect = ST_CLAIRE_NIGHT if visited_altar_of_ages else ST_CLAIRE_DAY
+
+    print(
+        "highjack_transition_rando |",
+        f"From: {hex(current_area_old)},",
+        f"To: {hex(current_area_new)}.",
+        f"Redirecting to: {hex(redirect)}",
+    )
+    memory.write_u32(CURRENT_AREA_ADDR, redirect)
+    return redirect
 
 
-def highjack_transition(from_: int | None, to: int, redirect: int):
+def highjack_transition(from_: int | None, to: int | None, redirect: int):
     if from_ is None:
         from_ = current_area_old
+    if to is None:
+        to = current_area_new
     if from_ == current_area_old and to == current_area_new:
         print(
             "highjack_transition |",
@@ -109,10 +108,89 @@ def draw_text(text: str):
     draw_text_index += 1
 
 
+def get_random_redirection(from_: int, _original_to: int, possible_redirections: Iterable[int]):
+    possible_redirections = [
+        area for area in possible_redirections
+        # Prevent looping on itself
+        if area != from_
+        # Prevent unintended entrances to Crash Site (resets most progression!)
+        # and (
+        #     area != CRASH_SITE
+        #     # Going from Cockpit or Canyon to Crash Site is OK.
+        #     or (
+        #         from_ in {PLANE_COCKPIT, JUNGLE_CANYON}
+        #         and original_to == CRASH_SITE
+        #     )
+        # )
+    ]
+    # Investigate and explain why that can happen
+    return random.choice(possible_redirections) \
+        if len(possible_redirections) > 0 \
+        else None
+
+
+transitions_map: dict[int, dict[int, int]] = {}
+"""
+{
+    from_id: {
+        og_to_id: remapped_to_id
+    }
+}
+"""
+
+
+def set_transitions_map():
+    _possible_exits_bucket = ALL_POSSIBLE_EXITS.copy()
+    """A temporary container of transitions to pick from until it is empty."""
+    global transitions_map
+    transitions_map = {}
+    for area in TRANSITION_INFOS_DICT.values():
+        from_ = area.area_id
+        for to_og in (exit_.area_id for exit_ in area.exits):
+            redirect = get_random_redirection(from_, to_og, _possible_exits_bucket)
+            if redirect is None or transitions_map.get(from_, {}).get(to_og):
+                # Don't override something set in a previous iteration, like from linked two-way entrances
+                continue
+
+            if transitions_map.get(from_):
+                transitions_map[from_][to_og] = redirect
+            else:
+                transitions_map[from_] = {to_og: redirect}
+            _possible_exits_bucket.remove(redirect)
+
+            if CONFIGS.LINKED_TRANSITIONS:
+                if transitions_map.get(redirect):
+                    transitions_map[redirect][to_og] = from_
+                else:
+                    transitions_map[redirect] = {to_og: from_}
+                try:
+                    _possible_exits_bucket.remove(from_)
+                except KeyError:
+                    pass
+
+
+set_transitions_map()
+
+print(TRANSITION_INFOS_DICT)
+# Dump spoiler logs
+spoiler_logs = f"Starting area: {TRANSITION_INFOS_DICT[starting_area].name}\n"
+for from_, to_old_and_new in transitions_map.items():
+    for to_old, to_new in to_old_and_new.items():
+        spoiler_logs += f"From: {TRANSITION_INFOS_DICT[from_].name}, " + \
+            f"To: {TRANSITION_INFOS_DICT[to_old].name}. " + \
+            f"Redirecting to: {TRANSITION_INFOS_DICT[to_new].name}\n"
+
+spoiler_logs_file = dolphin_path / "User" / "Logs" / f"SPOILER_LOGS_v{__version__}_{seed_string}.txt"
+with Path.open(spoiler_logs_file, "w") as file:
+    file.writelines(spoiler_logs)
+print("Spoiler logs written to", spoiler_logs_file)
+
+
 async def main_loop():
     global current_area_old
     global current_area_new
     global draw_text_index
+    global visited_altar_of_ages
 
     # Read memory, setup loop values, print debug to screen
     draw_text_index = 0
@@ -121,8 +199,12 @@ async def main_loop():
     current_area_new = memory.read_u32(CURRENT_AREA_ADDR)
     current_area = TRANSITION_INFOS_DICT.get(current_area_new)
     draw_text(f"Rando version: {__version__}")
-    draw_text(f"Current area: {hex(current_area_new).upper()} {f'({current_area.name})' if current_area else ''}")
     draw_text(f"Seed: {seed_string}")
+    draw_text(
+        f"Starting area: {hex(starting_area)}"
+        + " (Random)" if CONFIGS.STARTING_AREA is None else f"{TRANSITION_INFOS_DICT[starting_area].name}",
+    )
+    draw_text(f"Current area: {hex(current_area_new).upper()} {f'({current_area.name})' if current_area else ''}")
 
     # Always re-enable Item Swap.
     if memory.read_u32(ITEM_SWAP_ADDR) == 1:
@@ -133,16 +215,22 @@ async def main_loop():
         return
 
     # Standardize the Altar of Ages exit
-    if highjack_transition(ALTAR_OF_AGES, BITTENBINDERS_CAMP, MYSTERIOUS_TEMPLE):
+    if highjack_transition(ALTAR_OF_AGES, None, MYSTERIOUS_TEMPLE):
+        visited_altar_of_ages = True
         current_area_new = MYSTERIOUS_TEMPLE
 
     # Standardize the Viracocha Monoliths cutscene
     if highjack_transition(None, VIRACOCHA_MONOLITHS_CUTSCENE, VIRACOCHA_MONOLITHS):
         current_area_new = VIRACOCHA_MONOLITHS
 
-    redirect = highjack_transition_chaos()
+    # Standardize St. Claire's Excavation Camp
+    if highjack_transition(None, ST_CLAIRE_NIGHT, ST_CLAIRE_DAY):
+        current_area_new = ST_CLAIRE_DAY
+
+    redirect = highjack_transition_rando()
     if redirect:
         current_area_new = redirect
+
 
 while True:
     await main_loop()  # noqa: F704  # pyright: ignore

@@ -36,7 +36,10 @@
       ]
     },
     {
-      "Altar of Ages": "Not including the BBCamp exit as it only happens once from a cutscene and is cut out in entrance rando."
+      "Altar of Ages": "Not including the BBCamp exit as it only happens once from a cutscene and is cut out in entrance rando.",
+      "St. Claire's Excavation Camp": "Only including the Day ID, rando logic takes care of standardizing the night ID.",
+      "teleports": "teleports are broken if not comming from the expected areas",
+      "Crash Site": "Crash Site resets progression if not comming from the expected areas"
     }
   ],
   "Jungle": [
@@ -100,7 +103,7 @@
           "requires": null
         },
         {
-          "area_id": "0xA85A2793",
+          "area_id": "0xABD7CCD8",
           "area_name": "The Altar of Ages",
           "requires": null
         }
@@ -215,15 +218,6 @@
           "requires": null
         },
         {
-          "area_id": "0xEE8F6900",
-          "area_name": "Crash Site",
-          "requires": [
-            [
-              "GLITCHES"
-            ]
-          ]
-        },
-        {
           "area_id": "0x0AF1CCFF",
           "area_name": "Native Jungle",
           "requires": null
@@ -327,11 +321,6 @@
           "area_id": "0xF0F99C58",
           "area_name": "Fire-bombed Towers",
           "requires": []
-        },
-        {
-          "area_id": "0x99885996",
-          "area_name": "Ruins of El Dorado (Supai/Jaguar)",
-          "requires": []
         }
       ]
     },
@@ -382,11 +371,6 @@
       "default_entrance": "0xEE8F6900",
       "exits": [
         {
-          "area_id": "0xEE8F6900",
-          "area_name": "Crash Site",
-          "requires": []
-        },
-        {
           "area_id": "0x9D6149E1",
           "area_name": "Underground Dam",
           "requires": []
@@ -399,23 +383,6 @@
         {
           "area_id": "0x0081082C",
           "area_name": "Chameleon Temple",
-          "requires": []
-        }
-      ]
-    },
-    {
-      "area_id": "0xEE8F6900",
-      "area_name": "Crash Site",
-      "default_entrance": "0x99885996",
-      "exits": [
-        {
-          "area_id": "0x4A3E4058",
-          "area_name": "Plane Cockpit",
-          "requires": []
-        },
-        {
-          "area_id": "0xDEDA69BC",
-          "area_name": "Jungle Canyon",
           "requires": []
         }
       ]
@@ -447,31 +414,6 @@
         {
           "area_id": "0x239A2165",
           "area_name": "Turtle Monument",
-          "requires": []
-        },
-        {
-          "area_id": "0x0A1F2526",
-          "area_name": "Whack-A-Tuco",
-          "requires": []
-        },
-        {
-          "area_id": "0x0D72E13F",
-          "area_name": "Tuco Shoot",
-          "requires": []
-        },
-        {
-          "area_id": "0x7A75D1A9",
-          "area_name": "Pickaxe Race",
-          "requires": []
-        },
-        {
-          "area_id": "0x9316749C",
-          "area_name": "Raft Bowling",
-          "requires": []
-        },
-        {
-          "area_id": "0xE411440A",
-          "area_name": "KaBOOM!",
           "requires": []
         }
       ]
@@ -529,11 +471,6 @@
           "area_id": "0xCD944049",
           "area_name": "Butterfly Glade",
           "requires": []
-        },
-        {
-          "area_id": "0xE97CB47C",
-          "area_name": "Teleport",
-          "requires": []
         }
       ]
     },
@@ -550,18 +487,6 @@
         {
           "area_id": "0x0C1C3E47",
           "area_name": "Renegade Fort",
-          "requires": []
-        }
-      ]
-    },
-    {
-      "area_id": "0x72AD42FA",
-      "area_name": "St. Claire's Excavation Camp (Night)",
-      "default_entrance": "0xBA9370DF",
-      "exits": [
-        {
-          "area_id": "0xBA9370DF",
-          "area_name": "St. Claire's Excavation Camp (Day)",
           "requires": []
         }
       ]
@@ -647,11 +572,6 @@
         {
           "area_id": "0xBA9370DF",
           "area_name": "St. Claire's Excavation Camp (Day)",
-          "requires": []
-        },
-        {
-          "area_id": "0x72AD42FA",
-          "area_name": "St. Claire's Excavation Camp (Night)",
           "requires": []
         }
       ]
@@ -739,11 +659,6 @@
           "requires": []
         },
         {
-          "area_id": "0xE97CB47C",
-          "area_name": "Teleport",
-          "requires": []
-        },
-        {
           "area_id": "0xEA667977",
           "area_name": "Abandoned Cavern",
           "requires": []
@@ -780,13 +695,13 @@
           "requires": []
         },
         {
-          "area_name": "Penguin Temple (Harry)",
-          "default_entrance": "0x6F498BBD",
+          "area_id": "0x8147EA91",
+          "area_name": "Copacanti Lake",
           "requires": []
         },
         {
-          "area_id": "0x08E3C641",
-          "area_name": "Valley of the Spirits",
+          "area_id": "0x3E7EE822",
+          "area_name": "Ekkeko Ice Cavern",
           "requires": []
         }
       ]
@@ -879,11 +794,6 @@
         {
           "area_id": "0x1B8833D3",
           "area_name": "Mountain Sled Run",
-          "requires": []
-        },
-        {
-          "area_id": "0xE97CB47C",
-          "area_name": "Teleport",
           "requires": []
         },
         {

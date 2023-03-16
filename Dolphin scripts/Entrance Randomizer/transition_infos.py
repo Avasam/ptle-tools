@@ -59,7 +59,7 @@ class MajorAreas(NamedTuple):
     snowy_mountains: list[Area]
 
 
-def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):
+def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):  # noqa: N802
     major_areas = [
         [
             Area(
@@ -83,14 +83,14 @@ def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):
 
 
 try:
-    with open(
+    with Path.open(
         Path(__file__).parent / "transition_infos.json",
         encoding="UTF-8",
     ) as json_data:
         data: TransitionInfosJSON = json.load(json_data)
 except FileNotFoundError as error:
     print(error, "Looking in 'Various technical notes' instead")
-    with open(
+    with Path.open(
         Path(__file__).parent.parent.parent
         / "Various technical notes"
         / "transition_infos.json",
