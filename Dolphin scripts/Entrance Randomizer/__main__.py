@@ -67,7 +67,7 @@ def highjack_transition_rando():
     if not redirect:
         return False
 
-    # Apply Altar of Ages logic
+    # Apply Altar of Ages logic to St. Claire's Excavation Camp
     if redirect in {ST_CLAIRE_DAY, ST_CLAIRE_NIGHT}:
         redirect = ST_CLAIRE_NIGHT if visited_altar_of_ages else ST_CLAIRE_DAY
 
@@ -140,6 +140,11 @@ transitions_map: dict[int, dict[int, int]] = {}
 
 
 def set_transitions_map():
+    def _transition_map_set(from_: int, to: int, redirect: int):
+        if transitions_map.get(from_):
+            transitions_map[from_][to] = redirect
+        else:
+            transitions_map[from_] = {to: redirect}
     _possible_exits_bucket = ALL_POSSIBLE_EXITS.copy()
     """A temporary container of transitions to pick from until it is empty."""
     global transitions_map
@@ -152,28 +157,43 @@ def set_transitions_map():
                 # Don't override something set in a previous iteration, like from linked two-way entrances
                 continue
 
-            if transitions_map.get(from_):
-                transitions_map[from_][to_og] = redirect
-            else:
-                transitions_map[from_] = {to_og: redirect}
+            _transition_map_set(from_, to_og, redirect)
             _possible_exits_bucket.remove(redirect)
 
             if CONFIGS.LINKED_TRANSITIONS:
-                if transitions_map.get(redirect):
-                    transitions_map[redirect][to_og] = from_
-                else:
-                    transitions_map[redirect] = {to_og: from_}
+                # Ensure we haven't already expanded all transitions back to the "from" area.
+                # (I think that means that area had more exits than entrances)
+                if from_ not in _possible_exits_bucket:
+                    continue
                 try:
-                    _possible_exits_bucket.remove(from_)
-                except KeyError:
-                    pass
+                    # Get a still-available exit from the area we're redirecting to
+                    entrance = [
+                        exit_.area_id for exit_
+                        in TRANSITION_INFOS_DICT[redirect].exits
+                        if exit_.area_id in _possible_exits_bucket
+                    ][0]
+                except IndexError:
+                    # That area had more entrances than exits
+                    continue
+                _transition_map_set(redirect, entrance, from_)
+                _possible_exits_bucket.remove(from_)
 
 
 set_transitions_map()
 
-print(TRANSITION_INFOS_DICT)
+# This is necessary until/unless I map all areas even those not randomized.
+try:
+    starting_area_name = TRANSITION_INFOS_DICT[starting_area].name
+except KeyError:
+    if starting_area == CRASH_SITE:
+        starting_area_name = "Crash Site"
+    elif starting_area == TELEPORTERS:
+        starting_area_name = "Teleport"
+    else:
+        starting_area_name = str(starting_area)
+
 # Dump spoiler logs
-spoiler_logs = f"Starting area: {TRANSITION_INFOS_DICT[starting_area].name}\n"
+spoiler_logs = f"Starting area: {starting_area_name}\n"
 for from_, to_old_and_new in transitions_map.items():
     for to_old, to_new in to_old_and_new.items():
         spoiler_logs += f"From: {TRANSITION_INFOS_DICT[from_].name}, " + \
@@ -202,7 +222,7 @@ async def main_loop():
     draw_text(f"Seed: {seed_string}")
     draw_text(
         f"Starting area: {hex(starting_area)}"
-        + " (Random)" if CONFIGS.STARTING_AREA is None else f"{TRANSITION_INFOS_DICT[starting_area].name}",
+        + " (Random)" if CONFIGS.STARTING_AREA is None else f"{starting_area_name}",
     )
     draw_text(f"Current area: {hex(current_area_new).upper()} {f'({current_area.name})' if current_area else ''}")
 
@@ -216,6 +236,7 @@ async def main_loop():
 
     # Standardize the Altar of Ages exit
     if highjack_transition(ALTAR_OF_AGES, None, MYSTERIOUS_TEMPLE):
+        # Even if the cutscene isn't actually watched. Just leaving the Altar is good enough for the rando.
         visited_altar_of_ages = True
         current_area_new = MYSTERIOUS_TEMPLE
 

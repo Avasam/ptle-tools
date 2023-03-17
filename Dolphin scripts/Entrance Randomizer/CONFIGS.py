@@ -19,6 +19,5 @@ See `transition_infos.json` for all available IDs
 LINKED_TRANSITIONS: bool = False
 """
 Whether the new destination will contain an exit back to the area you came from.
-
-(Doesn't really work yet. Use at your own risks 😜)
+Assuming both areas have as many entrances as they have exits.
 """
