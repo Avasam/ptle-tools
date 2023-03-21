@@ -27,7 +27,7 @@ Repository: <https://github.com/UltiNaruto/PitfallARCTool>
 
 ## TexConvert
 
-A tool to convert unarchived Pitfall TEX format textures into a workable format.
+A tool to convert unarchived Pitfall TXFL format textures **from the PC version only** into DirectDraw Surface (DDS) fromat.
 
 Releases: <https://github.com/Helco/Pitfall/releases>
 
