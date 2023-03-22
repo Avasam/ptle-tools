@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PCTexturePackGeneratorConsole", "Console Generator\PCTexturePackGeneratorConsole.csproj", "{FA0A4430-31DB-4F9A-AE66-C6C14CA4920F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PCTexturePackGeneratorGUI", "GUI\PCTexturePackGeneratorGUI.csproj", "{1887C8D3-D8CD-450C-8929-A1FCCEDF5C84}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TexConvert", "..\..\TexConvert\TexConvert\TexConvert.csproj", "{2919A1BD-A9DC-418C-A2B6-D2A612CB15CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PitfallARCTool", "..\..\PitfallARCTool\PitfallARCTool\PitfallARCTool.csproj", "{B5F9E6C1-876A-4428-8EE3-4A7EFF910776}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{022964B5-C052-491F-80BC-02959384313C}"
+	ProjectSection(SolutionItems) = preProject
+		.EditorConfig = .EditorConfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA0A4430-31DB-4F9A-AE66-C6C14CA4920F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA0A4430-31DB-4F9A-AE66-C6C14CA4920F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA0A4430-31DB-4F9A-AE66-C6C14CA4920F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA0A4430-31DB-4F9A-AE66-C6C14CA4920F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1887C8D3-D8CD-450C-8929-A1FCCEDF5C84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1887C8D3-D8CD-450C-8929-A1FCCEDF5C84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1887C8D3-D8CD-450C-8929-A1FCCEDF5C84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1887C8D3-D8CD-450C-8929-A1FCCEDF5C84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2919A1BD-A9DC-418C-A2B6-D2A612CB15CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2919A1BD-A9DC-418C-A2B6-D2A612CB15CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2919A1BD-A9DC-418C-A2B6-D2A612CB15CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2919A1BD-A9DC-418C-A2B6-D2A612CB15CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5F9E6C1-876A-4428-8EE3-4A7EFF910776}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5F9E6C1-876A-4428-8EE3-4A7EFF910776}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5F9E6C1-876A-4428-8EE3-4A7EFF910776}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5F9E6C1-876A-4428-8EE3-4A7EFF910776}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB9BC0EA-DA8D-4437-BB39-0BE7DAD35072}
+	EndGlobalSection
+EndGlobal

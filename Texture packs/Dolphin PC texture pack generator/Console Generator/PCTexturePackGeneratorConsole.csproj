@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>PCTexturePackGeneratorConsole</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\PitfallARCTool\PitfallARCTool\PitfallARCTool.csproj" />
+    <ProjectReference Include="..\..\..\TexConvert\TexConvert\TexConvert.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Include="..\.EditorConfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.EditorConfig" />
+  </ItemGroup>
+
+</Project>
