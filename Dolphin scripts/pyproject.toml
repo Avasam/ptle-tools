@@ -1,7 +1,7 @@
 # https://beta.ruff.rs/docs/configuration
 [tool.ruff]
 line-length = 120
-select = ["ALL", "D213"]
+select = ["ALL"]
 target-version = "py38"
 # https://beta.ruff.rs/docs/rules
 ignore = [
@@ -106,6 +106,7 @@ max-branches = 15
 aggressive = 3
 ignore = [
   # TODO Suggest "multi-line method invocation style" to Ruff. and/or change to Black
+  # https://github.com/charliermarsh/ruff/issues/3713
   "E124", # Closing bracket may not match multi-line method invocation style (enforced by add-trailing-comma)
   "E402", # Allow imports at the bottom of file
   "E70", # Allow ... on same line as def

@@ -32,7 +32,7 @@
     "newLineKind": "auto",
     "associations": [
       "*.json",
-      "*.json",
+      "*.jsonc",
       "*.dmw"
     ]
   },

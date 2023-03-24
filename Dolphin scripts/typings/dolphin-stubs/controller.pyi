@@ -6,7 +6,7 @@ No acceleration or extensions data yet.
 """
 from typing import TypedDict, type_check_only
 
-#
+# https://github.com/charliermarsh/ruff/issues/3720
 
 
 @type_check_only
