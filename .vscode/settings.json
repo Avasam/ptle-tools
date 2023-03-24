@@ -7,11 +7,11 @@
     "*.dmw": "json",
     "pyrightconfig*.json": "jsonc",
     "dprint*.json": "jsonc",
-    ".flake8": "properties",
+    ".flake8": "properties"
   },
   "files.exclude": {
     "**/.mypy_cache": true,
-    "**/__pycache__": true,
+    "**/__pycache__": true
   },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
@@ -49,12 +49,12 @@
       // 79, // PEP8-17 default max
       // 88, // Black default
       // 99, // PEP8-17 acceptable max
-      120, // Our hard rule
+      120 // Our hard rule
     ],
     "editor.codeActionsOnSave": {
       // TODO: Ruff is supposed to be able to take care of this
-      "source.organizeImports": false,
-    },
+      "source.organizeImports": false
+    }
   },
   // Important to follow the config in pyrightconfig.json
   "python.analysis.useLibraryCodeForTypes": false,
@@ -77,11 +77,11 @@
       {
         "match": "\\.pyi?",
         "cmd": "add-trailing-comma \"${file}\" --py36-plus"
-      },
+      }
     ]
   },
   "[toml]": {
-    "editor.defaultFormatter": "tamasfe.even-better-toml",
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
   },
   "evenBetterToml.formatter.alignComments": false,
   "evenBetterToml.formatter.alignEntries": false,
@@ -106,5 +106,5 @@
   "powershell.codeFormatting.useCorrectCasing": true,
   "powershell.codeFormatting.whitespaceBetweenParameters": true,
   "powershell.integratedConsole.showOnStartup": false,
-  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.defaultProfile.windows": "PowerShell"
 }
