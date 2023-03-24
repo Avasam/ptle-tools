@@ -1,4 +1,4 @@
-namespace GUI
+namespace PCTexturePackGeneratorGUI
 {
     public partial class Form1 : Form
     {

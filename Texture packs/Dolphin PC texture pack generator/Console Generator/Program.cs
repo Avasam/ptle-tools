@@ -18,15 +18,15 @@ if (exitCode != 0) return exitCode;
 
 foreach (var textureFileInfo in new DirectoryInfo(convertedTexturesFolder).GetFiles())
 {
-  // var newName = TextureNameMapping.Dict.GetValueOrDefault(textureFileInfo.Name);
-  var newName = textureFileInfo.Name;
+  var newName = Utils.TextureNameMapping.GetValueOrDefault(textureFileInfo.Name);
+  //var newName = textureFileInfo.Name;
   if (string.IsNullOrEmpty(newName))
   {
     File.Delete(textureFileInfo.FullName);
   }
   else
   {
-    var destinationFolder = $"{outputLocation}/GPHE/";
+    var destinationFolder = $"{outputLocation}/GPHE52/";
     if (!File.Exists(destinationFolder))
     {
       Directory.CreateDirectory(destinationFolder);
