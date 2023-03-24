@@ -29,7 +29,12 @@
   },
   // https://dprint.dev/plugins/json/config/
   "json": {
-    "newLineKind": "auto"
+    "newLineKind": "auto",
+    "associations": [
+      "*.json",
+      "*.json",
+      "*.dmw"
+    ]
   },
   // https://dprint.dev/plugins/markdown/config/
   "markdown": {

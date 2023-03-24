@@ -1,9 +1,9 @@
 repos:
   # Broken, see: https://github.com/adamchainz/pre-commit-dprint/issues/3
-  # - repo: https://github.com/adamchainz/pre-commit-dprint
-  #   rev: "v0.35.3"
-  #   hooks:
-  #     - id: dprint
+  - repo: https://github.com/adamchainz/pre-commit-dprint
+    rev: "v0.35.3"
+    hooks:
+      - id: dprint
   - repo: https://github.com/charliermarsh/ruff-pre-commit
     rev: "v0.0.259" # Must match requirements-dev.txt
     hooks:
