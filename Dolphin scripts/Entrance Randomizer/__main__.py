@@ -10,6 +10,7 @@ from typing import Iterable
 
 from dolphin import event, gui, memory  # pyright: ignore[reportMissingModuleSource]
 
+print(f"Python version: {sys.version}")
 dolphin_path = Path().absolute()
 print("Dolphin path:", dolphin_path)
 real_scripts_path = os.path.realpath(dolphin_path / "Scripts")

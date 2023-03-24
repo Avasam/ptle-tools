@@ -1,6 +1,4 @@
-"""
-Module for interacting with the emulated machine's memory
-"""
+"""Module for interacting with the emulated machine's memory."""
 
 
 def read_u8(addr: int, /) -> int:

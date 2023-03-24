@@ -6,6 +6,8 @@ No acceleration or extensions data yet.
 """
 from typing import TypedDict, type_check_only
 
+#
+
 
 @type_check_only
 class GCInputs(TypedDict):
@@ -50,8 +52,9 @@ class WiiInputs(TypedDict):
 def get_gc_buttons(controller_id: int, /) -> GCInputs:
     """
     Retrieves the current input map for the given GameCube controller.
+
     :param controller_id: 0-based index of the controller
-    :return: dictionary describing the current input map
+    :return: dictionary describing the current input map.
     """
 
 
@@ -59,16 +62,18 @@ def set_gc_buttons(controller_id: int, inputs: GCInputs, /) -> None:
     """
     Sets the current input map for the given GameCube controller.
     The override will hold for the current frame.
+
     :param controller_id: 0-based index of the controller
-    :param inputs: dictionary describing the input map
+    :param inputs: dictionary describing the input map.
     """
 
 
 def get_wii_buttons(controller_id: int, /) -> WiiInputs:
     """
     Retrieves the current input map for the given Wii controller.
+
     :param controller_id: 0-based index of the controller
-    :return: dictionary describing the current input map
+    :return: dictionary describing the current input map.
     """
 
 
@@ -76,21 +81,28 @@ def set_wii_buttons(controller_id: int, inputs: WiiInputs, /) -> None:
     """
     Sets the current input map for the given Wii controller.
     The override will hold for the current frame.
+
     :param controller_id: 0-based index of the controller
-    :param inputs: dictionary describing the input map
+    :param inputs: dictionary describing the input map.
     """
 
 
-def set_wii_ircamera_transform(controller_id: int,
-                               x: float, y: float, z: float = -2,
-                               pitch: float = 0, yaw: float = 0,
-                               roll: float = 0, /) -> None:
+def set_wii_ircamera_transform(
+    controller_id: int,
+    x: float,
+    y: float,
+    z: float = -2,
+    pitch: float = 0,
+    yaw: float = 0,
+    roll: float = 0,
+    /,
+) -> None:
     """
     Places the simulated IR camera at the specified location
     with the specified rotation relative to the sensor bar.
     For example, to move 2 meters away from the sensor,
     15 centimeters to the right and 5 centimeters down, use:
-    `set_wii_ircamera_transform(controller_id, 0.15, -0.05, -2)`
+    `set_wii_ircamera_transform(controller_id, 0.15, -0.05, -2)`.
 
     :param controller_id: 0-based index of the controller
     :param x: x-position of the simulated IR camera in meters

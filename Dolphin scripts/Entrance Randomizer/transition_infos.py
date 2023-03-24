@@ -24,14 +24,14 @@ if TYPE_CHECKING:
 
     from typing_extensions import TypeAlias
 
-    TransitionInfosJSON: TypeAlias = dict[
+    TransitionInfosJSON: TypeAlias = dict[  # pyright: ignore  # Safe inside TYPE_CHECKING
         Literal[
             "Jungle",
             "Native Territory",
             "Lost Caverns",
             "Snowy Mountains",
         ],
-        list[AreaJSON],
+        list[AreaJSON],  # pyright: ignore  # Safe inside TYPE_CHECKING
     ]
 else:
     TransitionInfosJSON = None
@@ -98,7 +98,7 @@ except FileNotFoundError as error:
     ) as json_data:
         data: TransitionInfosJSON = json.load(json_data)
 # We don't wanna expose comments
-del data["//"]  # type: ignore[reportGeneralTypeIssues]
+del data["//"]  # pyright: ignore[reportGeneralTypeIssues]
 
 
 transition_infos = major_areas_from_JSON(data)

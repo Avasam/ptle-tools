@@ -11,7 +11,8 @@
   },
   "files.exclude": {
     "**/.mypy_cache": true,
-    "**/__pycache__": true
+    "**/__pycache__": true,
+    "**/.ruff_cache": true
   },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
@@ -38,7 +39,6 @@
   "[markdown]": {
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
   },
-  "python.analysis.stubPath": "Dolphin scripts/typings",
   "[python]": {
     // Ruff is not yet a formatter: https://github.com/charliermarsh/ruff/issues/1904
     // Cannot use autotpep8 until https://github.com/microsoft/vscode-autopep8/issues/32 is fixed
@@ -56,9 +56,16 @@
       "source.organizeImports": false
     }
   },
-  // Important to follow the config in pyrightconfig.json
+  "python.analysis.stubPath": "Dolphin scripts/typings",
+  // Important to respect the config in pyrightconfig.json
   "python.analysis.useLibraryCodeForTypes": false,
   "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.fixAll": [
+    "source.convertImportFormat"
+    // Specifically ignoring unusedImports because it's annoying to loose imports when commenting code for testing
+    // "source.unusedImports"
+  ],
+  // https://github.com/microsoft/vscode-autopep8/issues/32
   "python.formatting.provider": "autopep8",
   "python.linting.enabled": true,
   "ruff.importStrategy": "fromEnvironment",
@@ -99,6 +106,9 @@
   "evenBetterToml.formatter.reorderArrays": true,
   "evenBetterToml.formatter.reorderKeys": true,
   "evenBetterToml.formatter.trailingNewline": true,
+  "[powershell]": {
+    "editor.defaultFormatter": "ms-vscode.powershell"
+  },
   "powershell.codeFormatting.pipelineIndentationStyle": "IncreaseIndentationForFirstPipeline",
   "powershell.codeFormatting.autoCorrectAliases": true,
   "powershell.codeFormatting.trimWhitespaceAroundPipe": true,

@@ -36,3 +36,15 @@ Releases: <https://github.com/Helco/Pitfall/releases>
 A memory-based LiveSplit AutoSplitter for the PC version.
 
 <https://github.com/Avasam/Avasam.AutoSplitters/tree/main/Pitfall%20The%20Lost%20Expedition>
+
+## Meta / Contributing
+
+### Formatting, linting and type-checking
+
+You can simply install [pre-commit](https://pre-commit.ci/) (`pip install pre-commit`) and run it (`pre-commit run --all-files`) to lint, type-check, and automatically format all files.
+
+Autofixable issues will automatically be resolved when creating a pull-request.
+
+#### Format on save
+
+To automatically format on save using the Visual Studio Code editor, make sure to install all recommended extensions in [.vscode/extensions.json](.vscode/extensions.json). You should also [install dprint](https://dprint.dev/install/) and our python dev dependencies (`pip install -r ".\Dolphin scripts\requirements-dev.txt"`)
