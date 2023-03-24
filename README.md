@@ -39,6 +39,8 @@ A memory-based LiveSplit AutoSplitter for the PC version.
 
 ## Meta / Contributing
 
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Avasam/ptle-tools/main.svg)](https://results.pre-commit.ci/latest/github/Avasam/ptle-tools/main)
+
 ### Formatting, linting and type-checking
 
 You can simply install [pre-commit](https://pre-commit.ci/) (`pip install pre-commit`) and run it (`pre-commit run --all-files`) to lint, type-check, and automatically format all files.
