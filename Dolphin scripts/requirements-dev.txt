@@ -1,0 +1,4 @@
+add-trailing-comma>=2.3.0  # Added support for with statement
+autopep8>=2.0.0 # New checks # Must match .pre-commit-config.yaml
+pre-commit
+ruff>=0.0.259 # New Bandit checks and fixed issue # Must match .pre-commit-config.yaml
