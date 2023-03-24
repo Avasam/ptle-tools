@@ -10,7 +10,7 @@ Download: <https://dolphin-emu.org/download/> (anything 5.0-14514 or above is fi
 
 Watch and modify useful memory regions.
 
-Dolphin Memory Engine (DME): <https://github.com/aldelaro5/Dolphin-memory-engine/releases> \
+Dolphin Memory Engine (DME): <https://github.com/aldelaro5/Dolphin-memory-engine/releases>\
 Tables: [/Dolphin Memory Watches (DMW)](/Dolphin%20Memory%20Watches%20(DMW))
 
 ### Graphics Mods

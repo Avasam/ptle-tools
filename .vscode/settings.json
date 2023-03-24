@@ -5,8 +5,9 @@
     "source.fixAll": false
   },
   "files.associations": {
-    "**.dmw": "json"
-},
+    "**.dmw": "json",
+    "dprint*.json": "jsonc"
+  },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
@@ -23,12 +24,20 @@
       72
     ]
   },
+  "[json][jsonc][javascript][javascriptreact][typescript][typescriptreact][dockerfile]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
   "[json][jsonc]": {
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.fixAll": true
-    },
-    "editor.defaultFormatter": "vscode.json-language-features"
+    }
   },
   "[markdown]": {
     "editor.formatOnSave": true,
@@ -36,5 +45,5 @@
       "source.fixAll": true
     },
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
-},
+  }
 }

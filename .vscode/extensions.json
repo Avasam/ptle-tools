@@ -3,8 +3,11 @@
   "recommendations": [
     "bierner.github-markdown-preview",
     "davidanson.vscode-markdownlint",
-],
-"unwantedRecommendations": [
+    "dprint.dprint",
+    "redhat.vscode-yaml",
+    "tamasfe.even-better-toml"
+  ],
+  "unwantedRecommendations": [
     /*
      * Don't recommend by default for this workspace
     */
@@ -17,6 +20,6 @@
     */
     // VSCode has implemented an optimized version
     "coenraads.bracket-pair-colorizer",
-    "coenraads.bracket-pair-colorizer-2",
-  ],
+    "coenraads.bracket-pair-colorizer-2"
+  ]
 }
