@@ -20,61 +20,77 @@ IS_GC = chr(memory.read_u8(0x80000000)) == "G"
 IS_WII = chr(memory.read_u8(0x80000000)) == "R"
 
 if IS_GC:
-    if _game_id == 'PH' and _developer_id == '52':
-        if GAME_REGION == 'D':
+    if _game_id == "PH" and _developer_id == "52":
+        if GAME_REGION == "D":
             if GAME_VERSION == 0:
                 CURRENT_AREA_ADDR = 0x80417F50
                 ITEM_SWAP_ADDR = 0x804C7734
                 print("Detected GC DE 0-00 version!")
             else:
-                raise Exception(f'Unknown version of Pitfall The Lost Expedition (region -> {GAME_REGION}, version -> {GAME_VERSION})')
-        elif GAME_REGION == 'E':
+                raise Exception(
+                    f"Unknown version of Pitfall The Lost Expedition (region -> {GAME_REGION}, version -> {GAME_VERSION})",
+                )
+        elif GAME_REGION == "E":
             if GAME_VERSION == 0:
                 CURRENT_AREA_ADDR = 0x8041BEB4
                 ITEM_SWAP_ADDR = 0x804CB694
                 print("Detected GC US 0-00 version!")
             else:
-                raise Exception(f'Unknown version of Pitfall The Lost Expedition (region -> {GAME_REGION}, version -> {GAME_VERSION})')
-        elif GAME_REGION == 'F':
+                raise Exception(
+                    f"Unknown version of Pitfall The Lost Expedition (region -> {GAME_REGION}, version -> {GAME_VERSION})",
+                )
+        elif GAME_REGION == "F":
             if GAME_VERSION == 0:
                 CURRENT_AREA_ADDR = 0x80417F30
                 ITEM_SWAP_ADDR = 0x804C7714
                 print("Detected GC FR 0-00 version!")
             else:
-                raise Exception(f'Unknown version of Pitfall The Lost Expedition (region -> {GAME_REGION}, version -> {GAME_VERSION})')
-        elif GAME_REGION == 'P':
+                raise Exception(
+                    f"Unknown version of Pitfall The Lost Expedition (region -> {GAME_REGION}, version -> {GAME_VERSION})",
+                )
+        elif GAME_REGION == "P":
             if GAME_VERSION == 0:
                 CURRENT_AREA_ADDR = 0x80417F10
                 ITEM_SWAP_ADDR = 0x804C76F4
                 print("Detected GC EU 0-00 version!")
             else:
-                raise Exception(f'Unknown version of Pitfall The Lost Expedition (region -> {GAME_REGION}, version -> {GAME_VERSION})')
+                raise Exception(
+                    f"Unknown version of Pitfall The Lost Expedition (region -> {GAME_REGION}, version -> {GAME_VERSION})",
+                )
         else:
-            raise Exception(f'Unknown version of Pitfall The Lost Expedition (region -> {GAME_REGION}, version -> {GAME_VERSION})')
+            raise Exception(
+                f"Unknown version of Pitfall The Lost Expedition (region -> {GAME_REGION}, version -> {GAME_VERSION})",
+            )
     else:
-        raise Exception(f'Unknown game!')
+        raise Exception("Unknown game!")
 elif IS_WII:
-    if _game_id == 'PF' and _developer_id == '52':
-        if GAME_REGION == 'E':
+    if _game_id == "PF" and _developer_id == "52":
+        if GAME_REGION == "E":
             if GAME_VERSION == 0:
                 CURRENT_AREA_ADDR = 0x80448D04
                 ITEM_SWAP_ADDR = 0x80446608
                 print("Detected Wii US 0-00 version!")
             else:
-                raise Exception(f'Unknown version of Pitfall The Big Adventure (region -> {GAME_REGION}, version -> {GAME_VERSION})')
-        elif GAME_REGION == 'P':
+                raise Exception(
+                    f"Unknown version of Pitfall The Big Adventure (region -> {GAME_REGION}, version -> {GAME_VERSION})",
+                )
+        elif GAME_REGION == "P":
             if GAME_VERSION == 0:
                 CURRENT_AREA_ADDR = 0x80449104
                 ITEM_SWAP_ADDR = 0x80446A08
                 print("Detected Wii EU 0-00 version!")
             else:
-                raise Exception(f'Unknown version of Pitfall The Big Adventure (region -> {GAME_REGION}, version -> {GAME_VERSION})')
+                raise Exception(
+                    f"Unknown version of Pitfall The Big Adventure (region -> {GAME_REGION}, version -> {GAME_VERSION})",
+                )
         else:
-            raise Exception(f'Unknown version of Pitfall The Big Adventure (region -> {GAME_REGION}, version -> {GAME_VERSION})')
+            raise Exception(
+                f"Unknown version of Pitfall The Big Adventure (region -> {GAME_REGION}, version -> {GAME_VERSION})",
+            )
     else:
-        raise Exception('Unknown game!')
+        raise Exception("Unknown game!")
 else:
-    raise Exception('Unknown game!')
+    raise Exception("Unknown game!")
 
 
 JAGUAR = 0x99885996
