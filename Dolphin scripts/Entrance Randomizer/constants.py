@@ -1,9 +1,18 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
 from itertools import chain
 
 from dolphin import memory  # pyright: ignore[reportMissingModuleSource]
 from transition_infos import transition_infos
+
+
+@dataclass
+class Addresses:
+    current_area: int
+    item_swap: int
+    version_string: str
+
 
 DRAW_TEXT_STEP = 24
 DRAW_TEXT_OFFSET_X = 272
@@ -12,86 +21,39 @@ TRANSITION_INFOS_DICT = {area.area_id: area for area in chain(*transition_infos)
 ALL_TRANSITION_AREAS = {area.area_id for area in chain(*transition_infos)}
 ALL_POSSIBLE_EXITS = [exit_.area_id for exit_ in chain(*(area.exits for area in TRANSITION_INFOS_DICT.values()))]
 
-_game_id = "".join([chr(memory.read_u8(0x80000001 + i)) for i in range(2)])
-_developer_id = "".join([chr(memory.read_u8(0x80000004 + i)) for i in range(2)])
+_game_id_base = "".join([chr(memory.read_u8(0x80000000 + i)) for i in range(3)])
 GAME_REGION = chr(memory.read_u8(0x80000003))
+_developer_id = "".join([chr(memory.read_u8(0x80000004 + i)) for i in range(2)])
 GAME_VERSION = memory.read_u8(0x80000007)
-IS_GC = chr(memory.read_u8(0x80000000)) == "G"
-IS_WII = chr(memory.read_u8(0x80000000)) == "R"
+IS_GC = _game_id_base == "GPH"
+IS_WII = _game_id_base == "RPF"
 
-if IS_GC:
-    if _game_id == "PH" and _developer_id == "52":
-        if GAME_REGION == "D":
-            if GAME_VERSION == 0:
-                CURRENT_AREA_ADDR = 0x80417F50
-                ITEM_SWAP_ADDR = 0x804C7734
-                print("Detected GC DE 0-00 version!")
-            else:
-                raise Exception(
-                    f"Unknown version of Pitfall The Lost Expedition (region -> {GAME_REGION}, version -> {GAME_VERSION})",
-                )
-        elif GAME_REGION == "E":
-            if GAME_VERSION == 0:
-                CURRENT_AREA_ADDR = 0x8041BEB4
-                ITEM_SWAP_ADDR = 0x804CB694
-                print("Detected GC US 0-00 version!")
-            else:
-                raise Exception(
-                    f"Unknown version of Pitfall The Lost Expedition (region -> {GAME_REGION}, version -> {GAME_VERSION})",
-                )
-        elif GAME_REGION == "F":
-            if GAME_VERSION == 0:
-                CURRENT_AREA_ADDR = 0x80417F30
-                ITEM_SWAP_ADDR = 0x804C7714
-                print("Detected GC FR 0-00 version!")
-            else:
-                raise Exception(
-                    f"Unknown version of Pitfall The Lost Expedition (region -> {GAME_REGION}, version -> {GAME_VERSION})",
-                )
-        elif GAME_REGION == "P":
-            if GAME_VERSION == 0:
-                CURRENT_AREA_ADDR = 0x80417F10
-                ITEM_SWAP_ADDR = 0x804C76F4
-                print("Detected GC EU 0-00 version!")
-            else:
-                raise Exception(
-                    f"Unknown version of Pitfall The Lost Expedition (region -> {GAME_REGION}, version -> {GAME_VERSION})",
-                )
-        else:
-            raise Exception(
-                f"Unknown version of Pitfall The Lost Expedition (region -> {GAME_REGION}, version -> {GAME_VERSION})",
-            )
-    else:
-        raise Exception("Unknown game!")
-elif IS_WII:
-    if _game_id == "PF" and _developer_id == "52":
-        if GAME_REGION == "E":
-            if GAME_VERSION == 0:
-                CURRENT_AREA_ADDR = 0x80448D04
-                ITEM_SWAP_ADDR = 0x80446608
-                print("Detected Wii US 0-00 version!")
-            else:
-                raise Exception(
-                    f"Unknown version of Pitfall The Big Adventure (region -> {GAME_REGION}, version -> {GAME_VERSION})",
-                )
-        elif GAME_REGION == "P":
-            if GAME_VERSION == 0:
-                CURRENT_AREA_ADDR = 0x80449104
-                ITEM_SWAP_ADDR = 0x80446A08
-                print("Detected Wii EU 0-00 version!")
-            else:
-                raise Exception(
-                    f"Unknown version of Pitfall The Big Adventure (region -> {GAME_REGION}, version -> {GAME_VERSION})",
-                )
-        else:
-            raise Exception(
-                f"Unknown version of Pitfall The Big Adventure (region -> {GAME_REGION}, version -> {GAME_VERSION})",
-            )
-    else:
-        raise Exception("Unknown game!")
-else:
-    raise Exception("Unknown game!")
+# Including the version number seems overkill, I don't think there was ever a non v0. Can add later if needed.
+if GAME_VERSION != 0:
+    raise Exception(f"Unknown game version {GAME_VERSION}!")
+_addresses_map = {
+    "GPH": {
+        "D": Addresses(0x80417F50, 0x804C7734, "GC DE 0-00"),
+        "E": Addresses(0x8041BEB4, 0x804CB694, "GC US 0-00"),
+        "F": Addresses(0x80417F30, 0x804C7714, "GC FR 0-00"),
+        "P": Addresses(0x80417F10, 0x804C76F4, "GC EU 0-00"),
+    },
+    "RPF": {
+        "E": Addresses(0x80448D04, 0x80446608, "Wii US 0-00"),
+        "P": Addresses(0x80449104, 0x80446A08, "Wii EU 0-00"),
+    },
+}
 
+_addresses = _addresses_map.get(_game_id_base, {}).get(GAME_REGION)
+if not _addresses or _developer_id != "52":
+    raise Exception(
+        "Unknown version of Pitfall The Lost Expedition "
+        + f"(game id -> {_game_id_base}{GAME_REGION}{_developer_id}, version -> {GAME_VERSION})",
+    )
+print(f"Detected {_addresses.version_string} version!")
+
+CURRENT_AREA_ADDR = _addresses.current_area
+ITEM_SWAP_ADDR = _addresses.item_swap
 
 JAGUAR = 0x99885996
 CRASH_SITE = 0xEE8F6900

@@ -16,6 +16,8 @@ print("Dolphin path:", dolphin_path)
 real_scripts_path = os.path.realpath(dolphin_path / "Scripts")
 print("Real Scripts path:", real_scripts_path)
 sys.path.append(f"{real_scripts_path}/Entrance Randomizer")
+# Wait for the first frame before scanning the game for constants
+await event.frameadvance()  # noqa: F704  # pyright: ignore
 
 import CONFIGS
 from constants import *  # noqa: F403

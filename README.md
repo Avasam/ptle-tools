@@ -19,6 +19,10 @@ Various graphical modifications and post-processing effects using [Dolphin's Gra
 
 Graphics Mods: [/Graphics Mods](/Graphics%20Mods)
 
+### Entrance Randomizer
+
+An entrance randomizer prototype using python scripting with Dolphin. See [/Dolphin scripts](/Dolphin%20scripts) for all the details.
+
 ## Pitfall ARC Tool
 
 Unarchive and re-archive `.arc` gamefiles.
@@ -43,7 +47,7 @@ A memory-based LiveSplit AutoSplitter for the PC version.
 
 ### Formatting, linting and type-checking
 
-You can simply install [pre-commit](https://pre-commit.ci/) (`pip install pre-commit`) and run it (`pre-commit run --all-files`) to lint, type-check, and automatically format all files.
+You can simply install [pre-commit](https://pre-commit.ci/) (`pip install pre-commit`) and run it (`pre-commit run`) to lint, type-check, and automatically format all files.
 
 Autofixable issues will automatically be resolved when creating a pull-request.
 
