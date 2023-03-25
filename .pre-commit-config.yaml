@@ -1,4 +1,13 @@
 repos:
+  # Workaround for https://github.com/adamchainz/pre-commit-dprint/issues/4
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: pretty-format-json
+        types: [text] # Include custom extension json
+        files: ".*.(json|dmw)"
+        exclude: ".vscode/.*|dprint.json" # Exclude jsonc
+        args: [--autofix, --no-sort-keys]
   - repo: https://github.com/adamchainz/pre-commit-dprint
     rev: "v0.35.3"
     hooks:
