@@ -8,18 +8,23 @@
       "unsigned": false
     },
     {
-      "address": "80167382",
-      "baseIndex": 1,
-      "label": "Starting Area",
-      "typeIndex": 1,
-      "unsigned": false
-    },
-    {
-      "address": "8016738A",
-      "baseIndex": 1,
-      "label": "Starting Area",
-      "typeIndex": 1,
-      "unsigned": false
+      "groupEntries": [
+        {
+          "address": "80167382",
+          "baseIndex": 1,
+          "label": "High bits",
+          "typeIndex": 1,
+          "unsigned": false
+        },
+        {
+          "address": "8016738A",
+          "baseIndex": 1,
+          "label": "Low bits",
+          "typeIndex": 1,
+          "unsigned": false
+        }
+      ],
+      "groupName": "Starting Area"
     },
     {
       "groupEntries": [
@@ -70,14 +75,14 @@
       "groupEntries": [
         {
           "address": "80423408",
-          "baseIndex": 0,
+          "baseIndex": 3,
           "label": "A/B/X/Y/Start",
           "typeIndex": 0,
           "unsigned": false
         },
         {
           "address": "80423409",
-          "baseIndex": 0,
+          "baseIndex": 3,
           "label": "L/R/Z/Dpad",
           "typeIndex": 0,
           "unsigned": false
@@ -203,6 +208,10 @@
                 },
                 {
                   "groupEntries": [],
+                  "groupName": "03 -> Fall through floor"
+                },
+                {
+                  "groupEntries": [],
                   "groupName": "04 -> Sinking"
                 }
               ],
@@ -265,6 +274,23 @@
               "pointerOffsets": [
                 "418"
               ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "80417EC8",
+              "baseIndex": 0,
+              "label": "Is Grounded",
+              "pointerOffsets": [
+                "120"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "804C7714",
+              "baseIndex": 0,
+              "label": "Can't open inventory",
               "typeIndex": 2,
               "unsigned": false
             }
@@ -413,11 +439,60 @@
     {
       "groupEntries": [
         {
-          "address": "80E9C1DC",
-          "baseIndex": 1,
-          "label": "Item to choose (Inv. Menu)",
-          "typeIndex": 2,
-          "unsigned": false
+          "groupEntries": [
+            {
+              "address": "80E9C1DC",
+              "baseIndex": 1,
+              "label": "Value",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "groupEntries": [],
+              "groupName": "01 -> Open Handbook"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "02 -> Heroic Handbook"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "03 -> Close Handbook"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "04 -> New Item dialog"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "05 -> Save Game dialog"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "06 -> Item Swap"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "07 -> Shaman Shop dialog"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "08 -> Select Minigame dialog"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "09 -> Enter 2D Pitfall mode"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "10 -> 2D Pitfall mode"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "11 -> Exit 2D Pitfall mode"
+            }
+          ],
+          "groupName": "Menu ID"
         },
         {
           "address": "8012FE56",
