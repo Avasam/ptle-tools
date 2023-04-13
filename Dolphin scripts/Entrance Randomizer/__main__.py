@@ -10,7 +10,6 @@ from typing import Iterable
 
 from dolphin import event, gui, memory  # pyright: ignore[reportMissingModuleSource]
 
-print(f"Python version: {sys.version}")
 dolphin_path = Path().absolute()
 print("Dolphin path:", dolphin_path)
 real_scripts_path = os.path.realpath(dolphin_path / "Scripts")
@@ -30,6 +29,7 @@ Minor: Affects seed
 
 Patch: Does't affect seed (assuming same settings)
 """
+print(f"Python version: {sys.version}")
 print(f"Rando version: {__version__}")
 
 # Sets the seed

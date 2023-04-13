@@ -6,6 +6,14 @@ from itertools import chain
 from dolphin import memory  # pyright: ignore[reportMissingModuleSource]
 from transition_infos import transition_infos
 
+_ = 1_234_567_890
+_ = 0x12_34_56_78_9A_BC_DE_F0  # split per byte/int8
+_ = 0x1234_5678_9ABC_DEF0  # split per int16, like microsoft calculator
+_ = 0xEA66_7977  # high bits, low bits (see example usage below)
+_ = 0x8041BEB4  # pointer address
+_ = 0o12_345_670  # like microsoft calculator
+_ = 0b0110_0101_0110  # like microsoft calculator
+
 
 @dataclass
 class Addresses:
