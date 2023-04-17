@@ -47,6 +47,6 @@ repos:
       - id: pyright
         args: [--project, Dolphin scripts/pyproject.toml]
 ci:
-  skip:
-    - dprint # https://github.com/adamchainz/pre-commit-dprint/issues/4
-    - pyright # https://github.com/RobertCraigie/pyright-python/issues/164
+    skip:
+      - dprint # https://github.com/adamchainz/pre-commit-dprint/issues/4
+      - pyright # https://github.com/RobertCraigie/pyright-python/issues/164

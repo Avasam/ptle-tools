@@ -5,7 +5,7 @@ intuitive way. For example, people can then do this:
     `from dolphin import event, memory`
 instead of:
     `import dolphin_event as event`
-    `import dolphin_memory as memory`
+    `import dolphin_memory as memory`.
 
 Valid:
   `import dolphin`
@@ -16,11 +16,11 @@ Invalid:
   `import dolphin.event`
   `from dolphin.event import ...`
 """
-import dolphin_event as event
-import dolphin_memory as memory
-import dolphin_gui as gui
-import dolphin_savestate as savestate
 import dolphin_controller as controller
+import dolphin_event as event
+import dolphin_gui as gui
+import dolphin_memory as memory
+import dolphin_savestate as savestate
 import dolphin_utils as utils
 
 __all__ = [
