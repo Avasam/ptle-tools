@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Text.Json;
 using PCTexturePackGeneratorConsole;
 
 (var pcArcFolder, var outputLocation) = Utils.ParseArguments(args);
@@ -13,26 +14,42 @@ var exitCode = Utils.Execute($"{workingPath}\\PitfallARCTool.exe", $"-x \"{pcArc
 if (exitCode != 0) return exitCode;
 
 // TexConvert.TexConvert.Main(new string[] { extractedTexturesFolder, convertedTexturesFolder });
-exitCode = Utils.Execute($"{workingPath}\\TexConvert.exe", $"{extractedTexturesFolder} {convertedTexturesFolder}");
+exitCode = Utils.Execute(
+  $"{workingPath}\\TexConvert.exe",
+  $"--input {extractedTexturesFolder} --output {convertedTexturesFolder} --format png --vflip false"
+  );
+Console.WriteLine("");
 if (exitCode != 0) return exitCode;
+
 
 foreach (var textureFileInfo in new DirectoryInfo(convertedTexturesFolder).GetFiles())
 {
-  var newName = Utils.TextureNameMapping.GetValueOrDefault(textureFileInfo.Name);
+  //var newName = Utils.TextureNameMapping.GetValueOrDefault(textureFileInfo.Name);
   //var newName = textureFileInfo.Name;
-  if (string.IsNullOrEmpty(newName))
+
+  var dteTextureMap = JsonSerializer.Deserialize<Dictionary<string, string[]>>(File.ReadAllText("./DTETextureMap.json"));
+  if (dteTextureMap == null) throw new NullReferenceException(nameof(dteTextureMap) + " is null.");
+
+  var textureFileName = textureFileInfo.Name[..^textureFileInfo.Extension.Length];
+  var newNames = dteTextureMap.GetValueOrDefault(textureFileName);
+
+  // PC has some extra files
+  // Two Palettes textures aren't supported by this generator yet.
+  if (newNames?.Length != 1)
   {
+    var reason = newNames?.Length > 2 ? "it's a TwoPalettes format" : "it does not exist on GameCube";
+    Console.WriteLine($"Ignoring {textureFileName} because {reason}");
     File.Delete(textureFileInfo.FullName);
+    continue;
   }
-  else
+
+  var newName = newNames[0];
+  var destinationFolder = $"{outputLocation}/GPHE52/";
+  if (!File.Exists(destinationFolder))
   {
-    var destinationFolder = $"{outputLocation}/GPHE52/";
-    if (!File.Exists(destinationFolder))
-    {
-      Directory.CreateDirectory(destinationFolder);
-    }
-    File.Move(textureFileInfo.FullName, destinationFolder + newName);
+    Directory.CreateDirectory(destinationFolder);
   }
+  File.Move(textureFileInfo.FullName, destinationFolder + newName + textureFileInfo.Extension);
 }
 
 return 0;

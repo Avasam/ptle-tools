@@ -11,14 +11,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\PitfallARCTool\PitfallARCTool\PitfallARCTool.csproj" />
     <ProjectReference Include="..\..\..\TexConvert\TexConvert\TexConvert.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EditorConfigFiles Include="..\.EditorConfig" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\.EditorConfig" />
+    <None Update="DTETextureMap.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

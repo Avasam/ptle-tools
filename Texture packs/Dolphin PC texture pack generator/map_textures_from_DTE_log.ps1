@@ -13,7 +13,7 @@ else {
 $map = @{}
 Get-Content $dteLogFile
 | Where-Object { $_.StartsWith('[01] Extract: ') }
-| ForEach-Object { $_.Substring(14) }
+| ForEach-Object { $_.Substring(14, $_.Length - 4 - 14) }
 | ForEach-Object {
   $key, $value = $_.Split('\')
   if (!$map.ContainsKey($key)) {

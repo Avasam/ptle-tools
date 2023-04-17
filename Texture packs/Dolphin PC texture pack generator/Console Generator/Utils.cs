@@ -4,6 +4,15 @@ namespace PCTexturePackGeneratorConsole;
 
 public class Utils
 {
+  public static string GetDefaultOutputLocation()
+  {
+    var myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Dolphin Emulator";
+    if (Directory.Exists(myDocuments)) return myDocuments;
+
+    var appDataRoaming = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Dolphin Emulator";
+    return Directory.Exists(appDataRoaming) ? appDataRoaming : Directory.GetCurrentDirectory();
+  }
+
   public static (string, string) ParseArguments(string[] args)
   {
     var defaultPcArcFolder = "C:\\Program Files (x86)\\Aspyr\\PITFALL The Lost Expedition\\Game\\data";
@@ -22,6 +31,7 @@ public class Utils
       }
     }
 
+    var defaultoutputLocation = GetDefaultOutputLocation() + "\\Load\\Textures";
     string outputLocation;
     if (args.Length > 1)
     {
@@ -29,8 +39,12 @@ public class Utils
     }
     else
     {
-      Console.WriteLine("Texture pack output location: ");
+      Console.WriteLine($"Texture pack output location: ({defaultoutputLocation})");
       outputLocation = Console.ReadLine() ?? "";
+      if (outputLocation == "")
+      {
+        outputLocation = defaultoutputLocation;
+      }
     }
 
     return (pcArcFolder, outputLocation);
