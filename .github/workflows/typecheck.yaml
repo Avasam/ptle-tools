@@ -1,7 +1,7 @@
 name: Typecheck
 
 on:
-  workflow_dispatch: #  Allows manual builds
+  workflow_dispatch: #  Allows manual triggers
   push:
     branches:
       - main

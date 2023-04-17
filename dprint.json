@@ -1,52 +1,5 @@
-// SPDX-License-Identifier: MIT
-// Copyright 2023 Beslogic Inc.
 {
-  // https://github.com/dprint/dprint/issues/657
-  // https://dprint.dev/config/#Global-Configuration
-  "lineWidth": 120,
-  "indentWidth": 2,
-  "useTabs": false,
-  // https://github.com/dprint/dprint/issues/658
-  "newLineKind": "auto",
-  // https://dprint.dev/plugins/typescript/config/
-  "typescript": {
-    "quoteStyle": "preferSingle",
-    "quoteProps": "asNeeded",
-    "newLineKind": "auto",
-    "semiColons": "asi",
-    "operatorPosition": "sameLine",
-    "conditionalExpression.operatorPosition": "nextLine",
-    "arrowFunction.useParentheses": "preferNone",
-    "binaryExpression.linePerExpression": true,
-    // Not convinced yet
-    // "memberExpression.linePerExpression": true,
-    "typeLiteral.separatorKind": "comma",
-    "enumDeclaration.memberSpacing": "newLine",
-    "importDeclaration.forceSingleLine": true,
-    // conflicts with simple-import-sort/imports
-    "module.sortImportDeclarations": "maintain",
-    "module.sortExportDeclarations": "maintain"
-  },
-  // https://dprint.dev/plugins/json/config/
-  "json": {
-    "newLineKind": "auto",
-    "associations": [
-      "*.json",
-      "*.jsonc",
-      "*.dmw"
-    ]
-  },
-  // https://dprint.dev/plugins/markdown/config/
-  "markdown": {
-  },
-  // https://dprint.dev/plugins/dockerfile/config/
-  "dockerfile": {
-    "newLineKind": "auto"
-  },
-  // https://dprint.dev/plugins/toml/
-  "toml": {
-    "newLineKind": "auto"
-  },
+  "extends": "https://raw.githubusercontent.com/Samuel-Therrien-Beslogic/beslogic-dprint-configuration/main/dprint.json",
   "includes": ["**/*.*"],
   "excludes": [
     "**/node_modules",
@@ -56,13 +9,9 @@
     "**/cache",
     "**/dist",
     "**/tmp",
-    "**/obj"
-  ],
-  "plugins": [
-    "https://plugins.dprint.dev/typescript-0.84.0.wasm",
-    "https://plugins.dprint.dev/json-0.17.1.wasm",
-    "https://plugins.dprint.dev/markdown-0.15.2.wasm",
-    "https://plugins.dprint.dev/dockerfile-0.3.0.wasm",
-    "https://plugins.dprint.dev/toml-0.5.4.wasm"
+    "**/obj",
+    // Don't touch submodules
+    "TexConvert/",
+    "PitfallARCTool/"
   ]
 }

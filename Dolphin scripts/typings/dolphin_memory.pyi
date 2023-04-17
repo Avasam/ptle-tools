@@ -80,6 +80,14 @@ def read_f64(addr: int, /) -> float:
     :return: value as floating point number
     """
 
+def invalidate_icache(addr: int, size: int, /) -> None:
+    """
+    Invalidates JIT cached code between the address and address + size, forcing the JIT to refetch instructions instead of executing from its cache.
+
+    :param addr: memory address to start invalidation at
+    :param size: size of the cache as integer
+    """
+
 def write_u8(addr: int, value: int, /) -> None:
     """
     Writes an unsigned integer to 1 byte.

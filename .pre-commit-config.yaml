@@ -8,6 +8,21 @@ repos:
         files: ".*.(json|dmw)"
         exclude: ".vscode/.*|dprint.json" # Exclude jsonc
         args: [--autofix, --no-sort-keys]
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: check-case-conflict
+  - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+    rev: v2.8.0
+    hooks:
+      - id: pretty-format-toml
+        args: [--autofix]
+      - id: pretty-format-yaml
+        args: [--autofix, --indent, "4", --offset, "2", --preserve-quotes]
+      - id: pretty-format-ini
+        args: [--autofix]
   - repo: https://github.com/adamchainz/pre-commit-dprint
     rev: "v0.35.3"
     hooks:
