@@ -3,12 +3,12 @@
 ## Usage
 
 1. Have the PC version of "Pitfall: The Lost Expedition" installed
-2. [Download the release folder](https://download-directory.github.io/?url=https%3A%2F%2Fgithub.com%2FAvasam%2Fptle-tools%2Ftree%2Fmain%2FTexture%2520packs%2FDolphin%2520PC%2520texture%2520pack%2520generator%2FConsole%2520Generator%2Fbin%2FRelease%2Fnet7.0) and extract it
+2. [Download the release folder](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/Avasam/ptle-tools/tree/main/Texture%20packs/Dolphin%20PC%20texture%20pack%20generator/Console%20Generator/bin/Release/net7.0&fileName=PCTexturePackGenerator&rootDirectory=PCTexturePackGenerator) and extract it
 3. Run the application
     - Console Application:  
       3.1. Open a terminal of your choice inside the `PCTexturePackGenerator` folder  
       3.2. Run `PCTexturePackGeneratorConsole.exe`
-      - When prompted for a path, enter the location of your install. Or jsut press `Enter` if the default value looks good.
+      - When prompted for a path, enter the location of your install. Or just press `Enter` if the default value looks good.
     - GUI Application: GUI app is not complete yet
 4. That's it! The texture pack is generated! You can now load it in Dolphin.
 
