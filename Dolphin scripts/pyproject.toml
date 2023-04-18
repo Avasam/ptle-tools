@@ -49,7 +49,7 @@ ignore = [
   "F405", # Allow * import from constants since we use a lot, but not all
   "PLW0603", # Using globals due to the nature of this script
 ]
-"typings/dolphin-stubs/*.pyi" = [
+"typings/*.pyi" = [
   "D205", # External stubs, allow docstring w/o summary line
   "E501", # External stubs, ignore line-length
   "PYI021", # No source, keep docstrings

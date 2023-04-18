@@ -3,26 +3,23 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:
-      - id: pretty-format-json
-        types: [text] # Include custom extension json
-        files: ".*.(json|dmw)"
-        exclude: ".vscode/.*|dprint.json" # Exclude jsonc
-        args: [--autofix, --no-sort-keys]
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
       - id: end-of-file-fixer
       - id: mixed-line-ending
         args: [--fix=lf]
       - id: check-case-conflict
-  - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
-    rev: v2.8.0
-    hooks:
-      - id: pretty-format-toml
-        args: [--autofix]
-      - id: pretty-format-yaml
-        args: [--autofix, --indent, "4", --offset, "2", --preserve-quotes]
-      - id: pretty-format-ini
-        args: [--autofix]
+  # - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+  #   rev: v2.8.0
+  #   hooks:
+  #     # Moves entire sections, I don't like that >:(
+  #     # - id: pretty-format-toml
+  #     #   args: [--autofix]
+  #     # I don't like it, it really messes up a lot a stuff
+  #     # - id: pretty-format-yaml
+  #     #   args: [--autofix, --indent, "2", --offset, "0", --preserve-quotes, --line-width, "120"],
+  #     - id: pretty-format-ini
+  #       args: [--autofix]
   - repo: https://github.com/adamchainz/pre-commit-dprint
     rev: "v0.35.3"
     hooks:

@@ -13,5 +13,14 @@
     // Don't touch submodules
     "TexConvert/",
     "PitfallARCTool/"
-  ]
+  ],
+  "newLineKind": "lf",
+  // https://dprint.dev/plugins/json/config/
+  "json": {
+    "associations": [
+      "*.json",
+      "*.jsonc",
+      "*.dmw"
+    ]
+  }
 }

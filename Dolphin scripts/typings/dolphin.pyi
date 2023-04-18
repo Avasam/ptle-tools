@@ -15,13 +15,12 @@ Valid:
 Invalid:
   `import dolphin.event`
   `from dolphin.event import ...`
-"""
-import dolphin_event as event
-import dolphin_memory as memory
-import dolphin_gui as gui
-import dolphin_savestate as savestate
+"""  # noqa: D400,D415 # Tries to add a . at the end of an import line
 import dolphin_controller as controller
-import dolphin_utils as utils
+import dolphin_event as event
+import dolphin_gui as gui
+import dolphin_memory as memory
+import dolphin_savestate as savestate
 
 __all__ = [
     "event",
@@ -29,5 +28,4 @@ __all__ = [
     "gui",
     "savestate",
     "controller",
-    "utils",
 ]
