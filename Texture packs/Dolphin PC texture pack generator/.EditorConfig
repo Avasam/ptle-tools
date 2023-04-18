@@ -13,6 +13,9 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 max_line_length = 120
 
+[*.md]
+trim_trailing_whitespace = false
+
 # Python and type stubs
 [*.py?(i)]
 indent_size = 4
@@ -130,6 +133,6 @@ csharp_preserve_single_line_blocks = true
 ###############################
 
 # Allows if-guards
-csharp_prefer_braces = when_multiline:silent 
+csharp_prefer_braces = when_multiline:silent
 # Don't force using discard variables
 dotnet_diagnostic.IDE0058.severity = none

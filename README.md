@@ -19,6 +19,12 @@ Various graphical modifications and post-processing effects using [Dolphin's Gra
 
 Graphics Mods: [/Graphics Mods](/Graphics%20Mods)
 
+### Texture Packs & Resource Packs
+
+Read more about [Dolphin Custom Texure Projects](https://forums.dolphin-emu.org/Thread-how-to-install-texture-packs-custom-textures-info).
+
+PC to Dolphin Texture Pack: [/Dolphin PC texture pack generator](/Texture%20packs/Dolphin%20PC%20texture%20pack%20generator)
+
 ## Pitfall ARC Tool
 
 Unarchive and re-archive `.arc` gamefiles.

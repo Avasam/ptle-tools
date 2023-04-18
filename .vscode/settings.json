@@ -6,7 +6,7 @@
   },
   "files.associations": {
     "**.dmw": "json"
-},
+  },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
@@ -36,5 +36,14 @@
       "source.fixAll": true
     },
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
-},
+  },
+  "[powershell]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    },
+    "editor.defaultFormatter": "ms-vscode.powershell"
+  },
+  "powershell.codeFormatting.pipelineIndentationStyle": "IncreaseIndentationForFirstPipeline",
+  "powershell.codeFormatting.addWhitespaceAroundPipe": true
 }

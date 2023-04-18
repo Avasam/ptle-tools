@@ -1,55 +1,94 @@
 ﻿using System.Reflection;
 using System.Text.Json;
 using PCTexturePackGeneratorConsole;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 
 (var pcArcFolder, var outputLocation) = Utils.ParseArguments(args);
 var workingPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 var tempDirectory = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-var extractedTexturesFolder = $"{tempDirectory}/textures";
-var convertedTexturesFolder = $"{tempDirectory}/textures_converted";
+var extractedTexturesFolder = $"{tempDirectory}\\textures";
+var convertedTexturesFolder = $"{tempDirectory}\\textures_converted";
 Directory.CreateDirectory(tempDirectory);
 
-// PitfallARCTool.Program.Main(new string[]{ "-x", $"{pcArcFolder}/textures.arc", "-o", extractedTexturesFolder });
-var exitCode = Utils.Execute($"{workingPath}\\PitfallARCTool.exe", $"-x \"{pcArcFolder}/textures.arc\" -o \"{extractedTexturesFolder}\" -e LE");
+var exitCode = Utils.Execute(
+  $"{workingPath}\\PitfallARCTool.exe",
+  $"-x \"{pcArcFolder}\\textures.arc\" -o \"{extractedTexturesFolder}\" -e LE"
+);
 if (exitCode != 0) return exitCode;
 
-// TexConvert.TexConvert.Main(new string[] { extractedTexturesFolder, convertedTexturesFolder });
 exitCode = Utils.Execute(
   $"{workingPath}\\TexConvert.exe",
   $"--input {extractedTexturesFolder} --output {convertedTexturesFolder} --format png --vflip false"
-  );
+);
 Console.WriteLine("");
 if (exitCode != 0) return exitCode;
 
+var destinationFolder = $"{outputLocation}\\GPHE52\\";
+if (!File.Exists(destinationFolder))
+{
+  Directory.CreateDirectory(destinationFolder);
+}
 
 foreach (var textureFileInfo in new DirectoryInfo(convertedTexturesFolder).GetFiles())
 {
-  //var newName = Utils.TextureNameMapping.GetValueOrDefault(textureFileInfo.Name);
-  //var newName = textureFileInfo.Name;
-
-  var dteTextureMap = JsonSerializer.Deserialize<Dictionary<string, string[]>>(File.ReadAllText("./DTETextureMap.json"));
+  var dteTextureMapJson = File.ReadAllText(".\\DTETextureMap.jsonc");
+  var dteTextureMap = JsonSerializer.Deserialize<Dictionary<string, string[]>>(
+    dteTextureMapJson,
+    new JsonSerializerOptions { ReadCommentHandling = JsonCommentHandling.Skip }
+  );
   if (dteTextureMap == null) throw new NullReferenceException(nameof(dteTextureMap) + " is null.");
 
   var textureFileName = textureFileInfo.Name[..^textureFileInfo.Extension.Length];
-  var newNames = dteTextureMap.GetValueOrDefault(textureFileName);
+  var newNames = dteTextureMap.GetValueOrDefault(textureFileName) ?? Array.Empty<string>();
 
-  // PC has some extra files
-  // Two Palettes textures aren't supported by this generator yet.
-  if (newNames?.Length != 1)
+  if (newNames.Length > 2) throw new ArgumentException("Split textures should be at most 2 elements", nameof(newNames));
+
+  var reasonToIgnore = "";
+  if (textureFileName == "font_pitfall_harry_s24_p0")
   {
-    var reason = newNames?.Length > 2 ? "it's a TwoPalettes format" : "it does not exist on GameCube";
-    Console.WriteLine($"Ignoring {textureFileName} because {reason}");
+    // FIXME: This COULD be fixed with a lot of hardcoded image manipulation
+    reasonToIgnore = "fonts are not aligned the same on PC";
+  }
+  else if (newNames.Length <= 0)
+  {
+    // PC has some extra files
+    reasonToIgnore = "it does not exist in the GameCube version's textures archive";
+  }
+  else if (Utils.UnusedTextures.Contains(textureFileName))
+  {
+    // Reduce the Texture Pack size
+    reasonToIgnore = "it's known to be unused on GameCube & Wii";
+  }
+  if (reasonToIgnore != "")
+  {
+    Console.WriteLine($"Ignoring {textureFileName} because {reasonToIgnore}");
     File.Delete(textureFileInfo.FullName);
     continue;
   }
 
-  var newName = newNames[0];
-  var destinationFolder = $"{outputLocation}/GPHE52/";
-  if (!File.Exists(destinationFolder))
+  if (newNames.Length == 2)
   {
-    Directory.CreateDirectory(destinationFolder);
+    var imageFormat = newNames[0][^2..];
+
+    Func<Image<Rgba32>, (Image<Rgba32>, Image<Rgba32>)> SplitMethod = imageFormat switch
+    {
+      "_8" or "_9" => ImageUtils.SplitBATexture,
+      "14" => ImageUtils.SplitAlphaTexture,
+      _ => throw new ArgumentOutOfRangeException(nameof(imageFormat), $"Unknown GX format {imageFormat}"),
+    };
+    var image = Image.Load(textureFileInfo.FullName);
+    var (a, b) = SplitMethod((Image<Rgba32>)image);
+
+    a.Save(destinationFolder + newNames[0] + textureFileInfo.Extension);
+    b.Save(destinationFolder + newNames[1] + textureFileInfo.Extension);
+    File.Delete(textureFileInfo.FullName);
   }
-  File.Move(textureFileInfo.FullName, destinationFolder + newName + textureFileInfo.Extension);
+  else
+  {
+    File.Move(textureFileInfo.FullName, destinationFolder + newNames[0] + textureFileInfo.Extension);
+  }
+
 }
 
 return 0;
