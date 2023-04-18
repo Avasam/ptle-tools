@@ -1,0 +1,17 @@
+{
+  "extends": "https://raw.githubusercontent.com/Samuel-Therrien-Beslogic/beslogic-dprint-configuration/main/dprint.json",
+  "includes": ["**/*.*"],
+  "excludes": [
+    "**/node_modules",
+    "**/*-lock.json",
+    "**/coverage", // created on install by nx
+    "**/build",
+    "**/cache",
+    "**/dist",
+    "**/tmp",
+    "**/obj",
+    // Don't touch submodules
+    "TexConvert/",
+    "PitfallARCTool/"
+  ]
+}

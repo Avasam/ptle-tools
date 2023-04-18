@@ -110,7 +110,7 @@
     {
       "id": 62,
       "asset_id": 2883046616,
-      "asset_crc32": "A85A 2793",
+      "asset_crc32": "ABD7 CCD8",
       "asset_name": "m01a",
       "area_name": "The Altar of Ages"
     },
@@ -212,7 +212,7 @@
       "asset_id": 3729935782,
       "asset_crc32": "DE52 4DA6",
       "asset_name": "b52a",
-      "area_name": "Outpost Underwater Cave"
+      "area_name": "Twin Outpost (Underwater Cave)"
     },
     {
       "id": 79,
@@ -335,7 +335,7 @@
       "asset_id": 1427227756,
       "asset_crc32": "5511 C46C",
       "asset_name": "s58b",
-      "area_name": "Apu Illapu Shrine"
+      "area_name": "Apu Illapu Shrine (Spinjas)"
     },
     {
       "id": 38,

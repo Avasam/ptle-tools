@@ -10,7 +10,7 @@ Download: <https://dolphin-emu.org/download/> (anything 5.0-14514 or above is fi
 
 Watch and modify useful memory regions.
 
-Dolphin Memory Engine (DME): <https://github.com/aldelaro5/Dolphin-memory-engine/releases> \
+Dolphin Memory Engine (DME): <https://github.com/aldelaro5/Dolphin-memory-engine/releases>\
 Tables: [/Dolphin Memory Watches (DMW)](/Dolphin%20Memory%20Watches%20(DMW))
 
 ### Graphics Mods
@@ -25,6 +25,10 @@ Read more about [Dolphin Custom Texure Projects](https://forums.dolphin-emu.org/
 
 PC to Dolphin Texture Pack: [/Dolphin PC texture pack generator](/Texture%20packs/Dolphin%20PC%20texture%20pack%20generator)
 
+### Entrance Randomizer
+
+An entrance randomizer prototype using python scripting with Dolphin. See [/Dolphin scripts](/Dolphin%20scripts) for all the details.
+
 ## Pitfall ARC Tool
 
 Unarchive and re-archive `.arc` gamefiles.
@@ -33,7 +37,7 @@ Repository: <https://github.com/UltiNaruto/PitfallARCTool>
 
 ## TexConvert
 
-A tool to convert unarchived Pitfall TEX format textures into a workable format.
+A tool to convert unarchived Pitfall TXFL format textures **from the PC version only** into DirectDraw Surface (DDS) fromat.
 
 Releases: <https://github.com/Helco/Pitfall/releases>
 
@@ -42,3 +46,17 @@ Releases: <https://github.com/Helco/Pitfall/releases>
 A memory-based LiveSplit AutoSplitter for the PC version.
 
 <https://github.com/Avasam/Avasam.AutoSplitters/tree/main/Pitfall%20The%20Lost%20Expedition>
+
+## Meta / Contributing
+
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Avasam/ptle-tools/main.svg)](https://results.pre-commit.ci/latest/github/Avasam/ptle-tools/main)
+
+### Formatting, linting and type-checking
+
+You can simply install [pre-commit](https://pre-commit.ci/) (`pip install pre-commit`) and run it (`pre-commit run`) to lint, type-check, and automatically format all files.
+
+Autofixable issues will automatically be resolved when creating a pull-request.
+
+#### Format on save
+
+To automatically format on save using the Visual Studio Code editor, make sure to install all recommended extensions in [.vscode/extensions.json](.vscode/extensions.json). You should also [install dprint](https://dprint.dev/install/) and our python dev dependencies (`pip install -r ".\Dolphin scripts\requirements-dev.txt"`)

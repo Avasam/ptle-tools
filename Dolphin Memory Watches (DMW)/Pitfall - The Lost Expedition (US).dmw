@@ -4,23 +4,27 @@
       "address": "8041BEB4",
       "baseIndex": 1,
       "label": "Current Area",
-      "length": 4,
-      "typeIndex": 6,
+      "typeIndex": 2,
       "unsigned": true
     },
     {
-      "address": "8016A136",
-      "baseIndex": 1,
-      "label": "Starting Area",
-      "typeIndex": 1,
-      "unsigned": false
-    },
-    {
-      "address": "8016A13E",
-      "baseIndex": 1,
-      "label": "Starting Area",
-      "typeIndex": 1,
-      "unsigned": false
+      "groupEntries": [
+        {
+          "address": "8016A136",
+          "baseIndex": 1,
+          "label": "High bits",
+          "typeIndex": 1,
+          "unsigned": false
+        },
+        {
+          "address": "8016A13E",
+          "baseIndex": 1,
+          "label": "Low bits",
+          "typeIndex": 1,
+          "unsigned": false
+        }
+      ],
+      "groupName": "Starting Area"
     },
     {
       "groupEntries": [
@@ -282,6 +286,13 @@
               ],
               "typeIndex": 2,
               "unsigned": false
+            },
+            {
+              "address": "804CB694",
+              "baseIndex": 0,
+              "label": "Can't open inventory",
+              "typeIndex": 2,
+              "unsigned": true
             }
           ],
           "groupName": "Flags"
@@ -410,13 +421,6 @@
               "unsigned": false
             },
             {
-              "address": "804CB694",
-              "baseIndex": 0,
-              "label": "Item Swap (inverted)",
-              "typeIndex": 2,
-              "unsigned": true
-            },
-            {
               "address": "8041BE4C",
               "baseIndex": 0,
               "label": "Idols",
@@ -449,7 +453,7 @@
             },
             {
               "groupEntries": [],
-              "groupName": "03 -> Heroic Handbook"
+              "groupName": "02 -> Heroic Handbook"
             },
             {
               "groupEntries": [],
@@ -461,7 +465,31 @@
             },
             {
               "groupEntries": [],
+              "groupName": "05 -> Save Game dialog"
+            },
+            {
+              "groupEntries": [],
               "groupName": "06 -> Item Swap"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "07 -> Shaman Shop dialog"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "08 -> Select Minigame dialog"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "09 -> Enter 2D Pitfall mode"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "10 -> 2D Pitfall mode"
+            },
+            {
+              "groupEntries": [],
+              "groupName": "11 -> Exit 2D Pitfall mode"
             }
           ],
           "groupName": "Menu ID"

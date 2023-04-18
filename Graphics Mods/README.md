@@ -2,7 +2,7 @@
 
 Official documentation: <https://wiki.dolphin-emu.org/index.php?title=Graphics_Mods>
 
-- To Enable Graphics Mods: Graphics > Advanced  > Utility > Enable Graphics mods
+- To Enable Graphics Mods: Graphics > Advanced > Utility > Enable Graphics mods
 - To install a GraphicsMod, drop the mod's folder in the `User/Load/GraphicMods` Dolphin folder (something like `C:\Users\<user>\Documents\Dolphin Emulator\Load\GraphicMods` )
 - To use the GraphicsMod: right click your Pitfall game. > Properties > Graphics Mod.
 

@@ -1,0 +1,122 @@
+/**
+ * Bingo goals for https://bingosync.com
+ *
+ * Not adding the following:
+ * - Sling because both Torch and Rising Strike are dependant on it, making it a very bad rando goal.
+ * - Dash ability because it's too essential and every run will end up geting it anyway.
+ *   Rushing Dash early vs. other goals is already a bingo meta.
+ * - Mysterious Item, Extra Health and Canteen because they costs 2 or less
+     meaning it's the same goal as any Shaman, or all Idols from a level, and many Shamans.
+ * - Item Swap forcibly overlaps other goals.
+ * - Mouth of Hinti St. Claire boss fight is teh same goal as getting Torch.
+*/
+[
+  { "name": "Get all 1 Idol in Mama-Oullo Tower" },
+  { "name": "Get all 1 Idol in Native Jungle" },
+  { "name": "Get all 2 Idols in Bittenbinder's Camp" },
+  { "name": "Get all 1 Idol in The Great Tree" },
+  { "name": "Get all 2 Idols in Punchau Shrine" },
+  { "name": "Get all 1 Idol in Battered Bridge" },
+  { "name": "Get all 2 Idols in Altar of Huitaca" },
+  { "name": "Get all 2 Idols in Jungle Trail" },
+  { "name": "Get all 2 Idols in Statues of Ayar" },
+  { "name": "Get all 1 Idol in Mouth of Inti" },
+  { "name": "Get all 2 Idols in Jungle Canyon" },
+  { "name": "Get all 2 Idols in Crash Site" },
+  { "name": "Get all 1 Idol in Fire-bombed Towers" },
+  { "name": "Get all 1 Idol in Renegade Fort" },
+  { "name": "Get all 1 Idol in Renegade Headquarters" },
+  { "name": "Get all 2 Idols in Turtle Monument" },
+  { "name": "Get all 2 Idols in St. Claire's Excavation Camp" },
+  { "name": "Get all 1 Idol in Butterfly Glade" },
+  { "name": "Get all 2 Idols in Twin Outpost" },
+  { "name": "Get all 2 Idols in Flooded Courtyard" },
+  { "name": "Get all 1 Idol in Crystal Cavern" },
+  { "name": "Get all 1 Idol in Mountain Overlook" },
+  { "name": "Get all 1 Idol in Eyes of Doom" },
+  { "name": "Get all 2 Idols in Underground Dam" },
+  { "name": "Get all 2 Idols in Abandoned Cavern" },
+  { "name": "Get all 2 Idols in Valley of the Spirits" },
+  { "name": "Get all 1 Idol in Penguin Den" },
+  { "name": "Get all 1 Idols in Mountain Sled Run" },
+  { "name": "Get all 7 Idols in Ekkeko Ice Cavern" },
+  { "name": "Get all 2 Idols in White Valley" },
+  { "name": "Get all 3 Idols in Viracocha Monoliths" },
+  { "name": "Get all 2 Idols in Spinja Lair" },
+  { "name": "Get all 2 Idols in Copacanti Lake" },
+
+  { "name": "Get Whack-A-Tuco Idol (Native Game)" },
+  { "name": "Get Tuco Shoot Idol (Native Game)" },
+  { "name": "Get Pickaxe Race Idol (Native Game)" },
+  { "name": "Get Raft Bowling Idol (Native Game)" },
+  { "name": "Get KaBOOM! Idol (Native Game)" },
+
+  { "name": "Get Explorer in Punchau Shrine" },
+  { "name": "Get Explorer in Jungle Trail" },
+  { "name": "Get Explorer in Crash Site" },
+  { "name": "Get Explorer in Fire-bombed Towers" },
+  { "name": "Get Explorer in Renegade Fort" },
+  { "name": "Get Explorer in Renegade Headquarters" },
+  { "name": "Get Explorer in Turtle Monument" },
+  { "name": "Get Explorer in St. Claire's Excavation Camp" },
+  { "name": "Get Explorer in Twin Outposts" },
+  { "name": "Get Explorer in Flooded Courtyard" },
+  { "name": "Get Explorer in Abandoned Cavern" },
+  { "name": "Get Explorer in Ekkeko Ice Cavern" },
+  { "name": "Get Explorer in White Valley" },
+  { "name": "Get Explorer in Copacanti Lake" },
+  { "name": "Get Explorer in Cavern Lake" },
+
+  { "name": "Get a Quantum Idol or Explorer" },
+
+  { "name": "Get Shaman in Mama-Oullo Tower" },
+  { "name": "Get Shaman in The Great Tree" },
+  { "name": "Get Shaman in Plane Cockpit" },
+  { "name": "Get Shaman in Battered Bridge" },
+  { "name": "Get Shaman in Altar of Huitaca" },
+  { "name": "Get Shaman in Jungle Canyon" },
+  { "name": "Get Shaman in Renegade Fort" },
+  { "name": "Get Shaman in Renegade Headquarters" },
+  { "name": "Get Shaman in Turtle Monument" },
+  { "name": "Get Shaman in Butterfly Glade" },
+  { "name": "Get Shaman in Flooded Courtyard" },
+  { "name": "Get Shaman in Crystal Cavern" },
+  { "name": "Get Shaman in Underground Dam" },
+  { "name": "Get Shaman in Mountain Sled Run" },
+  { "name": "Get Shaman in Ekkeko Ice Cavern" },
+  { "name": "Get Shaman in White Valley" },
+  { "name": "Get Shaman in Viracocha Monoliths" },
+  { "name": "Get Shaman in Cavern Lake" },
+
+  { "name": "Get Canteen from source" },
+  { "name": "Get Torch from source" },
+  { "name": "Get Shield from source" },
+  { "name": "Get Gas Mask from source" },
+  { "name": "Get Raft from source" },
+  { "name": "Get Pickaxes from source" },
+  { "name": "Get TNT from source" },
+
+  { "name": "Get the Jungle Notes (Shaman)" },
+  { "name": "Get the Native Notes (Shaman)" },
+  { "name": "Get the Cavern Notes (Shaman)" },
+  { "name": "Get the Mountain Notes (Shaman)" },
+  { "name": "Get the Smash Strike (Shaman) ability" },
+  { "name": "Get the Super Sling (Shaman) ability" },
+  { "name": "Get the Breakdance (Shaman) ability" },
+  { "name": "Get the Rising Strike ability" },
+  { "name": "Get the Dive ability" },
+
+  { "name": "Complete the Monkey Temple" },
+  { "name": "Complete the Scorpion Temple" },
+  { "name": "Complete the Penguin Temple" },
+  { "name": "Complete the Chameleon Temple" },
+  { "name": "Complete the Mysterious Temple (Altar of Ages)" },
+
+  { "name": "Defeat St. Claire in Crystal Cavern" },
+  { "name": "Defeat Supaï and Pusca" },
+
+  { "name": "Kill a mama monkey" },
+  { "name": "Kill a scorpion" },
+  { "name": "Die to an insta-kill plane" },
+  { "name": "Softlock (have to S&Q, can't die)" }
+]
