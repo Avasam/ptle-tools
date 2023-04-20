@@ -8,7 +8,7 @@ Download: <https://dolphin-emu.org/download/> (anything 5.0-14514 or above is fi
 
 ### Memory Watches (DMW)
 
-Watch and modify useful memory regions.
+Watch and modify useful memory regions. Basically practice tools.
 
 Dolphin Memory Engine (DME): <https://github.com/aldelaro5/Dolphin-memory-engine/releases>\
 Tables: [/Dolphin Memory Watches (DMW)](/Dolphin%20Memory%20Watches%20(DMW))
@@ -23,21 +23,23 @@ Graphics Mods: [/Graphics Mods](/Graphics%20Mods)
 
 Read more about [Dolphin Custom Texure Projects](https://forums.dolphin-emu.org/Thread-how-to-install-texture-packs-custom-textures-info).
 
-PC to Dolphin Texture Pack: [/Dolphin PC texture pack generator](/Texture%20packs/Dolphin%20PC%20texture%20pack%20generator)
+PC to Dolphin Texture Pack: [/Dolphin PC texture pack generator/README.md](/Texture%20packs/Dolphin%20PC%20texture%20pack%20generator)
 
 ### Entrance Randomizer
 
 An entrance randomizer prototype using python scripting with Dolphin. See [/Dolphin scripts](/Dolphin%20scripts) for all the details.
 
-## Pitfall ARC Tool
+## Assets extraction
+
+### Pitfall ARC Tool
 
 Unarchive and re-archive `.arc` gamefiles.
 
 Repository: <https://github.com/UltiNaruto/PitfallARCTool>
 
-## TexConvert
+### TexConvert
 
-A tool to convert unarchived Pitfall TXFL format textures **from the PC version only** into DirectDraw Surface (DDS) fromat.
+A tool to convert unarchived Pitfall TXFL/LFXT format textures **from any console or version** into different usable formats.
 
 Releases: <https://github.com/Helco/Pitfall/releases>
 
