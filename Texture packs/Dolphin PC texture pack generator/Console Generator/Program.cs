@@ -33,24 +33,30 @@ if (!File.Exists(destinationFolder))
 foreach (var textureFileInfo in new DirectoryInfo(convertedTexturesFolder).GetFiles())
 {
   var dteTextureMapJson = File.ReadAllText(".\\DTETextureMap.jsonc");
-  var dteTextureMap = JsonSerializer.Deserialize<Dictionary<string, string[]>>(
+  var dteTextureMap = JsonSerializer.Deserialize<Dictionary<string, List<string>>>(
     dteTextureMapJson,
     new JsonSerializerOptions { ReadCommentHandling = JsonCommentHandling.Skip }
   );
   if (dteTextureMap == null) throw new NullReferenceException(nameof(dteTextureMap) + " is null.");
 
   var textureFileName = textureFileInfo.Name[..^textureFileInfo.Extension.Length];
-  var newNames = dteTextureMap.GetValueOrDefault(textureFileName) ?? Array.Empty<string>();
+  var newNames = dteTextureMap.GetValueOrDefault(textureFileName) ?? new List<string>();
 
-  if (newNames.Length > 2) throw new ArgumentException("Split textures should be at most 2 elements", nameof(newNames));
+  if (newNames.Count > 2) throw new ArgumentException("Split textures should be at most 2 elements", nameof(newNames));
 
   var reasonToIgnore = "";
   if (textureFileName == "font_pitfall_harry_s24_p0")
   {
     // FIXME: This COULD be fixed with a lot of hardcoded image manipulation
+    // NOTE: Wii fonts are actually higher quality than PC! So we don't want them there either
     reasonToIgnore = "fonts are not aligned the same on PC";
   }
-  else if (newNames.Length <= 0)
+  else if (Utils.LodMapping.ContainsKey(textureFileName))
+  {
+    // Ignore lower resolution versions of textures
+    reasonToIgnore = "there's a higher resolution texture available";
+  }
+  else if (newNames.Count <= 0)
   {
     // PC has some extra files
     reasonToIgnore = "it does not exist in the GameCube version's textures archive";
@@ -62,12 +68,12 @@ foreach (var textureFileInfo in new DirectoryInfo(convertedTexturesFolder).GetFi
   }
   if (reasonToIgnore != "")
   {
-    Console.WriteLine($"Ignoring {textureFileName} because {reasonToIgnore}");
+    Console.WriteLine($"Skipping {textureFileName} because {reasonToIgnore}");
     File.Delete(textureFileInfo.FullName);
     continue;
   }
 
-  if (newNames.Length == 2)
+  if (newNames.Count == 2)
   {
     var imageFormat = newNames[0][^2..];
 
