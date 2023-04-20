@@ -35,9 +35,7 @@ By generating the texture pack yourself, using your own installed assets, this a
 
 - Output a resource pack instead of just dumping all the texures for a texture pack..
 - The fonts texture has a different shape on PC, so smoother PC textures cannot be used directly (this _can_ be fixed with a lot of hardcoded image manipulation).
-- LOD (Level of Details, aka lower resolution) textures are still used. I wanna go through, find all LOD textures and make this generator use their higher resolution equivalent instead.
-- There are _a lot_ of unused textures added to the texture pack.
-  - Some of them are beta/dev content as well as console-specific textures, those will be easy to spot and exclude.
-  - Others are just unused, and there's no easy way to filter them all out.
+- LOD (Level of Details, aka lower resolution) textures are simply skipped for now. I wanna make a different tool that replaces LOD textures by their higher res version for completed texture packs.
+- It's bound to have a handful of unused textures added to the pack. Known ones are already excluded, but there's no easy way to filter them all out.
 - I wanna make a simple GUI application with buttons to select the folders and a logs window. Low priority because the console app is still very easy to use.
 - Use more and higher quality examples!
