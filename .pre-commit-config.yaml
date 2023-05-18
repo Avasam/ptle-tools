@@ -1,4 +1,8 @@
 repos:
+  - repo: https://github.com/Avasam/pre-commit-dprint
+    rev: "2711573"
+    hooks:
+      - id: dprint
   # Workaround for https://github.com/adamchainz/pre-commit-dprint/issues/4
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
@@ -20,11 +24,6 @@ repos:
   #     #   args: [--autofix, --indent, "2", --offset, "0", --preserve-quotes, --line-width, "120"],
   #     - id: pretty-format-ini
   #       args: [--autofix]
-  - repo: https://github.com/adamchainz/pre-commit-dprint
-    rev: "v0.35.3"
-    hooks:
-      - id: dprint
-        pass_filenames: false # https://github.com/adamchainz/pre-commit-dprint/issues/3#issuecomment-1483410008
   - repo: https://github.com/charliermarsh/ruff-pre-commit
     rev: "v0.0.261" # Must match requirements-dev.txt
     hooks:
@@ -45,5 +44,4 @@ repos:
         args: [--project, Dolphin scripts/pyproject.toml]
 ci:
   skip:
-    - dprint # https://github.com/adamchainz/pre-commit-dprint/issues/4
     - pyright # https://github.com/RobertCraigie/pyright-python/issues/164
