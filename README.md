@@ -6,6 +6,8 @@ A mono-repo and git sub-modules for all tools relating to Pitfall: The Lost Expe
 
 Download: <https://dolphin-emu.org/download/> (anything 5.0-14514 or above is fine)
 
+Free Look: https://wiki.dolphin-emu.org/index.php?title=Free_Look
+
 ### Memory Watches (DMW)
 
 Watch and modify useful memory regions. Basically practice tools.
