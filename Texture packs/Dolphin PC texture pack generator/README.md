@@ -33,7 +33,7 @@ By generating the texture pack yourself, using your own installed assets, this a
 
 ## Known issues / Planned features
 
-- Output a resource pack instead of just dumping all the texures for a texture pack..
+- Output a resource pack instead of just dumping all the textures for a texture pack.
 - The fonts texture has a different shape on PC, so smoother PC textures cannot be used directly (this _can_ be fixed with a lot of hardcoded image manipulation).
 - LOD (Level of Details, aka lower resolution) textures are simply skipped for now. I wanna make a different tool that replaces LOD textures by their higher res version for completed texture packs.
 - It's bound to have a handful of unused textures added to the pack. Known ones are already excluded, but there's no easy way to filter them all out.
