@@ -19,13 +19,14 @@ Tables: [/Dolphin Memory Watches (DMW)](/Dolphin%20Memory%20Watches%20(DMW))
 
 Various graphical modifications and post-processing effects using [Dolphin's Graphics Mods](https://wiki.dolphin-emu.org/index.php?title=Graphics_Mods)
 
-Graphics Mods: [/Graphics Mods](/Graphics%20Mods)
+- [Clear HUD](https://github.com/Avasam/ptle-tools/tree/main/Graphics%20Mods#clear-hud)
 
 ### Texture Packs & Resource Packs
 
 Read more about [Dolphin Custom Texure Projects](https://forums.dolphin-emu.org/Thread-how-to-install-texture-packs-custom-textures-info).
 
-PC to Dolphin Texture Pack: [/Dolphin PC texture pack generator/README.md](/Texture%20packs/Dolphin%20PC%20texture%20pack%20generator)
+- [PC to Dolphin Texture Pack generator](/Texture%20packs/Dolphin%20PC%20texture%20pack%20generator)
+- [Dynamic Input Pack](https://github.com/Avasam/UniversalDynamicInput/releases/latest) (display non-GameCube/Wii controller buttons)
 
 ### Entrance Randomizer
 
@@ -47,9 +48,9 @@ Releases: <https://github.com/Helco/Pitfall/releases>
 
 ## AutoSplitter
 
-A memory-based LiveSplit AutoSplitter for the PC version.
+A memory-based LiveSplit AutoSplitter for the PC version. Automatically installed with LiveSplit.
 
-<https://github.com/Avasam/Avasam.AutoSplitters/tree/main/Pitfall%20The%20Lost%20Expedition>
+Read more: <https://github.com/Avasam/Avasam.AutoSplitters/tree/main/Pitfall%20The%20Lost%20Expedition>
 
 ## Meta / Contributing
 
