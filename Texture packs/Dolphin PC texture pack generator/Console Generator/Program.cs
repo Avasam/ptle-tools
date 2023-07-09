@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
-using System.Text.Json;
 using PCTexturePackGeneratorConsole;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
+using CleanupUtils = TexturePackCleanup.Utils;
 
 (var pcArcFolder, var outputLocation) = Utils.ParseArguments(args);
 var workingPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -30,19 +30,14 @@ if (!File.Exists(destinationFolder))
   Directory.CreateDirectory(destinationFolder);
 }
 
+// Some higher res versions aren't used while LODs are (ie: croc_head vs croc_head_lod)
+// so we save deletion for later to avoid looping over all files twice
+//var filesToDelete = new List<(string, string)>();
+
+// First loop to remove unused textures and rename LODs
 foreach (var textureFileInfo in new DirectoryInfo(convertedTexturesFolder).GetFiles())
 {
-  var dteTextureMapJson = File.ReadAllText(".\\DTETextureMap.jsonc");
-  var dteTextureMap = JsonSerializer.Deserialize<Dictionary<string, List<string>>>(
-    dteTextureMapJson,
-    new JsonSerializerOptions { ReadCommentHandling = JsonCommentHandling.Skip }
-  );
-  if (dteTextureMap == null) throw new NullReferenceException(nameof(dteTextureMap) + " is null.");
-
   var textureFileName = textureFileInfo.Name[..^textureFileInfo.Extension.Length];
-  var newNames = dteTextureMap.GetValueOrDefault(textureFileName) ?? new List<string>();
-
-  if (newNames.Count > 2) throw new ArgumentException("Split textures should be at most 2 elements", nameof(newNames));
 
   var reasonToIgnore = "";
   if (textureFileName == "font_pitfall_harry_s24_p0")
@@ -51,29 +46,45 @@ foreach (var textureFileInfo in new DirectoryInfo(convertedTexturesFolder).GetFi
     // NOTE: Wii fonts are actually higher quality than PC! So we don't want them there either
     reasonToIgnore = "fonts are not aligned the same on PC";
   }
-  else if (Utils.LodMapping.ContainsKey(textureFileName))
+  else
   {
-    // Ignore lower resolution versions of textures
-    reasonToIgnore = "there's a higher resolution texture available";
+    CleanupUtils.IsUsedOnDolphin(textureFileName, false, out reasonToIgnore);
   }
-  else if (newNames.Count <= 0)
-  {
-    // PC has some extra files
-    reasonToIgnore = "it does not exist in the GameCube version's textures archive";
-  }
-  else if (Utils.UnusedTextures.Contains(textureFileName))
-  {
-    // Reduce the Texture Pack size
-    reasonToIgnore = "it's known to be unused on GameCube & Wii";
-  }
+
   if (reasonToIgnore != "")
   {
-    Console.WriteLine($"Skipping {textureFileName} because {reasonToIgnore}");
+    //filesToDelete.Add((textureFileInfo.FullName, reasonToIgnore));
+    Console.WriteLine($"Removing {textureFileName} because {reasonToIgnore}");
     File.Delete(textureFileInfo.FullName);
     continue;
   }
 
-  if (newNames.Count == 2)
+  var higherRes = CleanupUtils.LodMapping.GetValueOrDefault(textureFileName);
+  if (higherRes != null)
+  {
+    // Ignore lower resolution versions of textures
+    Console.WriteLine($"Replacing LOD {textureFileName} with higher resolution {higherRes}");
+    // Assume same file extension
+    File.Copy(Path.Join(convertedTexturesFolder, higherRes) + textureFileInfo.Extension, textureFileInfo.FullName, true);
+    continue;
+  }
+}
+
+//foreach (var (fileToDelete, reason) in filesToDelete)
+//{
+//  Console.WriteLine($"Removing {fileToDelete} because {reason}");
+//  File.Delete(fileToDelete);
+//}
+
+Console.WriteLine($"\nConverting textures to Dolphin format...");
+// First loop to do the Dolphin name and format conversion
+foreach (var textureFileInfo in new DirectoryInfo(convertedTexturesFolder).GetFiles())
+{
+  var textureFileName = textureFileInfo.Name[..^textureFileInfo.Extension.Length];
+
+  var newNames = CleanupUtils.DteTextureMap.GetValueOrDefault(textureFileName) ?? Array.Empty<string>();
+  if (newNames.Length > 2) throw new ArgumentException("Split textures should be at most 2 elements", nameof(newNames));
+  if (newNames.Length == 2)
   {
     var imageFormat = newNames[0][^2..];
 
@@ -86,13 +97,13 @@ foreach (var textureFileInfo in new DirectoryInfo(convertedTexturesFolder).GetFi
     var image = Image.Load(textureFileInfo.FullName);
     var (a, b) = SplitMethod((Image<Rgba32>)image);
 
-    a.Save(destinationFolder + newNames[0] + textureFileInfo.Extension);
-    b.Save(destinationFolder + newNames[1] + textureFileInfo.Extension);
+    a.Save(Path.Join(destinationFolder, newNames[0]) + textureFileInfo.Extension);
+    b.Save(Path.Join(destinationFolder, newNames[1]) + textureFileInfo.Extension);
     File.Delete(textureFileInfo.FullName);
   }
   else
   {
-    File.Move(textureFileInfo.FullName, destinationFolder + newNames[0] + textureFileInfo.Extension);
+    File.Move(textureFileInfo.FullName, Path.Join(destinationFolder, newNames[0]) + textureFileInfo.Extension);
   }
 
 }
