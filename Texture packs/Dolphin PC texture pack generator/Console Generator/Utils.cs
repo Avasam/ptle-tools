@@ -4,6 +4,17 @@ namespace PCTexturePackGeneratorConsole;
 
 public class Utils
 {
+  internal struct Manifest
+  {
+    public string name { get; set; }
+    public string id { get; set; }
+    public string version { get; set; }
+    public string description { get; set; }
+    public string[] authors { get; set; }
+    public string website { get; set; }
+    public bool compressed { get; set; }
+  };
+
   public static string GetDefaultOutputLocation()
   {
     var myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Dolphin Emulator";
@@ -31,7 +42,7 @@ public class Utils
       }
     }
 
-    var defaultoutputLocation = GetDefaultOutputLocation() + "\\Load\\Textures";
+    var defaultoutputLocation = GetDefaultOutputLocation() + "\\ResourcePacks";
     string outputLocation;
     if (args.Length > 1)
     {
