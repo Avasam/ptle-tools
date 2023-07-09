@@ -41,8 +41,7 @@
   },
   "[python]": {
     // Ruff is not yet a formatter: https://github.com/charliermarsh/ruff/issues/1904
-    // Cannot use autotpep8 until https://github.com/microsoft/vscode-autopep8/issues/32 is fixed
-    "editor.defaultFormatter": "ms-python.python",
+    "editor.defaultFormatter": "ms-python.autopep8",
     "editor.tabSize": 4,
     "editor.rulers": [
       72, // PEP8-17 docstrings
@@ -65,8 +64,6 @@
     // Specifically ignoring unusedImports because it's annoying to loose imports when commenting code for testing
     // "source.unusedImports"
   ],
-  // https://github.com/microsoft/vscode-autopep8/issues/32
-  "python.formatting.provider": "autopep8",
   "python.linting.enabled": true,
   "ruff.importStrategy": "fromEnvironment",
   // Use the Ruff extension instead
@@ -77,6 +74,8 @@
   "python.linting.pycodestyleEnabled": false,
   "python.linting.pylamaEnabled": false,
   "python.linting.pylintEnabled": false,
+  // Use the autopep8 extension instead
+  "python.formatting.provider": "none",
   // Use Pyright/Pylance instead
   "python.linting.mypyEnabled": false,
   "emeraldwalk.runonsave": {
