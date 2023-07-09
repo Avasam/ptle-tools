@@ -20,13 +20,17 @@ repos:
   #     #   args: [--autofix, --indent, "2", --offset, "0", --preserve-quotes, --line-width, "120"],
   #     - id: pretty-format-ini
   #       args: [--autofix]
-  - repo: https://github.com/adamchainz/pre-commit-dprint
-    rev: "v0.35.3"
+  - repo: local
     hooks:
       - id: dprint
+        name: dprint
+        entry: dprint fmt
+        language: node
+        types: [text]
+        additional_dependencies: ["dprint@~0.38.0"]
         pass_filenames: false # https://github.com/adamchainz/pre-commit-dprint/issues/3#issuecomment-1483410008
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: "v0.0.261" # Must match requirements-dev.txt
+    rev: "v0.0.277" # Must match requirements-dev.txt
     hooks:
       - id: ruff
         args: [--fix]
@@ -39,10 +43,10 @@ repos:
     hooks:
       - id: add-trailing-comma
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: "v1.1.302"
+    rev: "v1.1.316"
     hooks:
       - id: pyright
-        args: [--project, Dolphin scripts/pyproject.toml]
+
 ci:
   skip:
     - dprint # https://github.com/adamchainz/pre-commit-dprint/issues/4

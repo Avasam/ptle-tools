@@ -1,6 +1,10 @@
+<!-- markdownlint-disable MD033 -->
+
 # PTLE Tools
 
 A mono-repo and git sub-modules for all tools relating to Pitfall: The Lost Expedition (and The Big Adventure)
+
+<br/>
 
 ## Dolphin
 
@@ -32,6 +36,8 @@ Read more about [Dolphin Custom Texure Projects](https://forums.dolphin-emu.org/
 
 An entrance randomizer prototype using python scripting with Dolphin. See [/Dolphin scripts](/Dolphin%20scripts) for all the details.
 
+<br/>
+
 ## Assets extraction
 
 ### Pitfall ARC Tool
@@ -46,11 +52,15 @@ A tool to convert unarchived Pitfall TXFL/LFXT format textures **from any consol
 
 Releases: <https://github.com/Helco/Pitfall/releases>
 
+<br/>
+
 ## AutoSplitter
 
 A memory-based LiveSplit AutoSplitter for the PC version. Automatically installed with LiveSplit.
 
 Read more: <https://github.com/Avasam/Avasam.AutoSplitters/tree/main/Pitfall%20The%20Lost%20Expedition>
+
+<br/>
 
 ## Meta / Contributing
 

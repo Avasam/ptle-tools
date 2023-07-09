@@ -22,10 +22,25 @@ ignore = [
   "SIM105", # flake8-simplify: use-contextlib-suppress
   # Checked by type-checker (pyright)
   "ANN", # flake-annotations
+  "PGH003", # blanket-type-ignore
   "TCH", # flake8-type-checking
+  # Already shown by Pylance, checked by pyright, and can be caused by overloads.
+  "ARG002", # Unused method argument
   # We want D213: multi-line-summary-second-line and D211: no-blank-line-before-class
   "D203", # pydocstyle: one-blank-line-before-class
   "D212", # pydocstyle: multi-line-summary-first-line
+  # Allow differentiating between broken (FIXME) and to be done/added/completed (TODO)
+  "TD001", # flake8-todos: invalid-todo-tag
+
+  ###
+  # These should be warnings (https://github.com/charliermarsh/ruff/issues/1256)
+  ###
+  "FIX", # flake8-fixme
+  # Not all TODOs are worth an issue, this would be better as a warning
+  "TD003", # flake8-todos: missing-todo-link
+
+  # False-positives
+  "TCH004", # https://github.com/astral-sh/ruff/issues/3821
 ]
 
 ###
@@ -36,7 +51,7 @@ ignore = [
   "I002", # Stubs don't need from __future__ import annotations
   "PLC0414", # https://github.com/charliermarsh/ruff/issues/3734
 ]
-"Entrance Randomizer/**.py" = [
+"Dolphin scripts/Entrance Randomizer/**.py" = [
   # Print are used as debug logs
   "T20", # flake8-print
   # Project is too simple to create our own errors
@@ -44,12 +59,12 @@ ignore = [
   # We don't do cryptography in this project
   "S311", # suspicious-non-cryptographic-random-usage
 ]
-"Entrance Randomizer/__main__.py" = [
+"Dolphin scripts/Entrance Randomizer/__main__.py" = [
   "E402", # Python path must first be set in __main__
   "F405", # Allow * import from constants since we use a lot, but not all
   "PLW0603", # Using globals due to the nature of this script
 ]
-"typings/*.pyi" = [
+"Dolphin scripts/typings/*.pyi" = [
   "D205", # External stubs, allow docstring w/o summary line
   "E501", # External stubs, ignore line-length
   "PYI021", # No source, keep docstrings
@@ -116,11 +131,11 @@ ignore = [
 ]
 max_line_length = 120
 per_file_ignores = ["*.pyi: E302"]
-recursive = true
 
 # https://github.com/microsoft/pyright/blob/main/docs/configuration.md#sample-pyprojecttoml-file
 [tool.pyright]
 # Minimal python version supported
+extraPaths = ["Dolphin scripts/typings"]
 pythonVersion = "3.8.5"
 typeCheckingMode = "strict"
 # Extra strict

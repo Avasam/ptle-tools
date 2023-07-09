@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 from typing import Iterable
 
+import CONFIGS
 from dolphin import event, gui, memory  # pyright: ignore[reportMissingModuleSource]
 
 dolphin_path = Path().absolute()
@@ -16,9 +17,8 @@ real_scripts_path = os.path.realpath(dolphin_path / "Scripts")
 print("Real Scripts path:", real_scripts_path)
 sys.path.append(f"{real_scripts_path}/Entrance Randomizer")
 # Wait for the first frame before scanning the game for constants
-await event.frameadvance()  # noqa: F704  # pyright: ignore
+await event.frameadvance()  # noqa: F704, PLE1142  # pyright: ignore
 
-import CONFIGS
 from constants import *  # noqa: F403
 
 __version__ = "0.3"
@@ -257,4 +257,5 @@ async def main_loop():
 
 
 while True:
-    await main_loop()  # noqa: F704  # pyright: ignore
+
+    await main_loop()  # noqa: F704, PLE1142  # pyright: ignore

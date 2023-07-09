@@ -4,6 +4,17 @@ namespace PCTexturePackGeneratorConsole;
 
 public class Utils
 {
+  internal struct Manifest
+  {
+    public string name { get; set; }
+    public string id { get; set; }
+    public string version { get; set; }
+    public string description { get; set; }
+    public string[] authors { get; set; }
+    public string website { get; set; }
+    public bool compressed { get; set; }
+  };
+
   public static string GetDefaultOutputLocation()
   {
     var myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Dolphin Emulator";
@@ -31,7 +42,7 @@ public class Utils
       }
     }
 
-    var defaultoutputLocation = GetDefaultOutputLocation() + "\\Load\\Textures";
+    var defaultoutputLocation = GetDefaultOutputLocation() + "\\ResourcePacks";
     string outputLocation;
     if (args.Length > 1)
     {
@@ -62,54 +73,4 @@ public class Utils
     process?.WaitForExit();
     return process?.ExitCode ?? -1;
   }
-
-  // Map the Level of Details textures to their higher resolution equivalents.
-  public static Dictionary<string, string?> LodMapping = new()
-  {
-    // ["LOD"] = "higher_res",
-    ["harry_whiphat"] = "icon_sling",
-    ["harry_ice_pick_128"] = "icon_pickaxe",
-    ["tex1_16x16_ccface591a847a86_14"] = "gen_native_pouch",
-    ["s_jm_snow"] = "iceland_jm_snow bank",
-
-    // Technically the same texture 128x128 vs 256x256, but keep the lower res version for the blurry ice floor effect!
-    // ["s_jm_ice hard_see through"] = "s_jm_ice_see through_maze"
-  };
-
-  // Textures that we know for certain are unused on GameCube/Wii
-  public static HashSet<string> UnusedTextures = new()
-  {
-    // Unused icons
-    "icon_emptyslot",
-    // Xbox
-    "legal_screen_xbox_english",
-    // PS2
-    "insert_controller",
-    "legal_screen_ps2_english",
-    // Demo
-    "a05",
-    "a50",
-    "b15",
-    "c02",
-    "s14",
-    "opmcontrolscreen",
-    "opmexitscreenall",
-    // Early dev
-    "legal_screen_bad",
-    "lifepiplevel1",
-    "lifepiplevel2",
-    "lifepiplevel3",
-    "lifepiplevel4",
-    "lifepipoff",
-    "lifepipon",
-    "screendeveloper",
-    "screenpublisher",
-    "a28",
-    "a29",
-    "a30",
-    "a31",
-    "a32",
-    "c07",
-    "b09",
-  };
 }

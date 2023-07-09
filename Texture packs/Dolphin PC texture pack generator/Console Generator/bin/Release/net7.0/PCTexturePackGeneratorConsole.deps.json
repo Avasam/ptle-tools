@@ -9,7 +9,8 @@
       "PCTexturePackGeneratorConsole/1.0.0": {
         "dependencies": {
           "PitfallARCTool": "1.0.0",
-          "TexConvert": "1.2.0"
+          "TexConvert": "1.2.0",
+          "TexturePackCleanup": "1.0.0"
         },
         "runtime": {
           "PCTexturePackGeneratorConsole.dll": {}
@@ -141,6 +142,11 @@
         "runtime": {
           "TexConvert.dll": {}
         }
+      },
+      "TexturePackCleanup/1.0.0": {
+        "runtime": {
+          "TexturePackCleanup.dll": {}
+        }
       }
     }
   },
@@ -219,6 +225,11 @@
       "sha512": ""
     },
     "TexConvert/1.2.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TexturePackCleanup/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

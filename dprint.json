@@ -1,6 +1,6 @@
 {
   "extends": "https://raw.githubusercontent.com/Samuel-Therrien-Beslogic/beslogic-dprint-configuration/main/dprint.json",
-  "includes": ["**/*.*"],
+  "includes": ["**/*"],
   "excludes": [
     "**/node_modules",
     "**/*-lock.json",
@@ -14,13 +14,5 @@
     "TexConvert/",
     "PitfallARCTool/"
   ],
-  "newLineKind": "lf",
-  // https://dprint.dev/plugins/json/config/
-  "json": {
-    "associations": [
-      "*.json",
-      "*.jsonc",
-      "*.dmw"
-    ]
-  }
+  "newLineKind": "lf"
 }

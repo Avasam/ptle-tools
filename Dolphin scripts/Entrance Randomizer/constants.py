@@ -25,13 +25,25 @@ class Addresses:
 DRAW_TEXT_STEP = 24
 DRAW_TEXT_OFFSET_X = 272
 
-TRANSITION_INFOS_DICT = {area.area_id: area for area in chain(*transition_infos)}
+TRANSITION_INFOS_DICT = {
+    area.area_id: area for area in chain(*transition_infos)
+}
 ALL_TRANSITION_AREAS = {area.area_id for area in chain(*transition_infos)}
-ALL_POSSIBLE_EXITS = [exit_.area_id for exit_ in chain(*(area.exits for area in TRANSITION_INFOS_DICT.values()))]
+ALL_POSSIBLE_EXITS = [
+    exit_.area_id for exit_ in chain(
+        *(area.exits for area in TRANSITION_INFOS_DICT.values()),
+    )
+]
 
-_game_id_base = "".join([chr(memory.read_u8(0x80000000 + i)) for i in range(3)])
+_game_id_base = "".join([
+    chr(memory.read_u8(0x80000000 + i))
+    for i in range(3)
+])
 GAME_REGION = chr(memory.read_u8(0x80000003))
-_developer_id = "".join([chr(memory.read_u8(0x80000004 + i)) for i in range(2)])
+_developer_id = "".join([
+    chr(memory.read_u8(0x80000004 + i))
+    for i in range(2)
+])
 GAME_VERSION = memory.read_u8(0x80000007)
 IS_GC = _game_id_base == "GPH"
 IS_WII = _game_id_base == "RPF"
