@@ -71,7 +71,7 @@ Read more: <https://github.com/Avasam/Avasam.AutoSplitters/tree/main/Pitfall%20T
 ## Meta / Contributing
 
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Avasam/ptle-tools/main.svg)](https://results.pre-commit.ci/latest/github/Avasam/ptle-tools/main)
-[![PTLE Discord](https://badgen.net/discord/members/xbWDsTpRxj)](https://discord.gg/xbWDsTpRxj)
+[![PTLE Discord](https://badgen.net/discord/members/NEVJPZk)](https://discord.gg/NEVJPZk)
 
 ### Formatting, linting and type-checking
 
