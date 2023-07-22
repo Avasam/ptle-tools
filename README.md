@@ -52,6 +52,12 @@ A tool to convert unarchived Pitfall TXFL/LFXT format textures **from any consol
 
 Releases: <https://github.com/Helco/Pitfall/releases>
 
+### DolphinTextureExtraction-tool
+
+Dumps GameCube and Wii textures to a format and name compatible with Dolphin texture hash.
+
+Repository: <https://github.com/Venomalia/DolphinTextureExtraction-tool#readme>
+
 <br/>
 
 ## AutoSplitter
