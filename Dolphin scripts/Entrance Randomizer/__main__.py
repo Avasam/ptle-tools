@@ -170,11 +170,11 @@ def set_transitions_map():
                     continue
                 try:
                     # Get a still-available exit from the area we're redirecting to
-                    entrance = [
+                    entrance = next(
                         exit_.area_id for exit_
                         in TRANSITION_INFOS_DICT[redirect].exits
                         if exit_.area_id in _possible_exits_bucket
-                    ][0]
+                    )
                 except IndexError:
                     # That area had more entrances than exits
                     continue
