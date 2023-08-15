@@ -61,6 +61,16 @@ draw_text_index = 0
 visited_altar_of_ages = False
 
 
+# Used to set where you come from when you enter a new area
+def get_prev_area_addr() -> int:
+    addr = PREV_AREA_ADDR[0]
+    for i in range(len(PREV_AREA_ADDR) - 1):
+        addr = memory.read_u32(addr + PREV_AREA_ADDR[i + 1])
+        if addr < GC_MIN_ADDRESS or addr > GC_MAX_ADDRESS:
+            raise Exception(f'Invalid address {addr}')
+    return addr
+
+
 def highjack_transition_rando():
     # Early reaturn, faster check
     if current_area_old == current_area_new:

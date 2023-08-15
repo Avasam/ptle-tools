@@ -5,6 +5,7 @@ from itertools import chain
 
 from dolphin import memory  # pyright: ignore[reportMissingModuleSource]
 from transition_infos import transition_infos
+from typing import List
 
 _ = 1_234_567_890
 _ = 0x12_34_56_78_9A_BC_DE_F0  # split per byte/int8
@@ -17,6 +18,7 @@ _ = 0b0110_0101_0110  # like microsoft calculator
 
 @dataclass
 class Addresses:
+    prev_area: List[int]
     current_area: int
     item_swap: int
     version_string: str
@@ -53,14 +55,14 @@ if GAME_VERSION != 0:
     raise Exception(f"Unknown game version {GAME_VERSION}!")
 _addresses_map = {
     "GPH": {
-        "D": Addresses(0x80417F50, 0x804C7734, "GC DE 0-00"),
-        "E": Addresses(0x8041BEB4, 0x804CB694, "GC US 0-00"),
-        "F": Addresses(0x80417F30, 0x804C7714, "GC FR 0-00"),
-        "P": Addresses(0x80417F10, 0x804C76F4, "GC EU 0-00"),
+        "D": Addresses([0x80747648], 0x80417F50, 0x804C7734, "GC DE 0-00"),
+        "E": Addresses([0x8072B648], 0x8041BEB4, 0x804CB694, "GC US 0-00"),
+        "F": Addresses([0x80747648], 0x80417F30, 0x804C7714, "GC FR 0-00"),
+        "P": Addresses([0x80747648], 0x80417F10, 0x804C76F4, "GC EU 0-00"),
     },
     "RPF": {
-        "E": Addresses(0x80448D04, 0x80446608, "Wii US 0-00"),
-        "P": Addresses(0x80449104, 0x80446A08, "Wii EU 0-00"),
+        "E": Addresses([0x804542DC, 0x8], 0x80448D04, 0x80446608, "Wii US 0-00"),
+        "P": Addresses([0x804546DC, 0x18], 0x80449104, 0x80446A08, "Wii EU 0-00"),
     },
 }
 
@@ -72,6 +74,7 @@ if not _addresses or _developer_id != "52":
     )
 print(f"Detected {_addresses.version_string} version!")
 
+PREV_AREA_ADDR = _addresses.prev_area
 CURRENT_AREA_ADDR = _addresses.current_area
 ITEM_SWAP_ADDR = _addresses.item_swap
 
@@ -91,3 +94,7 @@ SCORPION_TEMPLE = 0x4B08BBEB
 ST_CLAIRE_NIGHT = 0x72AD42FA
 ST_CLAIRE_DAY = 0x72AD42FA
 TELEPORTERS = 0xE97CB47C
+
+GC_MIN_ADDRESS = 0x80000000
+GC_MEM_SIZE = 0x1800000
+GC_MAX_ADDRESS = 0x80000000 + GC_MEM_SIZE - 1 # so 0x817FFFFF
