@@ -67,7 +67,7 @@ def get_prev_area_addr() -> int:
     for i in range(len(PREV_AREA_ADDR) - 1):
         addr = memory.read_u32(addr + PREV_AREA_ADDR[i + 1])
         if addr < GC_MIN_ADDRESS or addr > GC_MAX_ADDRESS:
-            raise Exception(f'Invalid address {addr}')
+            raise Exception(f"Invalid address {addr}")
     return addr
 
 

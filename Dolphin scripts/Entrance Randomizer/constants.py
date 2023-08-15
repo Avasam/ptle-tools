@@ -5,7 +5,6 @@ from itertools import chain
 
 from dolphin import memory  # pyright: ignore[reportMissingModuleSource]
 from transition_infos import transition_infos
-from typing import List
 
 _ = 1_234_567_890
 _ = 0x12_34_56_78_9A_BC_DE_F0  # split per byte/int8
@@ -18,7 +17,7 @@ _ = 0b0110_0101_0110  # like microsoft calculator
 
 @dataclass
 class Addresses:
-    prev_area: List[int]
+    prev_area: list[int]
     current_area: int
     item_swap: int
     version_string: str
@@ -97,4 +96,4 @@ TELEPORTERS = 0xE97CB47C
 
 GC_MIN_ADDRESS = 0x80000000
 GC_MEM_SIZE = 0x1800000
-GC_MAX_ADDRESS = 0x80000000 + GC_MEM_SIZE - 1 # so 0x817FFFFF
+GC_MAX_ADDRESS = 0x80000000 + GC_MEM_SIZE - 1  # so 0x817FFFFF
