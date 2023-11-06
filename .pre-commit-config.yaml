@@ -48,6 +48,7 @@ repos:
       - id: pyright
 
 ci:
+  autoupdate_schedule: monthly
   skip:
     - dprint # https://github.com/adamchainz/pre-commit-dprint/issues/4
     - pyright # https://github.com/RobertCraigie/pyright-python/issues/164
