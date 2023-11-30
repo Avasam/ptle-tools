@@ -13,11 +13,12 @@ It even explains how to deal with dynamic pointers, which is my current issue wi
 
 All codes below are for NTSC Gamecube only
 
-Start in Test Level (by Avasam):
+Start in specific Level (by Avasam):  
+Replace `XXXX XXXX` by the `asset_crc32` found in [world_infos.json](/Various%20technical%20notes/world_infos.json)
 
 ```txt
-0216A136 0000E980
-0216A13E 00009967
+0216A136 0000XXXX
+0216A13E 0000XXXX
 ```
 
 Infinite Jumps (by Avasam):
