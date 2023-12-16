@@ -2,7 +2,7 @@
 
 Dolphin Memory Engine (DME) documentation: <https://github.com/aldelaro5/Dolphin-memory-engine>
 
-To use, download the `.dmw` file for your game version (US, FR, etc.). Open Dolphin. Open DME. Go under "File > Open..." and select the `.dmw` file you downloaded.
+To use, download the `.dmw` file for your game version (US, FR, etc.). Open Dolphin. Open DME. In DME, go under "File > Open..." and select the `.dmw` file you downloaded.
 
 ## Action Replay / Gecko Codes
 
