@@ -21,6 +21,8 @@ Replace `XXXX XXXX` by the `asset_crc32` found in [world_infos.json](/Various%20
 0216A13E 0000XXXX
 ```
 
+_**The codes below are a bit jank because they don't follow pointers and can randomly break**_
+
 Infinite Jumps (by Avasam):
 
 ```txt
