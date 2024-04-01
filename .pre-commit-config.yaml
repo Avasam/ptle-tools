@@ -30,12 +30,12 @@ repos:
         additional_dependencies: ["dprint@~0.38.0"]
         pass_filenames: false # https://github.com/adamchainz/pre-commit-dprint/issues/3#issuecomment-1483410008
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.2.0" # Must match requirements-dev.txt
+    rev: "v0.3.5" # Must match requirements-dev.txt
     hooks:
       - id: ruff
         args: [--fix]
   - repo: https://github.com/hhatto/autopep8
-    rev: "v2.0.4" # Must match requirements-dev.txt
+    rev: "v2.1.0" # Must match requirements-dev.txt
     hooks:
       - id: autopep8
   - repo: https://github.com/asottile/add-trailing-comma
@@ -43,7 +43,7 @@ repos:
     hooks:
       - id: add-trailing-comma
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: "v1.1.350"
+    rev: "v1.1.356"
     hooks:
       - id: pyright
 
