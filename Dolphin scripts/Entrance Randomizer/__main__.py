@@ -59,25 +59,29 @@ current_area_new = 0
 draw_text_index = 0
 """Count how many times draw_text has been called this frame"""
 visited_altar_of_ages = False
+shaman_shop_prices = DEFAULT_SHOP_PRICES
 
 
 def randomize_shaman_shop():
+    global shaman_shop_prices
     if ADDRESSES.shaman_shop_struct == TODO:
         return
 
-    new_prices = DEFAULT_SHOP_PRICES[:]
-    random.shuffle(new_prices)
+    shaman_shop_prices = DEFAULT_SHOP_PRICES[:]
+    random.shuffle(shaman_shop_prices)
 
-    max_health = new_prices[:5]
+    max_health = shaman_shop_prices[:5]
     max_health.sort()
-    new_prices[:5] = max_health
+    shaman_shop_prices[:5] = max_health
 
-    max_canteen = new_prices[5:10]
+    max_canteen = shaman_shop_prices[5:10]
     max_canteen.sort()
-    new_prices[5:10] = max_canteen
+    shaman_shop_prices[5:10] = max_canteen
 
+
+def patch_shaman_shop():
     for index, offset in enumerate(ShamanShopOffset):
-        memory.write_u32(ADDRESSES.shaman_shop_struct + offset, new_prices[index])
+        memory.write_u32(ADDRESSES.shaman_shop_struct + offset, shaman_shop_prices[index])
 
 
 def get_prev_area_addr():
@@ -258,6 +262,8 @@ async def main_loop():
         + " (Random)" if CONFIGS.STARTING_AREA is None else f"{starting_area_name}",
     )
     draw_text(f"Current area: {hex(current_area_new).upper()} {f'({current_area.name})' if current_area else ''}")
+
+    patch_shaman_shop()
 
     # Always re-enable Item Swap.
     if memory.read_u32(ADDRESSES.item_swap) == 1:
