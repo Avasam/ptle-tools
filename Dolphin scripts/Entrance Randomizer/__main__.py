@@ -21,7 +21,7 @@ await event.frameadvance()  # noqa: F704, PLE1142  # pyright: ignore
 import CONFIGS
 from constants import *  # noqa: F403
 
-__version__ = "0.3.1"
+__version__ = "0.3.2"
 """
 Major: New major feature or functionality
 
@@ -67,8 +67,14 @@ def randomize_shaman_shop():
     if ADDRESSES.shaman_shop_struct == TODO:
         return
 
-    shaman_shop_prices = DEFAULT_SHOP_PRICES[:]
+    shaman_shop_prices = MAPLESS_SHOP_PRICES[:] if CONFIGS.DISABLE_MAPS_IN_SHOP else DEFAULT_SHOP_PRICES[:]
     random.shuffle(shaman_shop_prices)
+
+    if CONFIGS.DISABLE_MAPS_IN_SHOP:
+        shaman_shop_prices.insert(13, 0xFF)
+        shaman_shop_prices.insert(14, 0xFF)
+        shaman_shop_prices.insert(15, 0xFF)
+        shaman_shop_prices.insert(16, 0xFF)
 
     max_health = shaman_shop_prices[:5]
     max_health.sort()
@@ -80,7 +86,16 @@ def randomize_shaman_shop():
 
 
 def patch_shaman_shop():
-    for index, offset in enumerate(ShamanShopOffset):
+    if CONFIGS.DISABLE_MAPS_IN_SHOP:
+        for offset in (
+                ShopCountOffset.JungleNotes,
+                ShopCountOffset.NativeNotes,
+                ShopCountOffset.CavernNotes,
+                ShopCountOffset.MountainNotes,
+        ):
+            memory.write_u32(ADDRESSES.shaman_shop_struct + offset, 0)
+
+    for index, offset in enumerate(ShopPriceOffset):
         memory.write_u32(ADDRESSES.shaman_shop_struct + offset, shaman_shop_prices[index])
 
 

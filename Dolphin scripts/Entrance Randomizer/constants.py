@@ -8,7 +8,7 @@ from dolphin import memory  # pyright: ignore[reportMissingModuleSource]
 from transition_infos import transition_infos
 
 
-class ShamanShopOffset(IntEnum):
+class ShopPriceOffset(IntEnum):
     ExtraHealth1 = 4
     ExtraHealth2 = 8
     ExtraHealth3 = 12
@@ -29,6 +29,19 @@ class ShamanShopOffset(IntEnum):
     MysteryItem = 84
 
 
+class ShopCountOffset(IntEnum):
+    ExtraHealth = ShopPriceOffset.ExtraHealth1 - 4
+    Canteen = ShopPriceOffset.Canteen1 - 4
+    SmashStrike = ShopPriceOffset.SmashStrike - 4
+    SuperSling = ShopPriceOffset.SuperSling - 4
+    Breakdance = ShopPriceOffset.Breakdance - 4
+    JungleNotes = ShopPriceOffset.JungleNotes - 4
+    NativeNotes = ShopPriceOffset.NativeNotes - 4
+    CavernNotes = ShopPriceOffset.CavernNotes - 4
+    MountainNotes = ShopPriceOffset.MountainNotes - 4
+    MysteryItem = ShopPriceOffset.MysteryItem - 4
+
+
 @dataclass
 class Addresses:
     version_string: str
@@ -39,8 +52,8 @@ class Addresses:
 
 
 DEFAULT_SHOP_PRICES = [2, 4, 8, 16, 32, 1, 2, 3, 4, 5, 10, 10, 10, 9, 7, 7, 8, 0]
-
-TODO = 0x0
+MAPLESS_SHOP_PRICES = [0x04, 8, 16, 32, 0x00003, 4, 5, 10, 10, 10, 9, 7, 7, 8]
+"""Same as `DEFAULT_SHOP_PRICES` but with 4 lowest prices removed."""
 
 DRAW_TEXT_STEP = 24
 DRAW_TEXT_OFFSET_X = 272
@@ -68,6 +81,8 @@ GAME_VERSION = memory.read_u8(0x80000007)
 IS_GC = _game_id_base == "GPH"
 IS_WII = _game_id_base == "RPF"
 
+TODO = 0x0
+
 # Including the version number seems overkill, I don't think there was ever a non v0. Can add later if needed.
 if GAME_VERSION != 0:
     raise Exception(f"Unknown game version {GAME_VERSION}!")
@@ -94,6 +109,7 @@ if not _addresses or _developer_id != "52":
 ADDRESSES = _addresses
 print(f"Detected {ADDRESSES.version_string} version!")
 
+# Level CRCs
 JAGUAR = 0x99885996
 CRASH_SITE = 0xEE8F6900
 PLANE_COCKPIT = 0x4A3E4058

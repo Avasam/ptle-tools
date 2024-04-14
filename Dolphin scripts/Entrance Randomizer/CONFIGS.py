@@ -21,3 +21,9 @@ LINKED_TRANSITIONS: bool = False
 Whether the new destination will contain an exit back to the area you came from.
 Assuming both areas have as many entrances as they have exits.
 """
+
+DISABLE_MAPS_IN_SHOP: bool = False
+"""
+Whether you can buy maps in the Shaman Shop.
+When maps are disabled, the 4 lowest prices (0, 1, 2, 2) are also removed form the pool.
+"""
