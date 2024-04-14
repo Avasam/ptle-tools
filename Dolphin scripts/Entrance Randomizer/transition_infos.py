@@ -98,7 +98,7 @@ except FileNotFoundError as error:
     ) as json_data:
         data: TransitionInfosJSON = json.load(json_data)
 # We don't wanna expose comments
-del data["//"]  # pyright: ignore[reportGeneralTypeIssues]
+del data["//"]  # pyright: ignore[reportArgumentType]
 
 
 transition_infos = major_areas_from_JSON(data)

@@ -8,7 +8,6 @@ import sys
 from pathlib import Path
 from typing import Iterable
 
-import CONFIGS
 from dolphin import event, gui, memory  # pyright: ignore[reportMissingModuleSource]
 
 dolphin_path = Path().absolute()
@@ -19,9 +18,10 @@ sys.path.append(f"{real_scripts_path}/Entrance Randomizer")
 # Wait for the first frame before scanning the game for constants
 await event.frameadvance()  # noqa: F704, PLE1142  # pyright: ignore
 
+import CONFIGS
 from constants import *  # noqa: F403
 
-__version__ = "0.3"
+__version__ = "0.3.1"
 """
 Major: New major feature or functionality
 
@@ -40,7 +40,7 @@ print("Seed set to:", seed_string)
 
 _possible_starting_areas = [
     area for area in ALL_TRANSITION_AREAS
-    # Remove impossible start areas + Don't immediatly give TNT
+    # Remove impossible start areas + Don't immediately give TNT
     if area not in {APU_ILLAPU_SHRINE, SCORPION_TEMPLE, ST_CLAIRE_DAY}
     # Add back areas removed from transitions because of issues
 ] + [CRASH_SITE, TELEPORTERS]
@@ -61,8 +61,8 @@ draw_text_index = 0
 visited_altar_of_ages = False
 
 
-# Used to set where you come from when you enter a new area
-def get_prev_area_addr() -> int:
+def get_prev_area_addr():
+    """Used to set where you come from when you enter a new area."""
     addr = PREV_AREA_ADDR[0]
     for i in range(len(PREV_AREA_ADDR) - 1):
         addr = memory.read_u32(addr + PREV_AREA_ADDR[i + 1])
@@ -71,8 +71,8 @@ def get_prev_area_addr() -> int:
     return addr
 
 
-def highjack_transition_rando():
-    # Early reaturn, faster check
+def highjack_transition_rando() -> int:  # pyright doesn't narrow `int | False` to just `int` after truthy check
+    # Early return, faster check
     if current_area_old == current_area_new:
         return False
 
@@ -143,13 +143,13 @@ def get_random_redirection(from_: int, _original_to: int, possible_redirections:
 
 
 transitions_map: dict[int, dict[int, int]] = {}
-"""
+"""```python
 {
     from_id: {
         og_to_id: remapped_to_id
     }
 }
-"""
+```"""
 
 
 def set_transitions_map():
@@ -214,8 +214,8 @@ for from_, to_old_and_new in transitions_map.items():
             f"Redirecting to: {TRANSITION_INFOS_DICT[to_new].name}\n"
 
 spoiler_logs_file = dolphin_path / "User" / "Logs" / f"SPOILER_LOGS_v{__version__}_{seed_string}.txt"
-with Path.open(spoiler_logs_file, "w") as file:
-    file.writelines(spoiler_logs)
+Path.mkdir(spoiler_logs_file.parent, exist_ok=True)
+Path.write_text(spoiler_logs_file, spoiler_logs)
 print("Spoiler logs written to", spoiler_logs_file)
 
 
