@@ -61,6 +61,25 @@ draw_text_index = 0
 visited_altar_of_ages = False
 
 
+def randomize_shaman_shop():
+    if ADDRESSES.shaman_shop_struct == TODO:
+        return
+
+    new_prices = DEFAULT_SHOP_PRICES[:]
+    random.shuffle(new_prices)
+
+    max_health = new_prices[:5]
+    max_health.sort()
+    new_prices[:5] = max_health
+
+    max_canteen = new_prices[5:10]
+    max_canteen.sort()
+    new_prices[5:10] = max_canteen
+
+    for index, offset in enumerate(ShamanShopOffset):
+        memory.write_u32(ADDRESSES.shaman_shop_struct + offset, new_prices[index])
+
+
 def get_prev_area_addr():
     """Used to set where you come from when you enter a new area."""
     addr = ADDRESSES.prev_area[0]
@@ -193,6 +212,7 @@ def set_transitions_map():
 
 
 set_transitions_map()
+randomize_shaman_shop()
 
 # This is necessary until/unless I map all areas even those not randomized.
 try:

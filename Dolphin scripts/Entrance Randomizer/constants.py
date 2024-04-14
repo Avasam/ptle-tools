@@ -1,10 +1,32 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from enum import IntEnum
 from itertools import chain
 
 from dolphin import memory  # pyright: ignore[reportMissingModuleSource]
 from transition_infos import transition_infos
+
+
+class ShamanShopOffset(IntEnum):
+    ExtraHealth1 = 4
+    ExtraHealth2 = 8
+    ExtraHealth3 = 12
+    ExtraHealth4 = 16
+    ExtraHealth5 = 20
+    Canteen1 = 92
+    Canteen2 = 96
+    Canteen3 = 100
+    Canteen4 = 104
+    Canteen5 = 108
+    SmashStrike = 36
+    SuperSling = 44
+    Breakdance = 28
+    JungleNotes = 60
+    NativeNotes = 52
+    CavernNotes = 68
+    MountainNotes = 76
+    MysteryItem = 84
 
 
 @dataclass
@@ -13,7 +35,12 @@ class Addresses:
     prev_area: list[int]
     current_area: int
     item_swap: int
+    shaman_shop_struct: int
 
+
+DEFAULT_SHOP_PRICES = [2, 4, 8, 16, 32, 1, 2, 3, 4, 5, 10, 10, 10, 9, 7, 7, 8, 0]
+
+TODO = 0x0
 
 DRAW_TEXT_STEP = 24
 DRAW_TEXT_OFFSET_X = 272
@@ -46,14 +73,14 @@ if GAME_VERSION != 0:
     raise Exception(f"Unknown game version {GAME_VERSION}!")
 _addresses_map = {
     "GPH": {
-        "D": Addresses("GC DE 0-00", [0x80747648], 0x80417F50, 0x804C7734),
-        "E": Addresses("GC US 0-00", [0x8072B648], 0x8041BEB4, 0x804CB694),
-        "F": Addresses("GC FR 0-00", [0x80747648], 0x80417F30, 0x804C7714),
-        "P": Addresses("GC EU 0-00", [0x80747648], 0x80417F10, 0x804C76F4),
+        "D": Addresses("GC DE 0-00", [0x80747648], 0x80417F50, 0x804C7734, TODO),
+        "E": Addresses("GC US 0-00", [0x8072B648], 0x8041BEB4, 0x804CB694, 0x7E00955C),
+        "F": Addresses("GC FR 0-00", [0x80747648], 0x80417F30, 0x804C7714, TODO),
+        "P": Addresses("GC EU 0-00", [0x80747648], 0x80417F10, 0x804C76F4, TODO),
     },
     "RPF": {
-        "E": Addresses("Wii US 0-00", [0x804542DC, 0x8], 0x80448D04, 0x80446608),
-        "P": Addresses("Wii EU 0-00", [0x804546DC, 0x18], 0x80449104, 0x80446A08),
+        "E": Addresses("Wii US 0-00", [0x804542DC, 0x8], 0x80448D04, 0x80446608, TODO),
+        "P": Addresses("Wii EU 0-00", [0x804546DC, 0x18], 0x80449104, 0x80446A08, TODO),
     },
 }
 
