@@ -63,11 +63,9 @@ if not _addresses or _developer_id != "52":
         "Unknown version of Pitfall The Lost Expedition "
         + f"(game id -> {_game_id_base}{GAME_REGION}{_developer_id}, version -> {GAME_VERSION})",
     )
-print(f"Detected {_addresses.version_string} version!")
 
-PREV_AREA_ADDR = _addresses.prev_area
-CURRENT_AREA_ADDR = _addresses.current_area
-ITEM_SWAP_ADDR = _addresses.item_swap
+ADDRESSES = _addresses
+print(f"Detected {ADDRESSES.version_string} version!")
 
 JAGUAR = 0x99885996
 CRASH_SITE = 0xEE8F6900
