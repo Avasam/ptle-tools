@@ -51,6 +51,7 @@ class Addresses:
     shaman_shop_struct: int
 
 
+MAX_IDOLS = 138
 DEFAULT_SHOP_PRICES = [2, 4, 8, 16, 32, 1, 2, 3, 4, 5, 10, 10, 10, 9, 7, 7, 8, 0]
 MAPLESS_SHOP_PRICES = [0x04, 8, 16, 32, 0x00003, 4, 5, 10, 10, 10, 9, 7, 7, 8]
 """Same as `DEFAULT_SHOP_PRICES` but with 4 lowest prices removed."""

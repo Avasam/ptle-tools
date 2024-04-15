@@ -6,7 +6,7 @@ import os
 import random
 import sys
 from pathlib import Path
-from typing import Iterable
+from typing import Iterable, Literal
 
 from dolphin import event, gui, memory  # pyright: ignore[reportMissingModuleSource]
 
@@ -21,7 +21,7 @@ await event.frameadvance()  # noqa: F704, PLE1142  # pyright: ignore
 import CONFIGS
 from constants import *  # noqa: F403
 
-__version__ = "0.3.2"
+__version__ = "0.3.3"
 """
 Major: New major feature or functionality
 
@@ -53,28 +53,118 @@ starting_area = (
 
 # Initialize a few values to be used in loop
 current_area_old = 0
-"""Area ID of teh previous frame"""
+"""Area ID of the previous frame"""
 current_area_new = 0
 """Area ID of the current frame"""
 draw_text_index = 0
 """Count how many times draw_text has been called this frame"""
 visited_altar_of_ages = False
 shaman_shop_prices = DEFAULT_SHOP_PRICES
+shaman_shop_prices_string = ""
+
+
+def randint_with_bias(a: int, b: int, bias: int = 1, direction: Literal["start", "middle"] = "middle"):
+    """
+    Run randint multiple times then averaged and rounded to create a bell-curve bias.
+
+    The bias strength is the number of iteration. So 1 is no bias.
+    """
+    if bias < 1:
+        raise ValueError(f"{bias=} is smaller than 1.")
+
+    total = 0
+
+    if direction == "start":
+        for _ in range(bias):
+            total += random.random()
+        total /= bias
+
+        # Bias towards the start by spreading the range over [-1, 1) then abs.
+        total = abs((total * 2) - 1)
+        # Spread the range from [0, 1) to [0, b-a+1)
+        total *= b - a + 1
+        # Raise the range from [0, b-a) to [a, b+1)
+        total += a
+        return int(total)
+
+    if direction == "middle":
+        for _ in range(bias):
+            total += random.randint(a, b)
+
+        return round(total / bias)
+
+    raise ValueError(f"Invalid {direction=}.")
 
 
 def randomize_shaman_shop():
     global shaman_shop_prices
+    global shaman_shop_prices_string
     if ADDRESSES.shaman_shop_struct == TODO:
         return
 
     shaman_shop_prices = MAPLESS_SHOP_PRICES[:] if CONFIGS.DISABLE_MAPS_IN_SHOP else DEFAULT_SHOP_PRICES[:]
-    random.shuffle(shaman_shop_prices)
 
+    if CONFIGS.SHOP_PRICES_RANGE:
+        shop_size = len(shaman_shop_prices)
+        idols_left = MAX_IDOLS
+        equal_price_per_item = idols_left // shop_size
+        minimum_max_price = equal_price_per_item + 1
+        max_price = max(minimum_max_price, CONFIGS.SHOP_PRICES_RANGE[1])
+        min_price = min(max_price, equal_price_per_item, CONFIGS.SHOP_PRICES_RANGE[0])
+        shaman_shop_prices = []
+        for items_left in range(shop_size, 0, -1):
+            # Ensure we don't bust the total of idols
+            max_price = min(idols_left, max_price)
+
+            equal_price_per_item_left = idols_left // items_left
+            maximum_min_price = min(max_price, equal_price_per_item_left)
+            min_price = min(min_price, maximum_min_price)
+
+            # Ensure a full fill when possible
+            if max_price * (items_left - 1) <= idols_left:
+                # Last few items in the shop, and it's currently possible for low rolls to not total 138,
+                # use as many idols as as needed
+                min_price = maximum_min_price
+            # Ramp up min_price to avoid having to deal with a bunch of forced 0 price near the end
+            # note we already know that `max_price <= idols_left` so no need to check
+            elif max_price <= items_left:
+                min_price = maximum_min_price
+
+            # Strongly bias the distribution towards the middle
+            price = randint_with_bias(min_price, max_price, 3, "start")
+            print(f"\n{idols_left=}, {price=}, {min_price=}, {max_price=}, {maximum_min_price=}, {items_left=}\n")
+
+            idols_left -= price
+            if idols_left < 0:
+                raise RuntimeError(
+                    f"Oops, somehow we used too many idols! {idols_left=}, {price=}, {min_price=}, {max_price=}",
+                )
+            shaman_shop_prices.append(price)
+
+            # Try to avoid repeated low prices
+            if price == min_price < maximum_min_price:
+                min_price += 1
+
+            # Try to avoid repeated high prices
+            if price == max_price > max(minimum_max_price, min_price):
+                max_price -= 1
+
+        if sum(shaman_shop_prices) != MAX_IDOLS:
+            raise RuntimeError(
+                f"{shaman_shop_prices=} totals {sum(shaman_shop_prices)}, which isn't {MAX_IDOLS}.",
+            )
+
+    random.shuffle(shaman_shop_prices)
     if CONFIGS.DISABLE_MAPS_IN_SHOP:
-        shaman_shop_prices.insert(13, 0xFF)
-        shaman_shop_prices.insert(14, 0xFF)
-        shaman_shop_prices.insert(15, 0xFF)
-        shaman_shop_prices.insert(16, 0xFF)
+        shaman_shop_prices.insert(13, -1)
+        shaman_shop_prices.insert(14, -1)
+        shaman_shop_prices.insert(15, -1)
+        shaman_shop_prices.insert(16, -1)
+
+    array_repr = str(shaman_shop_prices).replace(" ", "").replace("-1", "Ø")
+    array_sum = sum(shaman_shop_prices) + (4 if CONFIGS.DISABLE_MAPS_IN_SHOP else 0)
+    shaman_shop_prices_string = f"Shaman Shop: {array_repr} total {array_sum}"
+    print(shaman_shop_prices_string)
 
     max_health = shaman_shop_prices[:5]
     max_health.sort()
@@ -272,6 +362,7 @@ async def main_loop():
     current_area = TRANSITION_INFOS_DICT.get(current_area_new)
     draw_text(f"Rando version: {__version__}")
     draw_text(f"Seed: {seed_string}")
+    draw_text(shaman_shop_prices_string)
     draw_text(
         f"Starting area: {hex(starting_area)}"
         + " (Random)" if CONFIGS.STARTING_AREA is None else f"{starting_area_name}",

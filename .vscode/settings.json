@@ -1,7 +1,7 @@
 {
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": "explicit"
   },
   "files.associations": {
     "*.dmw": "json",
@@ -52,7 +52,7 @@
     ],
     "editor.codeActionsOnSave": {
       // TODO: Ruff is supposed to be able to take care of this
-      "source.organizeImports": false
+      "source.organizeImports": "never"
     }
   },
   "python.analysis.stubPath": "Dolphin scripts/typings",
