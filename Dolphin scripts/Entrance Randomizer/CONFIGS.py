@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from types_ import SeedType
+from lib.types_ import SeedType
 
 SEED: SeedType = None
 """

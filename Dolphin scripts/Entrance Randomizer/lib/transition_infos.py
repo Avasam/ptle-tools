@@ -91,7 +91,7 @@ try:
 except FileNotFoundError as error:
     print(error, "Looking in 'Various technical notes' instead")
     with Path.open(
-        Path(__file__).parent.parent.parent
+        Path(__file__).parent.parent.parent.parent
         / "Various technical notes"
         / "transition_infos.json",
         encoding="UTF-8",

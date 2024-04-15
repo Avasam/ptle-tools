@@ -1,45 +1,30 @@
 from __future__ import annotations
 
+import random
+import sys
 from dataclasses import dataclass
-from enum import IntEnum
 from itertools import chain
 
+import CONFIGS
 from dolphin import memory  # pyright: ignore[reportMissingModuleSource]
-from transition_infos import transition_infos
+from lib.transition_infos import transition_infos
 
+__version__ = "0.3.3"
+"""
+Major: New major feature or functionality
 
-class ShopPriceOffset(IntEnum):
-    ExtraHealth1 = 4
-    ExtraHealth2 = 8
-    ExtraHealth3 = 12
-    ExtraHealth4 = 16
-    ExtraHealth5 = 20
-    Canteen1 = 92
-    Canteen2 = 96
-    Canteen3 = 100
-    Canteen4 = 104
-    Canteen5 = 108
-    SmashStrike = 36
-    SuperSling = 44
-    Breakdance = 28
-    JungleNotes = 60
-    NativeNotes = 52
-    CavernNotes = 68
-    MountainNotes = 76
-    MysteryItem = 84
+Minor: Affects seed
 
+Patch: Does't affect seed (assuming same settings)
+"""
+print(f"Python version: {sys.version}")
+print(f"Rando version: {__version__}")
 
-class ShopCountOffset(IntEnum):
-    ExtraHealth = ShopPriceOffset.ExtraHealth1 - 4
-    Canteen = ShopPriceOffset.Canteen1 - 4
-    SmashStrike = ShopPriceOffset.SmashStrike - 4
-    SuperSling = ShopPriceOffset.SuperSling - 4
-    Breakdance = ShopPriceOffset.Breakdance - 4
-    JungleNotes = ShopPriceOffset.JungleNotes - 4
-    NativeNotes = ShopPriceOffset.NativeNotes - 4
-    CavernNotes = ShopPriceOffset.CavernNotes - 4
-    MountainNotes = ShopPriceOffset.MountainNotes - 4
-    MysteryItem = ShopPriceOffset.MysteryItem - 4
+# Sets the seed
+seed = CONFIGS.SEED if CONFIGS.SEED else random.randrange(sys.maxsize)
+random.seed(seed)
+seed_string = hex(seed).upper() if isinstance(seed, int) else seed
+print("Seed set to:", seed_string)
 
 
 @dataclass
@@ -50,14 +35,6 @@ class Addresses:
     item_swap: int
     shaman_shop_struct: int
 
-
-MAX_IDOLS = 138
-DEFAULT_SHOP_PRICES = [2, 4, 8, 16, 32, 1, 2, 3, 4, 5, 10, 10, 10, 9, 7, 7, 8, 0]
-MAPLESS_SHOP_PRICES = [0x04, 8, 16, 32, 0x00003, 4, 5, 10, 10, 10, 9, 7, 7, 8]
-"""Same as `DEFAULT_SHOP_PRICES` but with 4 lowest prices removed."""
-
-DRAW_TEXT_STEP = 24
-DRAW_TEXT_OFFSET_X = 272
 
 TRANSITION_INFOS_DICT = {
     area.area_id: area for area in chain(*transition_infos)

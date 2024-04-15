@@ -3,12 +3,10 @@
 from __future__ import annotations
 
 import os
-import random
 import sys
 from pathlib import Path
-from typing import Iterable, Literal
 
-from dolphin import event, gui, memory  # pyright: ignore[reportMissingModuleSource]
+from dolphin import event, memory  # pyright: ignore[reportMissingModuleSource]
 
 dolphin_path = Path().absolute()
 print("Dolphin path:", dolphin_path)
@@ -19,306 +17,18 @@ sys.path.append(f"{real_scripts_path}/Entrance Randomizer")
 await event.frameadvance()  # noqa: F704, PLE1142  # pyright: ignore
 
 import CONFIGS
-from constants import *  # noqa: F403
-
-__version__ = "0.3.3"
-"""
-Major: New major feature or functionality
-
-Minor: Affects seed
-
-Patch: Does't affect seed (assuming same settings)
-"""
-print(f"Python version: {sys.version}")
-print(f"Rando version: {__version__}")
-
-# Sets the seed
-seed = CONFIGS.SEED if CONFIGS.SEED else random.randrange(sys.maxsize)
-random.seed(seed)
-seed_string = hex(seed).upper() if isinstance(seed, int) else seed
-print("Seed set to:", seed_string)
-
-_possible_starting_areas = [
-    area for area in ALL_TRANSITION_AREAS
-    # Remove impossible start areas + Don't immediately give TNT
-    if area not in {APU_ILLAPU_SHRINE, SCORPION_TEMPLE, ST_CLAIRE_DAY}
-    # Add back areas removed from transitions because of issues
-] + [CRASH_SITE, TELEPORTERS]
-
-starting_area = (
-    CONFIGS.STARTING_AREA
-    if CONFIGS.STARTING_AREA
-    else random.choice(_possible_starting_areas)
+from lib.constants import *  # noqa: F403
+from lib.constants import __version__
+from lib.entrance_rando import (
+    highjack_transition,
+    highjack_transition_rando,
+    set_transitions_map,
+    starting_area,
+    state,
+    transitions_map,
 )
-
-# Initialize a few values to be used in loop
-current_area_old = 0
-"""Area ID of the previous frame"""
-current_area_new = 0
-"""Area ID of the current frame"""
-draw_text_index = 0
-"""Count how many times draw_text has been called this frame"""
-visited_altar_of_ages = False
-shaman_shop_prices = DEFAULT_SHOP_PRICES
-shaman_shop_prices_string = ""
-
-
-def randint_with_bias(a: int, b: int, bias: int = 1, direction: Literal["start", "middle"] = "middle"):
-    """
-    Run randint multiple times then averaged and rounded to create a bell-curve bias.
-
-    The bias strength is the number of iteration. So 1 is no bias.
-    """
-    if bias < 1:
-        raise ValueError(f"{bias=} is smaller than 1.")
-
-    total = 0
-
-    if direction == "start":
-        for _ in range(bias):
-            total += random.random()
-        total /= bias
-
-        # Bias towards the start by spreading the range over [-1, 1) then abs.
-        total = abs((total * 2) - 1)
-        # Spread the range from [0, 1) to [0, b-a+1)
-        total *= b - a + 1
-        # Raise the range from [0, b-a) to [a, b+1)
-        total += a
-        return int(total)
-
-    if direction == "middle":
-        for _ in range(bias):
-            total += random.randint(a, b)
-
-        return round(total / bias)
-
-    raise ValueError(f"Invalid {direction=}.")
-
-
-def randomize_shaman_shop():
-    global shaman_shop_prices
-    global shaman_shop_prices_string
-    if ADDRESSES.shaman_shop_struct == TODO:
-        return
-
-    shaman_shop_prices = MAPLESS_SHOP_PRICES[:] if CONFIGS.DISABLE_MAPS_IN_SHOP else DEFAULT_SHOP_PRICES[:]
-
-    if CONFIGS.SHOP_PRICES_RANGE:
-        shop_size = len(shaman_shop_prices)
-        idols_left = MAX_IDOLS
-        equal_price_per_item = idols_left // shop_size
-        minimum_max_price = equal_price_per_item + 1
-        max_price = max(minimum_max_price, CONFIGS.SHOP_PRICES_RANGE[1])
-        min_price = min(max_price, equal_price_per_item, CONFIGS.SHOP_PRICES_RANGE[0])
-        shaman_shop_prices = []
-        for items_left in range(shop_size, 0, -1):
-            # Ensure we don't bust the total of idols
-            max_price = min(idols_left, max_price)
-
-            equal_price_per_item_left = idols_left // items_left
-            maximum_min_price = min(max_price, equal_price_per_item_left)
-            min_price = min(min_price, maximum_min_price)
-
-            # Ensure a full fill when possible
-            if max_price * (items_left - 1) <= idols_left:
-                # Last few items in the shop, and it's currently possible for low rolls to not total 138,
-                # use as many idols as as needed
-                min_price = maximum_min_price
-            # Ramp up min_price to avoid having to deal with a bunch of forced 0 price near the end
-            # note we already know that `max_price <= idols_left` so no need to check
-            elif max_price <= items_left:
-                min_price = maximum_min_price
-
-            # Strongly bias the distribution towards the middle
-            price = randint_with_bias(min_price, max_price, 3, "start")
-            print(f"\n{idols_left=}, {price=}, {min_price=}, {max_price=}, {maximum_min_price=}, {items_left=}\n")
-
-            idols_left -= price
-            if idols_left < 0:
-                raise RuntimeError(
-                    f"Oops, somehow we used too many idols! {idols_left=}, {price=}, {min_price=}, {max_price=}",
-                )
-            shaman_shop_prices.append(price)
-
-            # Try to avoid repeated low prices
-            if price == min_price < maximum_min_price:
-                min_price += 1
-
-            # Try to avoid repeated high prices
-            if price == max_price > max(minimum_max_price, min_price):
-                max_price -= 1
-
-        if sum(shaman_shop_prices) != MAX_IDOLS:
-            raise RuntimeError(
-                f"{shaman_shop_prices=} totals {sum(shaman_shop_prices)}, which isn't {MAX_IDOLS}.",
-            )
-
-    random.shuffle(shaman_shop_prices)
-    if CONFIGS.DISABLE_MAPS_IN_SHOP:
-        shaman_shop_prices.insert(13, -1)
-        shaman_shop_prices.insert(14, -1)
-        shaman_shop_prices.insert(15, -1)
-        shaman_shop_prices.insert(16, -1)
-
-    array_repr = str(shaman_shop_prices).replace(" ", "").replace("-1", "Ø")
-    array_sum = sum(shaman_shop_prices) + (4 if CONFIGS.DISABLE_MAPS_IN_SHOP else 0)
-    shaman_shop_prices_string = f"Shaman Shop: {array_repr} total {array_sum}"
-    print(shaman_shop_prices_string)
-
-    max_health = shaman_shop_prices[:5]
-    max_health.sort()
-    shaman_shop_prices[:5] = max_health
-
-    max_canteen = shaman_shop_prices[5:10]
-    max_canteen.sort()
-    shaman_shop_prices[5:10] = max_canteen
-
-
-def patch_shaman_shop():
-    if CONFIGS.DISABLE_MAPS_IN_SHOP:
-        for offset in (
-                ShopCountOffset.JungleNotes,
-                ShopCountOffset.NativeNotes,
-                ShopCountOffset.CavernNotes,
-                ShopCountOffset.MountainNotes,
-        ):
-            memory.write_u32(ADDRESSES.shaman_shop_struct + offset, 0)
-
-    for index, offset in enumerate(ShopPriceOffset):
-        memory.write_u32(ADDRESSES.shaman_shop_struct + offset, shaman_shop_prices[index])
-
-
-def get_prev_area_addr():
-    """Used to set where you come from when you enter a new area."""
-    addr = ADDRESSES.prev_area[0]
-    for i in range(len(ADDRESSES.prev_area) - 1):
-        addr = memory.read_u32(addr + ADDRESSES.prev_area[i + 1])
-        if addr < GC_MIN_ADDRESS or addr > GC_MAX_ADDRESS:
-            raise Exception(f"Invalid address {addr}")
-    return addr
-
-
-def highjack_transition_rando() -> int:  # pyright doesn't narrow `int | False` to just `int` after truthy check
-    # Early return, faster check
-    if current_area_old == current_area_new:
-        return False
-
-    redirect = transitions_map.get(current_area_old, {}).get(current_area_new)
-    if not redirect:
-        return False
-
-    # Apply Altar of Ages logic to St. Claire's Excavation Camp
-    if redirect in {ST_CLAIRE_DAY, ST_CLAIRE_NIGHT}:
-        redirect = ST_CLAIRE_NIGHT if visited_altar_of_ages else ST_CLAIRE_DAY
-
-    print(
-        "highjack_transition_rando |",
-        f"From: {hex(current_area_old)},",
-        f"To: {hex(current_area_new)}.",
-        f"Redirecting to: {hex(redirect)}",
-    )
-    memory.write_u32(ADDRESSES.current_area, redirect)
-    return redirect
-
-
-def highjack_transition(from_: int | None, to: int | None, redirect: int):
-    if from_ is None:
-        from_ = current_area_old
-    if to is None:
-        to = current_area_new
-    if from_ == current_area_old and to == current_area_new:
-        print(
-            "highjack_transition |",
-            f"From: {hex(current_area_old)},",
-            f"To: {hex(current_area_new)}.",
-            f"Redirecting to: {hex(redirect)}",
-        )
-        memory.write_u32(ADDRESSES.current_area, redirect)
-        return True
-    return False
-
-
-def draw_text(text: str):
-    global draw_text_index
-    gui.draw_text(
-        (DRAW_TEXT_OFFSET_X, DRAW_TEXT_STEP / 2 + DRAW_TEXT_STEP * draw_text_index),
-        0xFF00FFFF,
-        text,
-    )
-    draw_text_index += 1
-
-
-def get_random_redirection(from_: int, _original_to: int, possible_redirections: Iterable[int]):
-    possible_redirections = [
-        area for area in possible_redirections
-        # Prevent looping on itself
-        if area != from_
-        # Prevent unintended entrances to Crash Site (resets most progression!)
-        # and (
-        #     area != CRASH_SITE
-        #     # Going from Cockpit or Canyon to Crash Site is OK.
-        #     or (
-        #         from_ in {PLANE_COCKPIT, JUNGLE_CANYON}
-        #         and original_to == CRASH_SITE
-        #     )
-        # )
-    ]
-    # Investigate and explain why that can happen
-    return random.choice(possible_redirections) \
-        if len(possible_redirections) > 0 \
-        else None
-
-
-transitions_map: dict[int, dict[int, int]] = {}
-"""```python
-{
-    from_id: {
-        og_to_id: remapped_to_id
-    }
-}
-```"""
-
-
-def set_transitions_map():
-    def _transition_map_set(from_: int, to: int, redirect: int):
-        if transitions_map.get(from_):
-            transitions_map[from_][to] = redirect
-        else:
-            transitions_map[from_] = {to: redirect}
-    _possible_exits_bucket = ALL_POSSIBLE_EXITS.copy()
-    """A temporary container of transitions to pick from until it is empty."""
-    global transitions_map
-    transitions_map = {}
-    for area in TRANSITION_INFOS_DICT.values():
-        from_ = area.area_id
-        for to_og in (exit_.area_id for exit_ in area.exits):
-            redirect = get_random_redirection(from_, to_og, _possible_exits_bucket)
-            if redirect is None or transitions_map.get(from_, {}).get(to_og):
-                # Don't override something set in a previous iteration, like from linked two-way entrances
-                continue
-
-            _transition_map_set(from_, to_og, redirect)
-            _possible_exits_bucket.remove(redirect)
-
-            if CONFIGS.LINKED_TRANSITIONS:
-                # Ensure we haven't already expanded all transitions back to the "from" area.
-                # (I think that means that area had more exits than entrances)
-                if from_ not in _possible_exits_bucket:
-                    continue
-                try:
-                    # Get a still-available exit from the area we're redirecting to
-                    entrance = next(
-                        exit_.area_id for exit_
-                        in TRANSITION_INFOS_DICT[redirect].exits
-                        if exit_.area_id in _possible_exits_bucket
-                    )
-                except IndexError:
-                    # That area had more entrances than exits
-                    continue
-                _transition_map_set(redirect, entrance, from_)
-                _possible_exits_bucket.remove(from_)
-
+from lib.shaman_shop import patch_shaman_shop, randomize_shaman_shop
+from lib.utils import draw_text, dump_spoiler_logs, reset_draw_text_index
 
 set_transitions_map()
 randomize_shaman_shop()
@@ -335,41 +45,24 @@ except KeyError:
         starting_area_name = str(starting_area)
 
 # Dump spoiler logs
-spoiler_logs = f"Starting area: {starting_area_name}\n"
-for from_, to_old_and_new in transitions_map.items():
-    for to_old, to_new in to_old_and_new.items():
-        spoiler_logs += f"From: {TRANSITION_INFOS_DICT[from_].name}, " + \
-            f"To: {TRANSITION_INFOS_DICT[to_old].name}. " + \
-            f"Redirecting to: {TRANSITION_INFOS_DICT[to_new].name}\n"
-
-spoiler_logs_file = dolphin_path / "User" / "Logs" / f"SPOILER_LOGS_v{__version__}_{seed_string}.txt"
-Path.mkdir(spoiler_logs_file.parent, exist_ok=True)
-Path.write_text(spoiler_logs_file, spoiler_logs)
-print("Spoiler logs written to", spoiler_logs_file)
+dump_spoiler_logs(starting_area_name, transitions_map, seed_string)
 
 
 async def main_loop():
-    global current_area_old
-    global current_area_new
-    global draw_text_index
-    global visited_altar_of_ages
-
     # Read memory, setup loop values, print debug to screen
-    draw_text_index = 0
-    current_area_old = current_area_new
+    reset_draw_text_index()
+    state.current_area_old = state.current_area_new
     await event.frameadvance()
-    current_area_new = memory.read_u32(ADDRESSES.current_area)
-    current_area = TRANSITION_INFOS_DICT.get(current_area_new)
+    state.current_area_new = memory.read_u32(ADDRESSES.current_area)
+    current_area = TRANSITION_INFOS_DICT.get(state.current_area_new)
     draw_text(f"Rando version: {__version__}")
     draw_text(f"Seed: {seed_string}")
-    draw_text(shaman_shop_prices_string)
+    draw_text(patch_shaman_shop())
     draw_text(
         f"Starting area: {hex(starting_area)}"
         + " (Random)" if CONFIGS.STARTING_AREA is None else f"{starting_area_name}",
     )
-    draw_text(f"Current area: {hex(current_area_new).upper()} {f'({current_area.name})' if current_area else ''}")
-
-    patch_shaman_shop()
+    draw_text(f"Current area: {hex(state.current_area_new).upper()} {f'({current_area.name})' if current_area else ''}")
 
     # Always re-enable Item Swap.
     if memory.read_u32(ADDRESSES.item_swap) == 1:
@@ -382,22 +75,21 @@ async def main_loop():
     # Standardize the Altar of Ages exit
     if highjack_transition(ALTAR_OF_AGES, None, MYSTERIOUS_TEMPLE):
         # Even if the cutscene isn't actually watched. Just leaving the Altar is good enough for the rando.
-        visited_altar_of_ages = True
-        current_area_new = MYSTERIOUS_TEMPLE
+        state.visited_altar_of_ages = True
+        state.current_area_new = MYSTERIOUS_TEMPLE
 
     # Standardize the Viracocha Monoliths cutscene
     if highjack_transition(None, VIRACOCHA_MONOLITHS_CUTSCENE, VIRACOCHA_MONOLITHS):
-        current_area_new = VIRACOCHA_MONOLITHS
+        state.current_area_new = VIRACOCHA_MONOLITHS
 
     # Standardize St. Claire's Excavation Camp
     if highjack_transition(None, ST_CLAIRE_NIGHT, ST_CLAIRE_DAY):
-        current_area_new = ST_CLAIRE_DAY
+        state.current_area_new = ST_CLAIRE_DAY
 
     redirect = highjack_transition_rando()
     if redirect:
-        current_area_new = redirect
+        state.current_area_new = redirect
 
 
 while True:
-
     await main_loop()  # noqa: F704, PLE1142  # pyright: ignore
