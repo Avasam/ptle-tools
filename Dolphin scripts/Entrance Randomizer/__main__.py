@@ -62,7 +62,10 @@ async def main_loop():
         f"Starting area: {hex(starting_area)}"
         + " (Random)" if CONFIGS.STARTING_AREA is None else f"{starting_area_name}",
     )
-    draw_text(f"Current area: {hex(state.current_area_new).upper()} {f'({current_area.name})' if current_area else ''}")
+    draw_text(
+        f"Current area: {hex(state.current_area_new).upper()}"
+        + f"({current_area.name})" if current_area else "",
+    )
 
     # Always re-enable Item Swap.
     if memory.read_u32(ADDRESSES.item_swap) == 1:
@@ -74,7 +77,8 @@ async def main_loop():
 
     # Standardize the Altar of Ages exit
     if highjack_transition(ALTAR_OF_AGES, None, MYSTERIOUS_TEMPLE):
-        # Even if the cutscene isn't actually watched. Just leaving the Altar is good enough for the rando.
+        # Even if the cutscene isn't actually watched.
+        # Just leaving the Altar is good enough for the rando.
         state.visited_altar_of_ages = True
         state.current_area_new = MYSTERIOUS_TEMPLE
 

@@ -28,7 +28,11 @@ def draw_text(text: str):
     _draw_text_index += 1
 
 
-def dump_spoiler_logs(starting_area_name: str, transitions_map: dict[int, dict[int, int]], seed_string: SeedType):
+def dump_spoiler_logs(
+    starting_area_name: str,
+    transitions_map: dict[int, dict[int, int]],
+    seed_string: SeedType,
+):
     spoiler_logs = f"Starting area: {starting_area_name}\n"
     for from_, to_old_and_new in transitions_map.items():
         for to_old, to_new in to_old_and_new.items():
@@ -36,10 +40,15 @@ def dump_spoiler_logs(starting_area_name: str, transitions_map: dict[int, dict[i
                 f"To: {TRANSITION_INFOS_DICT[to_old].name}. " + \
                 f"Redirecting to: {TRANSITION_INFOS_DICT[to_new].name}\n"
 
-    # TODO: Get actual user folder based whether Dolphin Emulator is in AppData/Roaming
+    # TODO (Avasam): Get actual user folder based whether Dolphin Emulator is in AppData/Roaming
     # and if the current installation is portable.
     dolphin_path = Path().absolute()
-    spoiler_logs_file = dolphin_path / "User" / "Logs" / f"SPOILER_LOGS_v{__version__}_{seed_string}.txt"
+    spoiler_logs_file = (
+        dolphin_path
+        / "User"
+        / "Logs"
+        / f"SPOILER_LOGS_v{__version__}_{seed_string}.txt"
+    )
     Path.mkdir(spoiler_logs_file.parent, parents=True, exist_ok=True)
     Path.write_text(spoiler_logs_file, spoiler_logs)
     print("Spoiler logs written to", spoiler_logs_file)
