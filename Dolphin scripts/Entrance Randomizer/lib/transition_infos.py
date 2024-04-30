@@ -91,14 +91,14 @@ try:
 except FileNotFoundError as error:
     print(error, "Looking in 'Various technical notes' instead")
     with Path.open(
-        Path(__file__).parent.parent.parent
+        Path(__file__).parent.parent.parent.parent
         / "Various technical notes"
         / "transition_infos.json",
         encoding="UTF-8",
     ) as json_data:
         data: TransitionInfosJSON = json.load(json_data)
 # We don't wanna expose comments
-del data["//"]  # pyright: ignore[reportGeneralTypeIssues]
+del data["//"]  # pyright: ignore[reportArgumentType]
 
 
 transition_infos = major_areas_from_JSON(data)

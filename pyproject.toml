@@ -52,6 +52,8 @@ ignore = [
   "PLC0414", # https://github.com/charliermarsh/ruff/issues/3734
 ]
 "Dolphin scripts/Entrance Randomizer/**.py" = [
+  "F405", # Allow * import from constants since we use a lot, but not all
+  "PLW0603", # Using globals due to the nature of this script
   # Print are used as debug logs
   "T20", # flake8-print
   # Project is too simple to create our own errors
@@ -61,8 +63,6 @@ ignore = [
 ]
 "Dolphin scripts/Entrance Randomizer/__main__.py" = [
   "E402", # Python path must first be set in __main__
-  "F405", # Allow * import from constants since we use a lot, but not all
-  "PLW0603", # Using globals due to the nature of this script
 ]
 "Dolphin scripts/typings/*.pyi" = [
   "D205", # External stubs, allow docstring w/o summary line
