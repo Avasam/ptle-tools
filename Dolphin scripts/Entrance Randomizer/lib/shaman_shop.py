@@ -155,8 +155,7 @@ def randomize_shaman_shop():
     _shaman_shop_prices_string = f"Shaman Shop: {array_repr} total {array_sum}"
     print(_shaman_shop_prices_string)
 
-    max_health = _shaman_shop_prices[:5]
-    max_health.sort()
+    max_health = sorted(_shaman_shop_prices[:5])
     _shaman_shop_prices[:5] = max_health
 
     max_canteen = _shaman_shop_prices[5:10]
