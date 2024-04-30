@@ -13,11 +13,7 @@ _possible_starting_areas = [
     # Add back areas removed from transitions because of issues
 ] + [CRASH_SITE, TELEPORTERS]
 
-starting_area = (
-    CONFIGS.STARTING_AREA
-    if CONFIGS.STARTING_AREA
-    else random.choice(_possible_starting_areas)
-)
+starting_area = CONFIGS.STARTING_AREA or random.choice(_possible_starting_areas)
 
 
 @dataclass
@@ -43,7 +39,8 @@ def get_prev_area_addr():
     return addr
 
 
-def highjack_transition_rando() -> int:  # pyright doesn't narrow `int | False` to just `int` after truthy check
+# -> int: pyright doesn't narrow `int | False` to just `int` after truthy check
+def highjack_transition_rando() -> int:
     # Early return, faster check
     if state.current_area_old == state.current_area_new:
         return False
@@ -128,7 +125,8 @@ def set_transitions_map():
         for to_og in (exit_.area_id for exit_ in area.exits):
             redirect = get_random_redirection(from_, to_og, _possible_exits_bucket)
             if redirect is None or transitions_map.get(from_, {}).get(to_og):
-                # Don't override something set in a previous iteration, like from linked two-way entrances
+                # Don't override something set in a previous iteration,
+                # like from linked two-way entrances.
                 continue
 
             _transition_map_set(from_, to_og, redirect)

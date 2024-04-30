@@ -52,7 +52,12 @@ _shaman_shop_prices = DEFAULT_SHOP_PRICES
 _shaman_shop_prices_string = ""
 
 
-def randint_with_bias(a: int, b: int, bias: int = 1, direction: Literal["start", "middle"] = "middle"):
+def randint_with_bias(
+    a: int,
+    b: int,
+    bias: int = 1,
+    direction: Literal["start", "middle"] = "middle",
+):
     """
     Run randint multiple times then averaged and rounded to create a bell-curve bias.
 
@@ -91,7 +96,9 @@ def randomize_shaman_shop():
     if ADDRESSES.shaman_shop_struct == TODO:
         return
 
-    _shaman_shop_prices = MAPLESS_SHOP_PRICES[:] if CONFIGS.DISABLE_MAPS_IN_SHOP else DEFAULT_SHOP_PRICES[:]
+    _shaman_shop_prices = MAPLESS_SHOP_PRICES[:] \
+        if CONFIGS.DISABLE_MAPS_IN_SHOP \
+        else DEFAULT_SHOP_PRICES[:]
 
     if CONFIGS.SHOP_PRICES_RANGE:
         shop_size = len(_shaman_shop_prices)
@@ -100,7 +107,7 @@ def randomize_shaman_shop():
         minimum_max_price = equal_price_per_item + 1
         max_price = max(minimum_max_price, CONFIGS.SHOP_PRICES_RANGE[1])
         min_price = min(max_price, equal_price_per_item, CONFIGS.SHOP_PRICES_RANGE[0])
-        _shaman_shop_prices = []
+        _shaman_shop_prices: list[int] = []
         for items_left in range(shop_size, 0, -1):
             # Ensure we don't bust the total of idols
             max_price = min(idols_left, max_price)
@@ -111,8 +118,8 @@ def randomize_shaman_shop():
 
             # Ensure a full fill when possible
             if max_price * (items_left - 1) <= idols_left:
-                # Last few items in the shop, and it's currently possible for low rolls to not total 138,
-                # use as many idols as as needed
+                # Last few items in the shop, and it's currently possible for
+                # low rolls to not total 138, use as many idols as as needed
                 min_price = maximum_min_price
             # Ramp up min_price to avoid having to deal with a bunch of forced 0 price near the end
             # note we already know that `max_price <= idols_left` so no need to check
@@ -121,13 +128,11 @@ def randomize_shaman_shop():
 
             # Strongly bias the distribution towards the middle
             price = randint_with_bias(min_price, max_price, 3, "start")
-            print(f"\n{idols_left=}, {price=}, {min_price=}, {max_price=}, {maximum_min_price=}, {items_left=}\n")
+            print(f"\n{idols_left=}, {price=}, {min_price=}, {max_price=}, {maximum_min_price=}, {items_left=}\n")  # noqa: E501
 
             idols_left -= price
             if idols_left < 0:
-                raise RuntimeError(
-                    f"Oops, somehow we used too many idols! {idols_left=}, {price=}, {min_price=}, {max_price=}",
-                )
+                raise RuntimeError(f"Oops, somehow we used too many idols! {idols_left=}, {price=}, {min_price=}, {max_price=}")  # noqa: E501
             _shaman_shop_prices.append(price)
 
             # Try to avoid repeated low prices
@@ -139,9 +144,7 @@ def randomize_shaman_shop():
                 max_price -= 1
 
         if sum(_shaman_shop_prices) != MAX_IDOLS:
-            raise RuntimeError(
-                f"{_shaman_shop_prices=} totals {sum(_shaman_shop_prices)}, which isn't {MAX_IDOLS}.",
-            )
+            raise RuntimeError(f"{_shaman_shop_prices=} totals {sum(_shaman_shop_prices)}, which isn't {MAX_IDOLS}.")  # noqa: E501
 
     random.shuffle(_shaman_shop_prices)
     if CONFIGS.DISABLE_MAPS_IN_SHOP:

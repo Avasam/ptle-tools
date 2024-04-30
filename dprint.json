@@ -1,6 +1,6 @@
 {
-  "extends": "https://raw.githubusercontent.com/Samuel-Therrien-Beslogic/beslogic-dprint-configuration/main/dprint.json",
-  "includes": ["**/*"],
+  // https://dprint.dev/config/#extending-a-different-configuration-file
+  "extends": "https://raw.githubusercontent.com/BesLogic/shared-configs/main/dprint.json",
   "excludes": [
     "**/node_modules",
     "**/*-lock.json",

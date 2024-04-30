@@ -13,7 +13,7 @@ It even explains how to deal with dynamic pointers, which is my current issue wi
 
 All codes below are for NTSC Gamecube only
 
-Start in specific Level (by Avasam):  
+Start in specific Level (by Avasam):\
 Replace `XXXX XXXX` by the `asset_crc32` found in [world_infos.json](/Various%20technical%20notes/world_infos.json)
 
 ```txt

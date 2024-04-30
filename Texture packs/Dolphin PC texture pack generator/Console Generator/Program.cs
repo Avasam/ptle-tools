@@ -1,4 +1,4 @@
-﻿using System.IO.Compression;
+using System.IO.Compression;
 using System.Reflection;
 using System.Text.Json;
 using PCTexturePackGeneratorConsole;
@@ -32,7 +32,6 @@ exitCode = Utils.Execute(
 Console.WriteLine("");
 if (exitCode != 0) return exitCode;
 
-
 Directory.CreateDirectory(workingPackFolder);
 Directory.CreateDirectory(gcGameTexturesFolder);
 Directory.CreateDirectory(wiiGameTexturesFolder);
@@ -42,6 +41,7 @@ using (var copy = logo.Clone(clone => clone.Flip(FlipMode.Vertical)))
 {
   copy.Save(Path.Join(workingPackFolder, "logo.png"));
 }
+
 Console.WriteLine("Creating manifest.json");
 File.WriteAllText(
   Path.Join(workingPackFolder, "manifest.json"),
@@ -57,7 +57,6 @@ File.WriteAllText(
   })
 );
 Console.WriteLine("");
-
 
 // First loop to remove unused textures and rename LODs
 foreach (var textureFileInfo in convertedTexturesDirectoryInfo.GetFiles())
@@ -94,7 +93,6 @@ foreach (var textureFileInfo in convertedTexturesDirectoryInfo.GetFiles())
   }
 }
 
-
 Console.WriteLine("\nConverting textures to Dolphin format...");
 // Second loop to do the Dolphin name and format conversion
 foreach (var textureFileInfo in convertedTexturesDirectoryInfo.GetFiles())
@@ -124,6 +122,7 @@ foreach (var textureFileInfo in convertedTexturesDirectoryInfo.GetFiles())
       a.Dispose();
       b.Dispose();
     }
+
     File.Delete(textureFileInfo.FullName);
   }
   else
@@ -139,6 +138,7 @@ if (File.Exists(resorucePackFilePath))
 {
   File.Delete(resorucePackFilePath);
 }
+
 ZipFile.CreateFromDirectory(workingPackFolder, resorucePackFilePath, CompressionLevel.SmallestSize, false);
 
 Console.WriteLine("Done!");

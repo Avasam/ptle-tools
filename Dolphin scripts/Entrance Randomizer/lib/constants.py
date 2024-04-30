@@ -21,7 +21,7 @@ print(f"Python version: {sys.version}")
 print(f"Rando version: {__version__}")
 
 # Sets the seed
-seed = CONFIGS.SEED if CONFIGS.SEED else random.randrange(sys.maxsize)
+seed = CONFIGS.SEED or random.randrange(sys.maxsize)
 random.seed(seed)
 seed_string = hex(seed).upper() if isinstance(seed, int) else seed
 print("Seed set to:", seed_string)
@@ -61,7 +61,8 @@ IS_WII = _game_id_base == "RPF"
 
 TODO = 0x0
 
-# Including the version number seems overkill, I don't think there was ever a non v0. Can add later if needed.
+# Including the version number seems overkill,
+# I don't think there was ever a non v0. Can add later if needed.
 if GAME_VERSION != 0:
     raise Exception(f"Unknown game version {GAME_VERSION}!")
 _addresses_map = {
