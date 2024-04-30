@@ -25,7 +25,9 @@ Assuming both areas have as many entrances as they have exits.
 DISABLE_MAPS_IN_SHOP: bool = True
 """
 Whether you can buy maps in the Shaman Shop.
-When maps are disabled, and using original shop prices, the 4 lowest prices (0, 1, 2, 2) are also removed form the pool.
+
+When maps are disabled, and using original shop prices,
+the 4 lowest prices (0, 1, 2, 2) are also removed form the pool.
 """
 
 SHOP_PRICES_RANGE: PriceRange = False  # (0, 32)

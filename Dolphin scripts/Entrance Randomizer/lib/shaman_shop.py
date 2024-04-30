@@ -118,8 +118,8 @@ def randomize_shaman_shop():
 
             # Ensure a full fill when possible
             if max_price * (items_left - 1) <= idols_left:
-                # Last few items in the shop, and it's currently possible for low rolls to not total 138,
-                # use as many idols as as needed
+                # Last few items in the shop, and it's currently possible for
+                # low rolls to not total 138, use as many idols as as needed
                 min_price = maximum_min_price
             # Ramp up min_price to avoid having to deal with a bunch of forced 0 price near the end
             # note we already know that `max_price <= idols_left` so no need to check

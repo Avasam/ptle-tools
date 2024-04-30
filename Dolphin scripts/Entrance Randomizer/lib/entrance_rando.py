@@ -39,7 +39,8 @@ def get_prev_area_addr():
     return addr
 
 
-def highjack_transition_rando() -> int:  # pyright doesn't narrow `int | False` to just `int` after truthy check
+# -> int: pyright doesn't narrow `int | False` to just `int` after truthy check
+def highjack_transition_rando() -> int:
     # Early return, faster check
     if state.current_area_old == state.current_area_new:
         return False
