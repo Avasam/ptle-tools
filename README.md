@@ -10,7 +10,7 @@ A mono-repo and git sub-modules for all tools relating to Pitfall: The Lost Expe
 
 Download: <https://dolphin-emu.org/download/> (anything 5.0-14514 or above is fine)
 
-Free Look: https://wiki.dolphin-emu.org/index.php?title=Free_Look
+Free Look: <https://wiki.dolphin-emu.org/index.php?title=Free_Look>
 
 ### Memory Watches (DMW)
 
@@ -30,6 +30,12 @@ Various graphical modifications and post-processing effects using [Dolphin's Gra
 Read more about [Dolphin Custom Texure Projects](https://forums.dolphin-emu.org/Thread-how-to-install-texture-packs-custom-textures-info).
 
 - [PC to Dolphin Texture Pack generator](/Texture%20packs/Dolphin%20PC%20texture%20pack%20generator) (higher resolution textures from the PC version)
+- [Supai Restored](https://chris1111.github.io/DownGit/#/home?url=https://github.com/Avasam/ptle-tools/tree/main/Texture%20packs/PTLE-Supai-Restored)\
+  ![](/Texture%20packs/PTLE-Supai-Restored/logo.png)
+  - Restores Supai to its non-demonic form. This uses altered PC textures.
+    - The body had to be vertically flipped.
+    - The head required manual adjustments to align the texture elements.
+    - Flames, body sheen, and eye glow removed.
 - [Dynamic Input Pack](https://github.com/Venomalia/UniversalDynamicInput#how-to-install-the-pack) (display non-GameCube/Wii controller buttons)
   \
   Download: <https://github.com/Venomalia/UniversalDynamicInput/releases/latest>\
