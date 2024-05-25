@@ -3,7 +3,7 @@ from __future__ import annotations
 import random
 from collections.abc import Iterable
 from itertools import starmap
-from typing import Literal, NamedTuple
+from typing import NamedTuple
 
 import CONFIGS
 from lib.constants import *  # noqa: F403
@@ -27,8 +27,7 @@ class Transition(NamedTuple):
     to: int
 
 
-# -> int: pyright doesn't narrow `int | False` to just `int` after truthy check
-def highjack_transition_rando() -> tuple[int, int] | Literal[False]:
+def highjack_transition_rando():
     # Early return, faster check. Detect the start of a transition
     if state.current_area_old == state.current_area_new:
         return False
