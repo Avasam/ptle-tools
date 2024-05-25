@@ -107,7 +107,7 @@ def randomize_shaman_shop():
         minimum_max_price = equal_price_per_item + 1
         max_price = max(minimum_max_price, CONFIGS.SHOP_PRICES_RANGE[1])
         min_price = min(max_price, equal_price_per_item, CONFIGS.SHOP_PRICES_RANGE[0])
-        _shaman_shop_prices: list[int] = []
+        _shaman_shop_prices.clear()
         for items_left in range(shop_size, 0, -1):
             # Ensure we don't bust the total of idols
             max_price = min(idols_left, max_price)
