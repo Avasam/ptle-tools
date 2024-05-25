@@ -29,7 +29,7 @@ class Transition(NamedTuple):
 
 # -> int: pyright doesn't narrow `int | False` to just `int` after truthy check
 def highjack_transition_rando() -> tuple[int, int] | Literal[False]:
-    # Early return, faster check. Detect teh start of a transition
+    # Early return, faster check. Detect the start of a transition
     if state.current_area_old == state.current_area_new:
         return False
 
