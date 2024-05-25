@@ -82,6 +82,8 @@ ignore = [
   # Specific to this project
   ###
   "CPY001", # missing-copyright-notice: Assume license from root
+  # This is a relatively small, low contributors project. Git blame suffice.
+  "TD002", # missing-todo-author
 
   ### FIXME/TODO: I'd normally set them as temporarily warnings, but no warnings in Ruff yet:
   ### https://github.com/astral-sh/ruff/issues/1256 & https://github.com/astral-sh/ruff/issues/1774):
