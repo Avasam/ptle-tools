@@ -357,8 +357,8 @@
           "requires": []
         },
         {
-          "area_id": "0x70EBFCA3",
-          "area_name": "Altar of Huitaca",
+          "area_id": "0x3292B6C9",
+          "area_name": "The Great Tree",
           "requires": []
         }
       ]
@@ -513,7 +513,7 @@
         },
         {
           "area_id": "0xE6B9138A",
-          "area_name": "Twin Outposts (2 exits)",
+          "area_name": "Twin Outposts",
           "requires": []
         },
         {
@@ -828,11 +828,6 @@
       "area_name": "Apu Illapu Shrine (Spinjas)",
       "default_entrance": "0x1B8833D3",
       "exits": [
-        {
-          "area_id": "0x1B8833D3",
-          "area_name": "Mountain Sled Run",
-          "requires": []
-        },
         {
           "area_id": "0x62548B77",
           "area_name": "White Valley",

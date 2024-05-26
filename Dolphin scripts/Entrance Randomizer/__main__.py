@@ -84,12 +84,16 @@ async def main_loop():
     if highjack_transition(0x0, LevelCRC.JAGUAR, starting_area):
         return
 
-    # Standardize the Altar of Ages exit
-    if highjack_transition(LevelCRC.ALTAR_OF_AGES, None, LevelCRC. MYSTERIOUS_TEMPLE):
+    # Standardize the Altar of Ages exit to remove the Altar -> BBCamp transition
+    if highjack_transition(
+            LevelCRC.ALTAR_OF_AGES,
+            LevelCRC.BITTENBINDERS_CAMP,
+            LevelCRC.MYSTERIOUS_TEMPLE,
+    ):
+        state.current_area_new = LevelCRC.MYSTERIOUS_TEMPLE
         # Even if the cutscene isn't actually watched.
         # Just leaving the Altar is good enough for the rando.
         state.visited_altar_of_ages = True
-        state.current_area_new = LevelCRC.MYSTERIOUS_TEMPLE
 
     # Standardize the Viracocha Monoliths cutscene
     if highjack_transition(

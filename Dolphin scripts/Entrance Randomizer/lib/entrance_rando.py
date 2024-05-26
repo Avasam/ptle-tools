@@ -47,8 +47,8 @@ def highjack_transition_rando():
         "highjack_transition_rando |",
         f"From: {hex(state.current_area_old)},",
         f"To: {hex(state.current_area_new)}.",
-        f"Redirecting to: {hex(redirect.from_)}",
-        f"({hex(redirect.to)} entrance)\n",
+        f"Redirecting to: {hex(redirect.to)}",
+        f"({hex(redirect.from_)} entrance)\n",
     )
     memory.write_u32(follow_pointer_path(ADDRESSES.prev_area), redirect.from_)
     memory.write_u32(ADDRESSES.current_area, redirect.to)
@@ -60,6 +60,11 @@ def highjack_transition(from_: int | None, to: int | None, redirect: int):
         from_ = state.current_area_old
     if to is None:
         to = state.current_area_new
+
+    # Early return. Detect the start of a transition
+    if state.current_area_old == state.current_area_new:
+        return False
+
     if from_ == state.current_area_old and to == state.current_area_new:
         print(
             "highjack_transition |",
