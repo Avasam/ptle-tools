@@ -58,6 +58,14 @@ def dump_spoiler_logs(
             + f"({TRANSITION_INFOS_DICT[redirect[0]].name} entrance)\n"
         )
 
+    unrandomized_transitions = ALL_POSSIBLE_TRANSITIONS - transitions_map.keys()
+    spoiler_logs += "\nUnrandomized transitions:\n"
+    for transition in unrandomized_transitions:
+        spoiler_logs += (
+            f"From: {TRANSITION_INFOS_DICT[transition[0]].name}, "
+            + f"To: {TRANSITION_INFOS_DICT[transition[1]].name}.\n"
+        )
+
     # TODO (Avasam): Get actual user folder based whether Dolphin Emulator is in AppData/Roaming
     # and if the current installation is portable.
     dolphin_path = Path().absolute()
