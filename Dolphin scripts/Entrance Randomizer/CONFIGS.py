@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from lib.types_ import PriceRange, SeedType
 
-SEED: SeedType = None
+SEED: SeedType = 1
 """
 Set your own seed, can be an `int`, `float`, `str`, `bytes` or `bytearray`.
 
@@ -28,7 +28,7 @@ Assuming both areas have as many entrances as they have exits.
 default = True
 """
 
-DISABLE_MAPS_IN_SHOP: bool = True
+DISABLE_MAPS_IN_SHOP: bool = False
 """
 Whether you can buy maps in the Shaman Shop.
 
