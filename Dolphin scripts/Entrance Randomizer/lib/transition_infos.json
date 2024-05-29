@@ -667,18 +667,6 @@
       ]
     },
     {
-      "area_id": "0x4B08BBEB",
-      "area_name": "Scorpion Temple (Harry)",
-      "default_entrance": "0x9A0C8DF8",
-      "exits": [
-        {
-          "area_id": "0x9A0C8DF8",
-          "area_name": "Eyes of Doom",
-          "requires": []
-        }
-      ]
-    },
-    {
       "area_id": "0x907C492B",
       "area_name": "Mountain Overlook",
       "default_entrance": "0x9A0C8DF8",
@@ -698,11 +686,6 @@
         {
           "area_id": "0x0DDE5470",
           "area_name": "Crystal Cavern",
-          "requires": []
-        },
-        {
-          "area_id": "0x4B08BBEB",
-          "area_name": "Scorpion Temple (Harry)",
           "requires": []
         },
         {
@@ -813,11 +796,6 @@
           "area_id": "0x8147EA91",
           "area_name": "Copacanti Lake",
           "requires": []
-        },
-        {
-          "area_id": "0x5511C46C",
-          "area_name": "Apu Illapu Shrine (Spinjas)",
-          "requires": []
         }
       ]
     },
@@ -829,18 +807,6 @@
         {
           "area_id": "0x08E3C641",
           "area_name": "Valley of the Spirits",
-          "requires": []
-        }
-      ]
-    },
-    {
-      "area_id": "0x5511C46C",
-      "area_name": "Apu Illapu Shrine (Spinjas)",
-      "default_entrance": "0x1B8833D3",
-      "exits": [
-        {
-          "area_id": "0x62548B77",
-          "area_name": "White Valley",
           "requires": []
         }
       ]
@@ -858,11 +824,6 @@
         {
           "area_id": "0x1553BBE1",
           "area_name": "Penguin Den",
-          "requires": []
-        },
-        {
-          "area_id": "0x1B8833D3",
-          "area_name": "Mountain Sled Run",
           "requires": []
         },
         {
@@ -970,18 +931,6 @@
           "area_id": "0x62548B77",
           "area_name": "White Valley",
           "requires": null
-        },
-        {
-          "area_id": "0xDEDA69BC",
-          "area_name": "Jungle Canyon",
-          "requires": [
-            [
-              "GLITCHES"
-            ],
-            [
-              "pickaxe"
-            ]
-          ]
         }
       ]
     }
