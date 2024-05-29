@@ -50,7 +50,7 @@ except KeyError:
 dump_spoiler_logs(starting_area_name, transitions_map, seed_string)
 
 # Create .graphml file
-create_graphml(transitions_map, seed_string)
+create_graphml(transitions_map, seed_string, starting_area)
 
 
 async def main_loop():

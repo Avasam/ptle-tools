@@ -46,7 +46,8 @@ def draw_text(text: str):
 
 def create_graphml(
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
-    seed_string: SeedType
+    seed_string: SeedType,
+    starting_area: int
 ):
     graphml_text = f"<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml><graph id=\"Graph\" uidGraph=\"1\" uidEdge=\"1\">\n"
     counter_x = 0
@@ -54,9 +55,35 @@ def create_graphml(
     for area in TRANSITION_INFOS_DICT.values():
         graphml_text += (
             f"<node positionX=\"{counter_x * 100 + counter_y * 20}\" positionY=\"{counter_x * 50 + counter_y * 50}\" "
-            + f"id=\"{area.small_id}\" "
-            + f"mainText=\"{area.name}\" upText=\"\" size=\"30\" ></node>\n"
+            + f"id=\"{area.small_id}\" mainText=\"{area.name}\" "
         )
+        # Starting area: Orange
+        if area.area_id == starting_area:
+            graphml_text += "ownStyles = \"{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;#ff8000&quot;}}\" "
+        # Area with Upgrade: Blue
+        elif area.area_id in (
+            LevelCRC.FLOODED_COURTYARD,
+            LevelCRC.TURTLE_MONUMENT,
+            LevelCRC.PLANE_COCKPIT,
+            LevelCRC.BITTENBINDERS_CAMP,
+            LevelCRC.MOUTH_OF_INTI,
+            LevelCRC.NATIVE_VILLAGE,
+            LevelCRC.RENEGADE_HEADQUARTERS,
+            LevelCRC.CAVERN_LAKE,
+            LevelCRC.MOUNTAIN_SLED_RUN,
+            LevelCRC.MOUNTAIN_OVERLOOK,
+            LevelCRC.APU_ILLAPU_SHRINE
+        ):
+            graphml_text += "ownStyles = \"{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;#0080ff&quot;}}\" "
+        # Important Story Triggers: Red
+        elif area.area_id in (
+            LevelCRC.ALTAR_OF_AGES,
+            LevelCRC.ST_CLAIRE_DAY,
+            LevelCRC.ST_CLAIRE_NIGHT,
+            LevelCRC.GATES_OF_EL_DORADO
+        ):
+            graphml_text += "ownStyles = \"{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;#ff0000&quot;}}\" "
+        graphml_text += "></node>\n"
         if counter_x == 9:
             counter_x = 0
             counter_y += 1
