@@ -117,9 +117,9 @@ def set_transitions_map():
                 counterpart_original = Transition(from_=redirect.to, to=redirect.from_)
                 counterpart_redirect = Transition(from_=original.to, to=original.from_)
 
-                if (flipped_redirect not in ALL_POSSIBLE_TRANSITIONS):
+                if (counterpart_redirect not in ALL_POSSIBLE_TRANSITIONS):
                     continue # if a transition in this direction doesn't exist (the original was a one-way): skip it
-                if (flipped_redirect not in _possible_transitions_bucket):
+                if (counterpart_redirect not in _possible_transitions_bucket):
                     continue # if the reverse transition was already used up: skip it
 
                 transitions_map[counterpart_original] = counterpart_redirect
