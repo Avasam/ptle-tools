@@ -600,6 +600,11 @@
           "area_id": "0xDE524DA6",
           "area_name": "Twin Outpost (Underwater Cave)",
           "requires": []
+        },
+        {
+          "area_id": "0x239A2165",
+          "area_name": "Turtle Monument",
+          "requires": []
         }
       ]
     },
@@ -649,6 +654,11 @@
       "area_name": "Crystal Cavern",
       "default_entrance": "0x9A0C8DF8",
       "exits": [
+        {
+          "area_id": "0xEA667977",
+          "area_name": "Abandoned Cavern",
+          "requires": []
+        },
         {
           "area_id": "0x9A0C8DF8",
           "area_name": "Eyes of Doom",

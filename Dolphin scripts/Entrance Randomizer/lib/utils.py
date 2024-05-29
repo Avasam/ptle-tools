@@ -65,8 +65,8 @@ def create_graphml(
     connections = []
     connections_two_way = []
     connections_one_way = []
-    for start, end in transitions_map.items():
-        connections.append([start[0], end[0]])
+    for original, redirect in transitions_map.items():
+        connections.append([original[0], redirect[1]])
     for pairing in connections:
         if not [pairing[1], pairing[0]] in connections_two_way:
             if [pairing[1], pairing[0]] in connections:
@@ -94,6 +94,8 @@ def create_graphml(
         counter += 1
     graphml_text += "</graph></graphml>"
 
+    # TODO (Avasam): Get actual user folder based whether Dolphin Emulator is in AppData/Roaming
+    # and if the current installation is portable.
     dolphin_path = Path().absolute()
     graphml_file = (
         dolphin_path
@@ -112,19 +114,20 @@ def dump_spoiler_logs(
     spoiler_logs = f"Starting area: {starting_area_name}\n"
     for original, redirect in transitions_map.items():
         spoiler_logs += (
-            f"From: {TRANSITION_INFOS_DICT[original[0]].name}, "
-            + f"To: {TRANSITION_INFOS_DICT[original[1]].name}. "
-            + f"Redirecting to: {TRANSITION_INFOS_DICT[redirect[1]].name} "
+            f"{TRANSITION_INFOS_DICT[original[0]].name} "
+            + f"({TRANSITION_INFOS_DICT[original[1]].name} exit) "
+            + f"will redirect to: {TRANSITION_INFOS_DICT[redirect[1]].name} "
             + f"({TRANSITION_INFOS_DICT[redirect[0]].name} entrance)\n"
         )
 
     unrandomized_transitions = ALL_POSSIBLE_TRANSITIONS - transitions_map.keys()
-    spoiler_logs += "\nUnrandomized transitions:\n"
-    for transition in unrandomized_transitions:
-        spoiler_logs += (
-            f"From: {TRANSITION_INFOS_DICT[transition[0]].name}, "
-            + f"To: {TRANSITION_INFOS_DICT[transition[1]].name}.\n"
-        )
+    if len(unrandomized_transitions) > 0:
+        spoiler_logs += "\nUnrandomized transitions:\n"
+        for transition in unrandomized_transitions:
+            spoiler_logs += (
+                f"From: {TRANSITION_INFOS_DICT[transition[0]].name}, "
+                + f"To: {TRANSITION_INFOS_DICT[transition[1]].name}.\n"
+            )
 
     # TODO (Avasam): Get actual user folder based whether Dolphin Emulator is in AppData/Roaming
     # and if the current installation is portable.
