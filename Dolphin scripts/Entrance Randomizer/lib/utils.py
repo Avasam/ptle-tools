@@ -60,13 +60,13 @@ def create_graphml(
         # Starting area: Orange
         if area.area_id == starting_area:
             graphml_text += "ownStyles = \"{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;#ff8000&quot;}}\" "
-        # Area with Upgrade: Blue
+        # Areas with Upgrades: Blue
         elif area.area_id in (
-            LevelCRC.FLOODED_COURTYARD,
-            LevelCRC.TURTLE_MONUMENT,
             LevelCRC.PLANE_COCKPIT,
             LevelCRC.BITTENBINDERS_CAMP,
             LevelCRC.MOUTH_OF_INTI,
+            LevelCRC.FLOODED_COURTYARD,
+            LevelCRC.TURTLE_MONUMENT,
             LevelCRC.NATIVE_VILLAGE,
             LevelCRC.RENEGADE_HEADQUARTERS,
             LevelCRC.CAVERN_LAKE,
@@ -105,18 +105,14 @@ def create_graphml(
         graphml_text += (
             f"<edge source=\"{TRANSITION_INFOS_DICT[pairing[0]].small_id}\" "
             + f"target=\"{TRANSITION_INFOS_DICT[pairing[1]].small_id}\" isDirect=\"false\" "
-            + f"weight=\"1\" useWeight=\"false\" id=\"{counter}\" text=\"\" upText=\"\" "
-            + f"arrayStyleStart=\"\" arrayStyleFinish=\"\" model_width=\"4\" model_type=\"0\" "
-            + f"model_curveValue=\"0.1\" model_default=\"NaN\" ></edge>\n"
+            + f"id=\"{counter}\" ></edge>\n"
         )
         counter += 1
     for pairing in connections_one_way:
         graphml_text += (
             f"<edge source=\"{TRANSITION_INFOS_DICT[pairing[0]].small_id}\" "
             + f"target=\"{TRANSITION_INFOS_DICT[pairing[1]].small_id}\" isDirect=\"true\" "
-            + f"weight=\"1\" useWeight=\"false\" id=\"{counter}\" text=\"\" upText=\"\" "
-            + f"arrayStyleStart=\"\" arrayStyleFinish=\"\" model_width=\"4\" model_type=\"0\" "
-            + f"model_curveValue=\"0.1\" model_default=\"true\" ></edge>\n"
+            + f"id=\"{counter}\" ></edge>\n"
         )
         counter += 1
     graphml_text += "</graph></graphml>"
