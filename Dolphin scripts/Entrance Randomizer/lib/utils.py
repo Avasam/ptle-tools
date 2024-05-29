@@ -44,6 +44,66 @@ def draw_text(text: str):
     _draw_text_index += 1
 
 
+def create_graphml(
+    transitions_map: Mapping[tuple[int, int], tuple[int, int]],
+    seed_string: SeedType
+):
+    graphml_text = f"<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml><graph id=\"Graph\" uidGraph=\"1\" uidEdge=\"1\">\n"
+    counter_x = 0
+    counter_y = 0
+    for area in TRANSITION_INFOS_DICT.values():
+        graphml_text += (
+            f"<node positionX=\"{counter_x * 100 + counter_y * 20}\" positionY=\"{counter_x * 50 + counter_y * 50}\" "
+            + f"id=\"{area.small_id}\" "
+            + f"mainText=\"{area.name}\" upText=\"\" size=\"30\" ></node>\n"
+        )
+        if counter_x == 9:
+            counter_x = 0
+            counter_y += 1
+        else:
+            counter_x += 1
+    connections = []
+    connections_two_way = []
+    connections_one_way = []
+    for start, end in transitions_map.items():
+        connections.append([start[0], end[0]])
+    for pairing in connections:
+        if not [pairing[1], pairing[0]] in connections_two_way:
+            if [pairing[1], pairing[0]] in connections:
+                connections_two_way.append(pairing)
+            else:
+                connections_one_way.append(pairing)
+    counter = 10000
+    for pairing in connections_two_way:
+        graphml_text += (
+            f"<edge source=\"{TRANSITION_INFOS_DICT[pairing[0]].small_id}\" "
+            + f"target=\"{TRANSITION_INFOS_DICT[pairing[1]].small_id}\" isDirect=\"false\" "
+            + f"weight=\"1\" useWeight=\"false\" id=\"{counter}\" text=\"\" upText=\"\" "
+            + f"arrayStyleStart=\"\" arrayStyleFinish=\"\" model_width=\"4\" model_type=\"0\" "
+            + f"model_curveValue=\"0.1\" model_default=\"NaN\" ></edge>\n"
+        )
+        counter += 1
+    for pairing in connections_one_way:
+        graphml_text += (
+            f"<edge source=\"{TRANSITION_INFOS_DICT[pairing[0]].small_id}\" "
+            + f"target=\"{TRANSITION_INFOS_DICT[pairing[1]].small_id}\" isDirect=\"true\" "
+            + f"weight=\"1\" useWeight=\"false\" id=\"{counter}\" text=\"\" upText=\"\" "
+            + f"arrayStyleStart=\"\" arrayStyleFinish=\"\" model_width=\"4\" model_type=\"0\" "
+            + f"model_curveValue=\"0.1\" model_default=\"true\" ></edge>\n"
+        )
+        counter += 1
+    graphml_text += "</graph></graphml>"
+
+    dolphin_path = Path().absolute()
+    graphml_file = (
+        dolphin_path
+        / "User"
+        / "Logs"
+        / f"MY_GRAPH_v{__version__}_{seed_string}.graphml"
+    )
+    Path.write_text(graphml_file, graphml_text)
+    print("Graphml file written to", graphml_file)
+
 def dump_spoiler_logs(
     starting_area_name: str,
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],

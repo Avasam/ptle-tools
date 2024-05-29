@@ -47,6 +47,7 @@ class Exit:
 @dataclass
 class Area:
     area_id: int
+    small_id: int
     name: str
     default_entrance: int
     exits: list[Exit]
@@ -64,6 +65,7 @@ def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):  # noqa: 
         [
             Area(
                 int(area["area_id"], 16),
+                0,
                 area["area_name"],
                 int(area["default_entrance"] or "0x0", 16),
                 [
@@ -79,6 +81,11 @@ def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):  # noqa: 
         ]
         for major_area in transition_infos_json.values()
     ]
+    counter = 1
+    for major_area in major_areas:
+        for area in major_area:
+            area.small_id = counter
+            counter += 1
     return MajorAreas(*major_areas)
 
 

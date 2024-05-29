@@ -28,6 +28,7 @@ from lib.entrance_rando import (
 )
 from lib.shaman_shop import patch_shaman_shop, randomize_shaman_shop
 from lib.utils import (
+    create_graphml,
     draw_text,
     dump_spoiler_logs,
     follow_pointer_path,
@@ -47,6 +48,9 @@ except KeyError:
 
 # Dump spoiler logs
 dump_spoiler_logs(starting_area_name, transitions_map, seed_string)
+
+# Create .graphml file
+create_graphml(transitions_map, seed_string)
 
 
 async def main_loop():
