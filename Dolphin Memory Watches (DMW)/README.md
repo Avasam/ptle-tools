@@ -21,6 +21,12 @@ Replace `XXXX XXXX` by the `asset_crc32` found in [world_infos.json](/Various%20
 0216A13E 0000XXXX
 ```
 
+16:9 Aspect Ratio (by Avasam):
+
+```txt
+043D75E0 3FE38E39
+```
+
 _**The codes below are a bit jank because they don't follow pointers and can randomly break**_
 
 Infinite Jumps (by Avasam):
