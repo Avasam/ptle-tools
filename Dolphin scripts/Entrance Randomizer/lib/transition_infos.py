@@ -51,6 +51,7 @@ class Area:
     name: str
     default_entrance: int
     exits: list[Exit]
+    con_left: int
 
 
 class MajorAreas(NamedTuple):
@@ -76,6 +77,7 @@ def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):  # noqa: 
                     )
                     for exit_ in area["exits"]
                 ],
+                0
             )
             for area in major_area
         ]
@@ -84,6 +86,7 @@ def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):  # noqa: 
     counter = 1
     for major_area in major_areas:
         for area in major_area:
+            area.con_left = len(area.exits)
             area.small_id = counter
             counter += 1
     return MajorAreas(*major_areas)

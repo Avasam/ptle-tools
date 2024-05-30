@@ -40,6 +40,9 @@ from lib.utils import (
 set_transitions_map()
 randomize_shaman_shop()
 
+# Create .graphml file
+create_graphml(transitions_map, seed_string, starting_area)
+
 # This is necessary until/unless I map all areas even those not randomized.
 try:
     starting_area_name = TRANSITION_INFOS_DICT[starting_area].name
@@ -48,9 +51,6 @@ except KeyError:
 
 # Dump spoiler logs
 dump_spoiler_logs(starting_area_name, transitions_map, seed_string)
-
-# Create .graphml file
-create_graphml(transitions_map, seed_string, starting_area)
 
 
 async def main_loop():
@@ -68,8 +68,8 @@ async def main_loop():
     draw_text(f"Seed: {seed_string}")
     draw_text(patch_shaman_shop())
     draw_text(
-        f"Starting area: {hex(starting_area).upper()}"
-        + " (Random)" if CONFIGS.STARTING_AREA is None else f"{starting_area_name}",
+        f"Starting area: {hex(starting_area).upper()} (Random)" if CONFIGS.STARTING_AREA is None
+        else f"Starting area: {starting_area_name}",
     )
     draw_text(
         f"Current area: {hex(state.current_area_new).upper()} "
