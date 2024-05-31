@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from lib.types_ import PriceRange, SeedType
 
-SEED: SeedType = 1
+SEED: SeedType = 'koala'
 """
 Set your own seed, can be an `int`, `float`, `str`, `bytes` or `bytearray`.
 

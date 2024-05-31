@@ -157,6 +157,7 @@ print(f"Detected {ADDRESSES.version_string} version!")
 
 class LevelCRC(IntEnum):
     JAGUAR = 0x99885996
+    PLANE_CUTSCENE = 0x53257119
     CRASH_SITE = 0xEE8F6900
     PLANE_COCKPIT = 0x4A3E4058
     JUNGLE_CANYON = 0xDEDA69BC

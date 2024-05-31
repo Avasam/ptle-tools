@@ -131,6 +131,11 @@ def unlink_two_levels(first, second):
 
 def set_transitions_map():
     transitions_map.clear()
+    starting_default = TRANSITION_INFOS_DICT[starting_area].default_entrance
+    tutorial_original = Transition(from_=LevelCRC.JAGUAR, to=LevelCRC.PLANE_CUTSCENE)
+    tutorial_redirect = Transition(from_=starting_default, to=starting_area)
+    transitions_map[tutorial_original] = tutorial_redirect
+
     _possible_redirections_bucket = list(starmap(Transition, ALL_POSSIBLE_TRANSITIONS))
     one_way_list = [
         Transition(from_=LevelCRC.WHITE_VALLEY, to=LevelCRC.MOUNTAIN_SLED_RUN),
@@ -231,7 +236,6 @@ def set_transitions_map():
         one_way_redirects = one_way_list.copy()
         random.shuffle(one_way_redirects)
         for original in one_way_list:
-            print(original, " --- ", one_way_redirects)
             if one_way_redirects[0].to == original.from_:
                 transitions_map[original] = one_way_redirects.pop(1)
             else:

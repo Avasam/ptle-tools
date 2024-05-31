@@ -85,8 +85,13 @@ async def main_loop():
         memory.write_u32(ADDRESSES.item_swap, 0)
 
     # Skip the intro fight and cutscene
-    if highjack_transition(0x0, LevelCRC.JAGUAR, starting_area):
-        return
+    """
+    This is disabled because we want to fight Jaguar 2 at the end of the game. So we need to fight Jaguar 1 at the start.
+    If we fight Jaguar 1 at any other time it will result in us losing all our items and abilities, which sucks.
+    Instead we just hijack Jaguar -> Plane Crash CUTSCENE to send us to starting_area
+    """
+    # if highjack_transition(0x0, LevelCRC.JAGUAR, starting_area):
+    #     return
 
     # Standardize the Altar of Ages exit to remove the Altar -> BBCamp transition
     if highjack_transition(
