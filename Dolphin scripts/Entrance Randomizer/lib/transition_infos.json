@@ -306,11 +306,6 @@
           "requires": []
         },
         {
-          "area_id": "0xB8D5CE86",
-          "area_name": "Mouth of Inti (2 exits)",
-          "requires": []
-        },
-        {
           "area_id": "0x69F0CDE2",
           "area_name": "Battered Bridge",
           "requires": []
@@ -329,7 +324,7 @@
         },
         {
           "area_id": "0xECC9D759",
-          "area_name": "Flooded Courtyard (2 exits)",
+          "area_name": "Flooded Courtyard",
           "requires": []
         }
       ]
@@ -379,13 +374,7 @@
       "area_id": "0xB8D5CE86",
       "area_name": "Mouth of Inti",
       "default_entrance": "0x70EBFCA3",
-      "exits": [
-        {
-          "area_id": "0x70EBFCA3",
-          "area_name": "Altar of Huitaca (2 exits)",
-          "requires": []
-        }
-      ]
+      "exits": []
     },
     {
       "area_id": "0xDEDA69BC",
@@ -558,6 +547,12 @@
       ]
     },
     {
+      "area_id": "0x72AD42FA",
+      "area_name": "St. Claire's Excavation Camp (Night)",
+      "default_entrance": "0xBA9370DF",
+      "exits": []
+    },
+    {
       "area_id": "0xCD944049",
       "area_name": "Butterfly Glade",
       "default_entrance": "0x239A2165",
@@ -581,7 +576,7 @@
       "exits": [
         {
           "area_id": "0xE6B9138A",
-          "area_name": "Twin Outposts (2 exits)",
+          "area_name": "Twin Outposts",
           "requires": []
         }
       ]
@@ -615,7 +610,7 @@
       "exits": [
         {
           "area_id": "0x7A9B3870",
-          "area_name": "Jungle Trail (2 exits)",
+          "area_name": "Jungle Trail",
           "requires": []
         },
         {
@@ -665,6 +660,12 @@
           "requires": []
         }
       ]
+    },
+    {
+      "area_id": "0x4B08BBEB",
+      "area_name": "Scorpion Temple (Harry)",
+      "default_entrance": "0x9A0C8DF8",
+      "exits": []
     },
     {
       "area_id": "0x907C492B",
@@ -939,6 +940,94 @@
           "requires": null
         }
       ]
+    }
+  ],
+  "Spirit Fights": [
+    {
+      "area_id": "0x02C7B675",
+      "area_name": "Monkey Temple (Spirit)",
+      "default_entrance": "0xF3B4DC8E",
+      "exits": []
+    },
+    {
+      "area_id": "0x0305DC42",
+      "area_name": "Scorpion Temple (Spirit)",
+      "default_entrance": "0x4B08BBEB",
+      "exits": []
+    },
+    {
+      "area_id": "0x1F237F32",
+      "area_name": "Penguin Temple (Spirit)",
+      "default_entrance": "0x1B11EC74",
+      "exits": []
+    }
+  ],
+  "El Dorado": [
+    {
+      "area_id": "0x99885996",
+      "area_name": "Ruins of El Dorado (Jaguar)",
+      "default_entrance": "0x93F89D45",
+      "exits": []
+    },
+    {
+      "area_id": "0xCFD2FE10",
+      "area_name": "Ancient El Dorado (Pusca)",
+      "default_entrance": "0x99885996",
+      "exits": []
+    }
+  ],
+  "Native Games": [
+    {
+      "area_id": "0x0A1F2526",
+      "area_name": "Whack-A-Tuco",
+      "default_entrance": "0x05AA726C",
+      "exits": []
+    },
+    {
+      "area_id": "0x0D72E13F",
+      "area_name": "Tuco Shoot",
+      "default_entrance": "0x05AA726C",
+      "exits": []
+    },
+    {
+      "area_id": "0x9316749C",
+      "area_name": "Raft Bowling",
+      "default_entrance": "0x05AA726C",
+      "exits": []
+    },
+    {
+      "area_id": "0x7A75D1A9",
+      "area_name": "Pickaxe Race",
+      "default_entrance": "0x05AA726C",
+      "exits": []
+    },
+    {
+      "area_id": "0xE411440A",
+      "area_name": "KaBOOM!",
+      "default_entrance": "0x05AA726C",
+      "exits": []
+    }
+  ],
+  "Cutscenes": [
+    {
+      "area_id": "0x53257119",
+      "area_name": "Plane Crash (CUTSCENE)",
+      "default_entrance": "0x99885996",
+      "exits": []
+    },
+    {
+      "area_id": "0xE8362F5F",
+      "area_name": "Viracocha Monoliths (CUTSCENE)",
+      "default_entrance": "0x7652BAFC",
+      "exits": []
+    }
+  ],
+  "Unused": [
+    {
+      "area_id": "0x47508760",
+      "area_name": "Beta Volcano Crash Site",
+      "default_entrance": "0x53257119",
+      "exits": []
     }
   ]
 }

@@ -59,6 +59,11 @@ class MajorAreas(NamedTuple):
     native_territory: list[Area]
     lost_caverns: list[Area]
     snowy_mountains: list[Area]
+    spirit_fights: list[Area]
+    el_dorado: list[Area]
+    native_games: list[Area]
+    cutscenes: list[Area]
+    unused: list[Area]
 
 
 def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):  # noqa: N802

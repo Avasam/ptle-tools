@@ -49,10 +49,18 @@ def create_graphml(
     seed_string: SeedType,
     starting_area: int
 ):
+    areas_randomized = []
+    for original, redirect in transitions_map.items():
+        if not TRANSITION_INFOS_DICT[original[0]] in areas_randomized:
+            areas_randomized.append(TRANSITION_INFOS_DICT[original[0]])
+        if not TRANSITION_INFOS_DICT[redirect[1]] in areas_randomized:
+            areas_randomized.append(TRANSITION_INFOS_DICT[redirect[1]])
+
     graphml_text = f"<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml><graph id=\"Graph\" uidGraph=\"1\" uidEdge=\"1\">\n"
     counter_x = 0
     counter_y = 0
-    for area in TRANSITION_INFOS_DICT.values():
+
+    for area in areas_randomized:
         graphml_text += (
             f"<node positionX=\"{counter_x * 100 + counter_y * 20}\" positionY=\"{counter_x * 50 + counter_y * 50}\" "
             + f"id=\"{area.small_id}\" mainText=\"{area.name}\" "
