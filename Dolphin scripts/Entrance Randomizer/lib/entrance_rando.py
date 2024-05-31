@@ -11,11 +11,15 @@ from lib.utils import follow_pointer_path, state
 
 _possible_starting_areas = [
     area for area in ALL_TRANSITION_AREAS
-    # Remove impossible start areas + Don't immediately give TNT
+    # Remove start areas that instantly softlock you + start areas that give too much progression
     if area not in {
         LevelCRC.APU_ILLAPU_SHRINE,
         LevelCRC.SCORPION_TEMPLE,
+        LevelCRC.SCORPION_SPIRIT,
         LevelCRC.ST_CLAIRE_DAY,
+        LevelCRC.ST_CLAIRE_NIGHT,
+        LevelCRC.JAGUAR,
+        LevelCRC.PUSCA
     }
 ]
 
