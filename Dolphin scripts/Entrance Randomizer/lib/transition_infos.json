@@ -812,6 +812,12 @@
       ]
     },
     {
+      "area_id": "0x5511C46C",
+      "area_name": "Apu Illapu Shrine",
+      "default_entrance": "0x1B8833D3",
+      "exits": []
+    },
+    {
       "area_id": "0x62548B77",
       "area_name": "White Valley",
       "default_entrance": "0x1553BBE1",

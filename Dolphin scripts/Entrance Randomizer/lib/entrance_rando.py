@@ -132,6 +132,12 @@ def unlink_two_levels(first, second):
 def set_transitions_map():
     transitions_map.clear()
     _possible_redirections_bucket = list(starmap(Transition, ALL_POSSIBLE_TRANSITIONS))
+    one_way_list = [
+        Transition(from_=LevelCRC.WHITE_VALLEY, to=LevelCRC.MOUNTAIN_SLED_RUN),
+        Transition(from_=LevelCRC.MOUNTAIN_SLED_RUN, to=LevelCRC.APU_ILLAPU_SHRINE),
+        Transition(from_=LevelCRC.APU_ILLAPU_SHRINE, to=LevelCRC.WHITE_VALLEY),
+        Transition(from_=LevelCRC.CAVERN_LAKE, to=LevelCRC.JUNGLE_CANYON)
+    ]
     if CONFIGS.LINKED_TRANSITIONS:
         # Ground rules:
         # 1. you can't make a transition from a level to itself
@@ -142,7 +148,8 @@ def set_transitions_map():
         level_list = []
         for area in TRANSITION_INFOS_DICT.values():
             area.con_left = len(area.exits)
-            level_list.append(area)
+            if area.con_left > 0:
+                level_list.append(area)
         random.shuffle(level_list)
         level_list.sort(key=lambda a: a.con_left, reverse=True)
 
@@ -220,14 +227,29 @@ def set_transitions_map():
             transitions_map[counterpart_original] = counterpart_redirect
             _possible_origins_bucket.remove(counterpart_original)
             _possible_redirections_bucket.remove(counterpart_redirect)
+
+        one_way_redirects = one_way_list.copy()
+        random.shuffle(one_way_redirects)
+        for original in one_way_list:
+            print(original, " --- ", one_way_redirects)
+            if one_way_redirects[0].to == original.from_:
+                transitions_map[original] = one_way_redirects.pop(1)
+            else:
+                 transitions_map[original] = one_way_redirects.pop(0)
     else:
         # Ground rules:
         # 1. you can't make a transition from a level to itself
+        for trans in one_way_list:
+            _possible_redirections_bucket.append(trans)
+
         for area in TRANSITION_INFOS_DICT.values():
             for to_og in (exit_.area_id for exit_ in area.exits):
                 original = Transition(from_=area.area_id, to=to_og)
                 redirect = get_random_redirection(original, _possible_redirections_bucket)
                 transitions_map[original] = redirect
                 _possible_redirections_bucket.remove(redirect)
-
+        for original in one_way_list:
+            redirect = get_random_redirection(original, _possible_redirections_bucket)
+            transitions_map[original] = redirect
+            _possible_redirections_bucket.remove(redirect)
 
