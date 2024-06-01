@@ -132,7 +132,7 @@ def create_graphml(
         dolphin_path
         / "User"
         / "Logs"
-        / f"MY_GRAPH_v{__version__}_{seed_string}.graphml"
+        / f"RANDOMIZED_MAP_v{__version__}_{seed_string}.graphml"
     )
     Path.write_text(graphml_file, graphml_text)
     print("Graphml file written to", graphml_file)
@@ -151,6 +151,7 @@ def dump_spoiler_logs(
             + f"({TRANSITION_INFOS_DICT[redirect[0]].name} entrance)\n"
         )
 
+    # Currently this should not be possible, but maybe in the future this will play a part
     unrandomized_transitions = ALL_POSSIBLE_TRANSITIONS - transitions_map.keys()
     if len(unrandomized_transitions) > 0:
         spoiler_logs += "\nUnrandomized transitions:\n"
@@ -159,6 +160,13 @@ def dump_spoiler_logs(
                 f"From: {TRANSITION_INFOS_DICT[transition[0]].name}, "
                 + f"To: {TRANSITION_INFOS_DICT[transition[1]].name}.\n"
             )
+
+    spoiler_logs += (
+        "\nThe following levels are currently excluded from the randomization process:\n"
+        + "- Scorpion Temple\n"
+        + "- Mouth of Inti\n"
+        + "- Twin Outposts (Underwater Passage)\n"
+    )
 
     # TODO (Avasam): Get actual user folder based whether Dolphin Emulator is in AppData/Roaming
     # and if the current installation is portable.
