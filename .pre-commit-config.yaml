@@ -13,7 +13,7 @@ repos:
     rev: v2.13.0
     hooks:
       - id: pretty-format-toml
-        args: [--autofix, --trailing-commas, --inline-comment-spaces, "1", --nosort]
+        args: [--autofix, --trailing-commas, --inline-comment-spaces, "1", --no-sort]
       - id: pretty-format-yaml
         args: [--autofix, --indent, "2", --offset, "2", --preserve-quotes, --line-width, "100"]
       - id: pretty-format-ini
