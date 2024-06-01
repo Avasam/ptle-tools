@@ -2,7 +2,7 @@
 
 Dolphin Memory Engine (DME) documentation: <https://github.com/aldelaro5/Dolphin-memory-engine>
 
-To use, download the `.dmw` file for your game version (US, FR, etc.). Open Dolphin. Open DME. Go under "File > Open..." and select the `.dmw` file you downloaded.
+To use, download the `.dmw` file for your game version (US, FR, etc.). Open Dolphin. Open DME. In DME, go under "File > Open..." and select the `.dmw` file you downloaded.
 
 ## Action Replay / Gecko Codes
 
@@ -13,12 +13,21 @@ It even explains how to deal with dynamic pointers, which is my current issue wi
 
 All codes below are for NTSC Gamecube only
 
-Start in Test Level (by Avasam):
+Start in specific Level (by Avasam):\
+Replace `XXXX XXXX` by the `asset_crc32` found in [world_infos.json](/Various%20technical%20notes/world_infos.json)
 
 ```txt
-0216A136 0000E980
-0216A13E 00009967
+0216A136 0000XXXX
+0216A13E 0000XXXX
 ```
+
+16:9 Aspect Ratio (by Avasam):
+
+```txt
+043D75E0 3FE38E39
+```
+
+_**The codes below are a bit jank because they don't follow pointers and can randomly break**_
 
 Infinite Jumps (by Avasam):
 

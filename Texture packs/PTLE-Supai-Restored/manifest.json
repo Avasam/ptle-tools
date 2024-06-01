@@ -1,0 +1,11 @@
+{
+  "name": "PTLE Supai Restored",
+  "id": "PTLE-Supai-Restored",
+  "version": "1",
+  "description": "Restores Supai to his non-demonic form. This uses altered PC textures",
+  "authors": [
+    "Avasam"
+  ],
+  "website": "https://github.com/Avasam/ptle-tools#texture-packs--resource-packs",
+  "compressed": true
+}

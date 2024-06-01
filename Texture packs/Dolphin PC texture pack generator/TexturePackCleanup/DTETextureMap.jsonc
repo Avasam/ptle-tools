@@ -1,0 +1,5605 @@
+// Generated using: map_textures_from_DTE_log.ps1 'E:\Users\Avasam\Pictures\Pitfall\Textures dumps\GPHE52 DTE textures\DolphinTextureExtraction.log'
+{
+  "0_jm_rain splasha": [
+    "tex1_16x16_5e483c0f419000f2_bcd03845ede3e320_8",
+    "tex1_16x16_5e483c0f419000f2_bdfab71a901455d6_8"
+  ],
+  "0_jm_rain splashb": [
+    "tex1_16x16_4ccf50603adc6692_b4673d389f2470d4_8",
+    "tex1_16x16_4ccf50603adc6692_5d01b6e626496743_8"
+  ],
+  "0_jm_rain splashc": [
+    "tex1_8x8_fc7820e3c081a40e_95c51b443aff459c_8",
+    "tex1_8x8_fc7820e3c081a40e_074b3db84bf72eb6_8"
+  ],
+  "0_jm_rain splashd": [
+    "tex1_8x8_eca5f8c177ceb877_17fe381dc1dac9cb_8",
+    "tex1_8x8_eca5f8c177ceb877_56c99e60a5ef893c_8"
+  ],
+  "0_jm_raindrop": [
+    "tex1_32x32_eb97306f28145108_14",
+    "tex1_32x32_2a8c446f7c40299a_14"
+  ],
+  "0_jm_waterfall_particle": [
+    "tex1_64x64_8ff54442fa4c7fd4_f62351e88ba52ad8_9"
+  ],
+  "a05": [
+    "tex1_512x512_ccdd2677406aee14_14"
+  ],
+  "a17_bt_burningtree": [
+    "tex1_128x128_882123f6e83ccc3d_14"
+  ],
+  "a17_grating02": [
+    "tex1_128x128_m_cd51badce0c33ca2_14"
+  ],
+  "a28": [
+    "tex1_512x256_66c0852ea3dea2cc_14"
+  ],
+  "a29": [
+    "tex1_512x256_efb8145aaf6b5a97_14"
+  ],
+  "a30": [
+    "tex1_512x256_d7f1fd3a83afbee1_14"
+  ],
+  "a31": [
+    "tex1_512x256_8d08e29a5a4b3faf_14"
+  ],
+  "a32": [
+    "tex1_512x256_f843208bc21a197e_14"
+  ],
+  "a50": [
+    "tex1_512x512_27ddd1f04f3cfd49_14"
+  ],
+  "aj_cable": [
+    "tex1_64x32_30239611319e2217_14"
+  ],
+  "aj_lightray": [
+    "tex1_8x8_8b256dca76447ee4_1f570ff11b2a52de_8",
+    "tex1_8x8_8b256dca76447ee4_619449a5122e5770_8"
+  ],
+  "aj_vine": [
+    "tex1_32x16_c5023970b8dc15d3_14"
+  ],
+  "aj_vine_leaf": [
+    "tex1_32x32_fd543016481a4dc0_984a314a0c559143_8",
+    "tex1_32x32_fd543016481a4dc0_633ae1a25430c5c1_8"
+  ],
+  "aura_floater_jl": [
+    "tex1_64x64_41bef8188d3fd224_85393230c52641ee_9"
+  ],
+  "a_aj_canopytop_dark": [
+    "tex1_128x128_a502a5cd3710a6bc_14"
+  ],
+  "a_aj_grassyedge_interior": [
+    "tex1_128x64_m_0f21d91714333fd5_14",
+    "tex1_128x64_m_0eca7aefe3375a0d_14"
+  ],
+  "a_aj_mud_wallows": [
+    "tex1_128x128_05f6c8d10d9728c0_14",
+    "tex1_128x128_cae0766dfbc777bf_14"
+  ],
+  "a_aj_mud_wallows_no_alpha": [
+    "tex1_64x64_5c775e1728ee17d3_14"
+  ],
+  "a_aj_riverbottom-dirt": [
+    "tex1_128x128_596852617614a22f_14",
+    "tex1_128x128_b2cb26de1cec7b33_14"
+  ],
+  "a_aj_rocka": [
+    "tex1_128x128_92a9f2dc041c77ec_14",
+    "tex1_128x128_e7375ecce9cd702f_14"
+  ],
+  "a_aj_scorchtrail": [
+    "tex1_256x256_3e96ae577cac21b5_14",
+    "tex1_256x256_160f7c4281054e43_14"
+  ],
+  "a_aj_treeleaves-type02": [
+    "tex1_128x128_m_4321b5ef75af1763_e747cf7f1a8f1ace_9"
+  ],
+  "a_aj_trench_edge": [
+    "tex1_128x128_5d4d776618e8080f_f3e44db41dde97d9_8",
+    "tex1_128x128_5d4d776618e8080f_9c9ab3f786ceba75_8"
+  ],
+  "a_aj_trench_edge.no_alpha": [
+    "tex1_128x128_3b816f910149332d_14"
+  ],
+  "a_aj_waterfall_foam": [
+    "tex1_128x128_fc4a88bb61460c3f_d9f8662fa862ee3d_9"
+  ],
+  "a_aj_waterfall_water": [
+    "tex1_128x128_1c288998570c9b82_06336a1c9e34ec15_9"
+  ],
+  "a_bt_pathdirt": [
+    "tex1_128x128_0b89aca6d16fe986_14",
+    "tex1_128x128_72a6cf515f09c3a5_14"
+  ],
+  "a_bt_pathdirt_no_alpha": [
+    "tex1_128x128_m_06bdbdc27f908711_14"
+  ],
+  "a_db_bridgeplanks": [
+    "tex1_128x128_5185186a4f769326_14"
+  ],
+  "a_dr_a02b_sky_bkground": [
+    "tex1_256x256_75ddd8ce204fa70a_14"
+  ],
+  "a_dr_a02b_sky_clouds": [
+    "tex1_128x128_fdcb7371fa76414d_d223bb4c1bc2d09c_9",
+    "tex1_128x128_fdcb7371fa76414d_e7533726a818a7be_9"
+  ],
+  "a_dr_cin_rain": [
+    "tex1_128x128_cd7c674c129ba940_14"
+  ],
+  "a_dr_gunpowder": [
+    "tex1_32x32_adef7d9b7abced49_14",
+    "tex1_32x32_6ef2a4b2165fcc7d_14"
+  ],
+  "a_dr_gunpowder_pile": [
+    "tex1_128x128_61da421822ec70bf_14",
+    "tex1_128x128_bc8f5055c9a2807f_14"
+  ],
+  "a_dr_pit_blend_grass": [
+    "tex1_128x64_9a99dc314e120a85_14",
+    "tex1_128x64_63dfff42bd4a3ccb_14"
+  ],
+  "a_figleaf3": [
+    "tex1_128x128_fbec9705de4f7198_0dce624ceb33d354_9"
+  ],
+  "a_figleaf3_lod": [
+    "tex1_32x32_65f83c9b7eb1e224_d5185629e964b07a_9"
+  ],
+  "a_gt_brnrock03": [
+    "tex1_256x256_f8f659c3ee3d22a1_14"
+  ],
+  "a_gt_firelog": [
+    "tex1_128x64_258342f61aec819a_14",
+    "tex1_128x64_cf24fc80cfd1399e_14"
+  ],
+  "a_gt_firelog_endcap": [
+    "tex1_64x64_cf940de23eb5def0_14"
+  ],
+  "a_gt_firelog_scroll": [
+    "tex1_64x32_7d024f017b11c814_14"
+  ],
+  "a_jj_cave floor": [
+    "tex1_128x128_53c458350e905961_14",
+    "tex1_128x128_41aa89226980b22c_14"
+  ],
+  "a_jj_cave wall": [
+    "tex1_256x256_1900711df929536f_14"
+  ],
+  "a_jj_caverock": [
+    "tex1_128x128_44b024a511844036_14"
+  ],
+  "a_jj_cliffrockc": [
+    "tex1_256x256_9dd079475900334e_14"
+  ],
+  "a_jj_flowera": [
+    "tex1_32x32_58ce87694e89b7c3_14",
+    "tex1_32x32_3b7c6eef1eaa2517_14"
+  ],
+  "a_jj_flowerb": [
+    "tex1_32x32_af16e9116db932f5_14",
+    "tex1_32x32_b31323bb46c46e91_14"
+  ],
+  "a_jj_flowerc": [
+    "tex1_128x128_m_c31c2b45b181c03b_14",
+    "tex1_128x128_m_449818b7e651d629_14"
+  ],
+  "a_jj_groundleaves": [
+    "tex1_128x128_m_d36e6f52b42dd520_c214a0c29015b9a7_9"
+  ],
+  "a_jj_hangingmoss": [
+    "tex1_128x64_m_0e8597ae8fca51ad_14",
+    "tex1_128x64_m_87cdf47f9adcf626_14"
+  ],
+  "a_jj_leavesburnt": [
+    "tex1_128x128_595feab31eafd799_1d022dd18657fca5_9"
+  ],
+  "a_jj_moss_noalpha": [
+    "tex1_128x128_m_3b434ed9919a30d6_14"
+  ],
+  "a_jj_quicksand": [
+    "tex1_128x128_m_299e1d5cf8fc871b_14"
+  ],
+  "a_jj_quicksand_b09": [
+    "tex1_128x128_d05ae14deabbfb53_14",
+    "tex1_128x128_b2a298be5a63ab0c_14"
+  ],
+  "a_jj_quicksand_no_alpha": [
+    "tex1_256x256_324ff5ea693b3a67_6"
+  ],
+  "a_jj_rock": [
+    "tex1_128x128_b858462d19bb860a_14"
+  ],
+  "a_jj_rock_grey": [
+    "tex1_128x128_73e031c7bcc3e110_14"
+  ],
+  "a_jj_tree": [
+    "tex1_128x128_m_167f67656fc95aa1_14"
+  ],
+  "a_jj_treehangingmoss": [
+    "tex1_128x128_m_7f7646bf88aed371_2431f81c9bb59568_8",
+    "tex1_128x128_m_7f7646bf88aed371_fc60498113d98035_8"
+  ],
+  "a_jj_treeleaves": [
+    "tex1_128x128_m_196b2cdf71df3996_cb5c6a03cfd88de6_9"
+  ],
+  "a_jj_watermud": [
+    "tex1_128x128_m_2de5d90d6084be72_14"
+  ],
+  "a_jm_cave floor to cave wall": [
+    "tex1_128x128_bbe90ecbe0fd6da3_14"
+  ],
+  "a_jm_pathdirt_no alpha": [
+    "tex1_128x128_b80fdd920c84bbca_14"
+  ],
+  "a_jm_tree": [
+    "tex1_128x64_0b77ec1e9f3e1da2_14"
+  ],
+  "a_kg_backdrop02": [
+    "tex1_128x128_1db991429534ec1c_8ca3fff6817819fb_9"
+  ],
+  "a_kg_brnblocks_slit": [
+    "tex1_128x128_25e5164fd6b61ef6_14"
+  ],
+  "a_kg_coconut": [
+    "tex1_64x64_a63e831b919a96f1_14"
+  ],
+  "a_kg_fernleaf01": [
+    "tex1_64x128_8f5fa08cadf22be7_53091b8bf8d8c243_8",
+    "tex1_64x128_8f5fa08cadf22be7_ceb39bf670f60556_8"
+  ],
+  "a_kg_palmtr_bark": [
+    "tex1_64x64_1ebae9a9bb3b797a_14"
+  ],
+  "a_kg_palmtr_topbark": [
+    "tex1_32x32_18869ea36c8c1f74_14"
+  ],
+  "a_kg_palm_leaf03": [
+    "tex1_128x64_5e10568e62f71e4b_14",
+    "tex1_128x64_a0020af7200e8aee_14"
+  ],
+  "a_kg_palm_leaf03_lod": [
+    "tex1_32x32_1e9db487fffa7195_14",
+    "tex1_32x32_03139fbe64dcf31e_14"
+  ],
+  "a_kg_plantwall01": [
+    "tex1_256x128_m_2def769122ee171e_d503b8ed572d4880_9",
+    "tex1_256x128_m_2def769122ee171e_d11c84ddf00f6726_9"
+  ],
+  "a_kg_rollinglog": [
+    "tex1_128x128_9daa2b0e60a35db9_14"
+  ],
+  "a_kg_scar_bark_01": [
+    "tex1_128x64_dba605f49be2e6f8_14",
+    "tex1_128x64_9df0a321482f2ce0_14"
+  ],
+  "a_kg_treebark_01": [
+    "tex1_256x256_f6fd4c1fae1f1fcb_14"
+  ],
+  "a_kg_treebark_02": [
+    "tex1_128x64_5ebe2331ee6135db_14"
+  ],
+  "a_kg_tree_core_01": [
+    "tex1_128x128_43251a47dc3190cc_14"
+  ],
+  "a_kg_vistaa": [
+    "tex1_128x128_m_61c8d0ede4efde11_3549725f431ea252_9"
+  ],
+  "a_kg_vistaa_256": [
+    "tex1_256x256_65b6bfe602a370ca_14",
+    "tex1_256x256_94bacfccce836780_14"
+  ],
+  "a_kg_vistab": [
+    "tex1_128x128_m_1f0c4dc66d1a9228_ea25ebf7fb469acd_9"
+  ],
+  "a_kg_vistab_256": [
+    "tex1_256x256_cf877b3b5291184f_91b0a82728510905_8",
+    "tex1_256x256_cf877b3b5291184f_3d18ec4b7b600c4d_8"
+  ],
+  "a_kh_blurock01": [
+    "tex1_256x256_cced88955ce5b2b3_14"
+  ],
+  "a_kh_blusquares": [
+    "tex1_256x256_b6d6b3d9a44f728b_14"
+  ],
+  "a_kh_blutrapzwall": [
+    "tex1_256x256_2ed40f0677b8fbcb_14"
+  ],
+  "a_kh_brnblocks01": [
+    "tex1_128x128_848b7288d04f82f5_14"
+  ],
+  "a_kh_brnblocks01_c02": [
+    "tex1_128x128_93fbfab3c4617159_14"
+  ],
+  "a_kh_brnblocks01_steps": [
+    "tex1_128x128_0c210e7d437b17d8_14"
+  ],
+  "a_kh_brnblocks_frost01": [
+    "tex1_256x256_m_315c02a64a4e1d06_14"
+  ],
+  "a_kh_brnblocks_slit": [
+    "tex1_128x128_5a3c78b6abfb1506_14"
+  ],
+  "a_kh_brnblocks_slit_frost": [
+    "tex1_256x256_m_aa99ebf0e73dd586_14"
+  ],
+  "a_kh_brncrumble": [
+    "tex1_128x128_91244fee39640363_14"
+  ],
+  "a_kh_brnrock01": [
+    "tex1_128x128_31723e21573e9620_14"
+  ],
+  "a_kh_brnrock02": [
+    "tex1_128x128_5802105aa740e010_14"
+  ],
+  "a_kh_brnrock02_frost": [
+    "tex1_256x256_m_7bac1318488ed422_14"
+  ],
+  "a_kh_brnrock03": [
+    "tex1_128x128_20ce1be60f1d1cde_14"
+  ],
+  "a_kh_hangvines": [
+    "tex1_128x64_m_60b69c0c66fde341_6de60909d39f2ddb_9"
+  ],
+  "a_kh_lightbrownbrick": [
+    "tex1_128x128_70872f8257eb7507_14"
+  ],
+  "a_kh_smbrownbrick": [
+    "tex1_256x256_m_90d0d7b126064992_14"
+  ],
+  "a_kh_smwhitebrick": [
+    "tex1_128x128_m_dcff765b039e34e3_14"
+  ],
+  "a_kh_switchmask": [
+    "tex1_256x256_155a81a4246f25f5_14"
+  ],
+  "a_kh_toonglyphs": [
+    "tex1_128x128_m_4f4d8639ec5f643f_14"
+  ],
+  "a_kh_toonglyphsb": [
+    "tex1_128x128_28ca0a8617ae0907_14"
+  ],
+  "a_kh_toonglyphsb_gold": [
+    "tex1_256x256_574fbc0fcbe581a8_250312d37ed719a2_8",
+    "tex1_256x256_574fbc0fcbe581a8_6fae8f034d790a67_8"
+  ],
+  "a_kh_toonglyphsb_grey": [
+    "tex1_256x256_90c916d0f25b17a2_14"
+  ],
+  "a_kh_toonglyphs_frosted": [
+    "tex1_256x256_m_939ffa5d7ff1886f_14"
+  ],
+  "a_kh_whiterock01": [
+    "tex1_128x128_m_3d7ed4ee9231aca9_14"
+  ],
+  "a_kh_whiterock01_frosted": [
+    "tex1_128x128_m_bc0b87dae73114e1_14"
+  ],
+  "a_ls_cliffa_grey": [
+    "tex1_256x256_77e82cf2b9bf29fa_348d83eaa7b7ef2b_9"
+  ],
+  "a_ls_cliffmoss1_grey": [
+    "tex1_256x256_c15fa8f4b2a56151_14"
+  ],
+  "a_ls_cliffmoss1_grey_transition": [
+    "tex1_256x256_8becccbbfb0db6fd_14"
+  ],
+  "a_ls_cliffmoss2_grey": [
+    "tex1_256x256_5283cbebeeb251ed_14"
+  ],
+  "a_ls_dirt": [
+    "tex1_256x256_a8807275fd4823e1_14"
+  ],
+  "a_ls_dirt_grey_patch": [
+    "tex1_128x128_d216bc542489422b_14",
+    "tex1_128x128_1b675d651f9a77f9_14"
+  ],
+  "a_ls_elephantearleaf": [
+    "tex1_64x64_60064a7d81902a0b_14",
+    "tex1_64x64_800da2f1026b7293_14"
+  ],
+  "a_ls_elephantearleaf_vine": [
+    "tex1_32x32_0c9be2c8a54c3cf9_c65a14b8f1f943be_8",
+    "tex1_32x32_0c9be2c8a54c3cf9_2698de85e0ecc381_8"
+  ],
+  "a_ls_figleaf2": [
+    "tex1_128x128_71403380ccddb419_3e7b02a1452ffb29_8",
+    "tex1_128x128_71403380ccddb419_12b57719924bdfd8_8"
+  ],
+  "a_ls_figleaf3": [
+    "tex1_128x128_74449839e9d561c9_02925f46fd2481df_9"
+  ],
+  "a_ls_grass": [
+    "tex1_128x128_6b2e3c59303a2033_887b6d02e42103d0_8",
+    "tex1_128x128_6b2e3c59303a2033_b546d9f3e0c2b979_8"
+  ],
+  "a_ls_grass_runtime": [
+    "tex1_128x128_m_149b4848f349c568_3d7b10ad86e5b118_9"
+  ],
+  "a_ls_groundcover": [
+    "tex1_128x128_m_2008737e8aeeb5a7_021145b3aa291fcc_9"
+  ],
+  "a_ls_heartvine": [
+    "tex1_128x128_5d20e3e29e21d7fc_b246a667a6afd904_9"
+  ],
+  "a_ls_pineapple_leaf": [
+    "tex1_128x64_742c3ef8a7783b7b_14",
+    "tex1_128x64_54edd3097abc4fcd_14"
+  ],
+  "a_ls_poletop3": [
+    "tex1_64x64_0ecf0ec4b0af45de_14"
+  ],
+  "a_ls_poletop3_frost": [
+    "tex1_64x64_f8974c5bc937b3cd_14"
+  ],
+  "a_ls_saphire_crystal": [
+    "tex1_128x64_c51746148133b735_71c0e55b30b19148_8",
+    "tex1_128x64_c51746148133b735_5f91cced9edccd01_8"
+  ],
+  "a_ls_vine": [
+    "tex1_64x64_2e4fb3135611ef3d_14"
+  ],
+  "a_segment_canopyfull": [
+    "tex1_128x128_35266270cac528fa_b387af36e5e22eb5_9"
+  ],
+  "a_segment_leafcluster": [
+    "tex1_128x128_m_4fe2a7ea8784a2cc_afdbc74ace13d402_9"
+  ],
+  "a_segment_plantwall": [
+    "tex1_256x256_m_5d7bfca8b9222c69_771816f9dab5c1df_9"
+  ],
+  "a_segment_plantwall_b": [
+    "tex1_256x256_65163f47c46acb4c_962cdb53291b6c64_9"
+  ],
+  "a_segment_plantwall_middle": [
+    "tex1_128x128_8bc7090555ce0c04_60610bf8af812e24_9"
+  ],
+  "a_tp_cartridge_rt": [
+    "tex1_64x64_cc76fa14c064d3d9_14"
+  ],
+  "a_ws-waterfallfog": [
+    "tex1_64x64_8afaaa5d648d3f65_4a1bd6c818c1bea8_8",
+    "tex1_64x64_8afaaa5d648d3f65_1f4804e4e4ef096c_8"
+  ],
+  "a_ws_treetopc": [
+    "tex1_256x256_5ddc3eaa70d269e4_aed31ec3b0f60884_9"
+  ],
+  "a_ws_treetopc_frosted": [
+    "tex1_128x128_402c2975ec81a708_14",
+    "tex1_128x128_a1dc91bd1d26d19f_14"
+  ],
+  "b09": [
+    "tex1_512x512_6263d925cfb3b33a_14"
+  ],
+  "b15": [
+    "tex1_512x512_dfac48fcb7a4c441_14"
+  ],
+  "bamboorope": [
+    "tex1_16x16_f9bf70c300f01307_14",
+    "tex1_16x16_e27c99dd632afb4b_14"
+  ],
+  "basic_white": [
+    "tex1_8x8_43a1edc9b8930cb4_14"
+  ],
+  "bat": [
+    "tex1_64x32_8a7073b6f8410459_14",
+    "tex1_64x32_23669a4d67429da3_14"
+  ],
+  "bernardhead": [
+    "tex1_256x256_fa56c3ef7124d1a7_14"
+  ],
+  "bernardlegs": [
+    "tex1_256x256_f806bc8ebd45810d_14"
+  ],
+  "bernard_head": [
+    "tex1_256x256_771c7f750a3151c0_14"
+  ],
+  "bernard_head_lod": [
+    "tex1_64x64_64d8cae61e3c2d28_14"
+  ],
+  "bernard_legs": [
+    "tex1_128x128_7cd2ea24988e53cb_14"
+  ],
+  "bernard_legs_lod": [
+    "tex1_64x64_0aab68ca06be7bf1_14"
+  ],
+  "birdambient": [
+    "tex1_64x32_28e385778d5b5a38_14",
+    "tex1_64x32_1a92193a9526ae1e_14"
+  ],
+  "birdambient02": [
+    "tex1_128x64_e1b93dd5450597e0_14",
+    "tex1_128x64_95ad6113bf429857_14"
+  ],
+  "birdambient03": [
+    "tex1_128x64_e4a89e407e9861eb_14"
+  ],
+  "birdambient04": [
+    "tex1_128x64_d8cf3307f19cf3a0_14"
+  ],
+  "black": [
+    "tex1_8x8_f31df448bb96f9e2_14"
+  ],
+  "book-bluepage": [
+    "tex1_256x128_b6d1a4f58335895d_8e7c9fe049659848_8",
+    "tex1_256x128_b6d1a4f58335895d_e27a6961232d24de_8"
+  ],
+  "book-redpage": [
+    "tex1_256x128_5c1ab6911cc57e83_5165e14aa36c7929_8",
+    "tex1_256x128_5c1ab6911cc57e83_7f322fde2217dce7_8"
+  ],
+  "book2": [
+    "tex1_256x256_f4ea498ce936eaea_14",
+    "tex1_256x256_4b5292549866dd7d_14"
+  ],
+  "book_background_jungle": [
+    "tex1_256x256_6c9595d9ae3fa8e4_14"
+  ],
+  "book_card": [
+    "tex1_128x128_483d5212bfb9cc67_14",
+    "tex1_128x128_911edc7f8805ef1b_14"
+  ],
+  "book_card_bg_plane": [
+    "tex1_8x8_f6e9be5d70632cf5_9aaba41ffa2da101_8",
+    "tex1_8x8_f6e9be5d70632cf5_f5b93e6348d4f8da_8"
+  ],
+  "book_card_cinema": [
+    "tex1_64x64_85514ab376f702bc_48097ef75d8f73f9_8",
+    "tex1_64x64_85514ab376f702bc_c963be66d0560eb8_8"
+  ],
+  "book_insert_babymonkey": [
+    "tex1_256x256_39175df37d5065f3_9348f040e728ce38_8",
+    "tex1_256x256_39175df37d5065f3_8ed642de9de8bc4c_8"
+  ],
+  "book_insert_bat": [
+    "tex1_256x256_993328894306062d_9348f040e728ce38_8",
+    "tex1_256x256_993328894306062d_69975381f03291bf_8"
+  ],
+  "book_insert_bittenbinder": [
+    "tex1_256x256_71f3a9408a57b70d_9348f040e728ce38_8",
+    "tex1_256x256_71f3a9408a57b70d_75c455bc8da6e38e_8"
+  ],
+  "book_insert_bushninja": [
+    "tex1_256x256_f3c9df93bd283764_9348f040e728ce38_8",
+    "tex1_256x256_f3c9df93bd283764_8d46b974992dfe55_8"
+  ],
+  "book_insert_chief": [
+    "tex1_256x256_89dc31d5b95b88fb_9348f040e728ce38_8",
+    "tex1_256x256_89dc31d5b95b88fb_483de788fbd94a78_8"
+  ],
+  "book_insert_eel": [
+    "tex1_256x256_5fa92c9b667cdd71_9348f040e728ce38_8",
+    "tex1_256x256_5fa92c9b667cdd71_31c6a3d34df128f8_8"
+  ],
+  "book_insert_explorer": [
+    "tex1_256x256_11d539f82f8dfc34_9348f040e728ce38_8",
+    "tex1_256x256_11d539f82f8dfc34_6f486d19c7fa68fd_8"
+  ],
+  "book_insert_fountain": [
+    "tex1_256x256_99083ac058bdf813_9348f040e728ce38_8",
+    "tex1_256x256_99083ac058bdf813_e6316679323076dd_8"
+  ],
+  "book_insert_genericnative": [
+    "tex1_256x256_dcc8ebd5520f2d33_9348f040e728ce38_8",
+    "tex1_256x256_dcc8ebd5520f2d33_24cc677b55d0bfff_8"
+  ],
+  "book_insert_gizmo": [
+    "tex1_256x256_ef4f6ddf6c5ed505_9348f040e728ce38_8",
+    "tex1_256x256_ef4f6ddf6c5ed505_cd67c75b16bfb742_8"
+  ],
+  "book_insert_harrybackpack": [
+    "tex1_256x256_de3255129a7e8fd8_9348f040e728ce38_8",
+    "tex1_256x256_de3255129a7e8fd8_a5f68b607b107aae_8"
+  ],
+  "book_insert_harrybreakdanceattack": [
+    "tex1_256x256_60f4f3a7d420effe_9348f040e728ce38_8",
+    "tex1_256x256_60f4f3a7d420effe_b0cdfa06a7acc537_8"
+  ],
+  "book_insert_harrycrouchattack": [
+    "tex1_256x256_011b69c9de60946c_9348f040e728ce38_8",
+    "tex1_256x256_011b69c9de60946c_9aa0bed3c0592f83_8"
+  ],
+  "book_insert_harrydive": [
+    "tex1_256x256_ea6b86bb59f252f7_9348f040e728ce38_8",
+    "tex1_256x256_ea6b86bb59f252f7_7c52422d8507a6b8_8"
+  ],
+  "book_insert_harrydoublejump": [
+    "tex1_256x256_8a96bcf2b7869af1_9348f040e728ce38_8",
+    "tex1_256x256_8a96bcf2b7869af1_67e69fd2fb85651a_8"
+  ],
+  "book_insert_harrydoublejumpattack": [
+    "tex1_256x256_3a330864b418af1e_9348f040e728ce38_8",
+    "tex1_256x256_3a330864b418af1e_ae7517026f566da6_8"
+  ],
+  "book_insert_harrygrab": [
+    "tex1_256x256_22157b3ecaec7d07_9348f040e728ce38_8",
+    "tex1_256x256_22157b3ecaec7d07_52e45ea3b6d8e021_8"
+  ],
+  "book_insert_harryjumpattack": [
+    "tex1_256x256_ef40b46cb77f1450_9348f040e728ce38_8",
+    "tex1_256x256_ef40b46cb77f1450_27294ef416d7458e_8"
+  ],
+  "book_insert_harrylook": [
+    "tex1_256x256_919f140f20802f94_9348f040e728ce38_8",
+    "tex1_256x256_919f140f20802f94_2d220dcc093132ee_8"
+  ],
+  "book_insert_harrymuscles": [
+    "tex1_256x256_6bf3f6c74bca714d_9348f040e728ce38_8",
+    "tex1_256x256_6bf3f6c74bca714d_f8ccaa434c6cca4f_8"
+  ],
+  "book_insert_harryrisingstrike": [
+    "tex1_256x256_4341062ce8e82428_9348f040e728ce38_8",
+    "tex1_256x256_4341062ce8e82428_1defc58ebb6c2e1b_8"
+  ],
+  "book_insert_harrysneak": [
+    "tex1_256x256_5022b735710d46e2_9348f040e728ce38_8",
+    "tex1_256x256_5022b735710d46e2_eac5193be066937e_8"
+  ],
+  "book_insert_harrystrike": [
+    "tex1_256x256_d1c9611401f22e3b_9348f040e728ce38_8",
+    "tex1_256x256_d1c9611401f22e3b_54153d34ad8ba92c_8"
+  ],
+  "book_insert_harrysuperrun": [
+    "tex1_256x256_ba786956370bd571_9348f040e728ce38_8",
+    "tex1_256x256_ba786956370bd571_0bd0bbace768b6ea_8"
+  ],
+  "book_insert_harrysupersling": [
+    "tex1_256x256_bcbf6e5873b68c7d_9348f040e728ce38_8",
+    "tex1_256x256_bcbf6e5873b68c7d_2243511a688ee2f9_8"
+  ],
+  "book_insert_harryswings": [
+    "tex1_256x256_d22ec5842ba898a2_9348f040e728ce38_8",
+    "tex1_256x256_d22ec5842ba898a2_3beb4b52ee2ec391_8"
+  ],
+  "book_insert_henchman": [
+    "tex1_256x256_8bdc839ef4222805_9348f040e728ce38_8",
+    "tex1_256x256_8bdc839ef4222805_52e45ea3b6d8e021_8"
+  ],
+  "book_insert_howler": [
+    "tex1_256x256_3cf32b4ba8bd6586_9348f040e728ce38_8",
+    "tex1_256x256_3cf32b4ba8bd6586_a51902d79f525942_8"
+  ],
+  "book_insert_huts": [
+    "tex1_256x256_510994fa32de7f59_9348f040e728ce38_8",
+    "tex1_256x256_510994fa32de7f59_02a642578c97dc76_8"
+  ],
+  "book_insert_inventory_canteen": [
+    "tex1_256x256_5371cf03f16593c0_9348f040e728ce38_8",
+    "tex1_256x256_5371cf03f16593c0_43609ba1d816e700_8"
+  ],
+  "book_insert_inventory_gasmask": [
+    "tex1_256x256_1cc9728d5120e6e9_9348f040e728ce38_8",
+    "tex1_256x256_1cc9728d5120e6e9_79d0b6d2b0c027df_8"
+  ],
+  "book_insert_inventory_icepicks": [
+    "tex1_256x256_de1c048794535229_9348f040e728ce38_8",
+    "tex1_256x256_de1c048794535229_ea62b3378711a9d6_8"
+  ],
+  "book_insert_inventory_idol": [
+    "tex1_256x256_bd7f5db1426eeb91_9348f040e728ce38_8",
+    "tex1_256x256_bd7f5db1426eeb91_0ce9c94b70b99272_8"
+  ],
+  "book_insert_inventory_mapicon": [
+    "tex1_256x256_e5415d6d4b39734c_9348f040e728ce38_8",
+    "tex1_256x256_e5415d6d4b39734c_538198ed3572c54a_8"
+  ],
+  "book_insert_inventory_raft": [
+    "tex1_256x256_4d83ea1cb65f2e7b_9348f040e728ce38_8",
+    "tex1_256x256_4d83ea1cb65f2e7b_a2ecbc86caa475e6_8"
+  ],
+  "book_insert_inventory_shield": [
+    "tex1_256x256_9e2672376619eb4f_9348f040e728ce38_8",
+    "tex1_256x256_9e2672376619eb4f_84614307238d7dce_8"
+  ],
+  "book_insert_inventory_sling": [
+    "tex1_256x256_3310515e935929a6_9348f040e728ce38_8",
+    "tex1_256x256_3310515e935929a6_b0cdfa06a7acc537_8"
+  ],
+  "book_insert_inventory_stinkbomb": [
+    "tex1_256x256_46aad541f7da25ea_9348f040e728ce38_8",
+    "tex1_256x256_46aad541f7da25ea_0cece955ac0540c1_8"
+  ],
+  "book_insert_inventory_tnt": [
+    "tex1_256x256_4eef88ed5276c5a6_9348f040e728ce38_8",
+    "tex1_256x256_4eef88ed5276c5a6_25983f0d1d38d051_8"
+  ],
+  "book_insert_inventory_torch": [
+    "tex1_256x256_313e57ea58d420a1_9348f040e728ce38_8",
+    "tex1_256x256_313e57ea58d420a1_ac57a90d1a3f13be_8"
+  ],
+  "book_insert_landcroc": [
+    "tex1_256x256_713868dd85893c96_9348f040e728ce38_8",
+    "tex1_256x256_713868dd85893c96_a6b7cc5de4b49a70_8"
+  ],
+  "book_insert_leech": [
+    "tex1_256x256_4b4fcbd4cca71eda_9348f040e728ce38_8",
+    "tex1_256x256_4b4fcbd4cca71eda_ac99a07e704b9ade_8"
+  ],
+  "book_insert_mamamonkey": [
+    "tex1_256x256_ba251ef1da3aed50_9348f040e728ce38_8",
+    "tex1_256x256_ba251ef1da3aed50_6932716372eb267d_8"
+  ],
+  "book_insert_micay": [
+    "tex1_256x256_e122fc42f596d6a7_9348f040e728ce38_8",
+    "tex1_256x256_e122fc42f596d6a7_6ade2cc36c2a5eb6_8"
+  ],
+  "book_insert_mole": [
+    "tex1_256x256_f68b5966cbaf31f8_9348f040e728ce38_8",
+    "tex1_256x256_f68b5966cbaf31f8_b7cda573210259ec_8"
+  ],
+  "book_insert_nativeathlete": [
+    "tex1_256x256_71cbad8ab006a94e_9348f040e728ce38_8",
+    "tex1_256x256_71cbad8ab006a94e_41c17ed627bf2100_8"
+  ],
+  "book_insert_nicole": [
+    "tex1_256x256_3b764125e8c7b64e_9348f040e728ce38_8",
+    "tex1_256x256_3b764125e8c7b64e_c72b6826e72765b4_8"
+  ],
+  "book_insert_noxiousplant": [
+    "tex1_256x256_3941ed715e48201a_9348f040e728ce38_8",
+    "tex1_256x256_3941ed715e48201a_5d977e6348915d16_8"
+  ],
+  "book_insert_penquin": [
+    "tex1_256x256_7cb300c88fa3116d_9348f040e728ce38_8",
+    "tex1_256x256_7cb300c88fa3116d_0cece955ac0540c1_8"
+  ],
+  "book_insert_pilot": [
+    "tex1_256x256_cfc41fb4e5908642_9348f040e728ce38_8",
+    "tex1_256x256_cfc41fb4e5908642_453448953f35b37f_8"
+  ],
+  "book_insert_pirrana": [
+    "tex1_256x256_a618804e5112e91b_9348f040e728ce38_8",
+    "tex1_256x256_a618804e5112e91b_453448953f35b37f_8"
+  ],
+  "book_insert_pit": [
+    "tex1_256x256_c10c5e72536593ea_9348f040e728ce38_8",
+    "tex1_256x256_c10c5e72536593ea_c729e5da5d4390ec_8"
+  ],
+  "book_insert_plane": [
+    "tex1_256x256_fb27d4d54dfc3a37_9348f040e728ce38_8",
+    "tex1_256x256_fb27d4d54dfc3a37_207ad86eacbf31d6_8"
+  ],
+  "book_insert_porcupine": [
+    "tex1_256x256_3959a2cc3e1cd27d_9348f040e728ce38_8",
+    "tex1_256x256_3959a2cc3e1cd27d_0842fd86ffb57489_8"
+  ],
+  "book_insert_pusca": [
+    "tex1_256x256_812fb21d0a58dbac_9348f040e728ce38_8",
+    "tex1_256x256_812fb21d0a58dbac_85c63c8acaf74e13_8"
+  ],
+  "book_insert_quickclaw": [
+    "tex1_256x256_9c7992e16304f474_9348f040e728ce38_8",
+    "tex1_256x256_9c7992e16304f474_8e1cde211cf9cf5f_8"
+  ],
+  "book_insert_renegadenative": [
+    "tex1_256x256_2995a40f2371576a_9348f040e728ce38_8",
+    "tex1_256x256_2995a40f2371576a_6932716372eb267d_8"
+  ],
+  "book_insert_scarab": [
+    "tex1_256x256_34c891d5b5716e6f_9348f040e728ce38_8",
+    "tex1_256x256_34c891d5b5716e6f_b0cdfa06a7acc537_8"
+  ],
+  "book_insert_scorpion": [
+    "tex1_256x256_23b1aaf253f5853d_9348f040e728ce38_8",
+    "tex1_256x256_23b1aaf253f5853d_35932fc346c51d6b_8"
+  ],
+  "book_insert_shaman": [
+    "tex1_256x256_5bbee40a1d6e5960_9348f040e728ce38_8",
+    "tex1_256x256_5bbee40a1d6e5960_635d96afb60abc9c_8"
+  ],
+  "book_insert_snowbowler": [
+    "tex1_256x256_c402a98d6f312c2e_9348f040e728ce38_8",
+    "tex1_256x256_c402a98d6f312c2e_453448953f35b37f_8"
+  ],
+  "book_insert_spinja": [
+    "tex1_256x256_e15b8cfc69572f6a_9348f040e728ce38_8",
+    "tex1_256x256_e15b8cfc69572f6a_5256d295ac25131f_8"
+  ],
+  "book_insert_stclaire": [
+    "tex1_256x256_15144fc7d7d23583_9348f040e728ce38_8",
+    "tex1_256x256_15144fc7d7d23583_c72b6826e72765b4_8"
+  ],
+  "book_insert_supai": [
+    "tex1_256x256_1142ef937989324e_9348f040e728ce38_8",
+    "tex1_256x256_1142ef937989324e_4e19ef88cdbbe426_8"
+  ],
+  "book_insert_tucatuca": [
+    "tex1_256x256_0590f08bd41a3856_9348f040e728ce38_8",
+    "tex1_256x256_0590f08bd41a3856_0bd0bbace768b6ea_8"
+  ],
+  "book_insert_vinemonkey": [
+    "tex1_256x256_695e42d426e32939_9348f040e728ce38_8",
+    "tex1_256x256_695e42d426e32939_f17464cf88e50251_8"
+  ],
+  "book_map_icon_arrow_current": [
+    "tex1_32x32_198b94946b5507c0_b6bc95ab6c626fc1_8",
+    "tex1_32x32_198b94946b5507c0_f389b5fe9a265bd0_8"
+  ],
+  "book_map_icon_arrow_not_current": [
+    "tex1_32x32_36812c63b0b7d495_f6e9be5d70632cf5_8",
+    "tex1_32x32_36812c63b0b7d495_919e31a418ae3dca_8"
+  ],
+  "book_map_icon_gray_inside": [
+    "tex1_128x128_e7d2e4ac45a60769_14"
+  ],
+  "book_map_icon_highlight_inside": [
+    "tex1_128x128_fab6969228c0ff37_14"
+  ],
+  "book_map_icon_highlight_outside": [
+    "tex1_64x64_42aad68e4467e10d_cc64a66ba73e3d7a_8",
+    "tex1_64x64_42aad68e4467e10d_3c98bb128d83ded8_8"
+  ],
+  "book_map_icon_highlight_outside_01": [
+    "tex1_64x32_65afaea7e396a262_cc64a66ba73e3d7a_8",
+    "tex1_64x32_65afaea7e396a262_b285ab4f6372cbb0_8"
+  ],
+  "book_map_icon_highlight_outside_02": [
+    "tex1_64x32_d794b6ce5106b1fa_cc64a66ba73e3d7a_8",
+    "tex1_64x32_d794b6ce5106b1fa_07e5f282df91ea67_8"
+  ],
+  "book_map_icon_node_current": [
+    "tex1_32x32_342fd90584ee6cb0_2f9df36d26561d4f_8",
+    "tex1_32x32_342fd90584ee6cb0_fbd4f7e900dba8b0_8"
+  ],
+  "book_map_icon_node_not_visited": [
+    "tex1_32x32_308567afe290d8df_3aefa6fd5cf2deb4_8",
+    "tex1_32x32_308567afe290d8df_ae44aa4942986f01_8"
+  ],
+  "book_map_icon_node_visited": [
+    "tex1_32x32_196369c6d9281497_3aefa6fd5cf2deb4_8",
+    "tex1_32x32_196369c6d9281497_86986bf365e22b87_8"
+  ],
+  "book_overlay_border_border1a": [
+    "tex1_128x64_ab759b9e17d915a3_2103f50ca458727f_8",
+    "tex1_128x64_ab759b9e17d915a3_324f45cdbc3b42f9_8"
+  ],
+  "book_overlay_border_border1b": [
+    "tex1_128x64_d2f6f90cdd44ab1e_2103f50ca458727f_8",
+    "tex1_128x64_d2f6f90cdd44ab1e_4be130c5e24f636c_8"
+  ],
+  "book_overlay_border_border2a": [
+    "tex1_128x64_5a267ebe65e134d6_392d101d2ad73c44_8",
+    "tex1_128x64_5a267ebe65e134d6_2c0fdfb647cdb53c_8"
+  ],
+  "book_overlay_border_lingo1a": [
+    "tex1_128x64_18d6654940c93724_4b45e6461bce628e_8",
+    "tex1_128x64_18d6654940c93724_03e479d3ec1f8a59_8"
+  ],
+  "book_overlay_border_lingo1b": [
+    "tex1_128x64_ca92b8d38667ab2b_4b45e6461bce628e_8",
+    "tex1_128x64_ca92b8d38667ab2b_c4e3fef31da574d2_8"
+  ],
+  "book_overlay_border_lingo1c": [
+    "tex1_128x64_91a383b4112f47eb_4b45e6461bce628e_8",
+    "tex1_128x64_91a383b4112f47eb_fc68393d9f6e786c_8"
+  ],
+  "book_overlay_border_lingo1d": [
+    "tex1_128x64_74bc0a44cbe9329b_4b45e6461bce628e_8",
+    "tex1_128x64_74bc0a44cbe9329b_49edb6788f86e4f2_8"
+  ],
+  "book_overlay_border_lingo2a": [
+    "tex1_128x64_e42c168450f3ea74_4b45e6461bce628e_8",
+    "tex1_128x64_e42c168450f3ea74_1b11bcfb60cdbca5_8"
+  ],
+  "book_overlay_border_rune1a": [
+    "tex1_128x64_0c73faa072e68ff9_2103f50ca458727f_8",
+    "tex1_128x64_0c73faa072e68ff9_1bc2537fe1a3d844_8"
+  ],
+  "book_overlay_border_rune1b": [
+    "tex1_128x64_c3b82688c2e0c8aa_2103f50ca458727f_8",
+    "tex1_128x64_c3b82688c2e0c8aa_cd4e197325b23671_8"
+  ],
+  "book_overlay_border_rune1c": [
+    "tex1_128x64_9a3e3e50b51817bc_2103f50ca458727f_8",
+    "tex1_128x64_9a3e3e50b51817bc_473ad848b2a1872b_8"
+  ],
+  "book_overlay_border_scribble1": [
+    "tex1_128x64_fa38aa74a81bbcfb_2103f50ca458727f_8",
+    "tex1_128x64_fa38aa74a81bbcfb_73bf1c1fc892fdc4_8"
+  ],
+  "book_overlay_map_main": [
+    "tex1_256x128_b745a0f04ddc9fa8_14",
+    "tex1_256x128_54880aa02f01482c_14"
+  ],
+  "book_overlay_side_native": [
+    "tex1_128x128_83ea715a3c8da994_2103f50ca458727f_8",
+    "tex1_128x128_83ea715a3c8da994_0822f7dc187d9f72_8"
+  ],
+  "book_overlay_side_temple": [
+    "tex1_128x128_f8b65685c782ddbf_2103f50ca458727f_8",
+    "tex1_128x128_f8b65685c782ddbf_6f412c8ac903805a_8"
+  ],
+  "book_page_bestiary": [
+    "tex1_256x256_76c513ef6e4cf5d5_1a88f6c26d81c07b_9"
+  ],
+  "book_page_blank": [
+    "tex1_256x256_a737f7eda016ec55_e74b66690decc00d_9"
+  ],
+  "book_page_blur01": [
+    "tex1_128x128_35556377789503ed_53476c59f8d74921_9"
+  ],
+  "book_page_blur02": [
+    "tex1_128x128_990b8a64646c4772_5bc4819f3488f58a_9"
+  ],
+  "book_page_bomberman": [
+    "tex1_256x256_05a87f9e2475e836_a82835b88a585dfd_9"
+  ],
+  "book_page_bowling": [
+    "tex1_256x256_53040f29c5e70d99_58d8aea6d6d0448a_9"
+  ],
+  "book_page_detail_map": [
+    "tex1_256x256_8d40a21a2afc7161_bf87c7213f154da8_8",
+    "tex1_256x256_8d40a21a2afc7161_9b96862c646f9b66_8"
+  ],
+  "book_page_frontend_main": [
+    "tex1_256x256_a2a8a9b3631dcea7_31497d699f954f96_9"
+  ],
+  "book_page_handbook": [
+    "tex1_256x256_1b82d59f764b9117_1e6d3cac4112aa7b_9"
+  ],
+  "book_page_icepick": [
+    "tex1_256x256_71fc9793fd293f59_3041675fc7f5c951_9"
+  ],
+  "book_page_inventory": [
+    "tex1_256x256_a753c33d9c55e31b_0cf4665fae57c012_9"
+  ],
+  "book_page_journal": [
+    "tex1_256x256_a8e7cd881a6882c5_c506bf660b327af2_9"
+  ],
+  "book_page_just_border2": [
+    "tex1_256x256_e838af31bef75327_3152faac8bd3c187_8",
+    "tex1_256x256_e838af31bef75327_98b0208fe3e92aed_8"
+  ],
+  "book_page_just_border3": [
+    "tex1_256x256_d44dc3ee7e000191_d7dcf4f9e3b5930c_8",
+    "tex1_256x256_d44dc3ee7e000191_b623161a53077001_8"
+  ],
+  "book_page_level_02": [
+    "tex1_256x256_173939ad9e0de0bf_14"
+  ],
+  "book_page_level_select_3": [
+    "tex1_256x256_5daccc308004bdd7_f83a19cc9d24f8c2_8",
+    "tex1_256x256_5daccc308004bdd7_1b5b87b284de650a_8"
+  ],
+  "book_page_level_select_e3": [
+    "tex1_256x256_fde77a617f524797_6391dff3e3b50c86_8",
+    "tex1_256x256_fde77a617f524797_44c0690bdf16b90e_8"
+  ],
+  "book_page_main": [
+    "tex1_256x256_aac8b11094485c94_ca98bb24e4d89c93_9"
+  ],
+  "book_page_map_caverns": [
+    "tex1_256x256_91a4e7d850da6a8c_66628ace66fec2dc_9"
+  ],
+  "book_page_map_junglea": [
+    "tex1_256x256_8267cfc8f9b3619f_a1ded62534a90459_9"
+  ],
+  "book_page_map_jungleb": [
+    "tex1_256x256_8bcacdff4ab4cb98_aa09d6ca40a01e8e_9"
+  ],
+  "book_page_map_line_dotted": [
+    "tex1_32x16_34a2c0c4b952e7c7_f6e9be5d70632cf5_8",
+    "tex1_32x16_34a2c0c4b952e7c7_320210a91d6d6ed8_8"
+  ],
+  "book_page_map_line_dotted_icon": [
+    "tex1_32x32_135f6246daf6daa7_f6e9be5d70632cf5_8",
+    "tex1_32x32_135f6246daf6daa7_66fd022338722edd_8"
+  ],
+  "book_page_map_line_solid_icon": [
+    "tex1_32x32_c40ccaf1a7166fef_41b4d1c910c1a58d_8",
+    "tex1_32x32_c40ccaf1a7166fef_e5632af36dfc4f70_8"
+  ],
+  "book_page_map_main": [
+    "tex1_256x256_acfb23a6d4ada103_8a168a5ab3a9d51e_9"
+  ],
+  "book_page_map_snow": [
+    "tex1_256x256_a3f141973bb13722_57bed49884a8712d_9"
+  ],
+  "book_page_notes": [
+    "tex1_256x256_0414560845d178ef_5ad4b0f1ea510daf_9"
+  ],
+  "book_page_olympics": [
+    "tex1_256x256_99013faac4475843_70eaab1701ac76a2_9"
+  ],
+  "book_page_opm_controls": [
+    "tex1_256x256_1cb891888ac17bd9_e41fdd2f1e6173d5_8",
+    "tex1_256x256_1cb891888ac17bd9_62fe49915549a76a_8"
+  ],
+  "book_page_options_audio": [
+    "tex1_256x256_0e0c9b568f1b5274_d0396f007482a552_9"
+  ],
+  "book_page_options_controls": [
+    "tex1_256x256_0edf1241646e54f9_9513d28e7f605833_9"
+  ],
+  "book_page_options_controls_remap_ngc": [
+    "tex1_256x256_b9919b0fc41f54f0_1e9b6df69d7dd3fc_9"
+  ],
+  "book_page_options_controls_remap_ps2": [
+    "tex1_256x256_08f5bd8241f4ac03_ad6b5fa0c03de226_8",
+    "tex1_256x256_08f5bd8241f4ac03_c5912fe0bf569939_8"
+  ],
+  "book_page_options_controls_remap_xbox": [
+    "tex1_256x256_1601c59f8a60720a_fc6c0a6e9cf9e24c_8",
+    "tex1_256x256_1601c59f8a60720a_d4d81e16e9e6ac81_8"
+  ],
+  "book_page_options_main": [
+    "tex1_256x256_d8e3b03f91ffb497_23ff243f679fa2fa_9"
+  ],
+  "book_page_options_video": [
+    "tex1_256x256_da7228c4c1d45f50_14"
+  ],
+  "book_page_saveload": [
+    "tex1_256x256_47c2367f73f6c2bc_46a06a856124392e_9"
+  ],
+  "book_page_skeet": [
+    "tex1_256x256_b7d91ba13307f9e0_a4ac038c7906c31f_9"
+  ],
+  "book_page_store": [
+    "tex1_256x256_d04dd05bfc43aa4c_c04ab2ed7c6f18f3_9"
+  ],
+  "book_page_store_breakdance": [
+    "tex1_256x256_bd0de711a2600dd2_6a7985b78dd9350e_9"
+  ],
+  "book_page_store_caverns": [
+    "tex1_256x256_74c2d9d9c0202975_4cd04dd116310874_9"
+  ],
+  "book_page_store_health": [
+    "tex1_256x256_63ae992561f5824a_8f2511bcfb3a513f_9"
+  ],
+  "book_page_store_junglea": [
+    "tex1_256x256_8eba75181f822841_3bea71cc23fb0c07_9"
+  ],
+  "book_page_store_jungleb": [
+    "tex1_256x256_62f90405e1948a0d_5ebea62c8d17db76_9"
+  ],
+  "book_page_store_pitfall_cart": [
+    "tex1_256x256_51170c59fdcabe24_d5cc6ed2f456a89e_9"
+  ],
+  "book_page_store_sling": [
+    "tex1_256x256_d93bf9d5d3fcc1fc_5a3d2b0c1b6b85ae_9"
+  ],
+  "book_page_store_smash": [
+    "tex1_256x256_a18b47f5f6034efd_0a26611a53b07d7d_9"
+  ],
+  "book_page_store_snow": [
+    "tex1_256x256_b38fd2f5db53aa93_39e51d83df71cd01_9"
+  ],
+  "book_page_store_water": [
+    "tex1_256x256_995f776ab1ceea31_a505ca565d77fe0f_9"
+  ],
+  "book_page_wackatuco": [
+    "tex1_256x256_6c9169f9be208a6e_a402d9d0aa05e3d0_9"
+  ],
+  "book_ui_arrow1_bottom": [
+    "tex1_32x32_401565bad83fbe84_1ac1501a4bafce60_8",
+    "tex1_32x32_401565bad83fbe84_d930ec61d4e23d35_8"
+  ],
+  "book_ui_arrow1_length": [
+    "tex1_32x32_125952d1ad94b32a_f28cb7c80d6022d2_8",
+    "tex1_32x32_125952d1ad94b32a_69dac29785f586c4_8"
+  ],
+  "book_ui_arrow1_top": [
+    "tex1_32x32_c991ae406a5f6f9d_f28cb7c80d6022d2_8",
+    "tex1_32x32_c991ae406a5f6f9d_8bc806237f0d673b_8"
+  ],
+  "book_ui_arrow_left_bottom": [
+    "tex1_32x32_a61afab0a454bef8_1ac1501a4bafce60_8",
+    "tex1_32x32_a61afab0a454bef8_4cf86f3ab7884d35_8"
+  ],
+  "book_ui_arrow_left_bottom_b": [
+    "tex1_32x32_dd33892ec1c53fd2_f28cb7c80d6022d2_8",
+    "tex1_32x32_dd33892ec1c53fd2_db24904412390957_8"
+  ],
+  "book_ui_arrow_left_length": [
+    "tex1_32x32_5cd4b1d7d8758d5e_1ac1501a4bafce60_8",
+    "tex1_32x32_5cd4b1d7d8758d5e_4a8eb7d7442592d3_8"
+  ],
+  "book_ui_arrow_left_length_b": [
+    "tex1_32x32_6106d05084933748_1ac1501a4bafce60_8",
+    "tex1_32x32_6106d05084933748_cdee85fd1e31abad_8"
+  ],
+  "book_ui_arrow_left_top": [
+    "tex1_32x32_8b648b9851c2533b_1ac1501a4bafce60_8",
+    "tex1_32x32_8b648b9851c2533b_f9e0cdd04eddf103_8"
+  ],
+  "book_ui_arrow_left_top_b": [
+    "tex1_32x32_071f7005c0ffaf95_f28cb7c80d6022d2_8",
+    "tex1_32x32_071f7005c0ffaf95_a35c66f4561acc90_8"
+  ],
+  "book_ui_arrow_map_45_normal": [
+    "tex1_32x32_c6fba7606399496e_1ac1501a4bafce60_8",
+    "tex1_32x32_c6fba7606399496e_927ac19be9e3ebfb_8"
+  ],
+  "book_ui_arrow_map_45_sel_bottom": [
+    "tex1_32x32_1e696bcaf81b8ecc_1ac1501a4bafce60_8",
+    "tex1_32x32_1e696bcaf81b8ecc_ee2649987076c12f_8"
+  ],
+  "book_ui_arrow_map_45_sel_length": [
+    "tex1_32x32_12e8a6f7d35c8ca7_1ac1501a4bafce60_8",
+    "tex1_32x32_12e8a6f7d35c8ca7_2c30258dabb48d64_8"
+  ],
+  "book_ui_arrow_map_45_sel_top": [
+    "tex1_32x32_64d8808c1d4df768_f28cb7c80d6022d2_8",
+    "tex1_32x32_64d8808c1d4df768_1cf9fbc445015034_8"
+  ],
+  "book_ui_arrow_map_left_normal": [
+    "tex1_32x32_7b58739948ffa604_f28cb7c80d6022d2_8",
+    "tex1_32x32_7b58739948ffa604_ba23f2ebb23350d3_8"
+  ],
+  "book_ui_arrow_map_left_sel_bottom": [
+    "tex1_32x32_4ab89d3043948887_351fe6588a4b1c00_8",
+    "tex1_32x32_4ab89d3043948887_e0935023aa8e0802_8"
+  ],
+  "book_ui_arrow_map_left_sel_length": [
+    "tex1_32x32_3331945129d4eb4f_1ac1501a4bafce60_8",
+    "tex1_32x32_3331945129d4eb4f_c614c0e5cdd87347_8"
+  ],
+  "book_ui_arrow_map_left_sel_top": [
+    "tex1_32x32_b48b3ed7fc8deb8f_351fe6588a4b1c00_8",
+    "tex1_32x32_b48b3ed7fc8deb8f_46649dea957ff156_8"
+  ],
+  "book_ui_arrow_map_up_normal": [
+    "tex1_32x32_4bbb8f224b212806_f28cb7c80d6022d2_8",
+    "tex1_32x32_4bbb8f224b212806_3934e09b0b123a4d_8"
+  ],
+  "book_ui_arrow_map_up_sel_left": [
+    "tex1_32x32_ae37e657940f7186_1ac1501a4bafce60_8",
+    "tex1_32x32_ae37e657940f7186_19d50f430f6af7cf_8"
+  ],
+  "book_ui_arrow_map_up_sel_length": [
+    "tex1_32x32_e8c179645d1de9cc_1ac1501a4bafce60_8",
+    "tex1_32x32_e8c179645d1de9cc_aca45579e2d148af_8"
+  ],
+  "book_ui_arrow_map_up_sel_right": [
+    "tex1_32x32_d752e7cf8dca3a2b_1ac1501a4bafce60_8",
+    "tex1_32x32_d752e7cf8dca3a2b_d70ac92051b7a0da_8"
+  ],
+  "book_ui_bg_glow": [
+    "tex1_128x64_074933d6f8b12da0_9348f040e728ce38_8",
+    "tex1_128x64_074933d6f8b12da0_c7da52a0f1d1cfbc_8"
+  ],
+  "book_ui_loading_border": [
+    "tex1_128x64_a9d00136d05ca114_a25712f92bef87af_8",
+    "tex1_128x64_a9d00136d05ca114_78416e429651614e_8"
+  ],
+  "book_ui_loading_fill": [
+    "tex1_128x64_75ff8175e33a6f76_17348d8dd5553a3a_8",
+    "tex1_128x64_75ff8175e33a6f76_70358fd9f55dc750_8"
+  ],
+  "book_ui_shamanshop_harry": [
+    "tex1_32x32_d8576e7f465af3b7_9348f040e728ce38_8",
+    "tex1_32x32_d8576e7f465af3b7_1624bd7a1cac49e4_8"
+  ],
+  "book_ui_shamanshop_health": [
+    "tex1_32x32_7d4935c44a5f5430_9348f040e728ce38_8",
+    "tex1_32x32_7d4935c44a5f5430_b7af80d446fb690e_8"
+  ],
+  "book_ui_shamanshop_map": [
+    "tex1_64x64_a6fd52789911ca89_9348f040e728ce38_8",
+    "tex1_64x64_a6fd52789911ca89_825a51b100d81c6e_8"
+  ],
+  "book_ui_shamanshop_mystery": [
+    "tex1_32x32_ee2174f26145efdc_9348f040e728ce38_8",
+    "tex1_32x32_ee2174f26145efdc_22f1a1f64cbb5694_8"
+  ],
+  "book_ui_underline1a": [
+    "tex1_128x64_b56e85ba9e8a16c7_1ac1501a4bafce60_8",
+    "tex1_128x64_b56e85ba9e8a16c7_02e391925d48ff08_8"
+  ],
+  "book_ui_underline1b": [
+    "tex1_128x64_ab1a2bf26924141c_1ac1501a4bafce60_8",
+    "tex1_128x64_ab1a2bf26924141c_4971ab1d1dbf4173_8"
+  ],
+  "book_ui_underline1c": [
+    "tex1_128x64_e6aab6c02263d061_f28cb7c80d6022d2_8",
+    "tex1_128x64_e6aab6c02263d061_38a2d80f9f8145e4_8"
+  ],
+  "book_ui_volume_bg": [
+    "tex1_128x64_54b8bffe5b0dace8_9ea9fa156b3b3eea_8",
+    "tex1_128x64_54b8bffe5b0dace8_b446c089bf74bebf_8"
+  ],
+  "book_ui_volume_meter": [
+    "tex1_128x64_94ca840973950ff4_1ac1501a4bafce60_8",
+    "tex1_128x64_94ca840973950ff4_c53b8f79eac0d5be_8"
+  ],
+  "bowlingscoresheet": [
+    "tex1_256x128_629f3bf6f45bafaa_6a12821971b67c3d_8",
+    "tex1_256x128_629f3bf6f45bafaa_5154937aa6427d02_8"
+  ],
+  "bt_dawnsky_bkground": [
+    "tex1_32x32_e44e6f365291f84d_14"
+  ],
+  "bt_nightsky_bkground": [
+    "tex1_32x32_m_7d7241265a676961_a3289f77b3418822_9",
+    "tex1_32x32_m_7d7241265a676961_37843688ade7a50f_9"
+  ],
+  "bt_tornadicsky_bkground": [
+    "tex1_128x128_fae0528b7c9c1110_8e32a302a691c333_8",
+    "tex1_128x128_fae0528b7c9c1110_27ac388890fd2efc_8"
+  ],
+  "bt_tornadicsky_clouds": [
+    "tex1_256x256_ffcaba9d43832eaa_e3cc6d07115c4a1b_9",
+    "tex1_256x256_ffcaba9d43832eaa_452212b7f3aa8598_9"
+  ],
+  "bush_ninja_bush": [
+    "tex1_128x128_4d8ba6714a67533a_14",
+    "tex1_128x128_266a3bcd38fb01e1_14"
+  ],
+  "bush_ninja_legs": [
+    "tex1_128x128_d7723ccf02cc0a6d_14"
+  ],
+  "bush_ninja_mask": [
+    "tex1_128x128_9f3584cb6d466820_14"
+  ],
+  "bush_ninja_torso": [
+    "tex1_128x128_69096f0c4a1d2a8f_14"
+  ],
+  "butterfly-01": [
+    "tex1_32x32_7285884131da091b_14",
+    "tex1_32x32_b799063e3da6d20c_14"
+  ],
+  "butterfly-01b": [
+    "tex1_32x32_2d06c08dd20ebafd_14"
+  ],
+  "button_ngc_a": [
+    "tex1_32x32_2399c2ce34fec876_14",
+    "tex1_32x32_3affe5ee1bcecc55_14"
+  ],
+  "button_ngc_analog_left_down": [
+    "tex1_32x32_6cab315c6f3d2250_221cbc917ed3be69_8",
+    "tex1_32x32_6cab315c6f3d2250_fd91b809331a0d42_8"
+  ],
+  "button_ngc_analog_left_left": [
+    "tex1_32x32_11561b91adef4069_77f29b521671a955_8",
+    "tex1_32x32_11561b91adef4069_333eccbf288b83e4_8"
+  ],
+  "button_ngc_analog_left_leftright": [
+    "tex1_32x32_d7fb94b282aeda24_14",
+    "tex1_32x32_d227d4da83a11c7c_14"
+  ],
+  "button_ngc_analog_left_none": [
+    "tex1_32x32_b0b821cba28dcfc4_4841a0dd26e280d5_8",
+    "tex1_32x32_b0b821cba28dcfc4_f5eea7a3851ce7d7_8"
+  ],
+  "button_ngc_analog_left_right": [
+    "tex1_32x32_46eb5e10330ef664_77f29b521671a955_8",
+    "tex1_32x32_46eb5e10330ef664_333eccbf288b83e4_8"
+  ],
+  "button_ngc_analog_left_up": [
+    "tex1_32x32_b813517ce31a7d80_8830954ef40d73d2_8",
+    "tex1_32x32_b813517ce31a7d80_cf18f63546dd4555_8"
+  ],
+  "button_ngc_analog_left_updown": [
+    "tex1_32x32_ff21f31e7627198c_14"
+  ],
+  "button_ngc_analog_right_down": [
+    "tex1_32x32_4094b3de4a51275e_14",
+    "tex1_32x32_7ffc0b1b3ce0bdd4_14"
+  ],
+  "button_ngc_analog_right_left": [
+    "tex1_32x32_77c2ef0b2ae259ed_14"
+  ],
+  "button_ngc_analog_right_leftright": [
+    "tex1_32x32_8c2eb63cef96518f_14"
+  ],
+  "button_ngc_analog_right_none": [
+    "tex1_32x32_a46bda65f586f1f4_14"
+  ],
+  "button_ngc_analog_right_right": [
+    "tex1_32x32_15caba5b7af41c65_14"
+  ],
+  "button_ngc_analog_right_up": [
+    "tex1_32x32_be7288d17ad8bad7_14"
+  ],
+  "button_ngc_analog_right_updown": [
+    "tex1_32x32_8abef47171f1432a_14"
+  ],
+  "button_ngc_b": [
+    "tex1_32x32_ad94d21bbcc3a574_14",
+    "tex1_32x32_3a892a7c0e4445ad_14"
+  ],
+  "button_ngc_dpad_down": [
+    "tex1_32x32_74a7bbf5e404c44c_14",
+    "tex1_32x32_7363ae45de49acd4_14"
+  ],
+  "button_ngc_dpad_left": [
+    "tex1_32x32_c1e21650bb2bb914_14"
+  ],
+  "button_ngc_dpad_right": [
+    "tex1_32x32_e852d37c0ff696f4_14"
+  ],
+  "button_ngc_dpad_up": [
+    "tex1_32x32_b8dafe525b256b26_14"
+  ],
+  "button_ngc_l": [
+    "tex1_32x32_fed286f21af61f01_14",
+    "tex1_32x32_6e59c7c731553517_14"
+  ],
+  "button_ngc_r": [
+    "tex1_32x32_f9dbb029d319877e_14",
+    "tex1_32x32_2300e8b773ce445e_14"
+  ],
+  "button_ngc_start": [
+    "tex1_32x32_efbbf8db69b5693a_b2aabd01a0d5a49c_8",
+    "tex1_32x32_efbbf8db69b5693a_d2d597a73856e489_8"
+  ],
+  "button_ngc_x": [
+    "tex1_32x32_2622b1230f9de198_14",
+    "tex1_32x32_d4635fe154b5d585_14"
+  ],
+  "button_ngc_y": [
+    "tex1_32x32_556705a75655c0a8_41c4d42ec60b68d4_8",
+    "tex1_32x32_556705a75655c0a8_41f1f6c4d8ee72ea_8"
+  ],
+  "button_ngc_z": [
+    "tex1_32x32_a64072935ad6cf50_14",
+    "tex1_32x32_3256d01828197fe6_14"
+  ],
+  "button_ps2_analog_left_down": [
+    "tex1_32x32_d94e95ed99c057de_155d0c494414859a_8",
+    "tex1_32x32_d94e95ed99c057de_d8a0ef185aab9e1e_8"
+  ],
+  "button_ps2_analog_left_left": [
+    "tex1_32x32_594c51776e2fdaa5_155d0c494414859a_8",
+    "tex1_32x32_594c51776e2fdaa5_047d9f64764aa3b2_8"
+  ],
+  "button_ps2_analog_left_leftright": [
+    "tex1_32x32_dfc66c4202b8e17b_adeb8d0fd2e20678_8",
+    "tex1_32x32_dfc66c4202b8e17b_89dd2b43b458fdfb_8"
+  ],
+  "button_ps2_analog_left_none": [
+    "tex1_32x32_c50ea9ec15eb505d_c7c061caac735983_8",
+    "tex1_32x32_c50ea9ec15eb505d_6de0d8ed3e13a637_8"
+  ],
+  "button_ps2_analog_left_right": [
+    "tex1_32x32_81cbea617353ebf1_155d0c494414859a_8",
+    "tex1_32x32_81cbea617353ebf1_047d9f64764aa3b2_8"
+  ],
+  "button_ps2_analog_left_up": [
+    "tex1_32x32_3d4c0bb2d49a98fb_4f664a8012c0b083_8",
+    "tex1_32x32_3d4c0bb2d49a98fb_e9e9b6b352e0972e_8"
+  ],
+  "button_ps2_analog_left_updown": [
+    "tex1_32x32_dd5438139eddf508_894520d842968ac6_8",
+    "tex1_32x32_dd5438139eddf508_fedca2bced8f504a_8"
+  ],
+  "button_ps2_analog_right_down": [
+    "tex1_32x32_c3e25a0478528eef_e8f1fbb28bbb7852_8",
+    "tex1_32x32_c3e25a0478528eef_6db05a45891a5e82_8"
+  ],
+  "button_ps2_analog_right_left": [
+    "tex1_32x32_857be44f06a4d8e6_60da5b0009f33825_8",
+    "tex1_32x32_857be44f06a4d8e6_326b14ed73c05316_8"
+  ],
+  "button_ps2_analog_right_leftright": [
+    "tex1_32x32_645efe9dfdefc2bf_5c90fbea9654e1eb_8",
+    "tex1_32x32_645efe9dfdefc2bf_a2a695ce40bd1638_8"
+  ],
+  "button_ps2_analog_right_none": [
+    "tex1_32x32_4f28ddae7c246d88_a0dd03b9dc30b48d_8",
+    "tex1_32x32_4f28ddae7c246d88_46c2a219d1b837d5_8"
+  ],
+  "button_ps2_analog_right_right": [
+    "tex1_32x32_ac99395d75c8503c_60da5b0009f33825_8",
+    "tex1_32x32_ac99395d75c8503c_326b14ed73c05316_8"
+  ],
+  "button_ps2_analog_right_up": [
+    "tex1_32x32_c1f1da4533ea6da0_fb2b0340ba505a99_8",
+    "tex1_32x32_c1f1da4533ea6da0_6db05a45891a5e82_8"
+  ],
+  "button_ps2_analog_right_updown": [
+    "tex1_32x32_7edac1f019a4ec3f_3e037fa2c1570a72_8",
+    "tex1_32x32_7edac1f019a4ec3f_44f2372ad0d42b86_8"
+  ],
+  "button_ps2_circle": [
+    "tex1_32x32_16ca1bea69336f64_14",
+    "tex1_32x32_21ede00d877ca631_14"
+  ],
+  "button_ps2_dpad_down": [
+    "tex1_32x32_b4b4903b1f439fe1_0678c9383fafab53_8",
+    "tex1_32x32_b4b4903b1f439fe1_5571094fcbde10b0_8"
+  ],
+  "button_ps2_dpad_left": [
+    "tex1_32x32_4fc083a4cdad1596_46cad165e3c095ff_8",
+    "tex1_32x32_4fc083a4cdad1596_3cf86e8dd0833544_8"
+  ],
+  "button_ps2_dpad_right": [
+    "tex1_32x32_e9252e6a42bbae06_22205d6238b70863_8",
+    "tex1_32x32_e9252e6a42bbae06_68effed0c6225b25_8"
+  ],
+  "button_ps2_dpad_up": [
+    "tex1_32x32_0950dbd0c9643e9c_14f3f582a7fa318b_8",
+    "tex1_32x32_0950dbd0c9643e9c_7f924f9d3cdaa09a_8"
+  ],
+  "button_ps2_l1": [
+    "tex1_32x32_72ee6c911e027689_82c4b1f01512d8ad_8",
+    "tex1_32x32_72ee6c911e027689_fbcd30a542646c65_8"
+  ],
+  "button_ps2_l2": [
+    "tex1_32x32_0007d31bb43ed4a6_14",
+    "tex1_32x32_804d13fb81187d60_14"
+  ],
+  "button_ps2_r1": [
+    "tex1_32x32_5a1731cab63cab10_8899b26c338c1461_8",
+    "tex1_32x32_5a1731cab63cab10_65182d9fdde2eec8_8"
+  ],
+  "button_ps2_r2": [
+    "tex1_32x32_3764d2bab4c56956_14",
+    "tex1_32x32_f77a83014b332a30_14"
+  ],
+  "button_ps2_square": [
+    "tex1_32x32_33e7411d6f45e936_14",
+    "tex1_32x32_49ca00997590fd5c_14"
+  ],
+  "button_ps2_start": [
+    "tex1_32x32_8cca9c520e37f975_b3c25acb49574d31_8",
+    "tex1_32x32_8cca9c520e37f975_c62e5186e86d2492_8"
+  ],
+  "button_ps2_triangle": [
+    "tex1_32x32_f1d8fcee54e2a695_14",
+    "tex1_32x32_9cd53028cff131c4_14"
+  ],
+  "button_ps2_x": [
+    "tex1_32x32_dc27848c7859ee03_14",
+    "tex1_32x32_10f3afeb2907394d_14"
+  ],
+  "button_xbx_a": [
+    "tex1_32x32_1117ce93be7c23c9_14",
+    "tex1_32x32_857277569f876b80_14"
+  ],
+  "button_xbx_analog_left_down": [
+    "tex1_32x32_c0b449df0622e515_4761fc34f535e86d_8",
+    "tex1_32x32_c0b449df0622e515_fa21250e6da3ce72_8"
+  ],
+  "button_xbx_analog_left_left": [
+    "tex1_32x32_e5e9d105162319a1_cd05712d6dffa146_8",
+    "tex1_32x32_e5e9d105162319a1_42c7277495bea753_8"
+  ],
+  "button_xbx_analog_left_leftright": [
+    "tex1_32x32_7f328b4409061632_14",
+    "tex1_32x32_5663c16e71b70e44_14"
+  ],
+  "button_xbx_analog_left_none": [
+    "tex1_32x32_37a69ec3f6ded081_d497e771c84ff12c_8",
+    "tex1_32x32_37a69ec3f6ded081_85d03162fd44f435_8"
+  ],
+  "button_xbx_analog_left_right": [
+    "tex1_32x32_11f075b6754e0e01_cd05712d6dffa146_8",
+    "tex1_32x32_11f075b6754e0e01_42c7277495bea753_8"
+  ],
+  "button_xbx_analog_left_up": [
+    "tex1_32x32_adbc94fd92a145fd_df5657ecbc22d5d2_8",
+    "tex1_32x32_adbc94fd92a145fd_15faf2c8e4e4930f_8"
+  ],
+  "button_xbx_analog_left_updown": [
+    "tex1_32x32_b8bb0376924b194b_14"
+  ],
+  "button_xbx_analog_right_down": [
+    "tex1_32x32_7ea226f72277edc0_a524f3258a092881_8",
+    "tex1_32x32_7ea226f72277edc0_4f9ccc957262f40f_8"
+  ],
+  "button_xbx_analog_right_left": [
+    "tex1_32x32_d6a6db248af38dc9_f3463563b7cee3dd_8",
+    "tex1_32x32_d6a6db248af38dc9_d03e1246db7f42bf_8"
+  ],
+  "button_xbx_analog_right_leftright": [
+    "tex1_32x32_29cd6eb570892c1b_14",
+    "tex1_32x32_f5b626e2303b92f4_14"
+  ],
+  "button_xbx_analog_right_none": [
+    "tex1_32x32_30fce2941c2a3a4d_f4510ff122978411_8",
+    "tex1_32x32_30fce2941c2a3a4d_e33b5a96c2ff0328_8"
+  ],
+  "button_xbx_analog_right_right": [
+    "tex1_32x32_00a90958f1bbea44_f3463563b7cee3dd_8",
+    "tex1_32x32_00a90958f1bbea44_d03e1246db7f42bf_8"
+  ],
+  "button_xbx_analog_right_up": [
+    "tex1_32x32_cd302982f12f4f30_2407ceae34a0ab9e_8",
+    "tex1_32x32_cd302982f12f4f30_0daefbb72949073a_8"
+  ],
+  "button_xbx_analog_right_updown": [
+    "tex1_32x32_f4744883780cce7f_14"
+  ],
+  "button_xbx_b": [
+    "tex1_32x32_a8dc4a3fe9ff864a_14",
+    "tex1_32x32_b7485f05388d4799_14"
+  ],
+  "button_xbx_black": [
+    "tex1_32x32_9968169308901699_14",
+    "tex1_32x32_7307092e509b2e4f_14"
+  ],
+  "button_xbx_dpad_down": [
+    "tex1_32x32_654036be128b5bcf_14",
+    "tex1_32x32_47dcf9f7ce757962_14"
+  ],
+  "button_xbx_dpad_left": [
+    "tex1_32x32_ed297d585d9c5eab_14",
+    "tex1_32x32_0107202e5b5c0516_14"
+  ],
+  "button_xbx_dpad_right": [
+    "tex1_32x32_816392a9d05c56bf_14",
+    "tex1_32x32_cdeaf25530b15d10_14"
+  ],
+  "button_xbx_dpad_up": [
+    "tex1_32x32_8bd5d76cada4f75e_14",
+    "tex1_32x32_5aeb971cff6c4e73_14"
+  ],
+  "button_xbx_l": [
+    "tex1_32x32_93e05ed854d690fb_14",
+    "tex1_32x32_18877f89bf8c526f_14"
+  ],
+  "button_xbx_r": [
+    "tex1_32x32_4f4c78d6d08f4c49_14",
+    "tex1_32x32_ed6668ce1f8ba979_14"
+  ],
+  "button_xbx_start": [
+    "tex1_32x32_7690080b133c9ec4_14",
+    "tex1_32x32_eb126705a619b95c_14"
+  ],
+  "button_xbx_white": [
+    "tex1_32x32_9efc51ad9b5a380f_14",
+    "tex1_32x32_255bcc7ffa533c49_14"
+  ],
+  "button_xbx_x": [
+    "tex1_32x32_095a73575c245c45_14",
+    "tex1_32x32_7d288e8e80206095_14"
+  ],
+  "button_xbx_y": [
+    "tex1_32x32_4f04e143966feba2_14",
+    "tex1_32x32_55be684801520e9b_14"
+  ],
+  "b_jj_grass": [
+    "tex1_256x256_m_a86485161fd67796_14",
+    "tex1_256x256_m_756780ae435234a3_14"
+  ],
+  "b_jm_totem_bad": [
+    "tex1_256x64_b28d0f3ba96c8baf_14"
+  ],
+  "b_kg_cliffrockgrey": [
+    "tex1_256x256_m_c8ba50691c7bcafc_14"
+  ],
+  "b_kg_dirt overlay": [
+    "tex1_128x128_aaafbc5f393d2231_14",
+    "tex1_128x128_ff2942ce100d81bf_14"
+  ],
+  "b_kg_dirt patch": [
+    "tex1_128x128_35588c20535c8e69_14",
+    "tex1_128x128_2d8e5973dba72896_14"
+  ],
+  "b_kg_glygh01": [
+    "tex1_128x128_cd8847334957df48_14"
+  ],
+  "b_kg_glygh01b": [
+    "tex1_256x256_m_131f1efba86dd5b3_14"
+  ],
+  "b_kg_hangingvines": [
+    "tex1_128x64_m_c0c9745cda93cc8f_2505888feb69cdbf_9"
+  ],
+  "b_kg_hangingvines_01": [
+    "tex1_256x128_m_03b41e688055a2b2_efdff538c686f903_8",
+    "tex1_256x128_m_03b41e688055a2b2_743c42bb03243fa0_8"
+  ],
+  "b_kg_hangingvines_flowers_w": [
+    "tex1_256x128_c016f30f901d57a8_f3b61a529e452b1b_9"
+  ],
+  "b_kg_sand_no_alpha": [
+    "tex1_64x64_aedc1a6befbb1faf_14"
+  ],
+  "b_kg_tiretread_dirt": [
+    "tex1_64x64_6cbb36826d00d5f1_14",
+    "tex1_64x64_68f0a5d9d47b333e_14"
+  ],
+  "b_kg_tiretread_dirtend": [
+    "tex1_64x64_33ac34bfda7992e9_14",
+    "tex1_64x64_dc95c7a8c7da1226_14"
+  ],
+  "b_kg_tiretread_dirtngrass": [
+    "tex1_64x64_aff00205f186f2d1_14"
+  ],
+  "b_kg_tiretread_dirtngrassend": [
+    "tex1_64x64_527c88337527aec4_14"
+  ],
+  "b_kh_hangvines": [
+    "tex1_256x128_597a559c255c3abb_3d4d2f21a053a253_9",
+    "tex1_256x128_597a559c255c3abb_1c039e5a4c2feae6_9"
+  ],
+  "b_kh_rocka_frosted": [
+    "tex1_128x128_7d0e93670802b615_14"
+  ],
+  "b_ls_animail_skin": [
+    "tex1_128x128_fa19a8ef27411306_88979b2b4879af43_8",
+    "tex1_128x128_fa19a8ef27411306_c6a7ef06cb0cd9ae_8"
+  ],
+  "b_ls_animal_skins": [
+    "tex1_128x128_e9451f2cc9a886da_cc5e6756c9de5946_9"
+  ],
+  "b_ls_brokenwooddoor": [
+    "tex1_128x128_f3d82999174cfc2b_14"
+  ],
+  "b_ls_hole": [
+    "tex1_64x64_f42ec25fa418c3fb_14",
+    "tex1_64x64_61a517d491fe0d4b_14"
+  ],
+  "b_ls_hutwallbottom": [
+    "tex1_128x64_81d82243af186bbb_14"
+  ],
+  "b_ls_hutwalltop": [
+    "tex1_128x64_e5a690abde6336da_14"
+  ],
+  "b_ls_melon": [
+    "tex1_64x64_e43cc7b05e8049b5_14"
+  ],
+  "b_ls_outhousedoor_hole": [
+    "tex1_64x64_6743f3b45a77a16f_ccc0f100fec19dd0_8",
+    "tex1_64x64_6743f3b45a77a16f_401b335148007dd3_8"
+  ],
+  "b_ls_pottery_crude": [
+    "tex1_128x128_2209ee36fb0cb6e7_14"
+  ],
+  "b_ls_pottery_pattern": [
+    "tex1_128x64_fc2831d448764f92_14"
+  ],
+  "b_ls_pottery_stripe": [
+    "tex1_128x64_35155c195a265191_14"
+  ],
+  "b_ls_pottery_urn": [
+    "tex1_128x64_224aa704f7324318_14"
+  ],
+  "b_ls_rottenwooddooor": [
+    "tex1_256x256_f8e2543c8d76b2de_14"
+  ],
+  "b_ls_thatch": [
+    "tex1_256x128_m_38f0316d358a1612_56efd14ff188b9c6_9"
+  ],
+  "b_ls_thatchtoo": [
+    "tex1_256x128_m_a3c73f15b5ee6971_25e35644bcfe7c6c_9"
+  ],
+  "b_ls_totempole": [
+    "tex1_64x128_4212702d8f72eb60_14"
+  ],
+  "b_ls_woodpost": [
+    "tex1_128x128_2e0dc24d79a3e700_14"
+  ],
+  "b_ls_woodpost_frost": [
+    "tex1_64x64_db93deed3c3b8b41_14"
+  ],
+  "b_ls_woodpost_tip": [
+    "tex1_128x128_1732f531b8e7fc5e_14"
+  ],
+  "b_ls_woodpost_tip_frost": [
+    "tex1_64x64_bbd597e57a1c7f47_14"
+  ],
+  "b_rt_jungle_tree_rings": [
+    "tex1_64x64_dca2f6ad3fc87b3e_14"
+  ],
+  "b_rt_totem_back_side_01": [
+    "tex1_128x64_a56f025461d90404_14"
+  ],
+  "b_tp_animal_skins_frost": [
+    "tex1_128x128_902486a895d9d4bb_14",
+    "tex1_128x128_bc1568849365a466_14"
+  ],
+  "b_tp_animal_skin_frost": [
+    "tex1_128x128_03c8088a211f509b_caf62231737eb001_8",
+    "tex1_128x128_03c8088a211f509b_ce81a74519c1bbf6_8"
+  ],
+  "b_tp_frosted_tree": [
+    "tex1_128x128_424a2d62cc6fa70b_14"
+  ],
+  "b_tp_pottery_crude_frost": [
+    "tex1_64x64_884a23e1fae97e74_14"
+  ],
+  "b_tp_pottery_stripe_frost": [
+    "tex1_64x32_276b9ac6926f64ca_14"
+  ],
+  "c00_db_caveranfloor": [
+    "tex1_256x256_04768eb4ca58c946_14"
+  ],
+  "c00_db_caveranfloor_edge": [
+    "tex1_128x128_060ca835c3864e56_14",
+    "tex1_128x128_c76c102afa8898bd_14"
+  ],
+  "c00_db_caveran_rocksurface": [
+    "tex1_128x128_8864db52f006d84a_14"
+  ],
+  "c00_db_caveran_rubble_rt": [
+    "tex1_128x128_c99b23335fc0a273_14"
+  ],
+  "c00_db_caveran_trench_blue": [
+    "tex1_128x128_701d8e7693029255_14"
+  ],
+  "c00_db_tunel_walls": [
+    "tex1_256x256_4d0278a7a453aabf_14"
+  ],
+  "c00_ws_caveranfloor": [
+    "tex1_128x128_bff88c26afd051a0_14"
+  ],
+  "c00_ws_cavernfloor": [
+    "tex1_128x128_06b49314640b4b94_14"
+  ],
+  "c00_ws_rockwall": [
+    "tex1_128x128_m_ad841da19e752712_14"
+  ],
+  "c02": [
+    "tex1_512x512_83faaf54643b7505_14"
+  ],
+  "c06_kg_geyser_outlet": [
+    "tex1_128x128_3c329fa219d99955_14",
+    "tex1_128x128_50b6e40c9cf93248_14"
+  ],
+  "c07": [
+    "tex1_512x256_9765486aa1e27e81_14"
+  ],
+  "centipede": [
+    "tex1_256x256_f639b8790021634f_14"
+  ],
+  "charcoalglow": [
+    "tex1_64x64_dc4bbaa9b0c22ffc_14"
+  ],
+  "charcoalglow_purple": [
+    "tex1_64x64_a0742a88bb6a6c09_14"
+  ],
+  "charcoalpile": [
+    "tex1_128x128_cc394d2961c339f1_14",
+    "tex1_128x128_2a2a64883f237eb9_14"
+  ],
+  "chief_drape_helmet": [
+    "tex1_128x128_659607d37a3ca164_c609438b1e5371f3_9"
+  ],
+  "chief_legs": [
+    "tex1_128x128_520ce33d894b8a3b_14"
+  ],
+  "chief_torso": [
+    "tex1_256x256_68299da2b9436d02_14"
+  ],
+  "cin_jm_lightininga": [
+    "tex1_256x128_e61f834e73537ada_14",
+    "tex1_256x128_bec120262ebebed7_14"
+  ],
+  "cin_jm_lightiningb": [
+    "tex1_256x128_cca34a3f2ce947a3_14",
+    "tex1_256x128_3f0b561aaf7ebe0b_14"
+  ],
+  "cin_jm_lightiningc": [
+    "tex1_256x128_b55d5a4b14393d11_14",
+    "tex1_256x128_7064c7e14ab3fe11_14"
+  ],
+  "circle_glow_add": [
+    "tex1_32x32_f77c84368aac7366_ff10223616c08787_8",
+    "tex1_32x32_f77c84368aac7366_361651667f4b6a16_8"
+  ],
+  "cliff_crack_grounddirt": [
+    "tex1_256x256_m_faa47dff869aae92_14",
+    "tex1_256x256_m_4ee6c4bd47025b08_14"
+  ],
+  "coconut_jm": [
+    "tex1_32x32_3eaaf036207c4826_14"
+  ],
+  "coconut_jm_leaf": [
+    "tex1_64x32_ba41d539ab14e1d1_607ad421022d3a2a_8",
+    "tex1_64x32_ba41d539ab14e1d1_3ac0dce8b895a057_8"
+  ],
+  "credits_background": [
+    "tex1_512x512_3d06eceb0b57d15a_14"
+  ],
+  "credits_background_end": [
+    "tex1_512x512_df20d016ca64ff08_14"
+  ],
+  "croc3_body": [
+    "tex1_256x128_e1923c4850af3fec_14"
+  ],
+  "croc3_tail": [
+    "tex1_256x128_e84ff8b8d00beb77_14"
+  ],
+  "croc_head_lod": [
+    "tex1_64x64_cd95fe75a707d4ac_14"
+  ],
+  "cube_digit_0": [
+    "tex1_32x32_8b995de09fc23718_14"
+  ],
+  "cube_digit_1": [
+    "tex1_32x32_254e04c48ebf1d50_14"
+  ],
+  "cube_digit_2": [
+    "tex1_32x32_ebd019c0e6f5ec20_14"
+  ],
+  "cube_digit_3": [
+    "tex1_32x32_f89eb72b10de44d2_14"
+  ],
+  "cube_digit_4": [
+    "tex1_32x32_860a24f30558b639_14"
+  ],
+  "cube_digit_5": [
+    "tex1_32x32_0fcd743f8a225169_14"
+  ],
+  "cube_digit_6": [
+    "tex1_32x32_92209321622b3ef4_14"
+  ],
+  "cube_digit_7": [
+    "tex1_32x32_e219badea34fd126_14"
+  ],
+  "cube_digit_8": [
+    "tex1_32x32_33054bbabf51a184_14"
+  ],
+  "cube_digit_9": [
+    "tex1_32x32_4fd7c1d1d9042552_14"
+  ],
+  "c_dr_falling_star": [
+    "tex1_128x128_ab9f030ac3ffb7da_14",
+    "tex1_128x128_783db16f3d32a2a0_14"
+  ],
+  "c_dr_falling_star_reflection": [
+    "tex1_32x32_9610e464ce8d58f7_6"
+  ],
+  "c_jj_dirtoverlay": [
+    "tex1_128x128_aad9447e1883723b_14",
+    "tex1_128x128_e96e9d1c06a5cbc6_14"
+  ],
+  "db_a70statue_body": [
+    "tex1_128x128_2a3d0578e2f31e29_14"
+  ],
+  "db_a70statue_head": [
+    "tex1_128x128_fd824ec22d345d27_14"
+  ],
+  "db_animail_skin": [
+    "tex1_256x256_33a4905e885810a3_14"
+  ],
+  "db_animail_skin_door": [
+    "tex1_256x256_4d4e6f14367f72f3_03ac33340acfad69_8",
+    "tex1_256x256_4d4e6f14367f72f3_05cdde1e68ef2a9f_8"
+  ],
+  "db_atari": [
+    "tex1_128x128_m_eaf522718db560f8_14"
+  ],
+  "db_bannera_animail_skin": [
+    "tex1_128x128_770be28db508ebd4_faad6026ac4f10dc_9"
+  ],
+  "db_bannerb_animail_skin": [
+    "tex1_128x128_e8dd22c910239da1_23349eff35bf214b_9"
+  ],
+  "db_bannerc_animail_skin": [
+    "tex1_128x128_e5832927af5c5a82_2160b1271ae9b32c_9"
+  ],
+  "db_barbedwire": [
+    "tex1_128x64_cd72fef51a859adf_fe352dbb39b887d6_8",
+    "tex1_128x64_cd72fef51a859adf_797ca63973da36be_8"
+  ],
+  "db_cavewall_ice_tuccohole": [
+    "tex1_128x128_f922a0c6175a11cd_14",
+    "tex1_128x128_b172a5afb749f160_14"
+  ],
+  "db_conveyor_parts": [
+    "tex1_128x128_092c8ccba115e8f9_14"
+  ],
+  "db_conveyor_straps": [
+    "tex1_32x16_24cb7e566edab20f_14"
+  ],
+  "db_eye": [
+    "tex1_128x128_4e2e205ade394b9c_14"
+  ],
+  "db_mud_transition": [
+    "tex1_128x128_155eeda577238e04_14",
+    "tex1_128x128_d002ffc126556593_14"
+  ],
+  "db_rope": [
+    "tex1_32x32_015199c843a99403_14"
+  ],
+  "db_ropes": [
+    "tex1_128x128_6c1c234ae8f2285c_14"
+  ],
+  "db_thatch_dark": [
+    "tex1_256x128_m_c8f1143e2c5dc903_14",
+    "tex1_256x128_m_bacd5a37cbcfb976_14"
+  ],
+  "db_thatch_dark_frost": [
+    "tex1_128x64_91ddfc441515572f_14",
+    "tex1_128x64_8242f2ea27530fc0_14"
+  ],
+  "db_toon_glyphs_blank": [
+    "tex1_128x64_c5553ce87252d084_14"
+  ],
+  "db_wooden_post": [
+    "tex1_128x64_fb7a286b8d498610_14"
+  ],
+  "db_wood_post_tip": [
+    "tex1_128x64_d6cc247ea352a78d_14"
+  ],
+  "db_wrap_full": [
+    "tex1_64x32_429b22962af72288_14"
+  ],
+  "db_wrap_full_frost": [
+    "tex1_64x32_f66671d864bb0d9a_14"
+  ],
+  "default": [
+    "tex1_8x8_d4e7f3f8d958d130_14"
+  ],
+  "depth": [
+    "tex1_8x8_25bf9b602d3e04b2_14",
+    "tex1_8x8_a2b43c016e5594b8_14"
+  ],
+  "dr_eelectricity": [
+    "tex1_128x128_c3c6829460ddc93e_744171074c1088ef_8",
+    "tex1_128x128_c3c6829460ddc93e_92a73f81136feb77_8"
+  ],
+  "dr_fireball_harry": [
+    "tex1_128x128_2e92064937929833_14",
+    "tex1_128x128_c4b071eaa99f247e_14"
+  ],
+  "dr_font_waterfall": [
+    "tex1_32x32_3ae00aef85be3bb6_14",
+    "tex1_32x32_781de3cef89e11f9_14"
+  ],
+  "dr_goop_particle": [
+    "tex1_32x32_ba55a3f5a3dae120_00754fefa274536b_8",
+    "tex1_32x32_ba55a3f5a3dae120_5d7aff58bbe556c2_8"
+  ],
+  "dr_kapow_particle": [
+    "tex1_64x64_cc5c090394f9e0fa_0cc9cd3532398e08_9"
+  ],
+  "dr_kapow_particle_blue": [
+    "tex1_64x64_f8916200f2155a4f_25b39bca34be1e40_8",
+    "tex1_64x64_f8916200f2155a4f_153013aab90223ad_8"
+  ],
+  "dr_light_beam": [
+    "tex1_128x128_1b995279dfe976fd_14",
+    "tex1_128x128_faafce750b201b6a_14"
+  ],
+  "dr_ray_particle": [
+    "tex1_64x64_110dedfb4430dc22_660f9902b3d682bc_9"
+  ],
+  "dr_ray_particle_nocenter": [
+    "tex1_128x128_acb711bc4f3d1f1e_effb6d4db48fe7a5_9"
+  ],
+  "dust-puff": [
+    "tex1_64x64_b3beb443a06931ea_e7f52ab4b2897255_9"
+  ],
+  "dustpuffwhite": [
+    "tex1_64x64_667a99353bc729f3_f748eaea6e3e445a_9"
+  ],
+  "e3loading": [
+    "tex1_512x512_0030e6cc190e8c11_14"
+  ],
+  "eel": [
+    "tex1_128x128_1d3e9f7be3bacee9_14"
+  ],
+  "eel_lod": [
+    "tex1_64x64_e9be53c4d999bccc_14"
+  ],
+  "egg": [
+    "tex1_64x64_07f760f77354b435_14"
+  ],
+  "egg_yolk": [
+    "tex1_64x32_f75ee95edc92f40d_14"
+  ],
+  "explorerhead": [
+    "tex1_128x128_ab35239c74488ad5_14"
+  ],
+  "explorerhead01": [
+    "tex1_128x128_20411f11fe56059a_14"
+  ],
+  "explorerhead_lod": [
+    "tex1_64x64_16ec467e85f810bf_14"
+  ],
+  "explorerhead_type2": [
+    "tex1_128x128_a4a0dfda9f2caf2e_14"
+  ],
+  "explorerhead_type2_lod": [
+    "tex1_32x32_53765d17c9bb9e6e_14"
+  ],
+  "explorerhead_type3": [
+    "tex1_128x128_e8159235783d9d9e_14"
+  ],
+  "explorerlegs": [
+    "tex1_128x128_61eb1dda576feeb9_14"
+  ],
+  "explorerlegs01": [
+    "tex1_128x128_40e8c609b909e4bd_14"
+  ],
+  "explorerlegs_lod": [
+    "tex1_64x64_e3bc0c6a2ea0731f_14"
+  ],
+  "explorerlegs_type2": [
+    "tex1_128x128_109e6002d19bdd29_14"
+  ],
+  "explorerlegs_type2_lod": [
+    "tex1_32x32_d185c2d34bbf326b_14"
+  ],
+  "explorerlegs_type3": [
+    "tex1_128x128_0f72cce4367862b5_14"
+  ],
+  "explosion_shroom": [
+    "tex1_128x128_415c16471d71b5e4_14",
+    "tex1_128x128_4658dc19ef48402b_14"
+  ],
+  "explosion_shroomcap": [
+    "tex1_128x64_e8046b7383b375f1_14",
+    "tex1_128x64_b837e582f695f6a4_14"
+  ],
+  "Explosion_Smokering": [
+    "tex1_64x64_c0e98a7276a0c744_ff10223616c08787_8",
+    "tex1_64x64_c0e98a7276a0c744_9e80109d677429a4_8"
+  ],
+  "fence_squares": [
+    "tex1_64x64_m_a26ec1ecfa12e5bc_fdc19a5f41f7673e_8",
+    "tex1_64x64_m_a26ec1ecfa12e5bc_3e68dc2ab56e8ed9_8"
+  ],
+  "flame01": [
+    "tex1_64x64_689c672d7bd39521_621b2137dddb3a78_8",
+    "tex1_64x64_689c672d7bd39521_2ff9cc774d994d2d_8"
+  ],
+  "flame01_gt": [
+    "tex1_32x32_ec71d4c1612b414f_b74fe081d6100fd5_8",
+    "tex1_32x32_ec71d4c1612b414f_77f03d53a4d4e086_8"
+  ],
+  "flame02": [
+    "tex1_64x64_3a18955cc177d498_299d4c36be18be82_8",
+    "tex1_64x64_3a18955cc177d498_0bc524355297ec22_8"
+  ],
+  "flame02_gt": [
+    "tex1_32x32_81a19d64f74843c5_4ad61cfdf7e47ae2_8",
+    "tex1_32x32_81a19d64f74843c5_f55deba514f16444_8"
+  ],
+  "flame03": [
+    "tex1_64x64_4f0e43d107607a79_01247a4b2c31677e_8",
+    "tex1_64x64_4f0e43d107607a79_432936d9885f0cba_8"
+  ],
+  "flame03_gt": [
+    "tex1_32x32_7920e4f4296214e6_eb5e3e4200c2354e_8",
+    "tex1_32x32_7920e4f4296214e6_ce70578242061717_8"
+  ],
+  "flame04": [
+    "tex1_64x64_66a1d7edde776ecc_6584a2d2cf6d5fff_8",
+    "tex1_64x64_66a1d7edde776ecc_97d95ebd4cf5483f_8"
+  ],
+  "flame04_gt": [
+    "tex1_32x32_a1e81cab96e045a9_1cec23291f063a39_8",
+    "tex1_32x32_a1e81cab96e045a9_5648eaa7c662d0a5_8"
+  ],
+  "flame05": [
+    "tex1_64x64_c3833713d1c852b1_b88d0e18af9665b1_8",
+    "tex1_64x64_c3833713d1c852b1_e3c7d4abe7447bc2_8"
+  ],
+  "flame05_gt": [
+    "tex1_32x32_d97433919db871b5_5a43f269ea8c3b72_8",
+    "tex1_32x32_d97433919db871b5_97f0071bb76aeec1_8"
+  ],
+  "flame06": [
+    "tex1_64x64_972ca76067a194b6_f2e746cfebe57e95_8",
+    "tex1_64x64_972ca76067a194b6_4ee3adcd193038ea_8"
+  ],
+  "flame06_gt": [
+    "tex1_32x32_f8f974d99d5d8ed6_66ed2bccc00a0c88_8",
+    "tex1_32x32_f8f974d99d5d8ed6_821d5f8ad28da12a_8"
+  ],
+  "flame07": [
+    "tex1_64x64_8f09e1d7afde952c_cac14d4f6e7798b2_8",
+    "tex1_64x64_8f09e1d7afde952c_bde6dc5e4b7a42fb_8"
+  ],
+  "flame07_gt": [
+    "tex1_32x32_05798ac8477a7641_67a4d530ed7af611_8",
+    "tex1_32x32_05798ac8477a7641_f4944d92ea7cfd38_8"
+  ],
+  "flame08": [
+    "tex1_64x64_b4170a3317752b1b_856ef9ef0184ff87_8",
+    "tex1_64x64_b4170a3317752b1b_d16b7672db6a98f0_8"
+  ],
+  "flame08_gt": [
+    "tex1_32x32_838e6a2c175d9167_7be0fd39b2508e5c_8",
+    "tex1_32x32_838e6a2c175d9167_0af9748d2c353c45_8"
+  ],
+  "flame09": [
+    "tex1_64x64_a521337f72ea8370_38a7709c350e5642_8",
+    "tex1_64x64_a521337f72ea8370_e6d121ce62a7210d_8"
+  ],
+  "flame10": [
+    "tex1_64x64_a59bd54322181885_f171c14a783eb234_8",
+    "tex1_64x64_a59bd54322181885_43d853e7c9966e29_8"
+  ],
+  "flame11": [
+    "tex1_64x64_e7f8e210e6d1ae15_d9b7c6aba543f8a9_8",
+    "tex1_64x64_e7f8e210e6d1ae15_57ec97ea9fdaaac7_8"
+  ],
+  "flame12": [
+    "tex1_64x64_00e5a97da5613a0c_1458471756f78821_8",
+    "tex1_64x64_00e5a97da5613a0c_a75007672aa23412_8"
+  ],
+  "flame13": [
+    "tex1_64x64_f4f8d460b44d83da_80015344317dddc8_8",
+    "tex1_64x64_f4f8d460b44d83da_df146bf9fd89b72f_8"
+  ],
+  "flame14": [
+    "tex1_64x64_9831a0205a1f88a2_0918fca1e7262cd0_8",
+    "tex1_64x64_9831a0205a1f88a2_22eefd0dd8b73b3e_8"
+  ],
+  "flame15": [
+    "tex1_64x64_0d488c9875777245_53655e931cd8d283_8",
+    "tex1_64x64_0d488c9875777245_ab4ae80f92c324d7_8"
+  ],
+  "flame16": [
+    "tex1_64x64_c804a14004ca8e49_31281dab25f4d06e_8",
+    "tex1_64x64_c804a14004ca8e49_dec828ad779b3b5b_8"
+  ],
+  "fog_jungle": [
+    "tex1_256x128_43c21622f2c99b00_1d4d8ac494ba13ab_8",
+    "tex1_256x128_43c21622f2c99b00_d5138935a61f3b06_8"
+  ],
+  "fog_layeredb": [
+    "tex1_128x64_8b347275ae574ef4_551ccab600000938_9"
+  ],
+  "fog_orange": [
+    "tex1_64x64_4219cb7648f86ae5_6b28a6a26f70197a_8",
+    "tex1_64x64_4219cb7648f86ae5_3efed8c55b3ace49_8"
+  ],
+  "font_pitfall_harry_s24_p0": [
+    "tex1_512x512_341c9348ae2647ba_14",
+    "tex1_512x512_fda755cc8ffcf8dd_14"
+  ],
+  "font_systemfont_s12_p0": [
+    "tex1_512x256_7131ec1b2fa2af47_14",
+    "tex1_512x256_12aec6f81781e7dd_14"
+  ],
+  "frogambient": [
+    "tex1_64x32_843a2d195511f1fc_14"
+  ],
+  "frogplant": [
+    "tex1_256x256_a2c8516613ced30c_14",
+    "tex1_256x256_4c86c66bb559fdf0_14"
+  ],
+  "frozen_piranha": [
+    "tex1_64x64_1d75a4be1574c6f3_14"
+  ],
+  "gen_native_legs": [
+    "tex1_128x128_4ce2bb06e324f47e_14"
+  ],
+  "gen_native_legs_lod": [
+    "tex1_64x64_2122236540545630_14"
+  ],
+  "gen_native_pouch": [
+    "tex1_64x64_a1fbe7ad68be6e1f_14"
+  ],
+  "gen_native_pouch_lod": [
+    "tex1_16x16_ccface591a847a86_14"
+  ],
+  "gen_native_torso": [
+    "tex1_128x128_3f93bf6b975ac0be_14"
+  ],
+  "gen_native_torso_lod": [
+    "tex1_64x64_8f7d5035d10ebca6_14"
+  ],
+  "gizmo_texture_page": [
+    "tex1_256x256_1c8bffe82f518eff_14"
+  ],
+  "glassblock": [
+    "tex1_32x32_2b3ac610a8acc9b1_14",
+    "tex1_32x32_8a2d093102382854_14"
+  ],
+  "glow": [
+    "tex1_16x16_ed2be9307c83bf3b_6b5b94a88881427c_8",
+    "tex1_16x16_ed2be9307c83bf3b_fc51c292da5ece5e_8"
+  ],
+  "grass": [
+    "tex1_256x256_2ee780138887104b_14"
+  ],
+  "ground_pit": [
+    "tex1_64x64_08c00b93b389d73c_14",
+    "tex1_64x64_edc854016f2b9abb_14"
+  ],
+  "gt_burntground": [
+    "tex1_256x256_m_5164d27328f7e876_a80dde4080829464_9"
+  ],
+  "gt_burntground_hotter": [
+    "tex1_256x256_m_54204e65dd34c165_2536233d0df1fc52_9"
+  ],
+  "guard_face": [
+    "tex1_256x256_33ebbda67fb4250b_14"
+  ],
+  "guard_headskin": [
+    "tex1_128x128_31d47f5d515e8995_14"
+  ],
+  "guard_legs2": [
+    "tex1_128x128_060f973c193f19c6_14"
+  ],
+  "guard_torso1": [
+    "tex1_128x128_f74c915265a696ad_14"
+  ],
+  "g_ls_pottery_crude": [
+    "tex1_128x128_eb61df7bba8af08f_14"
+  ],
+  "g_ls_pottery_pattern": [
+    "tex1_64x32_c0a640d84182ffbb_14"
+  ],
+  "g_ls_pottery_stripe": [
+    "tex1_64x32_9e36557b1704c521_14"
+  ],
+  "g_ls_pottery_urn": [
+    "tex1_64x32_40e740dedeff0aac_14"
+  ],
+  "harrybkpack": [
+    "tex1_128x128_25f151ab318dfe45_14"
+  ],
+  "harrybody": [
+    "tex1_256x256_bbc0eb8badd7e8eb_14"
+  ],
+  "harrybodyparts": [
+    "tex1_256x256_e1bb57d23c7d5715_14"
+  ],
+  "harrybodyparts_snow": [
+    "tex1_256x256_e1f56e8e1e6f9f97_14"
+  ],
+  "harryeye": [
+    "tex1_32x32_31c41c9263b75cd8_14"
+  ],
+  "harryface&pack": [
+    "tex1_256x256_c780f6f8e7afe94f_14"
+  ],
+  "harryhead": [
+    "tex1_64x64_ef856bfee3e114a3_14"
+  ],
+  "harrystrike": [
+    "tex1_32x32_458beed9d16dbe8c_03d59c3bd224927a_8",
+    "tex1_32x32_458beed9d16dbe8c_0e449c750bd8d94b_8"
+  ],
+  "harry_boots&pack": [
+    "tex1_256x128_50a06e085dcaa106_14"
+  ],
+  "harry_face_clean": [
+    "tex1_128x128_cc2acd42c9435161_14"
+  ],
+  "harry_face_ruff": [
+    "tex1_128x128_9c4289e35cbb848d_14"
+  ],
+  "harry_ice_pick_128": [
+    "tex1_32x32_6ebaad652e5cb9b9_14"
+  ],
+  "harry_jump_impact_sand_streaks": [
+    "tex1_64x64_d33a85d3d479d21b_82fcc9db2feb346f_9"
+  ],
+  "harry_original": [
+    "tex1_16x16_f1052326a146984f_14"
+  ],
+  "harry_run_01": [
+    "tex1_32x32_9c34e129c32715d3_ed33768f2818534e_9"
+  ],
+  "harry_run_02": [
+    "tex1_32x32_6d066cd3588eb33c_52636a5d5e5975f6_9"
+  ],
+  "harry_run_03": [
+    "tex1_32x32_62ef270bc4a9afc1_2e23e74471c73050_9"
+  ],
+  "harry_run_04": [
+    "tex1_32x32_cb59516e19d109f8_52636a5d5e5975f6_9"
+  ],
+  "harry_run_05": [
+    "tex1_32x32_4130408174cebbef_2e23e74471c73050_9"
+  ],
+  "harry_run_06": [
+    "tex1_32x32_6a7ec037e869872b_5dbb709af0585d96_9"
+  ],
+  "harry_run_07": [
+    "tex1_32x32_309f3e07cfda7b75_7076d4a00c05131b_9"
+  ],
+  "harry_run_08": [
+    "tex1_32x32_a0a28397e56a66e6_ed33768f2818534e_9"
+  ],
+  "harry_run_09": [
+    "tex1_32x32_744700800b16808b_2e23e74471c73050_9"
+  ],
+  "harry_run_10": [
+    "tex1_32x32_7241b51e0ae58f08_2e23e74471c73050_9"
+  ],
+  "harry_super": [
+    "tex1_128x128_4a2c658d0392c29c_14",
+    "tex1_128x128_c305b2d472194564_14"
+  ],
+  "harry_super_arm": [
+    "tex1_128x128_9b296d559bbf391b_a6a33a379117b795_8",
+    "tex1_128x128_9b296d559bbf391b_ab2b61e57eb2d4bb_8"
+  ],
+  "harry_whiphat": [
+    "tex1_32x32_2e827ca441ffccc8_14"
+  ],
+  "henchman_body": [
+    "tex1_128x128_9e224e1a05d4c72c_14"
+  ],
+  "henchman_body_lod": [
+    "tex1_64x64_347abaf69505b5b5_14"
+  ],
+  "henchman_head": [
+    "tex1_128x128_d2d9d36349851f7d_14"
+  ],
+  "henchman_head_lod": [
+    "tex1_64x64_e04b1de2a72c12d8_14"
+  ],
+  "heroic": [
+    "tex1_64x64_4e8372251164413b_70dda5c0ad9bc586_8",
+    "tex1_64x64_4e8372251164413b_0effdd38a7d6dced_8"
+  ],
+  "howler": [
+    "tex1_128x128_5cc9534372a1a2db_14"
+  ],
+  "howler_lod": [
+    "tex1_64x64_0fe388c541405d36_14"
+  ],
+  "h_jm_havok shaders": [
+    "tex1_8x8_03c4dfaae446495d_14"
+  ],
+  "iceland_jj_ice": [
+    "tex1_256x256_c3092ad45d3848d3_ac2b595b2cd20799_8",
+    "tex1_256x256_c3092ad45d3848d3_3c844b0664e8c686_8"
+  ],
+  "iceland_jj_snowpacked": [
+    "tex1_256x256_5bb1558ae6207cfe_14"
+  ],
+  "iceland_jm_cave floor": [
+    "tex1_256x256_5258150f928e0af8_14"
+  ],
+  "iceland_jm_cave floor rail": [
+    "tex1_128x128_954aef6373a48a9d_14"
+  ],
+  "iceland_jm_cave floorb": [
+    "tex1_128x128_028f5e93a851fee6_14"
+  ],
+  "iceland_jm_cave rock": [
+    "tex1_128x128_e215d94e5842a210_14"
+  ],
+  "iceland_jm_cave wall": [
+    "tex1_256x256_m_90b85afaa0b4bfee_14"
+  ],
+  "iceland_jm_cave wall2": [
+    "tex1_256x256_46919d429e5bb419_14"
+  ],
+  "iceland_jm_cave wall3": [
+    "tex1_256x256_c5e3a84624a053c7_14"
+  ],
+  "iceland_jm_snow bank": [
+    "tex1_256x256_m_eb13c3ef6e9a5dae_14"
+  ],
+  "iceland_jm_snow bank_blend": [
+    "tex1_128x128_bebed2670a0ca173_3e44c91f10d4b35d_8",
+    "tex1_128x128_bebed2670a0ca173_922c68841920194e_8"
+  ],
+  "iceland_jm_treea": [
+    "tex1_256x128_m_7ff9216539320eec_14",
+    "tex1_256x128_m_00e3553669819cce_14"
+  ],
+  "iceland_kh_snowbankedge": [
+    "tex1_128x64_af64ee518caf1acb_7995df60af5a94d4_8",
+    "tex1_128x64_af64ee518caf1acb_c3f1497bb8cd9c4c_8"
+  ],
+  "icon_butterfly_score": [
+    "tex1_64x64_af7fdf6c336384c6_14",
+    "tex1_64x64_e8e30e3160961f1a_14"
+  ],
+  "icon_check_box_empty": [
+    "tex1_32x32_f439c5a51099ebd7_1ac1501a4bafce60_8",
+    "tex1_32x32_f439c5a51099ebd7_37338512fec769e5_8"
+  ],
+  "icon_check_box_full": [
+    "tex1_32x32_d0cc0c0f40f396a1_1ac1501a4bafce60_8",
+    "tex1_32x32_d0cc0c0f40f396a1_9b754b5b150ea663_8"
+  ],
+  "icon_emptyhand": [
+    "tex1_64x64_1aa0113450cb64ac_14"
+  ],
+  "icon_emptyslot": [
+    "tex1_32x32_0f394a7538fd98c6_14"
+  ],
+  "icon_goal_x": [
+    "tex1_32x32_fb10ff2de0d4f224_507a6cb4bc892821_8",
+    "tex1_32x32_fb10ff2de0d4f224_ab45e24739bfdd6c_8"
+  ],
+  "icon_harry_position_n": [
+    "tex1_64x64_2e6dab403c11eff0_89f9602c43ac88a0_8",
+    "tex1_64x64_2e6dab403c11eff0_336db34e318597c7_8"
+  ],
+  "icon_harry_position_se": [
+    "tex1_64x64_ce156f781199644a_0bd3e2799cfe2fda_8",
+    "tex1_64x64_ce156f781199644a_2d8819fc7cba8c7a_8"
+  ],
+  "icon_harry_score": [
+    "tex1_64x64_a5e855576d3e42bf_183648f9a5e33336_8",
+    "tex1_64x64_a5e855576d3e42bf_9fb15410f4204819_8"
+  ],
+  "icon_inv_canteen": [
+    "tex1_64x64_97633d30dd6d52b6_14",
+    "tex1_64x64_08be046a7fc04379_14"
+  ],
+  "icon_inv_downsmash": [
+    "tex1_64x64_e3b2123229f3d9b1_14",
+    "tex1_64x64_7075f479a9272c74_14"
+  ],
+  "icon_inv_emptyhands": [
+    "tex1_64x64_dd18e62e5862da91_60295c9c70ed4213_8",
+    "tex1_64x64_dd18e62e5862da91_a99a218fc1c401f0_8"
+  ],
+  "icon_inv_gasmask": [
+    "tex1_64x64_fbed5a476134e2c6_14",
+    "tex1_64x64_78c1527c9c008c10_14"
+  ],
+  "icon_inv_grenade": [
+    "tex1_64x64_7495a8ec04694e22_14",
+    "tex1_64x64_e6784c689d3993ef_14"
+  ],
+  "icon_inv_pickaxe": [
+    "tex1_64x64_256479f9345ebb11_ad9c5160a34d8b76_8",
+    "tex1_64x64_256479f9345ebb11_c8753c617f02169b_8"
+  ],
+  "icon_inv_pogostilt": [
+    "tex1_64x64_a566ebb1738a24f6_4de8bf92467358fb_8",
+    "tex1_64x64_a566ebb1738a24f6_36f08ab0989327b4_8"
+  ],
+  "icon_inv_raft": [
+    "tex1_64x64_95e9259dd19b8859_4820e5f3b6b113bf_8",
+    "tex1_64x64_95e9259dd19b8859_67766a0d5e9c936a_8"
+  ],
+  "icon_inv_risingstrike": [
+    "tex1_64x64_c502a113948f46da_cccdaa8a3b247b74_8",
+    "tex1_64x64_c502a113948f46da_cdc354644764ef9a_8"
+  ],
+  "icon_inv_shield": [
+    "tex1_64x64_24a1c92d010822a9_14",
+    "tex1_64x64_1c8182bd6c23a93b_14"
+  ],
+  "icon_inv_sling": [
+    "tex1_64x64_f7e6f6eff38ca5b3_14",
+    "tex1_64x64_6144e8a0ee871143_14"
+  ],
+  "icon_inv_superrun": [
+    "tex1_64x64_b9fdb302d0110cd7_14",
+    "tex1_64x64_bbe0cca3a674b41d_14"
+  ],
+  "icon_inv_tnt": [
+    "tex1_64x64_6284151bf45ccadf_14",
+    "tex1_64x64_47cde4bf4ec18fc1_14"
+  ],
+  "icon_inv_torch": [
+    "tex1_64x64_52fe874c6d4bf2e9_1e8560a127c2f5f7_8",
+    "tex1_64x64_52fe874c6d4bf2e9_b92e3a3b0ee1e9eb_8"
+  ],
+  "icon_mikay_score": [
+    "tex1_64x64_ba92aac1825192ca_14",
+    "tex1_64x64_e4027482778b257b_14"
+  ],
+  "icon_native_score": [
+    "tex1_64x64_5db92d3e8ac041aa_14",
+    "tex1_64x64_a936484efa835d5b_14"
+  ],
+  "icon_pickaxe": [
+    "tex1_128x128_37abfb9451f3be69_14"
+  ],
+  "icon_save_idol": [
+    "tex1_32x32_72b736f63d23a449_9348f040e728ce38_8",
+    "tex1_32x32_72b736f63d23a449_bfe18b41ae5607aa_8"
+  ],
+  "icon_save_shaman": [
+    "tex1_32x32_42ed2e413606000f_9348f040e728ce38_8",
+    "tex1_32x32_42ed2e413606000f_2eee286b8c76a3aa_8"
+  ],
+  "icon_sling": [
+    "tex1_128x128_dc186669520a793b_14"
+  ],
+  "icon_timer": [
+    "tex1_64x64_d52f72cd8f94baf2_e7bf8609ce722394_8",
+    "tex1_64x64_d52f72cd8f94baf2_89ad708e73f904e6_8"
+  ],
+  "icon_torch": [
+    "tex1_32x128_feba0a15395f9e4c_14"
+  ],
+  "icon_tuco_count": [
+    "tex1_64x64_89ab21d3eeea7db5_14",
+    "tex1_64x64_511873453cfdfd6f_14"
+  ],
+  "ig_dr_dynogradient": [
+    "tex1_64x32_c114318e641bfb43_14"
+  ],
+  "insert_controller": [
+    "tex1_512x256_005c16b28d6d99d9_f01f55f05f818ac4_8",
+    "tex1_512x256_005c16b28d6d99d9_5b9fe0af4e102503_8"
+  ],
+  "jj_hotspike_rl": [
+    "tex1_256x128_d7468806004a81c1_14"
+  ],
+  "jj_treebark_slimy": [
+    "tex1_128x128_d7093763c8adf3fd_14"
+  ],
+  "jl_chaintemp": [
+    "tex1_64x32_6934c838608a5527_b1680c91ce3532c9_8",
+    "tex1_64x32_6934c838608a5527_c46ee1318cc91e84_8"
+  ],
+  "jl_jungle_curtain_left": [
+    "tex1_256x256_9f8f71874ecbc56e_14"
+  ],
+  "jl_jungle_curtain_right": [
+    "tex1_256x256_cfb36d393fb59ad2_14"
+  ],
+  "jl_ms_statuetastle_with_moss": [
+    "tex1_256x256_m_43fa0c8ad556ffe6_14"
+  ],
+  "jl_statuebody_arena": [
+    "tex1_128x128_e1b15e8cdc69fade_14"
+  ],
+  "jl_statuebody_frosted": [
+    "tex1_256x256_7659f974debbe14a_14"
+  ],
+  "jl_statueface": [
+    "tex1_256x256_m_4e12ea09c08fcc56_14"
+  ],
+  "jl_statueface_01": [
+    "tex1_256x256_m_eacf817e145696c0_14"
+  ],
+  "jl_statueface_arena": [
+    "tex1_128x128_2cc55c1d1a6cca51_14"
+  ],
+  "jl_statueface_frosted": [
+    "tex1_256x256_de800d66e5fdddbc_14"
+  ],
+  "jl_statuetastle": [
+    "tex1_128x128_6ff894c7df156599_14"
+  ],
+  "jl_statue_256": [
+    "tex1_256x256_9464baef72a4bea6_14"
+  ],
+  "jl_tp_statuetastle_frost": [
+    "tex1_128x128_c1da2f5e160ff218_14"
+  ],
+  "jm_bubble": [
+    "tex1_32x32_c4832980192d3514_ff10223616c08787_8",
+    "tex1_32x32_c4832980192d3514_37cfbd71ff1f2ace_8"
+  ],
+  "jm_circuit_energy overlay": [
+    "tex1_64x32_d757c3ae4b3badfb_ebb262cf9b01ec85_8",
+    "tex1_64x32_d757c3ae4b3badfb_7d0e2ff094504405_8"
+  ],
+  "jm_circuit_energy spark": [
+    "tex1_16x16_3c1d37782810285e_14",
+    "tex1_16x16_5704f8145fcf5fa6_14"
+  ],
+  "jm_coals": [
+    "tex1_256x256_f85759fde6292cbe_14"
+  ],
+  "jm_coalsoverlay": [
+    "tex1_256x256_4a5ff0de96fc7816_14",
+    "tex1_256x256_fe5a6254ec91e454_14"
+  ],
+  "jm_gong_good": [
+    "tex1_128x128_b85a125825a03b74_14"
+  ],
+  "jm_gysier_sulfer": [
+    "tex1_128x128_e7f7deb650db1301_14",
+    "tex1_128x128_1e5f7e2c5baf44c7_14"
+  ],
+  "jm_light_henchman": [
+    "tex1_64x64_45481461b5eda63e_14",
+    "tex1_64x64_10b07e5b4f4dd2da_14"
+  ],
+  "jm_logos skull overlay_bada": [
+    "tex1_64x64_a76c510db75ff256_a256db31312800a5_8",
+    "tex1_64x64_a76c510db75ff256_9e295d4d45b8a64f_8"
+  ],
+  "jm_steelwire03p": [
+    "tex1_64x32_44e1a51b6c833dbd_14"
+  ],
+  "jm_wrap_full_good": [
+    "tex1_64x32_db9394f610d79e85_14"
+  ],
+  "jungle terrain dirt": [
+    "tex1_8x8_68949602e4318979_14"
+  ],
+  "jungle water": [
+    "tex1_8x8_d49ceaef5d7acc2f_14"
+  ],
+  "jungle_db_moss_b": [
+    "tex1_128x128_1266d72a68975072_d004d7d93d3c95ac_8",
+    "tex1_128x128_1266d72a68975072_5815a7ab725bf0fd_8"
+  ],
+  "jungle_jj_bamboo": [
+    "tex1_32x128_m_c40b6e796f5035d9_14"
+  ],
+  "jungle_jj_cliffdirt": [
+    "tex1_128x128_fe0947ce708e0dff_14"
+  ],
+  "jungle_jj_dirthole": [
+    "tex1_256x256_f18fdcf7956be8c7_14"
+  ],
+  "jungle_jj_flowera": [
+    "tex1_128x128_f601c731ef4fc2ff_14",
+    "tex1_128x128_6c6218557c0c0ff2_14"
+  ],
+  "jungle_jj_grass": [
+    "tex1_256x256_m_caa18a92c0d01b95_14",
+    "tex1_256x256_m_69900f55907e2f13_14"
+  ],
+  "jungle_jj_grasspatch": [
+    "tex1_64x32_5fdde94f7f87a662_25f4fb0f7ad876c8_8",
+    "tex1_64x32_5fdde94f7f87a662_5c567c93113826f0_8"
+  ],
+  "jungle_jj_ground_greencrackdirt": [
+    "tex1_128x128_m_d4514e1ea3e3e859_c823fb7e6717ccc1_9"
+  ],
+  "jungle_jj_leaveswall": [
+    "tex1_256x256_3482947beb673acd_14",
+    "tex1_256x256_95755a30d846779b_14"
+  ],
+  "jungle_jj_planta": [
+    "tex1_128x128_m_2b18567fe769de3b_14",
+    "tex1_128x128_m_68f2d85784493584_14"
+  ],
+  "jungle_jj_planta_lod": [
+    "tex1_32x32_4155b3db3a66f4c8_14",
+    "tex1_32x32_328650fe4a4a151d_14"
+  ],
+  "jungle_jj_planta_trans": [
+    "tex1_256x256_c208503942adbf4d_14",
+    "tex1_256x256_828a273852d129b4_14"
+  ],
+  "jungle_jj_plantb": [
+    "tex1_64x128_m_67476b31cec9fd2c_801a6e83e339c249_8",
+    "tex1_64x128_m_67476b31cec9fd2c_50ae61937342105c_8"
+  ],
+  "jungle_jj_stem": [
+    "tex1_32x32_5e5db80320857c57_14"
+  ],
+  "jungle_kg_moss_bricks_01": [
+    "tex1_128x128_m_95f480672073d16d_14"
+  ],
+  "jungle_kg_moss_bricks_02": [
+    "tex1_128x128_m_a214328074f890e9_14"
+  ],
+  "jungle_kg_noxius_emblem": [
+    "tex1_128x128_9f165fe247a1465a_14"
+  ],
+  "jungle_kg_ruins_crack_01": [
+    "tex1_128x128_e0d71763ca96eaa4_14",
+    "tex1_128x128_dfcb9fe67f52495a_14"
+  ],
+  "jungle_kg_temple_big_block_01_outdoor": [
+    "tex1_64x64_18505b4be077e54c_14"
+  ],
+  "jungle_kg_temple_big_block_05_outdoor": [
+    "tex1_128x128_m_be109c2bcb63253a_14"
+  ],
+  "jungle_kg_temple_bricks_03": [
+    "tex1_128x128_690ddab3aeb81d94_14"
+  ],
+  "jungle_kg_temple_stone_floor_02": [
+    "tex1_128x128_a1964a58f09a57ad_14"
+  ],
+  "jungle_kh_pillar_01": [
+    "tex1_128x128_b67fde5c69c5bcfc_14"
+  ],
+  "jungle_kh_pillar_02": [
+    "tex1_128x64_c6aac7ab8c27c248_14"
+  ],
+  "jungle_ls_temple_root_01": [
+    "tex1_64x64_8cb73173ed6843e1_14"
+  ],
+  "jungle_rt_b03_statue_break": [
+    "tex1_64x64_8759b62dca430d4c_14"
+  ],
+  "jungle_rt_building_backdrops_01": [
+    "tex1_64x64_9cea48cb537faa81_14"
+  ],
+  "jungle_rt_chameleon_stone_symbol": [
+    "tex1_256x256_ea2eea8076cadf5a_14"
+  ],
+  "jungle_rt_chameleon_stone_symbol_03": [
+    "tex1_256x256_72f0ecf9307589de_f255f8dd919bfb1b_8",
+    "tex1_256x256_72f0ecf9307589de_45fde866b159cf5a_8"
+  ],
+  "jungle_rt_chameleon_stone_symbol_04": [
+    "tex1_256x256_716edc47fa0304b4_d5695232eda7843b_8",
+    "tex1_256x256_716edc47fa0304b4_cf82f8380b8823e6_8"
+  ],
+  "jungle_rt_chameleon_stone_symbol_frost": [
+    "tex1_128x128_2e3b6840881d2d5e_14"
+  ],
+  "jungle_rt_daniels_glyph": [
+    "tex1_256x256_8cf1b78e8614735d_14"
+  ],
+  "jungle_rt_dirt_path": [
+    "tex1_128x128_m_39e320d1e2c3cca7_14",
+    "tex1_128x128_m_9855d7f19c6423a9_14"
+  ],
+  "jungle_rt_dirt_path_end": [
+    "tex1_128x128_m_f980e6320d5625f2_14",
+    "tex1_128x128_m_057d630d26c8ebf4_14"
+  ],
+  "jungle_rt_disk_01": [
+    "tex1_64x64_5edd431482ea0e6c_14"
+  ],
+  "jungle_rt_disk_02": [
+    "tex1_64x64_331e8b948b4d9e39_14"
+  ],
+  "jungle_rt_disk_03": [
+    "tex1_64x64_32260d1715668c30_14"
+  ],
+  "jungle_rt_disk_04": [
+    "tex1_64x64_cf1b3d5bff89f039_14"
+  ],
+  "jungle_rt_disk_hole_01": [
+    "tex1_32x32_abdf82cf1cc459a2_14"
+  ],
+  "jungle_rt_eldorado_big_head": [
+    "tex1_256x256_a950e98d152cc4de_14"
+  ],
+  "jungle_rt_eldorado_brick_road_01": [
+    "tex1_256x256_m_afff3bffcefef5cd_14"
+  ],
+  "jungle_rt_eldorado_dirt_pile_01": [
+    "tex1_128x128_8eb506389a91bfe4_c9ee9fd43e7b1729_8",
+    "tex1_128x128_8eb506389a91bfe4_daa17ea2e5bcf379_8"
+  ],
+  "jungle_rt_eldorado_disk_holder_01": [
+    "tex1_64x64_5bec5bc2e5231fa2_14"
+  ],
+  "jungle_rt_eldorado_door_01": [
+    "tex1_256x128_efc2aa1b531606db_14",
+    "tex1_256x128_610901085fba9a8e_14"
+  ],
+  "jungle_rt_eldorado_face_01": [
+    "tex1_256x256_5acf41712281b84a_14"
+  ],
+  "jungle_rt_eldorado_floor_tile_edging_01": [
+    "tex1_128x64_64223f1323b032ba_14"
+  ],
+  "jungle_rt_eldorado_gate_glyph_01": [
+    "tex1_256x256_m_bfebc2327274e521_14"
+  ],
+  "jungle_rt_eldorado_gate_glyph_02": [
+    "tex1_256x256_m_0b879cfc2a16585e_14"
+  ],
+  "jungle_rt_eldorado_gate_upper_left_side_01": [
+    "tex1_256x128_7cd32c011efeae1a_14"
+  ],
+  "jungle_rt_eldorado_glyph_01": [
+    "tex1_128x64_918e0e48d70273d1_14"
+  ],
+  "jungle_rt_eldorado_gold_trim_01": [
+    "tex1_128x64_647f2a3116bca1d7_14"
+  ],
+  "jungle_rt_eldorado_key_framing": [
+    "tex1_32x32_0014417d637d563a_14"
+  ],
+  "jungle_rt_eldorado_pillar_01": [
+    "tex1_256x256_m_edb3d5cbe90d321d_14"
+  ],
+  "jungle_rt_eldorado_stacked_stone_01": [
+    "tex1_32x32_bc878fb59e5f6e03_14"
+  ],
+  "jungle_rt_eldorado_steps_01": [
+    "tex1_128x64_958f148d29339d69_14"
+  ],
+  "jungle_rt_eldorado_wall_04": [
+    "tex1_128x64_ab7219ea042fd0fe_14"
+  ],
+  "jungle_rt_eldorado_wall_05": [
+    "tex1_128x128_m_f45f95a1630ff507_14"
+  ],
+  "jungle_rt_eldorado_wall_gold_01": [
+    "tex1_256x128_5931056175485a0a_14"
+  ],
+  "jungle_rt_eldorado_wall_gold_02": [
+    "tex1_256x128_e3528fb1931d453c_14"
+  ],
+  "jungle_rt_gold_01": [
+    "tex1_128x128_8e3bd62983f199fc_14"
+  ],
+  "jungle_rt_grassy_ledge_arena": [
+    "tex1_256x256_ea11e7ad2434acae_14"
+  ],
+  "jungle_rt_large_block_crack": [
+    "tex1_16x16_576d09ed9dc29d00_14"
+  ],
+  "jungle_rt_level1_path_dirt_01": [
+    "tex1_128x128_0f8ffc62ff8983fd_14"
+  ],
+  "jungle_rt_level1_temple_01": [
+    "tex1_256x256_m_4e157e26f41b673a_14"
+  ],
+  "jungle_rt_level1_temple_02": [
+    "tex1_256x128_m_13d314da5d666bca_14"
+  ],
+  "jungle_rt_level1_temple_03": [
+    "tex1_256x256_m_9f3da31ac294802e_14"
+  ],
+  "jungle_rt_level1_temple_07": [
+    "tex1_256x128_m_e4b811847937d8af_14"
+  ],
+  "jungle_rt_level1_temple_08": [
+    "tex1_256x128_m_49b7b96557d8f105_14"
+  ],
+  "jungle_rt_level1_temple_09": [
+    "tex1_64x64_m_279f439d2dc79ef9_14"
+  ],
+  "jungle_rt_level1_temple_10": [
+    "tex1_256x256_m_61b5e8be3a76105e_14"
+  ],
+  "jungle_rt_level1_temple_12_grass": [
+    "tex1_256x256_m_70ecd49ddccf7b3a_14"
+  ],
+  "jungle_rt_level1_temple_13": [
+    "tex1_64x64_42a4114477a3824d_14"
+  ],
+  "jungle_rt_level1_temple_14": [
+    "tex1_256x256_m_7d6c93310f31451b_14"
+  ],
+  "jungle_rt_level1_temple_15_lava": [
+    "tex1_64x64_m_69ca34f9a2c46347_14",
+    "tex1_64x64_m_a454b7e155ad93e0_14"
+  ],
+  "jungle_rt_level1_temple_17_broken_wall": [
+    "tex1_64x64_5d4e4c03e147fd7d_14"
+  ],
+  "jungle_rt_level1_temple_18_black_smoke": [
+    "tex1_64x64_91cbed1f1a3d809c_14",
+    "tex1_64x64_b7f18fd7b40e4a32_14"
+  ],
+  "jungle_rt_level1_temple_19_black_smoke": [
+    "tex1_64x64_4d40babd6fece188_14",
+    "tex1_64x64_1c2e97ba24560cc9_14"
+  ],
+  "jungle_rt_level1_temple_21_inside_wall": [
+    "tex1_256x256_m_3a986c58f2a5ede5_14"
+  ],
+  "jungle_rt_level1_temple_23_cloud_01": [
+    "tex1_64x64_m_d605cc4668bb3489_f76efed271d6468d_8",
+    "tex1_64x64_m_d605cc4668bb3489_c2b755e9a362b8ff_8"
+  ],
+  "jungle_rt_level1_temple_25_ceiling": [
+    "tex1_128x128_3972f50a87fdf3fc_14"
+  ],
+  "jungle_rt_level1_temple_26_floor": [
+    "tex1_256x256_m_f1599157388ddf0e_14"
+  ],
+  "jungle_rt_level1_temple_27-watergod": [
+    "tex1_128x128_m_7dd625e8b475ed7a_14"
+  ],
+  "jungle_rt_level1_temple_29-inner_walls": [
+    "tex1_256x256_m_1c18de3d7d5d4aaf_14"
+  ],
+  "jungle_rt_level1_temple_30_ceiling": [
+    "tex1_64x64_c61774c3a014294e_14"
+  ],
+  "jungle_rt_level1_toon_glyphs_warm_color": [
+    "tex1_256x256_m_f62f35abac722db4_14"
+  ],
+  "jungle_rt_level1_volcano": [
+    "tex1_128x128_268ea50ce3838b80_14"
+  ],
+  "jungle_rt_light_beam_spot_01": [
+    "tex1_64x64_8b16e067e01d6298_14"
+  ],
+  "jungle_rt_lower_cliff_moss": [
+    "tex1_128x128_b3624ce80b1e271c_14",
+    "tex1_128x128_0e5c4e045bc97a2c_14"
+  ],
+  "jungle_rt_monkey_arena_gold": [
+    "tex1_128x128_b569e56d9b1b42e3_14"
+  ],
+  "jungle_rt_monkey_symbol_gold_01": [
+    "tex1_128x128_55f457f33e53c853_14",
+    "tex1_128x128_020dd6d8eac924a3_14"
+  ],
+  "jungle_rt_monkey_symbol_gold_02": [
+    "tex1_128x128_25a599a93cecea66_14"
+  ],
+  "jungle_rt_moss_bricks_01": [
+    "tex1_256x256_d83164ab8c983c4c_14"
+  ],
+  "jungle_rt_moss_bricks_02": [
+    "tex1_256x256_m_330e3e561aa71421_14"
+  ],
+  "jungle_rt_moss_bricks_03": [
+    "tex1_128x128_8eb4feeb1c6aaf23_14"
+  ],
+  "jungle_rt_pillar_01": [
+    "tex1_256x256_c1444b12a45216c6_14"
+  ],
+  "jungle_rt_pillar_02": [
+    "tex1_128x128_fd8a07110e1ec4bd_14"
+  ],
+  "jungle_rt_pillar_03": [
+    "tex1_128x128_m_7cfba9c0f6afe469_14"
+  ],
+  "jungle_rt_pillar_08": [
+    "tex1_128x64_22edde97f442654b_14",
+    "tex1_128x64_a279c406b8a3304f_14"
+  ],
+  "jungle_rt_pillar_09": [
+    "tex1_128x64_0f92e512cbf81f31_14"
+  ],
+  "jungle_rt_pillar_10": [
+    "tex1_128x128_43aee024c6b0e1aa_14"
+  ],
+  "jungle_rt_pillar_tops_01": [
+    "tex1_64x64_20dc1f63123e6cb5_14"
+  ],
+  "jungle_rt_reflection": [
+    "tex1_64x64_6cb8373c7f797dca_6"
+  ],
+  "jungle_rt_rubble_01": [
+    "tex1_64x64_0c956032550bda89_14"
+  ],
+  "jungle_rt_ruins_crack_01": [
+    "tex1_128x128_f85106160d0f8efc_14",
+    "tex1_128x128_0ed4f90dea53dc21_14"
+  ],
+  "jungle_rt_ruin_grass_overlay": [
+    "tex1_256x256_2fa9b01862b87990_a66d1596225b3f76_9"
+  ],
+  "jungle_rt_sconce_b03": [
+    "tex1_64x64_ae3905da3377fbb8_14"
+  ],
+  "jungle_rt_sconce_top_b03": [
+    "tex1_64x64_4d8e02eaf3731b56_14"
+  ],
+  "jungle_rt_scorpion_chamber_dome_01": [
+    "tex1_256x256_5ea5f4340f7d0fb3_14"
+  ],
+  "jungle_rt_scorpion_chamber_dome_03": [
+    "tex1_256x256_a9955f53593094c8_14"
+  ],
+  "jungle_rt_scorpion_chamber_floor_stones_01": [
+    "tex1_128x128_dd1aa85b831ffe62_14"
+  ],
+  "jungle_rt_scorpion_chamber_outer_rock_01": [
+    "tex1_256x256_d8b2a0841d0c99d0_14"
+  ],
+  "jungle_rt_scorpion_chamber_sand_01": [
+    "tex1_256x256_fd54dc7d09b9cc7f_14"
+  ],
+  "jungle_rt_scorpion_chamber_sand_blend_01": [
+    "tex1_256x128_9be5daa3797fd9dd_2126b4ca6d46c5e8_8",
+    "tex1_256x128_9be5daa3797fd9dd_c2695f73ad72be66_8"
+  ],
+  "jungle_rt_scorpion_chamber_stones_01": [
+    "tex1_256x256_9c8a0ffc3e463735_14"
+  ],
+  "jungle_rt_scorpion_chamber_symbol_01": [
+    "tex1_256x256_515d51a1ddfbc72c_14",
+    "tex1_256x256_01ce3b08b6eb02a5_14"
+  ],
+  "jungle_rt_scorpion_chamber_symbol_03": [
+    "tex1_128x128_9f46e37e08bdcd4e_14"
+  ],
+  "jungle_rt_scorpion_door_rock": [
+    "tex1_64x64_ae6587f273cf2c08_14"
+  ],
+  "jungle_rt_sky_sort_blocker": [
+    "tex1_8x8_0732a3ccb8b1399f_14"
+  ],
+  "jungle_rt_small_log_roped": [
+    "tex1_64x32_6dd49fdbaf758d0c_14"
+  ],
+  "jungle_rt_spider_web_01": [
+    "tex1_64x64_c6595278950035eb_ac2dcd6056348a80_8",
+    "tex1_64x64_c6595278950035eb_a094b61c41714717_8"
+  ],
+  "jungle_rt_spitmoss": [
+    "tex1_128x128_f12e012af9e68bf6_14"
+  ],
+  "jungle_rt_temple_back_wall_02": [
+    "tex1_128x128_91d1d91970938e0d_14"
+  ],
+  "jungle_rt_temple_big_block_01": [
+    "tex1_256x256_m_8295c694187c6107_14"
+  ],
+  "jungle_rt_temple_big_block_01_outdoor": [
+    "tex1_128x128_m_dbd7cbae7f21401a_14"
+  ],
+  "jungle_rt_temple_big_block_02": [
+    "tex1_128x128_m_7b8aa829d3b791bc_14"
+  ],
+  "jungle_rt_temple_big_block_02_outdoor": [
+    "tex1_128x128_m_5010267cb5056ce2_14"
+  ],
+  "jungle_rt_temple_big_block_03": [
+    "tex1_256x256_m_03249d800899ba60_14"
+  ],
+  "jungle_rt_temple_big_block_03_outdoor": [
+    "tex1_128x128_m_6d32da8b588f5316_14"
+  ],
+  "jungle_rt_temple_big_block_04": [
+    "tex1_256x256_m_d4b49e1aaac9fdc7_14"
+  ],
+  "jungle_rt_temple_big_block_05_outdoor": [
+    "tex1_256x256_m_418fa458d0aad676_14"
+  ],
+  "jungle_rt_temple_blend_01": [
+    "tex1_256x128_51f5ca244621f625_14",
+    "tex1_256x128_c9a725ef610eb6de_14"
+  ],
+  "jungle_rt_temple_blend_02": [
+    "tex1_256x128_5a71fb600fd334c7_f7f4de9e860573e5_8",
+    "tex1_256x128_5a71fb600fd334c7_13b9c2d2523ffba7_8"
+  ],
+  "jungle_rt_temple_bricks_03": [
+    "tex1_256x256_645c09567f0f12fb_14"
+  ],
+  "jungle_rt_temple_bricks_04": [
+    "tex1_128x128_969645244927b96a_14"
+  ],
+  "jungle_rt_temple_bricks_05": [
+    "tex1_256x256_3f83ea6bf955393d_14"
+  ],
+  "jungle_rt_temple_bricks_06": [
+    "tex1_256x256_m_30321e7472a9294a_14"
+  ],
+  "jungle_rt_temple_bricks_07": [
+    "tex1_128x64_68838ff676da0de3_14"
+  ],
+  "jungle_rt_temple_ceiling_02": [
+    "tex1_128x128_1eb7df85d7107896_14"
+  ],
+  "jungle_rt_temple_chipped_stone": [
+    "tex1_32x32_bb0a75a29a6c2138_14"
+  ],
+  "jungle_rt_temple_cinema_disks_leftside": [
+    "tex1_256x256_817daa74db6e7cf1_14",
+    "tex1_256x256_481717366310c8d5_14"
+  ],
+  "jungle_rt_temple_cinema_disks_rightside": [
+    "tex1_256x256_63af640912e06cc4_14",
+    "tex1_256x256_7e186e75512dc2f5_14"
+  ],
+  "jungle_rt_temple_cinema_hero_leftside": [
+    "tex1_256x256_ec3c2aaa7a83d8d5_14"
+  ],
+  "jungle_rt_temple_cinema_hero_rightside": [
+    "tex1_256x256_e410467efe540a35_14"
+  ],
+  "jungle_rt_temple_cinema_invaders_leftside": [
+    "tex1_256x256_fa132bda2b54a472_14"
+  ],
+  "jungle_rt_temple_cinema_invaders_rightside": [
+    "tex1_256x256_4c3c9b31f7dd2c79_14"
+  ],
+  "jungle_rt_temple_cinema_pusca_leftside": [
+    "tex1_256x256_7ebbfb0cab60792c_14"
+  ],
+  "jungle_rt_temple_cinema_pusca_rightside": [
+    "tex1_256x256_33912e4e41b42642_14"
+  ],
+  "jungle_rt_temple_cinema_ruins_leftside": [
+    "tex1_256x256_9f4034ec262303ef_14"
+  ],
+  "jungle_rt_temple_cinema_ruins_rightside": [
+    "tex1_256x256_4f93fb05700ab4ad_14"
+  ],
+  "jungle_rt_temple_cinema_slaughter_leftside": [
+    "tex1_256x256_1221fd7f08b117bb_14"
+  ],
+  "jungle_rt_temple_cinema_slaughter_rightside": [
+    "tex1_256x256_7efc17de9b26f8ea_14"
+  ],
+  "jungle_rt_temple_dirt_overlay": [
+    "tex1_256x256_a86f11c9673c9800_93a91b75b24e0327_8",
+    "tex1_256x256_a86f11c9673c9800_00c3e823bffec27e_8"
+  ],
+  "jungle_rt_temple_dirt_pile_01": [
+    "tex1_64x64_6ec2a7b8213789c0_14"
+  ],
+  "jungle_rt_temple_doorway_01": [
+    "tex1_256x128_d7e081716543a4cb_c4f9b7e68e75e373_8",
+    "tex1_256x128_d7e081716543a4cb_7a92a8d3a57451f3_8"
+  ],
+  "jungle_rt_temple_erosion_wall": [
+    "tex1_128x128_ff006403dbbc72a3_14"
+  ],
+  "jungle_rt_temple_floor_dec_01": [
+    "tex1_32x32_39e331d8d4fc5aff_14"
+  ],
+  "jungle_rt_temple_floor_edge": [
+    "tex1_128x128_cb7ca7c13091ff7f_14"
+  ],
+  "jungle_rt_temple_floor_edge_04": [
+    "tex1_128x128_a6c1973290d6afb9_14"
+  ],
+  "jungle_rt_temple_floor_spikes": [
+    "tex1_128x128_8accd86cc916795a_3b68141c77cd68d2_8",
+    "tex1_128x128_8accd86cc916795a_718dce49a15f9db4_8"
+  ],
+  "jungle_rt_temple_glyph_01": [
+    "tex1_64x64_23ec7f446aa0801a_14"
+  ],
+  "jungle_rt_temple_glyph_02": [
+    "tex1_128x128_58db51119b7d3507_14"
+  ],
+  "jungle_rt_temple_glyph_03": [
+    "tex1_64x64_7ec13ca41f120884_14"
+  ],
+  "jungle_rt_temple_grinder_01": [
+    "tex1_256x128_a755f15f8298de99_14"
+  ],
+  "jungle_rt_temple_grinder_spike": [
+    "tex1_64x64_2d5e216ffec1541e_14"
+  ],
+  "jungle_rt_temple_moss": [
+    "tex1_256x256_eff1533ef5ab86f9_3e21dce1f2270c40_8",
+    "tex1_256x256_eff1533ef5ab86f9_2739325b48764344_8"
+  ],
+  "jungle_rt_temple_root_01": [
+    "tex1_256x128_ee08af4c4f3ff009_14"
+  ],
+  "jungle_rt_temple_ruins_ceiling": [
+    "tex1_256x256_ce5e2a74f045294f_14"
+  ],
+  "jungle_rt_temple_steps_01": [
+    "tex1_64x32_b27766e934cb64bb_14"
+  ],
+  "jungle_rt_temple_steps_02": [
+    "tex1_64x32_24bea488694ea920_14"
+  ],
+  "jungle_rt_temple_steps_03": [
+    "tex1_128x64_ffdda424230a5761_14"
+  ],
+  "jungle_rt_temple_steps_04": [
+    "tex1_128x64_m_0e515f562080d644_14"
+  ],
+  "jungle_rt_temple_steps_05": [
+    "tex1_128x64_e7b7aff26738f311_14"
+  ],
+  "jungle_rt_temple_steps_kg": [
+    "tex1_128x64_f8108977316ad040_14"
+  ],
+  "jungle_rt_temple_stone_floor_02": [
+    "tex1_256x256_7249b3349329ffdd_14"
+  ],
+  "jungle_rt_temple_stone_floor_04": [
+    "tex1_64x64_d70fc1bc866abae2_14"
+  ],
+  "jungle_rt_temple_stone_wall_01": [
+    "tex1_128x128_cd2f9f321b0f3c33_14"
+  ],
+  "jungle_rt_temple_stone_wall_03": [
+    "tex1_128x128_6a21382e5e03387c_14"
+  ],
+  "jungle_rt_temple_sun_symbol_01": [
+    "tex1_256x256_a6b9c13aa567bede_14"
+  ],
+  "jungle_rt_temple_trim_01": [
+    "tex1_256x128_b2b05f019af026e6_14"
+  ],
+  "jungle_rt_temple_trim_03": [
+    "tex1_256x128_ebe77080b3915baa_cb1d4ba1e57120f9_8",
+    "tex1_256x128_ebe77080b3915baa_4310a067f0e79f34_8"
+  ],
+  "jungle_rt_temple_wall_crack": [
+    "tex1_32x32_e1c4cb20a5a54c07_14"
+  ],
+  "jungle_rt_toon_glyphs_warm_color": [
+    "tex1_128x128_m_2115f747be36484d_14"
+  ],
+  "jungle_rt_tree_leaves_01": [
+    "tex1_64x64_m_3659c591ed999feb_14",
+    "tex1_64x64_m_c816c75e3b41e27a_14"
+  ],
+  "jungle_rt_tree_moss_01": [
+    "tex1_32x32_2b58264d28ded9f6_718585f044bb53aa_8",
+    "tex1_32x32_2b58264d28ded9f6_5ddd0f4a0b8dac88_8"
+  ],
+  "jungle_rt_tree_tile_01": [
+    "tex1_128x128_28fbec7fce131274_14"
+  ],
+  "jungle_rt_upper_cliff_moss": [
+    "tex1_128x128_9c0a89fd02caa91e_14",
+    "tex1_128x128_02456f1282d232e7_14"
+  ],
+  "jungle_rt_vista_a_b03": [
+    "tex1_128x128_f31fe5a1796a4e3e_6150c8dedc9d318e_9"
+  ],
+  "jungle_rt_vista_b_b03": [
+    "tex1_128x128_fcb958b3d5e6ffba_a12c0eee8824e968_9"
+  ],
+  "jungle_rt_wall_crack": [
+    "tex1_32x32_1da188ffd3c99378_14"
+  ],
+  "jungle_rt_water_line_cliff": [
+    "tex1_256x256_2e7af58051d629c2_14"
+  ],
+  "jungle_tmp_water_01": [
+    "tex1_32x32_7522bf21a9f55aa9_14",
+    "tex1_32x32_35bf1cb134d69303_14"
+  ],
+  "junlge_rb_treeleaf1": [
+    "tex1_64x64_8ff8f41abff540c1_14"
+  ],
+  "kelp03": [
+    "tex1_128x128_05ab42354c9adcb4_4bae4b52843355e7_8",
+    "tex1_128x128_05ab42354c9adcb4_ca0ae9b96ffde79a_8"
+  ],
+  "kg_a04_temple": [
+    "tex1_128x128_b897a5336486679f_14"
+  ],
+  "kg_backdrop01": [
+    "tex1_256x128_5b09c72d8a6cca89_e80740d837569c07_8",
+    "tex1_256x128_5b09c72d8a6cca89_aa4844984f00e8b8_8"
+  ],
+  "kg_bars01": [
+    "tex1_64x64_m_1e21a7484607e024_bd19defb8712913c_8",
+    "tex1_64x64_m_1e21a7484607e024_252eff5e3ecdaf75_8"
+  ],
+  "kg_bigheadstatue": [
+    "tex1_256x256_c5b6b17ba6f59f09_14"
+  ],
+  "kg_bigheadstatue_frost": [
+    "tex1_128x128_d9ecb264ac15bb55_14"
+  ],
+  "kg_bigheadstatue_sm": [
+    "tex1_128x128_e5844b168d8a647d_14"
+  ],
+  "kg_bigheadstatue_sm_frost": [
+    "tex1_128x64_9b817a158c225bc9_14"
+  ],
+  "kg_blocks": [
+    "tex1_128x128_21e1fa052084ddce_14"
+  ],
+  "kg_blockssysa_warm_grey": [
+    "tex1_128x128_bdb20cb3e467e7ea_14"
+  ],
+  "kg_cracked_rock_no_alpha02": [
+    "tex1_128x128_f5c3fc78dbc3b944_14"
+  ],
+  "kg_crate_metal_tnt": [
+    "tex1_128x128_63be4b10f40e664e_14"
+  ],
+  "kg_crate_porcupine": [
+    "tex1_128x128_7f8d8e4e64d26e9d_14",
+    "tex1_128x128_410a1a0482add8d1_14"
+  ],
+  "kg_firestorm": [
+    "tex1_128x128_9027c899aa8fa4f3_14"
+  ],
+  "kg_fstone_brown_crumble": [
+    "tex1_128x128_41d37aaeea667f20_14"
+  ],
+  "kg_fstone_grey_crumble": [
+    "tex1_128x128_m_d1ec03628d405d2f_14"
+  ],
+  "kg_fstone_grey_crumble_frost": [
+    "tex1_128x128_d6c3cb028346be26_14"
+  ],
+  "kg_fstone_plain_grey": [
+    "tex1_128x128_d13e37582957397c_14"
+  ],
+  "kg_grate": [
+    "tex1_128x128_m_4b00c3ae2bd53ca2_14"
+  ],
+  "kg_gstone": [
+    "tex1_128x128_m_442d96ddd40fb43b_14"
+  ],
+  "kg_gstone_decor": [
+    "tex1_128x128_m_adc9170de596b768_14"
+  ],
+  "kg_gstone_decor02": [
+    "tex1_128x128_f59ac358b90e5f53_14"
+  ],
+  "kg_gstone_decor03": [
+    "tex1_128x128_923e70563f1d4fbb_14"
+  ],
+  "kg_jlstatue02": [
+    "tex1_128x64_a752d8fc78b5a8b2_14"
+  ],
+  "kg_metal": [
+    "tex1_64x32_559d10bcf5d6e137_14"
+  ],
+  "kg_metal02": [
+    "tex1_128x64_f10fa32b66029adc_14"
+  ],
+  "kg_metallock": [
+    "tex1_32x16_595759351ccc3eca_14"
+  ],
+  "kg_metal_crate": [
+    "tex1_64x64_dc479fcd6fe97cc8_14"
+  ],
+  "kg_moon_01": [
+    "tex1_128x128_095095b0eb0ae0b8_14"
+  ],
+  "kg_nightsky_bkground": [
+    "tex1_32x32_a244430d01d2444b_14"
+  ],
+  "kg_nightstars2": [
+    "tex1_256x256_m_e47c3abbc951bb62_7d2c070a015a3d97_9"
+  ],
+  "kg_oldmetal01": [
+    "tex1_64x64_a85afabceb3e3628_14"
+  ],
+  "kg_polishedmetal": [
+    "tex1_128x128_d750b27363f2b51b_6d93f555665707cf_9"
+  ],
+  "kg_relief03": [
+    "tex1_128x64_ab51ad998e11397f_14"
+  ],
+  "kg_reliefsnow": [
+    "tex1_128x64_65f12e3b697096cf_14"
+  ],
+  "kg_relief_04a": [
+    "tex1_64x64_ac0523a4e7666bc5_14"
+  ],
+  "kg_relief_05": [
+    "tex1_128x64_m_a722f00c2ffc10e5_14"
+  ],
+  "kg_relief_stone01": [
+    "tex1_256x128_b782996e2d34d23d_14"
+  ],
+  "kg_ruins": [
+    "tex1_128x64_d5f08dc7547ee6a9_14"
+  ],
+  "kg_ruintile_frosted": [
+    "tex1_128x128_6030f2615faec556_14"
+  ],
+  "kg_rustymetal02": [
+    "tex1_64x64_4af5ce19dabb97aa_14"
+  ],
+  "kg_rustyplate": [
+    "tex1_128x128_88714138b5e2e8a4_14"
+  ],
+  "kg_smallrocks": [
+    "tex1_64x64_9f2ffc85dcb72099_14"
+  ],
+  "kg_snowman": [
+    "tex1_128x128_36befa861051010c_14"
+  ],
+  "kg_spike": [
+    "tex1_64x64_9a94c8e5eac8cd1c_14"
+  ],
+  "kg_statue01": [
+    "tex1_128x128_da919cb43eb3a9ee_14"
+  ],
+  "kg_toonglyphs": [
+    "tex1_256x256_m_9ce6ba83f04f763e_14"
+  ],
+  "kg_toonglyphs2": [
+    "tex1_256x256_e05a260864c28882_14"
+  ],
+  "kg_toonglyphs3": [
+    "tex1_128x128_2c48597b1213f589_14"
+  ],
+  "kg_totem01a": [
+    "tex1_128x64_a3bd8725e649ce05_14"
+  ],
+  "kg_totem01a_frost": [
+    "tex1_256x128_m_e8b7f66b2015e86f_14"
+  ],
+  "kg_totem01b": [
+    "tex1_128x64_150d67641214e115_14"
+  ],
+  "kg_totem01b_frost": [
+    "tex1_256x128_m_b9ea9a5c67e25053_14"
+  ],
+  "kg_totem01rubble": [
+    "tex1_64x64_1e2cd55ca568c705_14"
+  ],
+  "kg_totem01rubble_frost": [
+    "tex1_128x128_m_d4340d15489576f0_14"
+  ],
+  "kg_trapznew3": [
+    "tex1_128x128_d2e75bc09b52c548_14"
+  ],
+  "kg_treebark_01": [
+    "tex1_128x128_67a094b36e930a76_14"
+  ],
+  "kg_tree_branch01": [
+    "tex1_128x64_c17c026cb3625869_6"
+  ],
+  "kg_walkway": [
+    "tex1_256x256_d4b98e90f4e885f6_14"
+  ],
+  "kg_walkwaytop": [
+    "tex1_128x128_da5b864c01827745_14"
+  ],
+  "kg_watergod02": [
+    "tex1_128x64_df52866314076469_14"
+  ],
+  "kg_wiremesh": [
+    "tex1_64x64_m_a15041e57e7c49af_14",
+    "tex1_64x64_m_9516412d0bbbe771_14"
+  ],
+  "kh_ash": [
+    "tex1_64x64_7d1567638babdb05_14"
+  ],
+  "kh_belt": [
+    "tex1_256x128_28e263e5275906e2_14"
+  ],
+  "kh_bigstatue": [
+    "tex1_256x256_08f73c1400a9b999_14"
+  ],
+  "kh_bigstatuemoss": [
+    "tex1_256x256_720fff86b9cc442c_14"
+  ],
+  "kh_bigstatue_frost": [
+    "tex1_256x256_m_bbcb1f116eb0401e_14"
+  ],
+  "kh_birdstatue": [
+    "tex1_32x32_af0378386726463f_14"
+  ],
+  "kh_blackness": [
+    "tex1_16x16_7eea83e439be8b87_14"
+  ],
+  "kh_blimpbag": [
+    "tex1_128x128_a49f2c0011f0414f_14"
+  ],
+  "kh_blimpparts": [
+    "tex1_256x128_c4c3ff63cc4f7eb5_14"
+  ],
+  "kh_blockssysa": [
+    "tex1_256x256_m_a0c5f9a1cbf53968_14"
+  ],
+  "kh_blockssysb": [
+    "tex1_256x256_m_58a0ccbe16f4a6ad_14"
+  ],
+  "kh_bone": [
+    "tex1_32x32_e3a5fc3550e7ec92_14"
+  ],
+  "kh_breakingstatue": [
+    "tex1_256x256_0f5348f44a7386ee_14"
+  ],
+  "kh_bridgeplanks_moss": [
+    "tex1_256x256_m_20fa1ef5b43e146b_14"
+  ],
+  "kh_burns": [
+    "tex1_128x64_6caf42f76f2f4af3_1e0710f845e2b428_8",
+    "tex1_128x64_6caf42f76f2f4af3_373f58139d6fb9e2_8"
+  ],
+  "kh_canvas": [
+    "tex1_128x128_63ba8e049fb7e363_14"
+  ],
+  "kh_carpet": [
+    "tex1_32x32_ffa3603853597981_14"
+  ],
+  "kh_controlpanel": [
+    "tex1_256x256_24529ab43c0685fe_14"
+  ],
+  "kh_crane": [
+    "tex1_256x128_56c8e174a032eaa2_14",
+    "tex1_256x128_fa854c54c232ed9d_14"
+  ],
+  "kh_crane_frosted": [
+    "tex1_128x128_4a9691bda62822cf_14"
+  ],
+  "kh_cranklift": [
+    "tex1_128x128_acebfdcf055a91f3_14",
+    "tex1_128x128_9eea829b69c75481_14"
+  ],
+  "kh_crate": [
+    "tex1_128x128_2905d53b0544be2b_14"
+  ],
+  "kh_crateb": [
+    "tex1_128x128_m_242461749f960afc_14"
+  ],
+  "kh_cratebroken": [
+    "tex1_64x32_98379c2cb9f7e803_64ff22192a9b2794_8",
+    "tex1_64x32_98379c2cb9f7e803_2b32b9feb64b8db5_8"
+  ],
+  "kh_crateburnt": [
+    "tex1_128x128_e07475df95f6d6ba_14"
+  ],
+  "kh_crate_metal": [
+    "tex1_128x128_3a44a256b1a1c47d_14"
+  ],
+  "kh_crumble": [
+    "tex1_64x64_a88fce1cec0e06fe_14"
+  ],
+  "kh_engine": [
+    "tex1_128x128_aa81aa379bc58a4a_14"
+  ],
+  "kh_engine_wreck": [
+    "tex1_128x128_3fd17218610e9778_14"
+  ],
+  "kh_eyeringglow": [
+    "tex1_64x64_6bc9e1715988bed1_14"
+  ],
+  "kh_eyeringglow2": [
+    "tex1_64x64_34003181ad794f20_14"
+  ],
+  "kh_facedesingblock": [
+    "tex1_256x128_57193cf0c7166c3a_14"
+  ],
+  "kh_facedesingblockmoss": [
+    "tex1_512x256_0ed0c47606f998ff_14"
+  ],
+  "kh_facedesingblock_kg": [
+    "tex1_256x128_d642328ae0bd5145_14"
+  ],
+  "kh_facedesingblock_painted": [
+    "tex1_256x128_098133ed5e50b937_14"
+  ],
+  "kh_fstone": [
+    "tex1_256x256_776b2d49dc5ad1a5_14"
+  ],
+  "kh_fstone_frosted": [
+    "tex1_256x256_m_5471f50d762ab15e_14"
+  ],
+  "kh_gatewheel": [
+    "tex1_32x32_ec13b5ff3a58aa3b_14"
+  ],
+  "kh_gearpart": [
+    "tex1_128x128_a21b88f04d147cb2_14"
+  ],
+  "kh_gizmo85": [
+    "tex1_128x128_0711e499fa1f383a_14"
+  ],
+  "kh_gizmoflap": [
+    "tex1_64x32_f00b2f2838407dd1_14"
+  ],
+  "kh_glass": [
+    "tex1_32x32_6d273cae637070f6_b84c636b3c62a06c_8",
+    "tex1_32x32_6d273cae637070f6_d0815fe9021baa20_8"
+  ],
+  "kh_glass_wreck": [
+    "tex1_32x32_2342620784ac8ff1_0138114e61e14c09_8",
+    "tex1_32x32_2342620784ac8ff1_03402886d30dcf81_8"
+  ],
+  "kh_glyphsb": [
+    "tex1_128x128_m_9330480ed5a2cd4a_14"
+  ],
+  "kh_grating": [
+    "tex1_128x128_m_733f50ea2dca4285_14"
+  ],
+  "kh_grock": [
+    "tex1_128x128_e35b24685d8300f2_14"
+  ],
+  "kh_grock_frost": [
+    "tex1_128x128_5facb751d99f0c0d_14"
+  ],
+  "kh_gyro85": [
+    "tex1_128x64_726c4fff3c06805b_14"
+  ],
+  "kh_headstat": [
+    "tex1_128x128_49fd0f872ce927a9_14"
+  ],
+  "kh_headstatmoss": [
+    "tex1_256x256_21d668912ce36015_14"
+  ],
+  "kh_headstat_dirty": [
+    "tex1_128x128_99f4f87374aaca5a_14"
+  ],
+  "kh_headstat_frost": [
+    "tex1_128x128_64134485105acc34_14"
+  ],
+  "kh_healingfont": [
+    "tex1_128x128_df93a589700b1a81_14"
+  ],
+  "kh_healingfont_frosty": [
+    "tex1_128x128_442bde98698f46f0_14"
+  ],
+  "kh_idol": [
+    "tex1_64x64_7be9c7aa3ef8cdcc_36d1f8743d33a49f_8",
+    "tex1_64x64_7be9c7aa3ef8cdcc_750274f6332f048d_8"
+  ],
+  "kh_idol_silver": [
+    "tex1_64x64_0a642ea3ac10ddbd_14",
+    "tex1_64x64_a26e0347a5847478_14"
+  ],
+  "kh_ladder": [
+    "tex1_128x128_af34b121d4b6fb2a_14"
+  ],
+  "kh_lanternpotchain": [
+    "tex1_128x128_8cb52c8385f4b458_14",
+    "tex1_128x128_b5bea0dd8b943267_14"
+  ],
+  "kh_largeplanks": [
+    "tex1_128x128_m_4fad3b2c1842e4e7_14"
+  ],
+  "kh_metalcrate": [
+    "tex1_256x256_39d9806969a36312_14"
+  ],
+  "kh_minecart": [
+    "tex1_128x128_96558b02dddb773d_14"
+  ],
+  "kh_mossbricks01": [
+    "tex1_128x128_ca923deea72bfafa_14"
+  ],
+  "kh_mossbricks_clean": [
+    "tex1_128x128_85bbcfdb2ea22e36_14"
+  ],
+  "kh_mossbricks_frosted": [
+    "tex1_128x128_134a39b256894857_14"
+  ],
+  "kh_mosscrumble": [
+    "tex1_128x128_1ae3d033c11519c7_14"
+  ],
+  "kh_mountainglyphs": [
+    "tex1_128x64_c57bf9a8ba15a041_14"
+  ],
+  "kh_mouthstat": [
+    "tex1_128x128_c57577cd6c654419_14"
+  ],
+  "kh_mouthstatmoss": [
+    "tex1_128x128_e82a20e0d53fe5bd_14"
+  ],
+  "kh_mouthstat_frost": [
+    "tex1_128x128_bb782b13c19b3175_14"
+  ],
+  "kh_netting": [
+    "tex1_64x64_m_d5a991b05af8e644_46b2df3c358fcf41_8",
+    "tex1_64x64_m_d5a991b05af8e644_c7c0099c441822fb_8"
+  ],
+  "kh_parachute": [
+    "tex1_128x64_73033fdb72c8aee6_14"
+  ],
+  "kh_parachutecloth": [
+    "tex1_32x32_fc43eb50dc80cc35_14"
+  ],
+  "kh_parachutecloth_red": [
+    "tex1_32x32_131d6553debaf21b_14"
+  ],
+  "kh_pathdirt_no_alpha": [
+    "tex1_256x256_m_e473695e43473fe1_14"
+  ],
+  "kh_pinkmarble": [
+    "tex1_128x128_5068c601a98e11fd_14"
+  ],
+  "kh_planefancywall": [
+    "tex1_128x64_63edda9f0b773fe9_14"
+  ],
+  "kh_planeflaps": [
+    "tex1_256x128_d5d1e2c267393187_14"
+  ],
+  "kh_planeflaps_wreck": [
+    "tex1_128x64_84211fa6e34e8072_14"
+  ],
+  "kh_planefloor": [
+    "tex1_64x64_m_5bb8d2cc1e96886c_14"
+  ],
+  "kh_planeinterior": [
+    "tex1_128x128_m_2cb48cf47fa06316_14"
+  ],
+  "kh_planepanela": [
+    "tex1_256x256_1be1bce7157e70bc_14"
+  ],
+  "kh_planepanelared": [
+    "tex1_128x128_9280ac02229d1897_14"
+  ],
+  "kh_planepanelared_wreck": [
+    "tex1_128x128_cbf5f2248b848ee9_14"
+  ],
+  "kh_planepanela_wreck": [
+    "tex1_128x128_575e4ef02bb69970_14"
+  ],
+  "kh_planepanelb": [
+    "tex1_256x128_d6742536d40b0a5b_14"
+  ],
+  "kh_planepanelb_wreck": [
+    "tex1_128x64_42e4d8db56303467_14"
+  ],
+  "kh_planepanel_a04": [
+    "tex1_256x256_974ce41a082170ff_14"
+  ],
+  "kh_planepartsa": [
+    "tex1_256x256_57f48d811ab7d8c9_14",
+    "tex1_256x256_bac2ee253d401412_14"
+  ],
+  "kh_planepartsa_wreck": [
+    "tex1_128x128_5689dcd4b8a3af22_14",
+    "tex1_128x128_f101c7420814713d_14"
+  ],
+  "kh_planepartsb": [
+    "tex1_256x256_29bf406cb247201b_14",
+    "tex1_256x256_64a66a911faa7941_14"
+  ],
+  "kh_planepartsb_wreck": [
+    "tex1_128x128_m_e00bc9f83af165d9_14",
+    "tex1_128x128_m_1931713ae0f316f6_14"
+  ],
+  "kh_planeparts_a04": [
+    "tex1_256x256_ace47828fc0c4d84_14"
+  ],
+  "kh_planks2": [
+    "tex1_128x128_b52d3a1901926c9a_14"
+  ],
+  "kh_planks2_smallversion": [
+    "tex1_128x128_a6b7dd04652b5315_14"
+  ],
+  "kh_pogostick": [
+    "tex1_64x64_79c0aa1392c5ab0e_14"
+  ],
+  "kh_polewood": [
+    "tex1_128x64_df751cb8af101f87_14"
+  ],
+  "kh_propblur": [
+    "tex1_128x64_731ad993edbf915b_d61391e270abdfad_8",
+    "tex1_128x64_731ad993edbf915b_5be04cd8f70eb3c8_8"
+  ],
+  "kh_pupil": [
+    "tex1_128x128_5a1e0259dd405f07_14"
+  ],
+  "kh_rfbroke": [
+    "tex1_128x128_5028ea50bcaec756_14"
+  ],
+  "kh_roughplank": [
+    "tex1_128x128_e23f84d4edf8fe61_14"
+  ],
+  "kh_ruinfloor": [
+    "tex1_128x128_6bb4a2d4ca749743_14"
+  ],
+  "kh_ruinfloor_frosted": [
+    "tex1_128x128_9a95132f515ca3a6_14"
+  ],
+  "kh_runers": [
+    "tex1_128x128_m_a931b3b6339d6d0c_14"
+  ],
+  "kh_rustyplate": [
+    "tex1_128x128_fb6db81a80467e1d_14"
+  ],
+  "kh_savesymbol": [
+    "tex1_128x128_65a9de89ef8caa60_14"
+  ],
+  "kh_spikefloorb": [
+    "tex1_256x256_be89ed3d75da6cb5_14"
+  ],
+  "kh_spitstat": [
+    "tex1_256x256_m_8b3f7cbee1a02996_14"
+  ],
+  "kh_spitstatmoss": [
+    "tex1_128x128_b6de732eb3dd8b28_14"
+  ],
+  "kh_steamboat": [
+    "tex1_128x128_84c76bbf693cef4c_14"
+  ],
+  "kh_steamengine": [
+    "tex1_256x256_c54cba3196ee6a4a_14"
+  ],
+  "kh_steelbeam": [
+    "tex1_128x128_8635eddaf245e8cf_14"
+  ],
+  "kh_steelbeam_dark": [
+    "tex1_256x256_ba9e037033b4d2c7_14"
+  ],
+  "kh_steelwire": [
+    "tex1_32x16_m_d26c844233b62f87_14"
+  ],
+  "kh_target": [
+    "tex1_32x32_acc81ee67887c02c_4104915641886525_8",
+    "tex1_32x32_acc81ee67887c02c_3e7bd1c603c5cd02_8"
+  ],
+  "kh_temple_bricks_frosted": [
+    "tex1_128x128_1450ea6b6ff57696_14"
+  ],
+  "kh_tilebroke_frosted": [
+    "tex1_128x128_1e1caeb3b3b75bd5_14"
+  ],
+  "kh_tileplain": [
+    "tex1_128x128_cff8129ee8fc9e66_14"
+  ],
+  "kh_timedevice": [
+    "tex1_128x64_e9b7a39ab2617a79_867675848e5542f2_8",
+    "tex1_128x64_e9b7a39ab2617a79_e859d921fff4fb63_8"
+  ],
+  "kh_timepower": [
+    "tex1_32x32_d73ba83fa07a14be_14"
+  ],
+  "kh_tire": [
+    "tex1_128x128_8a159b3e4080ea55_14"
+  ],
+  "kh_tools": [
+    "tex1_64x64_61a8f052a7c33a23_4486b4a8861591d4_8",
+    "tex1_64x64_61a8f052a7c33a23_9ed17b29f98904c0_8"
+  ],
+  "kh_toonglyphsc": [
+    "tex1_128x128_m_a6b8ab71db5f57c4_14"
+  ],
+  "kh_toonglyphsc_frosted": [
+    "tex1_128x128_0bc6130b957fb164_14"
+  ],
+  "kh_toonglyphsc_grey": [
+    "tex1_256x256_f2e5f1138affcb88_14"
+  ],
+  "kh_toonglyphsc_painted": [
+    "tex1_128x128_f8a645a05e46370c_14"
+  ],
+  "kh_traintracks": [
+    "tex1_128x64_f89c924a4689310c_14"
+  ],
+  "kh_trapznew": [
+    "tex1_128x128_m_51277e109614f66a_14"
+  ],
+  "kh_trapznew2": [
+    "tex1_128x128_6cffcfbf4dbcc6c2_14"
+  ],
+  "kh_trapznew_frost": [
+    "tex1_128x128_2211dc52d709e6b1_14"
+  ],
+  "kh_trapznew_warmgrey": [
+    "tex1_128x128_953a322f5b1799ad_14"
+  ],
+  "kh_trapz_old": [
+    "tex1_256x256_m_73821df37620547d_14"
+  ],
+  "kh_trollysystem": [
+    "tex1_128x128_5ed6787f02cec50a_14",
+    "tex1_128x128_34b470f89edff8d6_14"
+  ],
+  "kh_truck": [
+    "tex1_256x128_cf0d95f3a269d97b_14"
+  ],
+  "kh_wallpole": [
+    "tex1_64x64_f343dc3196062acc_14"
+  ],
+  "kh_wallpoleb": [
+    "tex1_64x64_cb28fc754a5fa141_14"
+  ],
+  "kh_worklamp": [
+    "tex1_128x128_f4844d04142a20a1_d90eaa38fee9e0ca_8",
+    "tex1_128x128_f4844d04142a20a1_3721173783182473_8"
+  ],
+  "kh_worklamp_wreck": [
+    "tex1_64x64_9d0610871e8601a5_14",
+    "tex1_64x64_4d2b3ce98e487d26_14"
+  ],
+  "kh_yellowmetal": [
+    "tex1_64x64_2b785568fbf650ec_14"
+  ],
+  "leech_body": [
+    "tex1_128x128_7286d961c8cfc81b_14"
+  ],
+  "leech_body_lod": [
+    "tex1_64x64_f0a8479a09642ea8_14"
+  ],
+  "leech_head": [
+    "tex1_128x128_fc2157ac1d41821a_14"
+  ],
+  "leech_head_lod": [
+    "tex1_64x64_d360cfed2c14e389_14"
+  ],
+  "legal_screen_bad": [
+    "tex1_128x64_29a2dcb9fa82c93d_14"
+  ],
+  "legal_screen_ngc_english": [
+    "tex1_512x512_5c34600f3afb3c66_14"
+  ],
+  "legal_screen_ps2_english": [
+    "tex1_512x512_f56b2a2acf89dfa7_14"
+  ],
+  "legal_screen_xbox_english": [
+    "tex1_512x512_ac58552a58cf777d_14"
+  ],
+  "lenseflare_circle": [
+    "tex1_64x64_3ac129f25180e3ed_d06b268c69aa66d3_9"
+  ],
+  "lenseflare_hexagon": [
+    "tex1_64x64_65738167cc20d66c_8e8d288c44ef9c0a_9"
+  ],
+  "lifecube_bamboo": [
+    "tex1_64x32_a2da40e2d4f7984c_0931611769ac55f5_8",
+    "tex1_64x32_a2da40e2d4f7984c_cca81e998285ea57_8"
+  ],
+  "lifecube_sidecap": [
+    "tex1_32x32_03b78338b5e8f2f2_14"
+  ],
+  "lifepipcomposite": [
+    "tex1_32x32_dc6e4373271e2b12_14"
+  ],
+  "lifepipcompositeboss": [
+    "tex1_32x32_a69d240a0fb67c44_14"
+  ],
+  "lifepipcompositebubble": [
+    "tex1_32x32_e81498f3d18d2698_14"
+  ],
+  "lifepipcompositehevil": [
+    "tex1_32x32_a1ad151a6b0b6bba_14"
+  ],
+  "lifepiplevel1": [
+    "tex1_32x32_6e2a8abe3f7198ff_14"
+  ],
+  "lifepiplevel2": [
+    "tex1_16x16_c9c678ee6364addd_14"
+  ],
+  "lifepiplevel3": [
+    "tex1_16x16_0a31d050d2b60d42_14"
+  ],
+  "lifepipoff": [
+    "tex1_16x16_10462b2cb7b1ddee_14"
+  ],
+  "lifepipon": [
+    "tex1_16x16_d487fe93e71091f0_14"
+  ],
+  "lightbeam": [
+    "tex1_64x64_42549e6c466f8163_14"
+  ],
+  "lightbeamdust": [
+    "tex1_64x64_f50f1ffb6c896eb0_14"
+  ],
+  "lightbeam_red": [
+    "tex1_32x32_7fea6f642c135a52_14"
+  ],
+  "lightmap_lev_0081082c_inst_3491979a": [
+    "tex1_16x16_6ec65e3e35ea121c_14"
+  ],
+  "lightmap_lev_0081082c_inst_4396a70c": [
+    "tex1_16x16_0dd9eb860591a873_14"
+  ],
+  "lightmap_lev_0081082c_inst_44fb6315": [
+    "tex1_16x16_d4d9a24164976546_14"
+  ],
+  "lightmap_lev_0081082c_inst_aaf50239": [
+    "tex1_16x16_b00a8261dbc0f704_14"
+  ],
+  "lightmap_lev_0081082c_inst_ddf232af": [
+    "tex1_16x16_dba9ac83484a91e2_14"
+  ],
+  "lightmap_lev_07eccc35_inst_316862c0": [
+    "tex1_8x8_093670a898b350d0_14"
+  ],
+  "lightmap_lev_07eccc35_inst_3605a6d9": [
+    "tex1_8x8_71204be992f03723_14"
+  ],
+  "lightmap_lev_07eccc35_inst_44fb6315": [
+    "tex1_64x64_c9d928a3b484d204_14"
+  ],
+  "lightmap_lev_07eccc35_inst_466f5256": [
+    "tex1_8x8_798109b571a5d3ca_14"
+  ],
+  "lightmap_lev_07eccc35_inst_a861337a": [
+    "tex1_8x8_4e913efd2769bb9b_14"
+  ],
+  "lightmap_lev_07eccc35_inst_af0cf763": [
+    "tex1_8x8_1d96d14bd905a9c8_14"
+  ],
+  "lightmap_lev_07eccc35_inst_d80bc7f5": [
+    "tex1_8x8_6951b2ae01e3de70_14"
+  ],
+  "lightmap_lev_07eccc35_inst_df6603ec": [
+    "tex1_8x8_05da623db677de82_14"
+  ],
+  "lightmap_lev_0af1ccff_inst_e19c291d": [
+    "tex1_8x8_ec6bfa1115595e54_14"
+  ],
+  "lightmap_lev_0c1c3e47_inst_0f924831": [
+    "tex1_8x8_33e40afdc49c29e4_14"
+  ],
+  "lightmap_lev_0c1c3e47_inst_202ba0a3": [
+    "tex1_8x8_9f9a06db501119f1_14"
+  ],
+  "lightmap_lev_0c1c3e47_inst_789578a7": [
+    "tex1_8x8_78dd0fb3927c574e_14"
+  ],
+  "lightmap_lev_0c1c3e47_inst_e19c291d": [
+    "tex1_32x32_016af21ad38c763c_14"
+  ],
+  "lightmap_lev_0ef63551_inst_44fb6315": [
+    "tex1_64x64_46bb383a60cd85a1_14"
+  ],
+  "lightmap_lev_0ef63551_inst_aaf50239": [
+    "tex1_8x8_8559d779961ab777_14"
+  ],
+  "lightmap_lev_0ef63551_inst_ddf232af": [
+    "tex1_32x32_10fe6a64773ad5a9_14"
+  ],
+  "lightmap_lev_1553bbe1_inst_44fb6315": [
+    "tex1_64x64_0448cf87a773dc33_14"
+  ],
+  "lightmap_lev_1b11ec74_inst_44fb6315": [
+    "tex1_128x128_61adbfa23dcf7fec_14"
+  ],
+  "lightmap_lev_1b8833d3_inst_44fb6315": [
+    "tex1_128x128_8d79767f250f8b29_14"
+  ],
+  "lightmap_lev_1f237f32_inst_44fb6315": [
+    "tex1_128x128_0155401e6dd99600_14"
+  ],
+  "lightmap_lev_239a2165_inst_e19c291d": [
+    "tex1_8x8_777cd7254d982e4e_14"
+  ],
+  "lightmap_lev_29c6e554_inst_202ba0a3": [
+    "tex1_256x256_62978fe1ffe3d564_14"
+  ],
+  "lightmap_lev_3292b6c9_inst_3491979a": [
+    "tex1_8x8_72ce9abb40b07aed_14"
+  ],
+  "lightmap_lev_3292b6c9_inst_44fb6315": [
+    "tex1_64x64_95d319c330338793_14"
+  ],
+  "lightmap_lev_3292b6c9_inst_ddf232af": [
+    "tex1_8x8_f33965ac82c952ee_14"
+  ],
+  "lightmap_lev_3a811024_inst_44fb6315": [
+    "tex1_8x8_d4f714e142d5b9f0_14"
+  ],
+  "lightmap_lev_3e7ee822_inst_44fb6315": [
+    "tex1_32x32_66a0ec43cc0523b2_14"
+  ],
+  "lightmap_lev_619e1126_inst_202ba0a3": [
+    "tex1_64x64_249523c5c2512fe6_14"
+  ],
+  "lightmap_lev_62548b77_inst_202ba0a3": [
+    "tex1_32x32_f48faf66cf487ad8_14"
+  ],
+  "lightmap_lev_6f498bbd_inst_44fb6315": [
+    "tex1_128x128_e18958ec7d5d564d_14"
+  ],
+  "lightmap_lev_72ad42fa_inst_3491979a": [
+    "tex1_16x16_a9b15e227777ca22_14"
+  ],
+  "lightmap_lev_72ad42fa_inst_4396a70c": [
+    "tex1_32x32_4e4c93cdaa4a705c_14"
+  ],
+  "lightmap_lev_72ad42fa_inst_44fb6315": [
+    "tex1_32x32_7b9f0398ac36b3aa_14"
+  ],
+  "lightmap_lev_72ad42fa_inst_aaf50239": [
+    "tex1_64x64_fcba8842ba1dfd10_14"
+  ],
+  "lightmap_lev_72ad42fa_inst_ddf232af": [
+    "tex1_32x32_b6414106bae6b90c_14"
+  ],
+  "lightmap_lev_7652bafc_inst_019588f8": [
+    "tex1_32x32_9494e7f6ebf64991_14"
+  ],
+  "lightmap_lev_7652bafc_inst_12912743": [
+    "tex1_32x32_3bf024dc01772238_14"
+  ],
+  "lightmap_lev_7a75d1a9_inst_3491979a": [
+    "tex1_8x8_8d9104dfb0c5b78d_14"
+  ],
+  "lightmap_lev_7a75d1a9_inst_4396a70c": [
+    "tex1_8x8_0160eaf09d549baf_14"
+  ],
+  "lightmap_lev_7a75d1a9_inst_aaf50239": [
+    "tex1_8x8_fb1925cafcfbdc27_14"
+  ],
+  "lightmap_lev_7a75d1a9_inst_da9ff6b6": [
+    "tex1_8x8_a9d8259d48190e11_14"
+  ],
+  "lightmap_lev_7a75d1a9_inst_ddf232af": [
+    "tex1_8x8_741356e23fa3308a_14"
+  ],
+  "lightmap_lev_8147ea91_inst_44fb6315": [
+    "tex1_128x128_2af95a794463c5ce_14"
+  ],
+  "lightmap_lev_8b372e42_inst_202ba0a3": [
+    "tex1_128x128_047c2811efc4800b_14"
+  ],
+  "lightmap_lev_9316749c_inst_44fb6315": [
+    "tex1_256x256_f20d5f4ee8bdbc12_14"
+  ],
+  "lightmap_lev_93f89d45_inst_44fb6315": [
+    "tex1_32x32_1df008b326953e96_14"
+  ],
+  "lightmap_lev_9d6149e1_inst_3491979a": [
+    "tex1_64x64_55640f9a39db44df_14"
+  ],
+  "lightmap_lev_9d6149e1_inst_4396a70c": [
+    "tex1_32x32_06c04e094d96f110_14"
+  ],
+  "lightmap_lev_9d6149e1_inst_44fb6315": [
+    "tex1_32x32_8b3dc1f59983c883_14"
+  ],
+  "lightmap_lev_9d6149e1_inst_aaf50239": [
+    "tex1_32x32_2e81009c968e132e_14"
+  ],
+  "lightmap_lev_9d6149e1_inst_ad98c620": [
+    "tex1_32x32_85d175a39bac2455_14"
+  ],
+  "lightmap_lev_9d6149e1_inst_da9ff6b6": [
+    "tex1_32x32_20a17e7bfd5716e8_14"
+  ],
+  "lightmap_lev_9d6149e1_inst_ddf232af": [
+    "tex1_32x32_e681e8e2570b124f_14"
+  ],
+  "lightmap_lev_abd7ccd8_inst_202ba0a3": [
+    "tex1_32x32_6665fe0987f4163d_14"
+  ],
+  "lightmap_lev_b252ee26_inst_44fb6315": [
+    "tex1_32x32_28eadc8ff1bcbe39_14"
+  ],
+  "lightmap_lev_b8d5ce86_inst_e19c291d": [
+    "tex1_8x8_d1e2a1bd20259ba3_14"
+  ],
+  "lightmap_lev_b8dccbfe_inst_44fb6315": [
+    "tex1_32x32_c7e409b8645d2ab0_14"
+  ],
+  "lightmap_lev_ba9370df_inst_3491979a": [
+    "tex1_16x16_e84c6267b20cfdc7_14"
+  ],
+  "lightmap_lev_ba9370df_inst_44fb6315": [
+    "tex1_64x64_1a2634487f76b5c4_14"
+  ],
+  "lightmap_lev_ba9370df_inst_aaf50239": [
+    "tex1_64x64_89b75756fbcdfe69_14"
+  ],
+  "lightmap_lev_ba9370df_inst_ddf232af": [
+    "tex1_32x32_a5990617f37041a8_14"
+  ],
+  "lightmap_lev_cd944049_inst_3491979a": [
+    "tex1_8x8_021dab985f8c034e_14"
+  ],
+  "lightmap_lev_cd944049_inst_980b4b5b": [
+    "tex1_8x8_87b0d2acdc88c80d_14"
+  ],
+  "lightmap_lev_cd944049_inst_aaf50239": [
+    "tex1_64x64_4c96c367781dfdf7_14"
+  ],
+  "lightmap_lev_de524da6_inst_44fb6315": [
+    "tex1_64x64_a49efe8b479fcaf2_14"
+  ],
+  "lightmap_lev_deda69bc_inst_202ba0a3": [
+    "tex1_16x16_fad32ca9948fbf97_14"
+  ],
+  "lightmap_lev_deda69bc_inst_44fb6315": [
+    "tex1_64x64_e9e087b597fce072_14"
+  ],
+  "lightmap_lev_deda69bc_inst_ddf232af": [
+    "tex1_32x32_24a9801f8255aa1a_14"
+  ],
+  "lightmap_lev_e6b9138a_inst_202ba0a3": [
+    "tex1_32x32_28cc94be3152beb9_14"
+  ],
+  "lightmap_lev_ea667977_inst_789578a7": [
+    "tex1_8x8_6346dd78c9a44d15_14"
+  ],
+  "lightmap_lev_ecc9d759_inst_44fb6315": [
+    "tex1_128x128_0704ef354e248cfe_14"
+  ],
+  "lightmap_lev_ecc9d759_inst_789578a7": [
+    "tex1_8x8_3d06b98554d4af91_14"
+  ],
+  "lightmap_lev_ecc9d759_inst_e19c291d": [
+    "tex1_8x8_a9c85f839be084c6_14"
+  ],
+  "lightmap_lev_f0f99c58_inst_44fb6315": [
+    "tex1_8x8_592835944be05bce_14"
+  ],
+  "lightmap_lev_f0f99c58_inst_ddf232af": [
+    "tex1_8x8_ee4dffeb4302eccc_14"
+  ],
+  "lightmap_lev_f5c60ce9_inst_202ba0a3": [
+    "tex1_8x8_a825f5860c1b3ab8_14"
+  ],
+  "lightmap_lev_f5c60ce9_inst_44fb6315": [
+    "tex1_16x16_8859891194056e92_14"
+  ],
+  "lightmap_lev_f5c60ce9_inst_e19c291d": [
+    "tex1_8x8_cd0cc80386019eff_14"
+  ],
+  "lightray": [
+    "tex1_64x64_1ccb33e2a21ea844_14"
+  ],
+  "ls_lamp": [
+    "tex1_64x64_8f16ed69bae2721d_14"
+  ],
+  "ls_rockscorpion": [
+    "tex1_128x128_43a0c144898c264f_14"
+  ],
+  "mccallister_deadbody": [
+    "tex1_256x256_13efe9e3a56c5814_14"
+  ],
+  "mccallister_deadhead": [
+    "tex1_256x256_25c17ae0b468f641_14"
+  ],
+  "melon": [
+    "tex1_64x64_26e222d4c83df59f_14"
+  ],
+  "micay_legs": [
+    "tex1_128x128_e704dd8b178ca6b2_14"
+  ],
+  "micay_legs_lod": [
+    "tex1_64x64_1e6e55a6bca7b56b_14"
+  ],
+  "micay_torso": [
+    "tex1_128x128_5a9fc0a74435742a_14"
+  ],
+  "micay_torso_lod": [
+    "tex1_64x64_6c82c3f023d539a9_14"
+  ],
+  "mini_puscalegs": [
+    "tex1_128x128_m_46a00f2dbc967a1b_d2d4d022b2810895_9"
+  ],
+  "mini_puscatorso": [
+    "tex1_128x128_m_527d82dbf61702a1_7bfaefe38e8318f7_9"
+  ],
+  "mirror_reflect": [
+    "tex1_64x64_6c8e7b5f86ec28ca_14"
+  ],
+  "monkey2": [
+    "tex1_128x128_e8bb03e19edfbb9b_14",
+    "tex1_128x128_272b17b01ea4668b_14"
+  ],
+  "monkey2_lod": [
+    "tex1_64x64_9a324a82d50a5969_14"
+  ],
+  "monkeybaby_texturecloth": [
+    "tex1_256x256_m_e7eb8c40513e94e5_14"
+  ],
+  "monkeybaby_texturecloth_lod": [
+    "tex1_32x32_64a47953ee25adac_14"
+  ],
+  "monkeymom_texture": [
+    "tex1_128x128_cc07696b602b1663_14"
+  ],
+  "monkeymom_texture_lod": [
+    "tex1_64x64_c502cae760da2350_14"
+  ],
+  "ms_a17_burntground": [
+    "tex1_256x256_m_23657a0ea6d7cc7d_3aea145cd3ec6b8c_9"
+  ],
+  "ms_a17_rockwall01": [
+    "tex1_256x256_m_54a8ac3da9b2389e_14"
+  ],
+  "ms_a17_rockwall02": [
+    "tex1_256x256_m_cd043483c501e838_14"
+  ],
+  "ms_a_kg_palm_leaf_small": [
+    "tex1_32x16_85ca0885c0bdada5_14"
+  ],
+  "ms_bark": [
+    "tex1_32x32_3aad1b4b01685408_14"
+  ],
+  "ms_brown": [
+    "tex1_32x32_b7f2c1f533674f44_14"
+  ],
+  "ms_burnt": [
+    "tex1_32x32_236f5e63c3a6c883_14"
+  ],
+  "ms_burnt_tree": [
+    "tex1_64x32_fd9e19684737010c_14"
+  ],
+  "ms_carving01": [
+    "tex1_128x128_m_0ef84b7bc955b194_14"
+  ],
+  "ms_fora17_burnt_tower01": [
+    "tex1_256x256_m_3d9194a213a17d09_14"
+  ],
+  "ms_grounddirt": [
+    "tex1_128x128_e3f99bec7b523710_14"
+  ],
+  "ms_jungle_rt_eldorado_wall_05": [
+    "tex1_128x128_2c1715dd1a5f71fa_14"
+  ],
+  "ms_kg_toonglyphs4": [
+    "tex1_128x128_3a2a4a5a499ee59f_14"
+  ],
+  "ms_large_bricks": [
+    "tex1_256x256_m_8ab326e65aae13f0_14"
+  ],
+  "ms_mine_cart_optimized": [
+    "tex1_128x64_9d6daff1fe797d94_14"
+  ],
+  "ms_stick_fortents": [
+    "tex1_8x16_9dd3c74a8d27a8cb_14"
+  ],
+  "ms_tiny_leaf": [
+    "tex1_32x32_a3daa8e178e16a30_3b2e5501fb9e09ae_8",
+    "tex1_32x32_a3daa8e178e16a30_d6cc6e4f139c435a_8"
+  ],
+  "ms_tiny_leaf02": [
+    "tex1_32x16_b74ab6a37ecdbd04_2281a110421f406d_8",
+    "tex1_32x16_b74ab6a37ecdbd04_08ad063cc8d3e063_8"
+  ],
+  "ms_tiny_leaf_colorvariation_a": [
+    "tex1_32x32_ca0066f9c55e02fd_0860093f162df01b_8",
+    "tex1_32x32_ca0066f9c55e02fd_191f20e6adab37b9_8"
+  ],
+  "ms_treebark01": [
+    "tex1_128x128_m_e0fb1e27484f6918_14"
+  ],
+  "ms_turtlebeak": [
+    "tex1_256x256_m_ee7e2d5571059242_14"
+  ],
+  "ms_turtlejaw_fora17_runtime": [
+    "tex1_256x256_931776fe0d90d208_14"
+  ],
+  "ms_turtle_foot02": [
+    "tex1_256x256_m_ba81efdd8860ec43_14"
+  ],
+  "ms_vine_small01": [
+    "tex1_16x16_0f1df8bd15be01a7_14"
+  ],
+  "m_jj_dryriverdirt": [
+    "tex1_128x128_227a4588e5aa38ab_14",
+    "tex1_128x128_fad9d27aca2c11c4_14"
+  ],
+  "m_jj_grassedge": [
+    "tex1_128x64_4487e68df2f51385_8414af95f6ec3003_8",
+    "tex1_128x64_4487e68df2f51385_68ee0b3c8ca0367a_8"
+  ],
+  "m_jj_lillypad": [
+    "tex1_64x64_a98459a17e716530_377ab00efbba7efa_8",
+    "tex1_64x64_a98459a17e716530_b68bcc2176f854c6_8"
+  ],
+  "m_jj_mossrock": [
+    "tex1_128x128_7135b4db3d9bfb26_14",
+    "tex1_128x128_a6016151b563fb56_14"
+  ],
+  "m_jj_mud_platform": [
+    "tex1_128x128_f39e8b4d973a57fb_14"
+  ],
+  "m_jj_pathdirt": [
+    "tex1_128x128_2b827c5ec43ea225_14",
+    "tex1_128x128_a07baf726f876994_14"
+  ],
+  "m_jj_pathdirt_no_alpha": [
+    "tex1_128x128_7b8741451bca5928_14"
+  ],
+  "m_jj_pathdirt_outlet": [
+    "tex1_128x128_640433ca62de30b7_14"
+  ],
+  "m_jj_sporeplant_body": [
+    "tex1_128x128_6d1380e736b1cbe7_14"
+  ],
+  "m_jj_sporeplant_mouth": [
+    "tex1_128x128_be47972a3ef4b919_14"
+  ],
+  "m_jj_waterweeds": [
+    "tex1_128x128_af524bc62dd79459_4c41ad1cf989d3d0_8",
+    "tex1_128x128_af524bc62dd79459_1964bf5cb91e6bcf_8"
+  ],
+  "m_jj_waterweeds_main": [
+    "tex1_128x128_271007f04eb128f0_14"
+  ],
+  "m_jj_waterweeds_thorns": [
+    "tex1_64x64_c277326a24952cd4_14"
+  ],
+  "native cutouts": [
+    "tex1_256x128_m_073a41d7168cc1ac_d2eaba994ec993c3_8",
+    "tex1_256x128_m_073a41d7168cc1ac_46029a1ec9f90a9a_8"
+  ],
+  "native_athlete_legs": [
+    "tex1_256x256_6acc9f53fc6ceab6_14",
+    "tex1_256x256_744d1aae7740e408_14"
+  ],
+  "native_athlete_torso": [
+    "tex1_256x256_a074c875224b6524_14"
+  ],
+  "native_mask": [
+    "tex1_128x128_9f62a377a5c711bd_14"
+  ],
+  "native_mask_lod": [
+    "tex1_64x64_cc4d19dff123f1ee_14"
+  ],
+  "nicholebody": [
+    "tex1_256x256_827c5ff7be4cc489_14"
+  ],
+  "nicholebody_snow": [
+    "tex1_256x256_dbea3e1450a1da26_14"
+  ],
+  "nicholebody_stage3": [
+    "tex1_256x256_c92be6ef381a192c_14"
+  ],
+  "nicholebody_stage5": [
+    "tex1_256x256_be0a991cd8a6bbca_14"
+  ],
+  "nicholebody_stage6": [
+    "tex1_256x256_da4ffd7aa2be41eb_14"
+  ],
+  "nicholehead": [
+    "tex1_256x256_069920f23bcfdfb3_14"
+  ],
+  "nicholehead_snow": [
+    "tex1_256x256_a80286659710b298_14"
+  ],
+  "nichole_relaxed_head": [
+    "tex1_256x256_93101877dd0e1378_14"
+  ],
+  "noxious": [
+    "tex1_256x256_d10581cefc1e021b_14"
+  ],
+  "noxious_lod": [
+    "tex1_64x64_fc9efc7ad71678e6_14"
+  ],
+  "objects, dirigible, balloon": [
+    "tex1_8x8_cae6775fd344026f_14"
+  ],
+  "objects, dirigible, element": [
+    "tex1_8x8_7afc877416963442_14"
+  ],
+  "opmcontrolscreen": [
+    "tex1_512x512_cf3a12a74205f81a_14"
+  ],
+  "opmexitscreenall": [
+    "tex1_512x512_39338c5174544e74_14"
+  ],
+  "opmexitscreennotall": [
+    "tex1_512x512_7ec3a14384e55b19_14"
+  ],
+  "opmlegalscreen": [
+    "tex1_512x512_984d028cf6c85019_14"
+  ],
+  "opmtitlescreen": [
+    "tex1_512x512_ec9ec77b3e134a19_14"
+  ],
+  "particle_dirt_cloud": [
+    "tex1_64x64_c062591752a9c6bf_c1fba71787562af9_9"
+  ],
+  "particle_explode_additive": [
+    "tex1_128x128_b9362cfe90511744_fdf177cfb8ebef4f_9"
+  ],
+  "particle_explode_additive_saves": [
+    "tex1_128x128_eae4a261faeee411_bdece2cdd72f61e2_9"
+  ],
+  "particle_footprint_dirt": [
+    "tex1_32x32_929fce30c6fb465e_14",
+    "tex1_32x32_db8692b7bb7b9ddc_14"
+  ],
+  "particle_footprint_grass": [
+    "tex1_32x32_a92ea6c4f24056f4_14",
+    "tex1_32x32_b345960759fda07a_14"
+  ],
+  "particle_footprint_mud": [
+    "tex1_32x32_b76afbab79e9c2e2_14",
+    "tex1_32x32_fc6fa9ef948fd06d_14"
+  ],
+  "particle_grassblade_02": [
+    "tex1_64x32_64a4108c65289ee5_32fce589c6475684_8",
+    "tex1_64x32_64a4108c65289ee5_be22451bb5b2233c_8"
+  ],
+  "particle_ice_chunks": [
+    "tex1_64x64_e31cc4634cc27dc9_27c1e6133127a7dd_8",
+    "tex1_64x64_e31cc4634cc27dc9_8ec6e0cec1a8bcc2_8"
+  ],
+  "particle_lavachunks": [
+    "tex1_64x64_dd388312b8e728e6_14",
+    "tex1_64x64_cb8b41c12172545b_14"
+  ],
+  "particle_mudchunks": [
+    "tex1_32x32_a0928e0d78a059bf_14",
+    "tex1_32x32_19257787423447ce_14"
+  ],
+  "particle_mudchunks2": [
+    "tex1_32x32_7c6776a9c2d71cd7_2500af0f3fc3918b_8",
+    "tex1_32x32_7c6776a9c2d71cd7_ab25544cf8b69762_8"
+  ],
+  "particle_mystic door_additive_jungle": [
+    "tex1_64x64_d266827079c0e6d7_14",
+    "tex1_64x64_d0ee9cfa0ec2fc19_14"
+  ],
+  "particle_pf_dirtpuff": [
+    "tex1_64x64_d8e476c09a04570b_ff10223616c08787_8",
+    "tex1_64x64_d8e476c09a04570b_b84ebb14a64fedf4_8"
+  ],
+  "particle_rolling_grass_quad": [
+    "tex1_128x64_f7fbffea3094c1d0_14",
+    "tex1_128x64_f7d7465d56120737_14"
+  ],
+  "particle_sawdust": [
+    "tex1_64x64_9da1b898e2bb3e76_14",
+    "tex1_64x64_617edc688b6ba3e0_14"
+  ],
+  "particle_sparkle": [
+    "tex1_64x64_d0473bb6edacea57_ff10223616c08787_8",
+    "tex1_64x64_d0473bb6edacea57_803b9908fe2431d9_8"
+  ],
+  "particle_swirlydot": [
+    "tex1_64x64_47e4437d4fd24bc4_708a468df2793bda_9"
+  ],
+  "particle_swirlystar": [
+    "tex1_64x64_50458f8ffac51387_679f05615389e952_9"
+  ],
+  "particle_water": [
+    "tex1_16x16_4461eb6ff35eaddb_69280650c80e0bd6_9"
+  ],
+  "particle_whiteflash": [
+    "tex1_16x16_567c7112c5443659_ff10223616c08787_8",
+    "tex1_16x16_567c7112c5443659_79f1385972f2d98d_8"
+  ],
+  "penguin_map": [
+    "tex1_128x128_37c17cdc0b3d496e_14",
+    "tex1_128x128_1a2529f95516d152_14"
+  ],
+  "penguin_map_lod": [
+    "tex1_64x64_d8906922deeb8fed_14"
+  ],
+  "pf_beast_dizzy_at": [
+    "tex1_16x16_46806db07cdc7e08_397910255e734c51_8",
+    "tex1_16x16_46806db07cdc7e08_c172bfb935ad75bc_8"
+  ],
+  "pf_beast_dizzy_exclaimation": [
+    "tex1_16x16_78efbb3ffb3e0379_00bc7e7d391add71_8",
+    "tex1_16x16_78efbb3ffb3e0379_8f0ca746eb66a928_8"
+  ],
+  "pf_beast_dizzy_pound": [
+    "tex1_16x16_2b2097e664a17c00_cd6064ff2b02c231_8",
+    "tex1_16x16_2b2097e664a17c00_d75d38421e19c025_8"
+  ],
+  "pf_beast_dizzy_star": [
+    "tex1_16x16_bab4798ac697a86c_01b120eff1b1bc9d_8",
+    "tex1_16x16_bab4798ac697a86c_3b9c3c77f060241a_8"
+  ],
+  "pf_cin_knockoutb": [
+    "tex1_32x32_7d8d96bffb364d20_ff10223616c08787_8",
+    "tex1_32x32_7d8d96bffb364d20_ad2f94a264321e28_8"
+  ],
+  "pf_ice_splinter_01": [
+    "tex1_64x32_e269991bfa500096_9551759da915f5ad_8",
+    "tex1_64x32_e269991bfa500096_270377f856c9e13e_8"
+  ],
+  "pf_sand_cascade": [
+    "tex1_64x64_m_21e8970ad7918e63_fbf8aa9525d40421_9"
+  ],
+  "pf_sand_pebbles": [
+    "tex1_32x32_436f7498a1bd6c2d_21c20a84095166a8_8",
+    "tex1_32x32_436f7498a1bd6c2d_597640a06e80d6f0_8"
+  ],
+  "pf_sand_streaks": [
+    "tex1_64x64_9e936cfbb4fc7cc2_8ba1f09ff218062e_8",
+    "tex1_64x64_9e936cfbb4fc7cc2_1c70a2410ee9779c_8"
+  ],
+  "pf_wood_splinter_01": [
+    "tex1_64x32_ca7a84a7e03ae0cb_14",
+    "tex1_64x32_cc38a3766cd6af95_14"
+  ],
+  "pf_wood_splinter_02": [
+    "tex1_64x32_0fb9c9aa7f6542f4_14",
+    "tex1_64x32_25faef58d939c59a_14"
+  ],
+  "ph_202_moss_noalpha": [
+    "tex1_128x64_a38954f46b045c60_14"
+  ],
+  "ph_a_bt_pathdirt": [
+    "tex1_256x256_b0f944f67962a2a8_14",
+    "tex1_256x256_aaca685b2fa519b2_14"
+  ],
+  "ph_bone": [
+    "tex1_128x128_d3d07da22361858c_14"
+  ],
+  "ph_c00_ws_cavernfloor": [
+    "tex1_256x256_b468618a88164412_14"
+  ],
+  "ph_c00_ws_rockwall": [
+    "tex1_256x256_5af6778f68776206_14"
+  ],
+  "ph_jj_pathdirt": [
+    "tex1_256x256_m_4b74b89ecb5a2c2a_14"
+  ],
+  "ph_jl_statuebody": [
+    "tex1_256x256_4a72f5ff9bb46773_d349aa523d87b376_9",
+    "tex1_256x256_4a72f5ff9bb46773_ca580d0f5c0643ec_9"
+  ],
+  "ph_jl_statueface": [
+    "tex1_256x256_a3e1f6889ec0d68f_14"
+  ],
+  "ph_jungle_moss_bricks_01": [
+    "tex1_128x128_8d560e9be8c2a39c_14"
+  ],
+  "ph_jungle_rt_temple_big_block_01": [
+    "tex1_256x128_05cfcb262bb4355e_14"
+  ],
+  "ph_jungle_rt_temple_big_block_02": [
+    "tex1_256x256_b4b54f046a723d88_14"
+  ],
+  "ph_jungle_rt_tree_leaves_01": [
+    "tex1_128x128_57d18d26bc890009_14",
+    "tex1_128x128_b0548185ab066951_14"
+  ],
+  "ph_kh_planeflaps_wreck": [
+    "tex1_128x128_e13f862de02ff8ad_14"
+  ],
+  "ph_kh_planeinterior": [
+    "tex1_256x256_a4a8523792886e64_14"
+  ],
+  "ph_kh_planepanela_wreck": [
+    "tex1_256x256_49d9cfe25edaeb36_14"
+  ],
+  "ph_kh_planepanelb_wreck": [
+    "tex1_256x128_c4b731eacf5fd3be_14"
+  ],
+  "ph_kh_planepartsa_wreck": [
+    "tex1_256x256_5ae60b47c3b30167_14"
+  ],
+  "ph_kh_planepartsb_wreck": [
+    "tex1_64x256_d0b26d1767ccf5fe_14"
+  ],
+  "ph_ms_a17_rockwall02": [
+    "tex1_256x256_2ba48644cd99db03_14"
+  ],
+  "ph_r_bt_columns": [
+    "tex1_256x256_14db8ba98accb887_14"
+  ],
+  "ph_r_bt_sulpture": [
+    "tex1_128x128_3453ad25182ade2b_14"
+  ],
+  "ph_r_bt_trim00": [
+    "tex1_64x64_d0db8da4ee9cfd4c_14"
+  ],
+  "ph_tomb_cover": [
+    "tex1_256x256_a629edb260f0cd33_14"
+  ],
+  "pickup_canteen": [
+    "tex1_64x64_3f3b8326a99a5399_14"
+  ],
+  "pickup_gasmask": [
+    "tex1_64x64_fcb49d5802df2b5b_14",
+    "tex1_64x64_52b4466073a0ec99_14"
+  ],
+  "pickup_stink_bomb": [
+    "tex1_64x64_f80c3d398172be62_14",
+    "tex1_64x64_d0e14613b517e691_14"
+  ],
+  "pickup_tnt": [
+    "tex1_32x32_78aa825420afc367_14"
+  ],
+  "pierre_body": [
+    "tex1_256x256_cc9cab110e535af3_14"
+  ],
+  "pierre_head": [
+    "tex1_256x256_507a1c621be43299_14"
+  ],
+  "pilot_head": [
+    "tex1_256x256_5f866a63c2abf9d1_14"
+  ],
+  "pilot_legs": [
+    "tex1_128x128_8ecc6457a2333e5a_14"
+  ],
+  "pip": [
+    "tex1_32x32_058b41beeb0de951_14",
+    "tex1_32x32_82392ecdd503097b_14"
+  ],
+  "piranha": [
+    "tex1_64x64_76896eb28705fb03_14"
+  ],
+  "pit_monster_jungle_grass": [
+    "tex1_256x256_m_227cc2fe27b5ae08_14",
+    "tex1_256x256_m_2093d47f2fa4f51f_14"
+  ],
+  "pit_monster_jungle_teeth": [
+    "tex1_32x32_fd59f02e15386624_14",
+    "tex1_32x32_03dd81547cfde382_14"
+  ],
+  "pit_mouth_grass": [
+    "tex1_256x128_6888f9a11f802e0c_0f67a374c3ac70ae_8",
+    "tex1_256x128_6888f9a11f802e0c_9d5edc959cf62027_8"
+  ],
+  "pit_throat_monster": [
+    "tex1_128x128_cb3a98620ef1bae7_14"
+  ],
+  "plant_fern": [
+    "tex1_64x32_af142c6d1b4cafa0_30903363b6f118ac_8",
+    "tex1_64x32_af142c6d1b4cafa0_d2caf18273515806_8"
+  ],
+  "plant_fern_stem": [
+    "tex1_32x16_365bc6aa9193c5fe_5e3fdbed4a1d5ff6_8",
+    "tex1_32x16_365bc6aa9193c5fe_39ef776a7f192ed1_8"
+  ],
+  "pointer-2_snow": [
+    "tex1_128x128_0f2e1b215b448b01_14"
+  ],
+  "pointer2": [
+    "tex1_128x128_a9746ea49acd4b83_14"
+  ],
+  "porcu_quill": [
+    "tex1_32x16_93a51deb038ad781_14"
+  ],
+  "porcu_texture": [
+    "tex1_256x128_m_9298557070b37aae_14"
+  ],
+  "porcu_texture_lod": [
+    "tex1_64x64_e1993b203d16fcd4_14"
+  ],
+  "pot1_mayan": [
+    "tex1_32x64_75683406a1fa2aef_14"
+  ],
+  "pot2_mayan": [
+    "tex1_32x64_230be2bd18aebba8_14"
+  ],
+  "pot3_mayan": [
+    "tex1_32x64_4e845bae5bd33dc4_14"
+  ],
+  "pot_bottom": [
+    "tex1_32x32_1098c5d1bd9231d7_14"
+  ],
+  "pot_top": [
+    "tex1_32x32_d0a09978184d6c8e_14"
+  ],
+  "projectile_lod_coconut": [
+    "tex1_16x16_55696c03bcfb8ab6_14",
+    "tex1_16x16_351dfaa6cd9702bd_14"
+  ],
+  "projectile_LOD_electric_ball": [
+    "tex1_64x64_c9a9513103598e2b_14",
+    "tex1_64x64_092a64bf0f86f45f_14"
+  ],
+  "projectile_LOD_flaming_ball": [
+    "tex1_64x64_05124c9475b3edeb_c5bd34f0585a31c8_8",
+    "tex1_64x64_05124c9475b3edeb_ecdbcef52786bd20_8"
+  ],
+  "projectile_lod_flaming_tear": [
+    "tex1_64x64_16aabe839b878a74_603e32a25a7a54f5_8",
+    "tex1_64x64_16aabe839b878a74_9614cbc6c8801d44_8"
+  ],
+  "projectile_lod_sling": [
+    "tex1_8x8_b88795100eae18d0_14",
+    "tex1_8x8_bf31ca610b816d10_14"
+  ],
+  "projectile_lod_slingsuper": [
+    "tex1_32x32_9dc67190cae7fbbf_3f12868a2af0b406_8",
+    "tex1_32x32_9dc67190cae7fbbf_f13927b4f534a6a6_8"
+  ],
+  "proto_mntaclifffaceb256": [
+    "tex1_256x256_f2fee6ccfc0e2e3f_14"
+  ],
+  "puscalegs": [
+    "tex1_128x128_9c3b82bfc768979b_14"
+  ],
+  "puscatorso": [
+    "tex1_256x256_f4794b1fc19b04af_14",
+    "tex1_256x256_b1418b97963fce21_14"
+  ],
+  "Pusca_discs_floating": [
+    "tex1_64x64_015c0fbcaf34fee4_ff10223616c08787_8",
+    "tex1_64x64_015c0fbcaf34fee4_8752bd4116490495_8"
+  ],
+  "Pusca_discs_sparkles": [
+    "tex1_16x16_dc0392c4f203a469_ff10223616c08787_8",
+    "tex1_16x16_dc0392c4f203a469_12b6fca493b2bbe4_8"
+  ],
+  "pusca_distortion": [
+    "tex1_32x32_fd0a5fc2733e53a5_27ddab027a6cca64_8",
+    "tex1_32x32_fd0a5fc2733e53a5_d5a1776dcd22f055_8"
+  ],
+  "Pusca_distortion2": [
+    "tex1_64x64_0321040cbfaf3f69_55d9bb6c6e7819de_8",
+    "tex1_64x64_0321040cbfaf3f69_16c2da7d161bfe36_8"
+  ],
+  "Pusca_FlameDrip": [
+    "tex1_64x64_33089bf3c02a53d2_14",
+    "tex1_64x64_8ced3e40a043cd7b_14"
+  ],
+  "Pusca_machinegun": [
+    "tex1_64x64_ab1084af34503ea7_14",
+    "tex1_64x64_127d5a24df247850_14"
+  ],
+  "Pusca_Mini": [
+    "tex1_64x64_abc1d9b58598c451_af668a895172312a_8",
+    "tex1_64x64_abc1d9b58598c451_432adbf384bec491_8"
+  ],
+  "Pusca_ShockCloudLrg": [
+    "tex1_64x64_5426f1427510543f_14",
+    "tex1_64x64_44adb9fb94f2c85b_14"
+  ],
+  "Pusca_Still_Particle": [
+    "tex1_64x128_e7bb66d90ada3676_14",
+    "tex1_64x128_9c4292fecec7aa45_14"
+  ],
+  "p_aj_treeleaves-type02": [
+    "tex1_256x256_3fc9b732761570e0_085b9a5b8a20d697_9"
+  ],
+  "p_a_kh_brnrock03": [
+    "tex1_128x128_2ca63d72dca250d3_14"
+  ],
+  "p_grass_blender_01": [
+    "tex1_256x128_7266ff930a55a58a_14",
+    "tex1_256x128_1864b1800a9b4f9b_14"
+  ],
+  "p_jungle_rb_treemoss": [
+    "tex1_256x256_4573154e022db868_d68183e5c9817c3f_9"
+  ],
+  "p_jungle_rt_wall_05": [
+    "tex1_128x128_e560b7e976ca8309_14"
+  ],
+  "p_kh_toonglyphsmoss": [
+    "tex1_128x128_93dcc948e9b14328_14"
+  ],
+  "p_plant_mushroom_02": [
+    "tex1_128x128_be68740ca260c021_14"
+  ],
+  "p_plant_mushroom_03": [
+    "tex1_128x128_04140b583212ea49_14"
+  ],
+  "p_plant_mushroom_bottom": [
+    "tex1_64x64_b47ed754e5a53000_14"
+  ],
+  "p_plant_mushroom_stem": [
+    "tex1_64x128_b6a8c1c0535aeaa6_14"
+  ],
+  "p_platglyphs_01": [
+    "tex1_128x128_f1b0b6324f9091c0_14"
+  ],
+  "p_treetop_leavesbluesm": [
+    "tex1_256x256_b2cf3c0eddd47eb4_e9b010e73d2e1af5_9"
+  ],
+  "quickclaw_body": [
+    "tex1_256x256_2961f0e36625d220_14"
+  ],
+  "quickclaw_head": [
+    "tex1_256x256_ae07969a1a6bc2f1_14"
+  ],
+  "renegadebush_ninja_legs": [
+    "tex1_128x128_c5f56b1bb0b23488_14"
+  ],
+  "renegadebush_ninja_torso": [
+    "tex1_128x128_877eed24a6919d2d_14"
+  ],
+  "renegade_native_legs": [
+    "tex1_128x128_383d3c303761d577_14"
+  ],
+  "renegade_native_legs_lod": [
+    "tex1_64x64_94cc55036cdea10b_14"
+  ],
+  "renegade_native_mask": [
+    "tex1_128x128_a19d9cdb7e98fd0b_14"
+  ],
+  "renegade_native_mask_lod": [
+    "tex1_64x64_c90c15b1c1a35d7b_14"
+  ],
+  "renegade_native_torso": [
+    "tex1_128x128_d5b9b01e4a036adc_14"
+  ],
+  "renegade_native_torso_lod": [
+    "tex1_64x64_e64c1132bef16c9b_14"
+  ],
+  "rope": [
+    "tex1_32x32_d11d90c1ad7fbb55_14"
+  ],
+  "rope_jm": [
+    "tex1_64x16_m_ba31c1bfe0c998c8_14"
+  ],
+  "rope_jm_moss": [
+    "tex1_64x32_m_588e8140ad9f5bd5_14"
+  ],
+  "ruin_stone": [
+    "tex1_64x64_1c0632fdfa6ac20e_14"
+  ],
+  "ruin_stone_top": [
+    "tex1_64x64_d79f23107c2fadcc_14"
+  ],
+  "ruler": [
+    "tex1_128x64_12f3c5d84ee4bf06_14"
+  ],
+  "r_bt_columns": [
+    "tex1_256x256_98d8e3c6d20e38e7_14"
+  ],
+  "r_bt_dirtwall": [
+    "tex1_128x128_a6161601a8d2afec_14"
+  ],
+  "r_bt_trim00": [
+    "tex1_128x128_50fde4365768ec19_14"
+  ],
+  "r_bt_trim01": [
+    "tex1_128x128_95f6a99cd3deb85f_14"
+  ],
+  "r_bt_trim02": [
+    "tex1_128x128_932a8f85c82cdbdb_14"
+  ],
+  "r_bt_wallmural": [
+    "tex1_128x64_ffbfaba7831a9ed6_14"
+  ],
+  "r_bt_wallmural2": [
+    "tex1_128x64_96d339fcc4ed0c40_14"
+  ],
+  "r_bt_wallstones": [
+    "tex1_256x256_611515ef5ab1f785_14"
+  ],
+  "r_kg_wall": [
+    "tex1_128x128_m_603661122cf2fd21_14"
+  ],
+  "s14": [
+    "tex1_512x512_8a3974bf8095188e_14"
+  ],
+  "scarab": [
+    "tex1_128x128_151bc48902e65d9e_14",
+    "tex1_128x128_e3a73bd88675ee01_14"
+  ],
+  "scarab_lod": [
+    "tex1_64x64_ecc42ad7eadd10c7_14"
+  ],
+  "scarab_snowball": [
+    "tex1_32x32_7d05eab7399ca4b7_14"
+  ],
+  "scene76b_whiteout": [
+    "tex1_32x32_322c53b531668c3e_a21c44d9afcdad52_8",
+    "tex1_32x32_322c53b531668c3e_e87619c3234f45b4_8"
+  ],
+  "scorpion1": [
+    "tex1_128x128_93a661d7c9a8ef4d_14"
+  ],
+  "scorpioncrystal": [
+    "tex1_256x256_76247ea49859513f_14",
+    "tex1_256x256_60eda4b9026985f5_14"
+  ],
+  "screen1": [
+    "tex1_512x256_3208b3341381b993_14"
+  ],
+  "screendeveloper": [
+    "tex1_512x512_05cb3fd6efd1249c_14"
+  ],
+  "screenpublisher": [
+    "tex1_512x512_3d5bc4ac94e838a2_14"
+  ],
+  "shadowspot": [
+    "tex1_32x32_2cd24d397e20b036_a76530f96ba6820d_8",
+    "tex1_32x32_2cd24d397e20b036_6747153308418181_8"
+  ],
+  "shaman_native_legs": [
+    "tex1_128x128_7837c911d4bf23a8_14"
+  ],
+  "shaman_native_legs_lod": [
+    "tex1_64x64_ed8b93de612e75e8_14"
+  ],
+  "shaman_native_mask": [
+    "tex1_128x128_bb234662e9b84aaa_14",
+    "tex1_128x128_b8571ddaee9c62ab_14"
+  ],
+  "shaman_native_mask_lod": [
+    "tex1_64x64_ac93cf713ef09664_14",
+    "tex1_64x64_3ef35cc3a3a10d8f_14"
+  ],
+  "shaman_native_torso": [
+    "tex1_128x128_556df1698b968246_14"
+  ],
+  "shaman_native_torso_lod": [
+    "tex1_64x64_c4efe9beca3ad5bc_14"
+  ],
+  "ShockCloud": [
+    "tex1_64x64_f8bc68759de542d6_7c6a67fa9bb6ad51_9"
+  ],
+  "ShockGlow": [
+    "tex1_64x64_9401cd7e5a1e40c9_4a0e2cb9de16a273_8"
+  ],
+  "shroom0001": [
+    "tex1_64x64_f0b947785d1c56c6_039decb095e0e1c0_8",
+    "tex1_64x64_f0b947785d1c56c6_4e132fb20a6fa757_8"
+  ],
+  "shroom0002": [
+    "tex1_64x64_a4d3e5c994776c63_172505d6477eb1b3_8",
+    "tex1_64x64_a4d3e5c994776c63_1e24f09a7885123c_8"
+  ],
+  "shroom0003": [
+    "tex1_64x64_ecf517d81f8f8404_34ae7956313a8e91_8",
+    "tex1_64x64_ecf517d81f8f8404_e81109164d0520c3_8"
+  ],
+  "shroom0004": [
+    "tex1_64x64_46d4016bcd2b4cd5_4b3907cc5b68b1e3_8",
+    "tex1_64x64_46d4016bcd2b4cd5_c0b2113c3ba65932_8"
+  ],
+  "shroom0005": [
+    "tex1_64x64_f73bd174a8716c69_60ab5be71d26c1a7_8",
+    "tex1_64x64_f73bd174a8716c69_0f055e299a47f672_8"
+  ],
+  "shroom0006": [
+    "tex1_64x64_b2e349f1d296f768_995700f42ea5bcbb_8",
+    "tex1_64x64_b2e349f1d296f768_6850e5962d922624_8"
+  ],
+  "shroom0007": [
+    "tex1_64x64_5bbf382d6d1fcdf2_8ed0f58bfd705075_8",
+    "tex1_64x64_5bbf382d6d1fcdf2_2c390fbc290878c1_8"
+  ],
+  "shroom0008": [
+    "tex1_64x64_66778b6a5b8f5418_0908d92c1e427bf7_8",
+    "tex1_64x64_66778b6a5b8f5418_bacb543f71676b23_8"
+  ],
+  "shroom0009": [
+    "tex1_64x64_4e916c51c92fabc2_4fa64bc4c8fbdde1_8",
+    "tex1_64x64_4e916c51c92fabc2_72556f727b81e342_8"
+  ],
+  "shroom0010": [
+    "tex1_64x64_ab8989c4dc8d82f7_f51840931c66dae2_8",
+    "tex1_64x64_ab8989c4dc8d82f7_72d49920ae5aa2c5_8"
+  ],
+  "shroom0011": [
+    "tex1_64x64_c7c73ae0603c2ecf_72a487b2c315abe1_8",
+    "tex1_64x64_c7c73ae0603c2ecf_68fb47e299a4e6ad_8"
+  ],
+  "shroom0012": [
+    "tex1_64x64_887312f5cf49738e_65354f82a697395d_8",
+    "tex1_64x64_887312f5cf49738e_810b0a73119d1f64_8"
+  ],
+  "shroom0013": [
+    "tex1_64x64_46fb9246f85be665_ae97f3483f901b8d_8",
+    "tex1_64x64_46fb9246f85be665_b7e3672e2f62e350_8"
+  ],
+  "skycloud1": [
+    "tex1_128x128_4774f17cc92e49aa_14",
+    "tex1_128x128_42c9f3d1ff4a6b2e_14"
+  ],
+  "sky_bt_clouds_dawn": [
+    "tex1_128x128_2daa843f51142f07_694b40c7c08d2809_8",
+    "tex1_128x128_2daa843f51142f07_1f6aee697fe56491_8"
+  ],
+  "sky_horizon": [
+    "tex1_64x32_f7ae2f126d308521_14",
+    "tex1_64x32_7830fa18be53cfd7_14"
+  ],
+  "sky_horizon_green": [
+    "tex1_128x128_589ddb285c3bf20b_7d76063556f2ddbd_8",
+    "tex1_128x128_589ddb285c3bf20b_6f1fea18c2588438_8"
+  ],
+  "sky_jj_blue": [
+    "tex1_16x16_365f88b7916a3e2f_14"
+  ],
+  "sky_jj_bluegreen": [
+    "tex1_16x16_a6466513e8e4d1e9_14"
+  ],
+  "sky_jj_cloudsa": [
+    "tex1_128x128_a7d6634a3668e5b4_7beb83054d624436_9"
+  ],
+  "sky_jj_clouds_stormy": [
+    "tex1_128x128_cadc9b214d463585_3a148f4fcd83976f_9"
+  ],
+  "sky_jj_horizon_cloudsa": [
+    "tex1_128x64_02e3f882a7b2da9c_85c2b029f5b2b6b0_9"
+  ],
+  "sky_jj_horizon_stormy": [
+    "tex1_128x64_174905ecdf42ee03_0ece6e2b807ff22b_9"
+  ],
+  "sky_jj_stormy": [
+    "tex1_16x16_7ced68401ff8156d_14"
+  ],
+  "slingreticle": [
+    "tex1_16x16_63c0750152f77939_5d4c87d6589e7be3_8",
+    "tex1_16x16_63c0750152f77939_047e4a4317e1a9a4_8"
+  ],
+  "smoke_layeredb": [
+    "tex1_128x64_1b665fe9607cc776_18de97a7c15367d2_8",
+    "tex1_128x64_1b665fe9607cc776_e0f5a6546c4c4c79_8"
+  ],
+  "snake": [
+    "tex1_256x256_6074dc0548186a27_14"
+  ],
+  "snblowler_legs": [
+    "tex1_128x128_63113aa00217ab87_14"
+  ],
+  "snblowler_legs_lod": [
+    "tex1_64x64_d1ce57946c1879d4_14"
+  ],
+  "snbowler_ball": [
+    "tex1_128x128_8ced6d0434800475_14"
+  ],
+  "snbowler_ball_lod": [
+    "tex1_64x64_491e30b4fb56c98e_14"
+  ],
+  "snbowler_mask": [
+    "tex1_128x128_98cd675b582fda30_14"
+  ],
+  "snbowler_mask_lod": [
+    "tex1_64x64_8246f5be772b8f8d_14"
+  ],
+  "snbowler_torso": [
+    "tex1_128x128_3d0a9a17e797198b_14"
+  ],
+  "snbowler_torso_lod": [
+    "tex1_64x64_a0b743f0de012c1f_14"
+  ],
+  "snowweasel_texture": [
+    "tex1_256x256_c427a246828a384f_14"
+  ],
+  "spiderambient": [
+    "tex1_32x16_383f13e4ebd63096_14"
+  ],
+  "spiderweb": [
+    "tex1_128x128_8213c6495722458c_14"
+  ],
+  "spiderweb_ashes": [
+    "tex1_32x32_abbdd6ab6893c395_48b11daf65c4601f_8",
+    "tex1_32x32_abbdd6ab6893c395_c7281acc8d96cdcb_8"
+  ],
+  "spinja_legs": [
+    "tex1_128x128_6aff5977f77ca8c6_14"
+  ],
+  "spinja_legs_lod": [
+    "tex1_64x64_4e5c0328eaf38dfe_14"
+  ],
+  "spinja_mask": [
+    "tex1_128x128_a97458f2239464d1_14"
+  ],
+  "spinja_mask_lod": [
+    "tex1_64x64_a2ca3c280b8d83e8_14"
+  ],
+  "spinja_motionrings": [
+    "tex1_8x8_5cad9672f11c59e6_14",
+    "tex1_8x8_098e8e0fff83a316_14"
+  ],
+  "spinja_torso": [
+    "tex1_128x128_30f8ab525c1d7773_14",
+    "tex1_128x128_64d36306a73e7daa_14"
+  ],
+  "spinja_torso_lod": [
+    "tex1_64x64_decc5b7aece14b31_14"
+  ],
+  "stclaire_body": [
+    "tex1_128x128_de7468f86cc1ab20_14"
+  ],
+  "stclaire_deadbody": [
+    "tex1_256x256_300380d411da8698_14"
+  ],
+  "stclaire_deadhead": [
+    "tex1_256x256_d8324a93e2691957_14"
+  ],
+  "stclaire_head": [
+    "tex1_256x256_ecf37d82bbe3874a_14"
+  ],
+  "stclairhead": [
+    "tex1_256x256_a611162941d3448c_14"
+  ],
+  "stclairlowbody": [
+    "tex1_256x256_a116b22835fa9904_14"
+  ],
+  "stclairshirtarms": [
+    "tex1_256x256_bf134e1a6133bbaa_14"
+  ],
+  "sun": [
+    "tex1_64x64_26aa4add331ecca3_3b3a87ca899c788d_9"
+  ],
+  "suntemple_alter_carving_kg": [
+    "tex1_64x64_d414a863fc00be4e_14"
+  ],
+  "supai_body": [
+    "tex1_256x256_7008280c063cf465_14"
+  ],
+  "supai_demonicbody": [
+    "tex1_128x128_32a9c750ba55cbab_14",
+    "tex1_128x128_41d690492be2f0e7_14"
+  ],
+  "supai_demonichead": [
+    "tex1_128x128_9fecffb946431e65_14"
+  ],
+  "supai_eye_glow": [
+    "tex1_16x16_f8dcb543fed113dc_14"
+  ],
+  "Supai_FireBall_01": [
+    "tex1_64x64_56f689ebfa68c5eb_14",
+    "tex1_64x64_127396a54806a16e_14"
+  ],
+  "Supai_FireBall_02": [
+    "tex1_64x64_2da7e672de16a299_14",
+    "tex1_64x64_c2e112a97563c323_14"
+  ],
+  "Supai_FireBall_03": [
+    "tex1_64x64_394d57a7b7e1c560_14",
+    "tex1_64x64_8aae3c752cb9e527_14"
+  ],
+  "Supai_FireBall_04": [
+    "tex1_64x64_e9fde5bc2b00da8d_14",
+    "tex1_64x64_3f484955e4d1f937_14"
+  ],
+  "supai_flame_01": [
+    "tex1_32x32_dac76fd697e08465_14",
+    "tex1_32x32_192682ba716f6a22_14"
+  ],
+  "supai_flame_02": [
+    "tex1_64x64_536a213313e7e093_14",
+    "tex1_64x64_5cb71196cec87e1a_14"
+  ],
+  "supai_flame_03": [
+    "tex1_64x64_6168cc5acf39a0cd_14",
+    "tex1_64x64_d577644f590e4480_14"
+  ],
+  "supai_head": [
+    "tex1_256x256_aca31e2fd685f56d_14"
+  ],
+  "supermeter": [
+    "tex1_64x32_c0a726174d6d3afb_ccc7751588ee1682_8",
+    "tex1_64x32_c0a726174d6d3afb_f8190209f0145d41_8"
+  ],
+  "systemdepth": [
+    "tex1_8x8_f6e9be5d70632cf5_cc782b1487ab0577_8",
+    "tex1_8x8_f6e9be5d70632cf5_d7a947d752925770_8"
+  ],
+  "system_radioactive": [
+    "tex1_32x32_7be4b8a3d3f5c5ed_0cd945a9f9a6df9c_8"
+  ],
+  "s_aj_ice crystal": [
+    "tex1_128x64_3ce132f1ee82ae0f_506f32426e94dab9_9"
+  ],
+  "s_aj_ice crystalk_reflection": [
+    "tex1_32x32_b80a4136be8b9359_6"
+  ],
+  "s_aj_ice_floor": [
+    "tex1_64x64_0e2cdca4d7917475_12db199ae7d0d0f6_8",
+    "tex1_64x64_0e2cdca4d7917475_b20d2ca94d07329a_8"
+  ],
+  "s_aj_snow_trans": [
+    "tex1_64x64_3ff13507dec6033d_ff10223616c08787_8",
+    "tex1_64x64_3ff13507dec6033d_bd49f82e86f4c645_8"
+  ],
+  "s_db_ice": [
+    "tex1_128x128_ce807d873255912d_a80ee0f08a62a28d_9"
+  ],
+  "s_db_iceb": [
+    "tex1_128x128_b416a3c25bf8162a_858835da6035b72c_8",
+    "tex1_128x128_b416a3c25bf8162a_49b0bce94008a495_8"
+  ],
+  "s_dr_breakable_ice_reflection": [
+    "tex1_32x32_8e73bc558d05df07_6"
+  ],
+  "s_dr_ice": [
+    "tex1_128x128_1e9acd05e389000e_14",
+    "tex1_128x128_84f168cefa740ba1_14"
+  ],
+  "s_glyphwritinga": [
+    "tex1_256x256_e7912e9b404f5c2c_e54d4c0413ac1fa6_8",
+    "tex1_256x256_e7912e9b404f5c2c_a6a31b70ae1f2f55_8"
+  ],
+  "s_glyphwritingb": [
+    "tex1_256x256_ef0f66f7260c1dbb_05568f5a89783c4f_8",
+    "tex1_256x256_ef0f66f7260c1dbb_123c5da4fb4631c1_8"
+  ],
+  "s_jj_cavewall_ice": [
+    "tex1_128x128_05aee38b96863369_32d6544d8db9f561_8",
+    "tex1_128x128_05aee38b96863369_8a3532ddeb8ef166_8"
+  ],
+  "s_jj_glacierwall": [
+    "tex1_128x128_m_8da89d3401a75ecd_14"
+  ],
+  "s_jm_bricks": [
+    "tex1_128x128_cde9986ae04dd516_14"
+  ],
+  "s_jm_cave floor rail_frost": [
+    "tex1_256x256_m_8bfff002a3f17a05_14"
+  ],
+  "s_jm_cave floorb frost": [
+    "tex1_128x128_5ec9e0c48a76b7d8_14"
+  ],
+  "s_jm_cave rock_clean snow": [
+    "tex1_128x128_6ed0e4ce21e12024_14"
+  ],
+  "s_jm_cave rock_frost": [
+    "tex1_256x256_a009eda81d817d51_14"
+  ],
+  "s_jm_cavern growth": [
+    "tex1_64x64_9689c8e09c304601_14",
+    "tex1_64x64_4e9e69576ed804af_14"
+  ],
+  "s_jm_cavern_snow top": [
+    "tex1_128x128_8f0978ed17b4c737_14"
+  ],
+  "s_jm_columns": [
+    "tex1_128x128_f22da4b35699b61b_14"
+  ],
+  "s_jm_crystal beam": [
+    "tex1_64x64_3c810042978555cb_14",
+    "tex1_64x64_0e186abb44b043d6_14"
+  ],
+  "s_jm_fire pool": [
+    "tex1_256x256_81aeaf946479b75a_14",
+    "tex1_256x256_df56f07ca84505dc_14"
+  ],
+  "s_jm_fire poola": [
+    "tex1_128x128_89ede5c5eaac1488_14",
+    "tex1_128x128_df978594c00b798a_14"
+  ],
+  "s_jm_frost": [
+    "tex1_128x128_43a4bad240a3ab04_14",
+    "tex1_128x128_94eddcd53bbf66c4_14"
+  ],
+  "s_jm_glacierwall_blend": [
+    "tex1_64x64_e6a61cf381280d22_14",
+    "tex1_64x64_d75db591f844d5df_14"
+  ],
+  "s_jm_ice clamp": [
+    "tex1_128x64_5b4fa0307a6a20e6_14"
+  ],
+  "s_jm_ice hard_see through": [
+    "tex1_128x128_7c4ceae8c08b02ad_14",
+    "tex1_128x128_f465b937b20d33c4_14"
+  ],
+  "s_jm_ice_see through_maze": [
+    "tex1_256x256_a3d37410365d3977_14",
+    "tex1_256x256_8f8b27fc31607380_14"
+  ],
+  "s_jm_pillar_01": [
+    "tex1_128x128_fc453c05afad056b_14"
+  ],
+  "s_jm_reflect": [
+    "tex1_64x64_563fe3e961177a42_c430328f745098f4_9"
+  ],
+  "s_jm_reflect less": [
+    "tex1_32x32_bcbfcf361ce95477_6"
+  ],
+  "s_jm_reflect lots": [
+    "tex1_128x128_dd59b06d1232a925_6"
+  ],
+  "s_jm_snow bank_cavern": [
+    "tex1_256x256_d94105e5330c0ab2_14"
+  ],
+  "s_jm_snow cavern edge": [
+    "tex1_128x128_dcf20ea5bd620723_f1c3cf63b27a6d38_8",
+    "tex1_128x128_dcf20ea5bd620723_1bd1b460541fa484_8"
+  ],
+  "s_jm_snow cavern edgeb": [
+    "tex1_256x256_7ce0d439e082f222_1e72370943cd6c27_8",
+    "tex1_256x256_7ce0d439e082f222_459bb7a38d9d5b12_8"
+  ],
+  "s_jm_snow flake": [
+    "tex1_32x32_02f0559e55525c11_9aa6704b20437c16_9"
+  ],
+  "s_jm_snow mound": [
+    "tex1_256x256_ded3d6bbffed61fa_14"
+  ],
+  "s_jm_snow mound_trans": [
+    "tex1_256x256_d2aee94cc07bb513_cdf3989148670a02_8",
+    "tex1_256x256_d2aee94cc07bb513_930aaaf5049153f4_8"
+  ],
+  "s_jm_snow ride": [
+    "tex1_128x128_7f3fa63c821c09ef_14"
+  ],
+  "s_jm_snowedge": [
+    "tex1_256x128_4b4a22c27802e9d6_2158fd35d0da1786_8",
+    "tex1_256x128_4b4a22c27802e9d6_86a8de18ece83faf_8"
+  ],
+  "s_jm_snowoverlay_cavern": [
+    "tex1_128x128_3a5f8332b677de8c_14",
+    "tex1_128x128_0b3d27f41873e363_14"
+  ],
+  "s_jm_snowrock": [
+    "tex1_256x256_4f1043b2e1897634_14"
+  ],
+  "s_jm_snow_overlay": [
+    "tex1_256x256_d2e5d3233de279ee_14"
+  ],
+  "s_jm_squares_frosted": [
+    "tex1_128x128_eb681a54dba7cc9e_14"
+  ],
+  "s_jm_temple_bricks_03": [
+    "tex1_128x128_d5196ed3756d2be8_14"
+  ],
+  "s_jm_temple_stone_floor_02": [
+    "tex1_128x128_34e31fedc6b3db55_14"
+  ],
+  "s_jm_trim00": [
+    "tex1_256x256_61f8fc660e9d698e_14"
+  ],
+  "s_jm_trim01": [
+    "tex1_128x128_fc8d043183868d95_14"
+  ],
+  "s_jm_trim02": [
+    "tex1_128x128_799af32e07098e14_14"
+  ],
+  "s_jm_vistaa_snow": [
+    "tex1_256x256_fdbce536868d3655_3e0cabea930f4a80_8",
+    "tex1_256x256_fdbce536868d3655_bd9f6506913280a2_8"
+  ],
+  "s_jm_vistab_snow": [
+    "tex1_256x256_9c8e18eb6adc3879_0f0699b89a3b43b5_8",
+    "tex1_256x256_9c8e18eb6adc3879_eec4d9cd02b4975b_8"
+  ],
+  "s_jm_vistab_snow_temple": [
+    "tex1_256x256_db07f85ddbe51fcd_3185a7d1ca1e0e26_8",
+    "tex1_256x256_db07f85ddbe51fcd_6914f3c24e256c53_8"
+  ],
+  "s_jm_wallstones": [
+    "tex1_128x128_bf2def8bb444a767_14"
+  ],
+  "s_kg_cliffs": [
+    "tex1_256x256_7d6cca576d9e37c6_14"
+  ],
+  "s_kg_icewall": [
+    "tex1_128x128_d28dd39022f04c5c_14"
+  ],
+  "s_kg_shards": [
+    "tex1_256x256_e539273429b9bd4a_14",
+    "tex1_256x256_bc852ff33b048419_14"
+  ],
+  "s_kg_twig": [
+    "tex1_64x32_2871016f6d3d8177_032a44fc7a172841_8",
+    "tex1_64x32_2871016f6d3d8177_047b98543bb4b152_8"
+  ],
+  "s_kg_waterlevel_ice01": [
+    "tex1_128x64_5aceee9308507b6b_14",
+    "tex1_128x64_a0d9fa5579f9a3ec_14"
+  ],
+  "s_ls_gravel_frost": [
+    "tex1_128x128_5da3ae0d6693a344_14"
+  ],
+  "s_ls_greyrock01": [
+    "tex1_128x128_179c034db493af37_14"
+  ],
+  "s_ls_icey_bottom_dirt": [
+    "tex1_128x128_8d4eba1e1379f3f1_14",
+    "tex1_128x128_33b25adb0d3e1290_14"
+  ],
+  "s_ls_snowoverlay": [
+    "tex1_128x128_f836b57bf67691a2_3a140ae721f7adbf_8",
+    "tex1_128x128_f836b57bf67691a2_018c0776d70b4578_8"
+  ],
+  "s_ls_watertransition": [
+    "tex1_128x128_71d73c907b8a2213_14",
+    "tex1_128x128_2fe04f0ad0b6e26f_14"
+  ],
+  "s_rockwall2_frost": [
+    "tex1_128x128_054a0aac0f89c96e_14"
+  ],
+  "s_rt_crack_ceiling_hole_01": [
+    "tex1_64x32_9bfb57fdc0216fce_14"
+  ],
+  "s_rt_crack_floor": [
+    "tex1_64x64_184c499b89035f27_14"
+  ],
+  "s_rt_wall_frost": [
+    "tex1_256x256_befa37c2fe4f70b5_14",
+    "tex1_256x256_b2d68d60e2c9bb3a_14"
+  ],
+  "s_tp_watertransition": [
+    "tex1_256x256_cb9f92f7427aa3d8_14"
+  ],
+  "tendrilflame_01": [
+    "tex1_64x64_63e52f9f4ab18d82_cf3035cc7a69e738_9"
+  ],
+  "tendrilflame_02": [
+    "tex1_64x64_e8ebd1f1bae316ef_7501d23cc2bcf9d4_9"
+  ],
+  "tendrilflame_03": [
+    "tex1_64x64_cfff18bb7d2f93ad_8390a8aa5c33d47d_9"
+  ],
+  "tendrilflame_04": [
+    "tex1_64x64_dc4b257ee266aa8d_34e17e726fb0b829_9"
+  ],
+  "tendrilflame_horz_02": [
+    "tex1_32x32_29cb9b9144adcd30_14",
+    "tex1_32x32_0b4d8cb6eb91a90f_14"
+  ],
+  "tendrilflame_horz_04": [
+    "tex1_64x64_45347bb42295c47f_14",
+    "tex1_64x64_bd79cae35ba30d01_14"
+  ],
+  "themole_body": [
+    "tex1_256x256_6ca2543fc8f36570_14"
+  ],
+  "themole_head": [
+    "tex1_256x256_112fb50f1c06b53e_14"
+  ],
+  "thinbranch6": [
+    "tex1_64x64_545935333bbda72b_808db70192c72f14_9"
+  ],
+  "tikishield": [
+    "tex1_128x128_edd57a79197f7955_14"
+  ],
+  "title_screen_still": [
+    "tex1_512x256_17b1d8794eea38e1_14"
+  ],
+  "tnt_scorch_mark": [
+    "tex1_256x256_ada09a81ecc10cc7_05c8a14c0b3495da_8",
+    "tex1_256x256_ada09a81ecc10cc7_3264b608eaad32d5_8"
+  ],
+  "torch-01": [
+    "tex1_32x64_69e873c47efd780a_14"
+  ],
+  "torch_smoke_01_gt": [
+    "tex1_64x64_250163a530766562_5052811528423e94_9"
+  ],
+  "torch_spark_gt": [
+    "tex1_64x64_b4c1a8d34e42a7b5_f26fcec5da977c7b_9"
+  ],
+  "tp_b60_glyphs": [
+    "tex1_256x256_m_0ef0d059d8d28e06_14"
+  ],
+  "tp_birdcrate": [
+    "tex1_128x128_0ce55ab7006bfb2a_14"
+  ],
+  "tp_brownrock01": [
+    "tex1_128x128_75fac45959479a9b_14"
+  ],
+  "tp_facedesingblock_frosted": [
+    "tex1_256x128_m_e7b905684035a8fc_14"
+  ],
+  "tp_glyphsb_frost": [
+    "tex1_128x128_m_969957a6abec0e3d_14"
+  ],
+  "tp_gstone_decor_frost": [
+    "tex1_128x128_m_3843fd86934203ea_14"
+  ],
+  "tp_mouthstat_frosty": [
+    "tex1_128x128_35b6cc42d64db8b2_14"
+  ],
+  "tp_pathdirt_va": [
+    "tex1_128x128_025a19d88da8669d_14"
+  ],
+  "tp_statue_frosty": [
+    "tex1_512x256_e42eaa55dae666ad_14"
+  ],
+  "tp_toonglyphsb_frosted": [
+    "tex1_256x256_m_16d340806dc549b7_14"
+  ],
+  "tp_toonglyphspenguin": [
+    "tex1_128x64_0717540f53757f5e_14"
+  ],
+  "tp_toonglyphs_frost": [
+    "tex1_256x256_m_0457a0ff24e03796_14"
+  ],
+  "treetop_leavesblue": [
+    "tex1_256x256_4ed2a340d644a9c7_4376b25c53356115_9"
+  ],
+  "tree_leafy_a_bark2": [
+    "tex1_256x256_b916dbcbb7bd6fc2_14"
+  ],
+  "tree_rings": [
+    "tex1_64x64_eb2a1b53201ccbb8_14"
+  ],
+  "tubeorg": [
+    "tex1_128x64_bd8cb7103a7a42c0_14"
+  ],
+  "tucotuco": [
+    "tex1_256x256_a7014a221c4852ea_14"
+  ],
+  "tucotuco_body": [
+    "tex1_256x256_97a53c33145ddb26_14"
+  ],
+  "tucotuco_body_lod": [
+    "tex1_64x64_92dceef20d3344b3_14"
+  ],
+  "tucotuco_rotisserie": [
+    "tex1_64x64_c5d9984284ffa3b4_14"
+  ],
+  "tvscreen": [
+    "tex1_8x8_fd311fc74716051a_14"
+  ],
+  "valentine_at": [
+    "tex1_64x64_fc162da2ca8514f2_14",
+    "tex1_64x64_4a91d18cc4220785_14"
+  ],
+  "valentine_dj": [
+    "tex1_64x64_1353484023bbd5e4_14",
+    "tex1_64x64_75abda79ebfd3cc0_14"
+  ],
+  "vine_static_mainlighter": [
+    "tex1_32x32_fff6cb67cc3b3bff_14"
+  ],
+  "wall_stone_brace": [
+    "tex1_128x128_01ae75db13b75b46_14"
+  ],
+  "water 01": [
+    "tex1_32x32_4a915383cf5ce193_425056ab40ffc1e3_8",
+    "tex1_32x32_4a915383cf5ce193_ff473a0787c4e634_8"
+  ],
+  "waterhighlight": [
+    "tex1_256x256_2465d6c4fa1e57fb_c71c127c53cc2be2_8",
+    "tex1_256x256_2465d6c4fa1e57fb_762a6afbcb974f99_8"
+  ],
+  "watermeter_bamboo": [
+    "tex1_64x32_86460661db2a40c5_595fdb4cd9f46233_8",
+    "tex1_64x32_86460661db2a40c5_f47d06d1703569f6_8"
+  ],
+  "waterpouring": [
+    "tex1_32x16_9a0d8a4f892be29d_bea82fd26d2e4be1_8",
+    "tex1_32x16_9a0d8a4f892be29d_8c06ced82a13e577_8"
+  ],
+  "waterproc_reflect": [
+    "tex1_64x64_e41fa9d1a02a6b00_14"
+  ],
+  "waterproc_reflect_frozen": [
+    "tex1_64x64_1c685915d4d94057_14"
+  ],
+  "waterproc_waves": [
+    "tex1_64x64_67aa84efdc15a00c_14",
+    "tex1_64x64_c19fecb48f40fe78_14"
+  ],
+  "WaterTile": [
+    "tex1_128x64_9fe3ab7b7eb3235e_14"
+  ],
+  "waterwaves": [
+    "tex1_128x128_2c65c33480087b74_759f98646eba5ed5_8",
+    "tex1_128x128_2c65c33480087b74_2822946b76a533d8_8"
+  ],
+  "water_reflect_02": [
+    "tex1_256x256_e8e2913c97855fa0_6"
+  ],
+  "water_ring": [
+    "tex1_256x256_a54fb62b0a7819b1_14",
+    "tex1_256x256_c3de75091883166a_14"
+  ],
+  "water_ring_warp_additive": [
+    "tex1_64x64_78bb89ddc708e578_4c072b572521818b_8"
+  ],
+  "water_ring_warp_additive_s14_inlet": [
+    "tex1_128x64_0d5bec9ab5457d21_19548484fd5d7466_8",
+    "tex1_128x64_0d5bec9ab5457d21_da4b3a3abcc8ad2b_8"
+  ],
+  "weapons_rock": [
+    "tex1_8x8_6d249e841fe6b6df_14"
+  ],
+  "wellwaterlod": [
+    "tex1_64x64_13a2e56b2201289a_b39c6e281984c0b6_8",
+    "tex1_64x64_13a2e56b2201289a_679f326bdb2c12dd_8"
+  ],
+  "woodshieldhalf": [
+    "tex1_64x64_b34f483d4c2fbc46_14"
+  ],
+  "ws_crane": [
+    "tex1_256x256_cb6a2e44c6338440_558b41511b38187d_8",
+    "tex1_256x256_cb6a2e44c6338440_be278725d2fc46e9_8"
+  ],
+  "ws_largeplanks": [
+    "tex1_128x128_ec159a12f079f451_14"
+  ],
+  "ws_woodfloor": [
+    "tex1_128x128_7384e8705742ad51_14"
+  ],
+  "zzz": [
+    "tex1_32x32_4a764f500b512eb2_ff10223616c08787_8",
+    "tex1_32x32_4a764f500b512eb2_37cc6bf5282a5b33_8"
+  ],
+  "___null": [
+    "tex1_8x8_2150bbfee402d96c_14"
+  ]
+}

@@ -3,12 +3,12 @@
  *
  * Not adding the following:
  * - Sling because both Torch and Rising Strike are dependant on it, making it a very bad rando goal.
- * - Dash ability because it's too essential and every run will end up geting it anyway.
+ * - Dash ability because it's too essential and every run will end up getting it anyway.
  *   Rushing Dash early vs. other goals is already a bingo meta.
- * - Mysterious Item, Extra Health and Canteen because they costs 2 or less
+ * - Mysterious Item, Extra Health and Canteen because they cost 2 or less
      meaning it's the same goal as any Shaman, or all Idols from a level, and many Shamans.
  * - Item Swap forcibly overlaps other goals.
- * - Mouth of Hinti St. Claire boss fight is teh same goal as getting Torch.
+ * - Mouth of Inti St. Claire boss fight is the same goal as getting Torch.
 */
 [
   { "name": "Get all 1 Idol in Mama-Oullo Tower" },
@@ -115,6 +115,7 @@
   { "name": "Defeat St. Claire in Crystal Cavern" },
   { "name": "Defeat Supaï and Pusca" },
 
+  { "name": "Complete Mickay's butterflies questline" },
   { "name": "Kill a mama monkey" },
   { "name": "Kill a scorpion" },
   { "name": "Die to an insta-kill plane" },

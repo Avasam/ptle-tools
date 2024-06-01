@@ -453,208 +453,208 @@
   ],
   "Unused": [
     {
+      "id": 11,
+      "asset_id": null,
+      "asset_crc32": "0D29 D251",
+      "asset_name": "0-sneath",
+      "area_name": "⚠ Single broken hot coals log floating midair"
+    },
+    {
+      "id": 21,
+      "asset_id": null,
+      "asset_crc32": "29C6 E554",
+      "asset_name": "0-Andy",
+      "area_name": "Beta Mountain Village"
+    },
+    {
+      "id": 22,
+      "asset_id": null,
+      "asset_crc32": "303E 8832",
+      "asset_name": "0-Brad",
+      "area_name": "Beta Mama-Oullo Tower"
+    },
+    {
+      "id": 26,
+      "asset_id": null,
+      "asset_crc32": "3c621331",
+      "asset_name": "0-karl",
+      "area_name": "Unbroken Spruce Moose Plane"
+    },
+    {
+      "id": 27,
+      "asset_id": null,
+      "asset_crc32": "3cc32d64",
+      "asset_name": "0-stan",
+      "area_name": "⚠ Empty, Skybox flies away"
+    },
+    {
+      "id": 29,
+      "asset_id": null,
+      "asset_crc32": "4750 8760",
+      "asset_name": "0-justin",
+      "area_name": "Beta Volcano Crash Site"
+    },
+    {
+      "id": 30,
+      "asset_id": null,
+      "asset_crc32": "4A35 F149",
+      "asset_name": "0-evan",
+      "area_name": "Physics Test Level"
+    },
+    {
+      "id": 33,
+      "asset_id": null,
+      "asset_crc32": "523C 6B66",
+      "asset_name": "0-bunn",
+      "area_name": "⚠ 3 Renegade huts floating midair"
+    },
+    {
+      "id": 36,
+      "asset_id": null,
+      "asset_crc32": "5C28 38D2",
+      "asset_name": "0-richard",
+      "area_name": "⚠ Empty"
+    },
+    {
+      "id": 40,
+      "asset_id": null,
+      "asset_crc32": "6A6C 5478",
+      "asset_name": "0-tom",
+      "area_name": "⚠ Pink sphere with crosses"
+    },
+    {
+      "id": 41,
+      "asset_id": null,
+      "asset_crc32": "6A8F 1240",
+      "asset_name": "0-jamey",
+      "area_name": "⚠ Particles Test Level"
+    },
+    {
+      "id": 44,
+      "asset_id": null,
+      "asset_crc32": "720F 5230",
+      "asset_name": "0-Joe",
+      "area_name": "Models Test Level"
+    },
+    {
+      "id": 46,
+      "asset_id": null,
+      "asset_crc32": "7567 D75A",
+      "asset_name": "0-sound",
+      "area_name": "Sound range Test Level"
+    },
+    {
+      "id": 52,
+      "asset_id": null,
+      "asset_crc32": "8CA7 D952",
+      "asset_name": "0-ryan",
+      "area_name": "Trees and a rock wall"
+    },
+    {
+      "id": 59,
+      "asset_id": null,
+      "asset_crc32": "9F49 9B32",
+      "asset_name": "0-lonnie",
+      "area_name": "Small Gameplay Test Level"
+    },
+    {
+      "id": 63,
+      "asset_id": null,
+      "asset_crc32": "B252 EE26",
+      "asset_name": "0jacobm",
+      "area_name": "Interractions Test Level"
+    },
+    {
+      "id": 60,
+      "asset_id": null,
+      "asset_crc32": "9FB1 EC73",
+      "asset_name": "0-Lacy",
+      "area_name": "Shaman Horde"
+    },
+    {
+      "id": 65,
+      "asset_id": null,
+      "asset_crc32": "B8DC CBFE",
+      "asset_name": "0-geoff",
+      "area_name": "Terrain and Pusca Test Level"
+    },
+    {
+      "id": 67,
+      "asset_id": null,
+      "asset_crc32": "BA96 749A",
+      "asset_name": "0-kreitler",
+      "area_name": "Tunnel Gameplay Test Level"
+    },
+    {
+      "id": 68,
+      "asset_id": null,
+      "asset_crc32": "BE1E AE73",
+      "asset_name": "0-derek",
+      "area_name": "Sand Pit & Disco Ball Test Level"
+    },
+    {
+      "id": 69,
+      "asset_id": null,
+      "asset_crc32": "C6E6 D851",
+      "asset_name": "0-Michael",
+      "area_name": "Critters Test Level"
+    },
+    {
+      "id": 70,
+      "asset_id": null,
+      "asset_crc32": "C7AD F2B9",
+      "asset_name": "0-beasties",
+      "area_name": "Hedge Arenas"
+    },
+    {
+      "id": 73,
+      "asset_id": null,
+      "asset_crc32": "D4E6 40B8",
+      "asset_name": "0-alan",
+      "area_name": "Beta characters"
+    },
+    {
+      "id": 76,
+      "asset_id": null,
+      "asset_crc32": "E0F1 09CC",
+      "asset_name": "0-quentin",
+      "area_name": "Beta characters (IDEM)"
+    },
+    {
+      "id": 77,
+      "asset_id": null,
+      "asset_crc32": "E11B 11B7",
+      "asset_name": "0-stanBeasts",
+      "area_name": "Hedge Arenas (but empty)"
+    },
+    {
       "id": 82,
       "asset_id": 3917519207,
       "asset_crc32": "E980 9967",
       "asset_name": "gym",
-      "area_name": "Test Level"
+      "area_name": "Full Gameplay Test Level"
+    },
+    {
+      "id": 88,
+      "asset_id": null,
+      "asset_crc32": "F43B 5568",
+      "asset_name": "0-paul",
+      "area_name": "⚠ Beta Crash Site + Plane Cockpit"
+    },
+    {
+      "id": 89,
+      "asset_id": null,
+      "asset_crc32": "F5C6 0CE9",
+      "asset_name": "0-mike",
+      "area_name": "Full Gameplay Test Level 2"
     }
   ],
   "Unloadable": [
     {
       "id": 3,
       "asset_id": null,
-      "asset_crc32": "",
+      "asset_crc32": "050B F177",
       "asset_name": "0-jason",
-      "area_name": null
-    },
-    {
-      "id": 11,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-sneath",
-      "area_name": null
-    },
-    {
-      "id": 21,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-Andy",
-      "area_name": null
-    },
-    {
-      "id": 22,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-Brad",
-      "area_name": null
-    },
-    {
-      "id": 26,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-karl",
-      "area_name": null
-    },
-    {
-      "id": 27,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-stan",
-      "area_name": null
-    },
-    {
-      "id": 29,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-justin",
-      "area_name": null
-    },
-    {
-      "id": 30,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-evan",
-      "area_name": null
-    },
-    {
-      "id": 33,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-bunn",
-      "area_name": null
-    },
-    {
-      "id": 36,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-richard",
-      "area_name": null
-    },
-    {
-      "id": 40,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-tom",
-      "area_name": null
-    },
-    {
-      "id": 41,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-jamey",
-      "area_name": null
-    },
-    {
-      "id": 44,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-Joe",
-      "area_name": null
-    },
-    {
-      "id": 46,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-sound",
-      "area_name": null
-    },
-    {
-      "id": 52,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-ryan",
-      "area_name": null
-    },
-    {
-      "id": 59,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-lonnie",
-      "area_name": null
-    },
-    {
-      "id": 60,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-Lacy",
-      "area_name": null
-    },
-    {
-      "id": 63,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0jacobm",
-      "area_name": null
-    },
-    {
-      "id": 65,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-geoff",
-      "area_name": null
-    },
-    {
-      "id": 67,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-kreitler",
-      "area_name": null
-    },
-    {
-      "id": 68,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-derek",
-      "area_name": null
-    },
-    {
-      "id": 69,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-Michael",
-      "area_name": null
-    },
-    {
-      "id": 70,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-beasties",
-      "area_name": null
-    },
-    {
-      "id": 73,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-alan",
-      "area_name": null
-    },
-    {
-      "id": 76,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-quentin",
-      "area_name": null
-    },
-    {
-      "id": 77,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-stanBeasts",
-      "area_name": null
-    },
-    {
-      "id": 88,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-paul",
-      "area_name": null
-    },
-    {
-      "id": 89,
-      "asset_id": null,
-      "asset_crc32": "",
-      "asset_name": "0-mike",
       "area_name": null
     }
   ]

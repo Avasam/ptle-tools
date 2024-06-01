@@ -1,13 +1,11 @@
 {
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": "explicit"
   },
   "files.associations": {
     "*.dmw": "json",
-    "pyrightconfig*.json": "jsonc",
-    "dprint*.json": "jsonc",
-    ".flake8": "properties"
+    "*.json": "jsonc"
   },
   "files.exclude": {
     "**/.mypy_cache": true,
@@ -23,7 +21,7 @@
   "editor.tabSize": 2,
   "editor.rulers": [
     80,
-    120
+    100
   ],
   "[git-commit]": {
     "editor.rulers": [
@@ -36,24 +34,24 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
+  "yaml.format.printWidth": 100,
   "[markdown]": {
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
   },
   "[python]": {
     // Ruff is not yet a formatter: https://github.com/charliermarsh/ruff/issues/1904
-    // Cannot use autotpep8 until https://github.com/microsoft/vscode-autopep8/issues/32 is fixed
-    "editor.defaultFormatter": "ms-python.python",
+    "editor.defaultFormatter": "ms-python.autopep8",
     "editor.tabSize": 4,
     "editor.rulers": [
       72, // PEP8-17 docstrings
       // 79, // PEP8-17 default max
       // 88, // Black default
       // 99, // PEP8-17 acceptable max
-      120 // Our hard rule
+      100 // Our hard rule
     ],
     "editor.codeActionsOnSave": {
       // TODO: Ruff is supposed to be able to take care of this
-      "source.organizeImports": false
+      "source.organizeImports": "never"
     }
   },
   "python.analysis.stubPath": "Dolphin scripts/typings",
@@ -65,20 +63,9 @@
     // Specifically ignoring unusedImports because it's annoying to loose imports when commenting code for testing
     // "source.unusedImports"
   ],
-  // https://github.com/microsoft/vscode-autopep8/issues/32
-  "python.formatting.provider": "autopep8",
-  "python.linting.enabled": true,
   "ruff.importStrategy": "fromEnvironment",
   // Use the Ruff extension instead
   "isort.check": false,
-  "python.linting.banditEnabled": false,
-  "python.linting.flake8Enabled": false,
-  "python.linting.prospectorEnabled": false,
-  "python.linting.pycodestyleEnabled": false,
-  "python.linting.pylamaEnabled": false,
-  "python.linting.pylintEnabled": false,
-  // Use Pyright/Pylance instead
-  "python.linting.mypyEnabled": false,
   "emeraldwalk.runonsave": {
     "commands": [
       {
@@ -96,7 +83,7 @@
   "evenBetterToml.formatter.arrayAutoCollapse": true,
   "evenBetterToml.formatter.arrayAutoExpand": true,
   "evenBetterToml.formatter.arrayTrailingComma": true,
-  "evenBetterToml.formatter.columnWidth": 120,
+  "evenBetterToml.formatter.columnWidth": 100,
   "evenBetterToml.formatter.compactArrays": true,
   "evenBetterToml.formatter.compactEntries": false,
   "evenBetterToml.formatter.compactInlineTables": false,

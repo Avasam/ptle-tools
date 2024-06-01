@@ -503,6 +503,137 @@
         }
       ],
       "groupName": "Misc"
+    },
+    {
+      "groupEntries": [
+        {
+          "address": "7E009560",
+          "baseIndex": 0,
+          "label": "Extra Health 1",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E009564",
+          "baseIndex": 0,
+          "label": "Extra Health 2",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E009568",
+          "baseIndex": 0,
+          "label": "Extra Health 3",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E00956C",
+          "baseIndex": 0,
+          "label": "Extra Health 4",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E009570",
+          "baseIndex": 0,
+          "label": "Extra Health 5",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E0095B8",
+          "baseIndex": 0,
+          "label": "Canteen Max 1",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E0095BC",
+          "baseIndex": 0,
+          "label": "Canteen Max 2",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E0095C0",
+          "baseIndex": 0,
+          "label": "Canteen Max 3",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E0095C4",
+          "baseIndex": 0,
+          "label": "Canteen Max 4",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E0095C8",
+          "baseIndex": 0,
+          "label": "Canteen Max 5",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E009580",
+          "baseIndex": 0,
+          "label": "Smash Strike",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E009588",
+          "baseIndex": 0,
+          "label": "Super Sling",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E009578",
+          "baseIndex": 0,
+          "label": "Breakdance",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E009598",
+          "baseIndex": 0,
+          "label": "Jungle Notes",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E009590",
+          "baseIndex": 0,
+          "label": "Native Notes",
+          "typeIndex": 2,
+          "unsigned": true
+        },
+        {
+          "address": "7E0095A0",
+          "baseIndex": 0,
+          "label": "Cavern Notes",
+          "typeIndex": 2,
+          "unsigned": true
+        },
+        {
+          "address": "7E0095A8",
+          "baseIndex": 0,
+          "label": "Mountain Notes",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E0095B0",
+          "baseIndex": 0,
+          "label": "Mystery Item",
+          "typeIndex": 2,
+          "unsigned": false
+        }
+      ],
+      "groupName": "Shaman Shop"
     }
   ]
 }
