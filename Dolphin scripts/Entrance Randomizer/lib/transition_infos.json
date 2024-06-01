@@ -571,15 +571,9 @@
     },
     {
       "area_id": "0xDE524DA6",
-      "area_name": "Twin Outpost (Underwater Cave)",
+      "area_name": "Twin Outposts (Underwater Cave)",
       "default_entrance": "0xE6B9138A",
-      "exits": [
-        {
-          "area_id": "0xE6B9138A",
-          "area_name": "Twin Outposts",
-          "requires": []
-        }
-      ]
+      "exits": []
     },
     {
       "area_id": "0xE6B9138A",
@@ -589,11 +583,6 @@
         {
           "area_id": "0xECC9D759",
           "area_name": "Flooded Courtyard",
-          "requires": []
-        },
-        {
-          "area_id": "0xDE524DA6",
-          "area_name": "Twin Outpost (Underwater Cave)",
           "requires": []
         },
         {
