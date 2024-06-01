@@ -23,7 +23,9 @@ _possible_starting_areas = [
     }
 ]
 
-starting_area = CONFIGS.STARTING_AREA or random.choice(_possible_starting_areas)
+starting_area = random.choice(_possible_starting_areas)
+if not CONFIGS.STARTING_AREA is None:
+    starting_area = CONFIGS.STARTING_AREA
 
 
 class Transition(NamedTuple):
