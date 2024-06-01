@@ -19,10 +19,10 @@
 ### Known issues and limitations
 
 - To generate a new seed, simply reload the script.
-- Non-vanilla transitions will always spawn Harry at the default entrance. This can be a bit confusing when using linked transitions.
-- Some areas are not randomized because they are broken with default transition. These can be fixed eventually:
-  - Crash Site: Removes all abilities and items
-  - Teleport: The teleporter pads only activate based on which (vanilla) transition was taken.
+- Some linked transitions are not spawning at the right entrance and use the default entrance instead. Known cases:
+  - Jungle Canyon from Punchau Shrine
+  - Bittenbinder's Camp from Mysterious Temple
+- One-way transitions are not linked together. This can be a bit confusing when sometimes going back leads to a different area.
 
 ### Developing
 

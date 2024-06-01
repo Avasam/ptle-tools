@@ -37,12 +37,29 @@
     },
     {
       "Altar of Ages": "Not including the BBCamp exit as it only happens once from a cutscene and is cut out in entrance rando.",
-      "St. Claire's Excavation Camp": "Only including the Day ID, rando logic takes care of standardizing the night ID.",
-      "teleports": "teleports are broken if not comming from the expected areas",
-      "Crash Site": "Crash Site resets progression if not comming from the expected areas"
+      "St. Claire's Excavation Camp": "Only including the Day ID, rando logic takes care of standardizing the night ID."
     }
   ],
   "Jungle": [
+    {
+      "area_id": "0xEE8F6900",
+      "area_name": "Crash Site",
+      "default_entrance": "0x53257119",
+      "exits": [
+        {
+          "area_id": "0xDEDA69BC",
+          "area_name": "Jungle Canyon",
+          "requires": null
+        },
+        {
+          "area_id": "0x4A3E4058",
+          "area_name": "Plane Cockpit",
+          "requires": [
+            "SPEEDRUN"
+          ]
+        }
+      ]
+    },
     {
       "area_id": "0x0081082C",
       "area_name": "Chameleon Temple",
@@ -213,6 +230,11 @@
       "default_entrance": "0x38C7AE7D",
       "exits": [
         {
+          "area_id": "0xEE8F6900",
+          "area_name": "Crash Site",
+          "requires": null
+        },
+        {
           "area_id": "0x38C7AE7D",
           "area_name": "Punchau Shrine",
           "requires": null
@@ -335,8 +357,8 @@
           "requires": []
         },
         {
-          "area_id": "0x70EBFCA3",
-          "area_name": "Altar of Huitaca",
+          "area_id": "0x3292B6C9",
+          "area_name": "The Great Tree",
           "requires": []
         }
       ]
@@ -371,6 +393,11 @@
       "default_entrance": "0xEE8F6900",
       "exits": [
         {
+          "area_id": "0xEE8F6900",
+          "area_name": "Crash Site",
+          "requires": null
+        },
+        {
           "area_id": "0x9D6149E1",
           "area_name": "Underground Dam",
           "requires": []
@@ -401,6 +428,28 @@
           "area_id": "0x93F89D45",
           "area_name": "Gates of El Dorado",
           "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0xE97CB47C",
+      "area_name": "Teleports",
+      "default_entrance": "0x239A2165",
+      "exits": [
+        {
+          "area_id": "0x239A2165",
+          "area_name": "Turtle Monument",
+          "requires": null
+        },
+        {
+          "area_id": "0x9D6149E1",
+          "area_name": "Underground Dam",
+          "requires": null
+        },
+        {
+          "area_id": "0x62548B77",
+          "area_name": "White Valley",
+          "requires": null
         }
       ]
     }
@@ -458,8 +507,13 @@
       "default_entrance": "0xE6B9138A",
       "exits": [
         {
+          "area_id": "0xE97CB47C",
+          "area_name": "Jungle Teleport",
+          "requires": []
+        },
+        {
           "area_id": "0xE6B9138A",
-          "area_name": "Twin Outposts (2 exits)",
+          "area_name": "Twin Outposts",
           "requires": []
         },
         {
@@ -654,6 +708,11 @@
       "default_entrance": "0xDEDA69BC",
       "exits": [
         {
+          "area_id": "0xE97CB47C",
+          "area_name": "Cavern Teleport",
+          "requires": []
+        },
+        {
           "area_id": "0xDEDA69BC",
           "area_name": "Jungle Canyon",
           "requires": []
@@ -738,7 +797,7 @@
     {
       "area_id": "0x1B8833D3",
       "area_name": "Mountain Sled Run",
-      "default_entrance": "0x08E3C641",
+      "default_entrance": "0x8147EA91",
       "exits": [
         {
           "area_id": "0x8147EA91",
@@ -770,11 +829,6 @@
       "default_entrance": "0x1B8833D3",
       "exits": [
         {
-          "area_id": "0x1B8833D3",
-          "area_name": "Mountain Sled Run",
-          "requires": []
-        },
-        {
           "area_id": "0x62548B77",
           "area_name": "White Valley",
           "requires": []
@@ -786,6 +840,11 @@
       "area_name": "White Valley",
       "default_entrance": "0x1553BBE1",
       "exits": [
+        {
+          "area_id": "0xE97CB47C",
+          "area_name": "Mountain Teleport",
+          "requires": []
+        },
         {
           "area_id": "0x1553BBE1",
           "area_name": "Penguin Den",
