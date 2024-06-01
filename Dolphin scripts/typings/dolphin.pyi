@@ -5,7 +5,7 @@ intuitive way. For example, people can then do this:
     `from dolphin import event, memory`
 instead of:
     `import dolphin_event as event`
-    `import dolphin_memory as memory`.
+    `import dolphin_memory as memory`
 
 Valid:
   `import dolphin`
@@ -15,7 +15,7 @@ Valid:
 Invalid:
   `import dolphin.event`
   `from dolphin.event import ...`
-"""  # Tries to add a . at the end of an import line
+"""  # noqa: D400,D415 # Tries to add a . at the end of an import line
 import dolphin_controller as controller
 import dolphin_event as event
 import dolphin_gui as gui
