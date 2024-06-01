@@ -35,7 +35,7 @@ repos:
       - id: ruff
         args: [--fix]
   - repo: https://github.com/hhatto/autopep8
-    rev: "v2.1.1" # Must match requirements-dev.txt
+    rev: "v2.2.0" # Must match requirements-dev.txt
     hooks:
       - id: autopep8
   - repo: https://github.com/asottile/add-trailing-comma

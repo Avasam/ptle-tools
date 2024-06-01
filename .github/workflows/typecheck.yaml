@@ -30,11 +30,6 @@ jobs:
     name: Run pyright
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        # - uses: actions/setup-python@v4
-        #   with:
-        #     python-version: "3.8"
-        #     cache: pip
-        #     cache-dependency-path: "**/requirements*.txt"
-        # - run: pip install -r requirements.txt
-      - uses: jakebailey/pyright-action@v1
+      - uses: actions/checkout@v4
+      - run: pip install typing_extensions
+      - uses: jakebailey/pyright-action@v2

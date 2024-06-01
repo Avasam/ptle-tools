@@ -3,7 +3,7 @@
   "extends": [
     "config:recommended"
   ],
-  "groupName": "all",
+  "groupName": "all dependencies",
   "semanticCommits": "disabled",
   "separateMajorMinor": false,
   "suppressNotifications": [
