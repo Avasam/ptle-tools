@@ -4,7 +4,18 @@
 2. Turn on "Scripting" logs and set Verbosity to "Error" or any option below (not "Notice").
 3. Under "Scripts", click "Add new Scripts" and select your Python script.
 
-## Entrance Randomizer (prototype)
+## Entrance Randomizer
+
+### Features
+- Randomization of almost all basic transitions in the game
+- Randomization of Shaman Shop prices
+- Generation of Spoiler Log .txt file
+- Generation of Randomized Map .graphml file
+- Option to manually choose a seed, or to get a random seed
+- Option to manually choose a starting area, or to get a random starting area
+- Option to make all transitions 2-directional, or to allow 1-directional transitions
+- Option to disable maps from the Shaman Shop, or to let them remain
+- Further options for Shaman Shop prices
 
 ### Installing
 
@@ -16,13 +27,26 @@
 6. In Dolphin, under "Scripts", click "Add new Scripts" and select `Scripts/Entrance Randomizer/__main__.py`.
 7. Enjoy and watch logs for errors 🙂
 
+### About the .graphml file
+
+In order to display the generated map take these steps:
+1. Go to https://graphonline.ru/en/
+2. Under "Graph" choose "Import from file" and choose your generated .graphml file
+3. Under "Algorithms" choose "Arrange the graph"
+4. Enjoy your map! You can freely move the dots, and you can use multiple features under the "Algorithms" tab (like "Find all paths" for instance)
+5. You can also save your map at any time by choosing "Graph" --> "Export to file"
+
 ### Known issues and limitations
 
-- To generate a new seed, simply reload the script.
-- Non-vanilla transitions will always spawn Harry at the default entrance. This can be a bit confusing when using linked transitions.
-- Some areas are not randomized because they are broken with default transition. These can be fixed eventually:
-  - Crash Site: Removes all abilities and items
-  - Teleport: The teleporter pads only activate based on which (vanilla) transition was taken.
+- To generate a new seed, simply reload the script
+- Sometimes a transition does not make you enter the level from the correct entrance, but from the default entrance instead
+- Some seeds will result in impossible to complete configurations, because you might need some items to progress that you don't have yet
+- When using LINKED_TRANSITIONS = False the generated .graphml map will become very hard to read, given the extreme amount of connections that will be drawn
+
+### Solved issues
+
+- All areas will now be guaranteed to be linked to eachother. This means that between any level A and any level B there is always at least 1 route that leads you from one to the other.
+- The game can now be finished because Altar of Ages, St. Claire's Camp, Gates of El Dorado and the Final Bosses all work correctly.
 
 ### Developing
 
