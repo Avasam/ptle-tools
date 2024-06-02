@@ -82,7 +82,7 @@ def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):  # noqa: 
                     )
                     for exit_ in area["exits"]
                 ],
-                0
+                0,
             )
             for area in major_area
         ]

@@ -19,12 +19,12 @@ _possible_starting_areas = [
         LevelCRC.ST_CLAIRE_DAY,
         LevelCRC.ST_CLAIRE_NIGHT,
         LevelCRC.JAGUAR,
-        LevelCRC.PUSCA
+        LevelCRC.PUSCA,
     }
 ]
 
 starting_area = random.choice(_possible_starting_areas)
-if not CONFIGS.STARTING_AREA is None:
+if CONFIGS.STARTING_AREA is not None:
     starting_area = CONFIGS.STARTING_AREA
 
 
@@ -86,12 +86,11 @@ def highjack_transition(from_: int | None, to: int | None, redirect: int):
 def get_random_redirection(original: Transition, all_redirections: Iterable[Transition]):
     possible_redirections = [
         redirect for redirect in all_redirections
-        if original.from_ != redirect.to # Prevent looping on itself
+        if original.from_ != redirect.to  # Prevent looping on itself
     ]
     if len(possible_redirections) > 0:
         return random.choice(possible_redirections)
-    else:
-        return None
+    return None
 
 
 transitions_map: dict[tuple[int, int], Transition] = {}
@@ -100,6 +99,7 @@ transitions_map: dict[tuple[int, int], Transition] = {}
     (og_from_id, og_to_id): (og_from_id, og_to_id)
 }
 ```"""
+
 
 def check_part_of_loop(link, link_list, area_list):
     unchecked_links = []
@@ -118,17 +118,19 @@ def check_part_of_loop(link, link_list, area_list):
         if len(new_links_reached) > 0:
             new_area_reached = True
             for nl in new_links_reached:
-                if not nl[0] in areas_reachable:
+                if nl[0] not in areas_reachable:
                     areas_reachable.append(nl[0])
-                elif not nl[1] in areas_reachable:
+                elif nl[1] not in areas_reachable:
                     areas_reachable.append(nl[1])
                 unchecked_links.remove(nl)
     return len(areas_reachable) == len(area_list)
+
 
 def link_two_levels(first, second):
     first.con_left -= 1
     second.con_left -= 1
     return [first, second]
+
 
 def unlink_two_levels(first, second):
     first.con_left += 1
@@ -147,7 +149,7 @@ def set_transitions_map():
         Transition(from_=LevelCRC.WHITE_VALLEY, to=LevelCRC.MOUNTAIN_SLED_RUN),
         Transition(from_=LevelCRC.MOUNTAIN_SLED_RUN, to=LevelCRC.APU_ILLAPU_SHRINE),
         Transition(from_=LevelCRC.APU_ILLAPU_SHRINE, to=LevelCRC.WHITE_VALLEY),
-        Transition(from_=LevelCRC.CAVERN_LAKE, to=LevelCRC.JUNGLE_CANYON)
+        Transition(from_=LevelCRC.CAVERN_LAKE, to=LevelCRC.JUNGLE_CANYON),
     ]
     if CONFIGS.LINKED_TRANSITIONS:
         # Ground rules:
@@ -181,7 +183,9 @@ def set_transitions_map():
                         break
                     if level_list[i].con_left > 0:
                         levels_available.append(level_list[i])
-                amount_chosen = random.randint(1, min(level_list[index].con_left, len(levels_available)))
+                amount_chosen = random.randint(
+                    1, min(level_list[index].con_left, len(levels_available)),
+                )
                 levels_chosen = random.sample(levels_available, amount_chosen)
                 for level_chosen in levels_chosen:
                     link_list.append(link_two_levels(level_list[index], level_chosen))
@@ -195,7 +199,8 @@ def set_transitions_map():
                 link_list.append(link_two_levels(level_list[index], level_b))
                 total_con_left -= 2
             else:
-                # option 3: break open a connection that's part of a level loop, then restart this iteration
+                # option 3: break open a connection that's part of a level loop, then
+                # restart this iteration
                 direc = random.choice([-1, 1])
                 link_i = random.randrange(len(link_list))
                 valid_link = False
@@ -245,7 +250,7 @@ def set_transitions_map():
             if one_way_redirects[0].to == original.from_:
                 transitions_map[original] = one_way_redirects.pop(1)
             else:
-                 transitions_map[original] = one_way_redirects.pop(0)
+                transitions_map[original] = one_way_redirects.pop(0)
     else:
         # Ground rules:
         # 1. you can't make a transition from a level to itself

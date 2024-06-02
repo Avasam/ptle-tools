@@ -47,27 +47,35 @@ def draw_text(text: str):
 def create_graphml(
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
     seed_string: SeedType,
-    starting_area: int
+    starting_area: int,
 ):
     areas_randomized = []
     for original, redirect in transitions_map.items():
-        if not TRANSITION_INFOS_DICT[original[0]] in areas_randomized:
+        if TRANSITION_INFOS_DICT[original[0]] not in areas_randomized:
             areas_randomized.append(TRANSITION_INFOS_DICT[original[0]])
-        if not TRANSITION_INFOS_DICT[redirect[1]] in areas_randomized:
+        if TRANSITION_INFOS_DICT[redirect[1]] not in areas_randomized:
             areas_randomized.append(TRANSITION_INFOS_DICT[redirect[1]])
 
-    graphml_text = f"<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml><graph id=\"Graph\" uidGraph=\"1\" uidEdge=\"1\">\n"
+    graphml_text = '<?xml version="1.0" encoding="UTF-8"?><graphml><graph id="Graph" uidGraph="1" uidEdge="1">\n'
     counter_x = 0
     counter_y = 0
 
     for area in areas_randomized:
-        graphml_text += (
-            f"<node positionX=\"{counter_x * 100 + counter_y * 20}\" positionY=\"{counter_x * 50 + counter_y * 50}\" "
-            + f"id=\"{area.small_id}\" mainText=\"{area.name}\" "
-        )
+        graphml_text += ( f'<node positionX="{
+            counter_x *
+            100
+            + counter_y
+            * 20
+        }" positionY="{
+            counter_x *
+            50
+            + counter_y
+            * 50
+        }" ' +
+                          f'id="{area.small_id}" mainText="{area.name}" ' )
         # Starting area: Orange
         if area.area_id == starting_area:
-            graphml_text += "ownStyles = \"{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;#ff8000&quot;}}\" "
+            graphml_text += 'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;#ff8000&quot;}}" '
         # Areas with Upgrades: Blue
         elif area.area_id in (
             LevelCRC.PLANE_COCKPIT,
@@ -80,17 +88,17 @@ def create_graphml(
             LevelCRC.CAVERN_LAKE,
             LevelCRC.MOUNTAIN_SLED_RUN,
             LevelCRC.MOUNTAIN_OVERLOOK,
-            LevelCRC.APU_ILLAPU_SHRINE
+            LevelCRC.APU_ILLAPU_SHRINE,
         ):
-            graphml_text += "ownStyles = \"{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;#0080ff&quot;}}\" "
+            graphml_text += 'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;#0080ff&quot;}}" '
         # Important Story Triggers: Red
         elif area.area_id in (
             LevelCRC.ALTAR_OF_AGES,
             LevelCRC.ST_CLAIRE_DAY,
             LevelCRC.ST_CLAIRE_NIGHT,
-            LevelCRC.GATES_OF_EL_DORADO
+            LevelCRC.GATES_OF_EL_DORADO,
         ):
-            graphml_text += "ownStyles = \"{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;#ff0000&quot;}}\" "
+            graphml_text += 'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;#ff0000&quot;}}" '
         graphml_text += "></node>\n"
         if counter_x == 9:
             counter_x = 0
@@ -103,7 +111,7 @@ def create_graphml(
     for original, redirect in transitions_map.items():
         connections.append([original[0], redirect[1]])
     for pairing in connections:
-        if not [pairing[1], pairing[0]] in connections_two_way:
+        if [pairing[1], pairing[0]] not in connections_two_way:
             if [pairing[1], pairing[0]] in connections:
                 connections_two_way.append(pairing)
             else:
@@ -111,16 +119,16 @@ def create_graphml(
     counter = 10000
     for pairing in connections_two_way:
         graphml_text += (
-            f"<edge source=\"{TRANSITION_INFOS_DICT[pairing[0]].small_id}\" "
-            + f"target=\"{TRANSITION_INFOS_DICT[pairing[1]].small_id}\" isDirect=\"false\" "
-            + f"id=\"{counter}\" ></edge>\n"
+            f'<edge source="{TRANSITION_INFOS_DICT[pairing[0]].small_id}" '
+            + f'target="{TRANSITION_INFOS_DICT[pairing[1]].small_id}" isDirect="false" '
+            + f'id="{counter}" ></edge>\n'
         )
         counter += 1
     for pairing in connections_one_way:
         graphml_text += (
-            f"<edge source=\"{TRANSITION_INFOS_DICT[pairing[0]].small_id}\" "
-            + f"target=\"{TRANSITION_INFOS_DICT[pairing[1]].small_id}\" isDirect=\"true\" "
-            + f"id=\"{counter}\" ></edge>\n"
+            f'<edge source="{TRANSITION_INFOS_DICT[pairing[0]].small_id}" '
+            + f'target="{TRANSITION_INFOS_DICT[pairing[1]].small_id}" isDirect="true" '
+            + f'id="{counter}" ></edge>\n'
         )
         counter += 1
     graphml_text += "</graph></graphml>"
@@ -136,6 +144,7 @@ def create_graphml(
     )
     Path.write_text(graphml_file, graphml_text)
     print("Graphml file written to", graphml_file)
+
 
 def dump_spoiler_logs(
     starting_area_name: str,
