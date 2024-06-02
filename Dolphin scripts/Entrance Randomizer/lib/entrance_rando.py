@@ -223,17 +223,19 @@ def set_transitions_map():
 
         index = 2
         while index < len(level_list):
-            r = random.choice([1, 2])
-            if total_con_left > 0 and (level_list[index].con_left < 2 or r == 1):
+            r = random.choice(["1", "2"])
+            if total_con_left > 0 and (level_list[index].con_left == 1 or r == "1"):
                 # option 1: connect to one or more existing levels
                 connect_to_existing(level_list, index, link_list)
-            elif level_list[index].con_left >= 2 and (total_con_left == 0 or r == 2):
+            elif level_list[index].con_left > 1 and (total_con_left == 0 or r == "2"):
                 # option 2: put the current level inbetween an already established connection
                 total_con_left += level_list[index].con_left
                 level_a, level_b = link_list.pop(random.randrange(len(link_list)))
                 unlink_two_levels(level_a, level_b)
-                link_list.append(link_two_levels(level_list[index], level_a))
-                link_list.append(link_two_levels(level_list[index], level_b))
+                link_list.extend((
+                    link_two_levels(level_list[index], level_a),
+                    link_two_levels(level_list[index], level_b)
+                ))
                 total_con_left -= 2
             else:
                 # option 3: break open a connection that's part of a level loop,
@@ -259,9 +261,7 @@ def set_transitions_map():
     else:
         # Ground rules:
         # 1. you can't make a transition from a level to itself
-        for trans in one_way_list:
-            _possible_redirections_bucket.append(trans)
-
+        _possible_redirections_bucket.extend(one_way_list)
         for area in TRANSITION_INFOS_DICT.values():
             for to_og in (exit_.area_id for exit_ in area.exits):
                 original = Transition(from_=area.area_id, to=to_og)
