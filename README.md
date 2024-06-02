@@ -16,8 +16,9 @@ Free Look: <https://wiki.dolphin-emu.org/index.php?title=Free_Look>
 
 Watch and modify useful memory regions. Basically practice tools.
 
-Dolphin Memory Engine (DME): <https://github.com/aldelaro5/Dolphin-memory-engine/releases>\
-Tables: [/Dolphin Memory Watches (DMW)](/Dolphin%20Memory%20Watches%20(DMW))
+- [Dolphin Memory Engine (DME) Releases](https://github.com/aldelaro5/Dolphin-memory-engine/releases)
+- [Tables / Dolphin Memory Watches (DMW)](/Dolphin%20Memory%20Watches%20(DMW))
+- [Action Replay / Gecko Codes](/Dolphin%20Memory%20Watches%20(DMW)/README.md#action-replay--gecko-codes)
 
 ### Graphics Mods
 

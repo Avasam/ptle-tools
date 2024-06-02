@@ -262,4 +262,3 @@ def set_transitions_map():
             redirect = get_random_redirection(original, _possible_redirections_bucket)
             transitions_map[original] = redirect
             _possible_redirections_bucket.remove(redirect)
-
