@@ -94,7 +94,7 @@ def create_vertices(transitions_map, starting_area):
             output_text += (
                 'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;#ff0000&quot;}}" '
             )
-        output_text += '></node>\n'
+        output_text += "></node>\n"
         row_length = 10
         counter_x += 1
         if counter_x == row_length:
@@ -145,7 +145,7 @@ def create_graphml(
         + '<graphml><graph id="Graph" uidGraph="1" uidEdge="1">\n'
         + create_vertices(transitions_map, starting_area)
         + create_edges(transitions_map)
-        + '</graph></graphml>'
+        + "</graph></graphml>"
     )
 
     # TODO (Avasam): Get actual user folder based whether Dolphin Emulator is in AppData/Roaming

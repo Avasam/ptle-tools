@@ -243,7 +243,7 @@ def set_transitions_map():
                 unlink_two_levels(level_a, level_b)
                 link_list.extend((
                     link_two_levels(level_list[index], level_a),
-                    link_two_levels(level_list[index], level_b)
+                    link_two_levels(level_list[index], level_b),
                 ))
                 total_con_left -= 2
             else:
