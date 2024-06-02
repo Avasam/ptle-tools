@@ -62,6 +62,7 @@ def highjack_transition(from_: int | None, to: int | None, redirect: int):
         return True
     return False
 
+
 def highjack_transition_rando():
     # Early return, faster check. Detect the start of a transition
     if state.current_area_old == state.current_area_new:
@@ -89,14 +90,17 @@ def highjack_transition_rando():
     memory.write_u32(ADDRESSES.current_area, redirect.to)
     return redirect
 
+
 def link_two_levels(first, second):
     first.con_left -= 1
     second.con_left -= 1
     return [first, second]
 
+
 def unlink_two_levels(first, second):
     first.con_left += 1
     second.con_left += 1
+
 
 def connect_to_existing(level_list, index, link_list):
     global total_con_left
@@ -114,6 +118,7 @@ def connect_to_existing(level_list, index, link_list):
     for level_chosen in levels_chosen:
         link_list.append(link_two_levels(level_list[index], level_chosen))
         total_con_left -= 2
+
 
 def check_part_of_loop(link, link_list, area_list):
     unchecked_links = link_list.copy()
@@ -134,6 +139,7 @@ def check_part_of_loop(link, link_list, area_list):
                     areas_reachable.append(nl[1])
                 unchecked_links.remove(nl)
     return len(areas_reachable) == len(area_list)
+
 
 def break_open_connection(level_list, index, link_list):
     global total_con_left
@@ -157,6 +163,7 @@ def break_open_connection(level_list, index, link_list):
     unlink_two_levels(level_a, level_b)
     total_con_left += 2
 
+
 def link_list_to_transitions(link_list, transitions_map, origins_bucket, redirections_bucket):
     for link in link_list:
         options_original = [
@@ -179,6 +186,7 @@ def link_list_to_transitions(link_list, transitions_map, origins_bucket, redirec
         origins_bucket.remove(counterpart_original)
         redirections_bucket.remove(counterpart_redirect)
 
+
 def get_random_redirection(original: Transition, all_redirections: Iterable[Transition]):
     possible_redirections = [
         redirect for redirect in all_redirections
@@ -187,6 +195,7 @@ def get_random_redirection(original: Transition, all_redirections: Iterable[Tran
     if len(possible_redirections) > 0:
         return random.choice(possible_redirections)
     return None
+
 
 def set_transitions_map():
     transitions_map.clear()
@@ -246,7 +255,7 @@ def set_transitions_map():
             link_list,
             transitions_map,
             _possible_origins_bucket,
-            _possible_redirections_bucket
+            _possible_redirections_bucket,
         )
 
         one_way_redirects = one_way_list.copy()
