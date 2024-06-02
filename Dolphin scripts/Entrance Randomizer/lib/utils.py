@@ -45,9 +45,9 @@ def draw_text(text: str):
 
 
 def create_vertices(
-        transitions_map: Mapping[tuple[int, int], tuple[int, int]],
-        starting_area: int
-    ):
+    transitions_map: Mapping[tuple[int, int], tuple[int, int]],
+    starting_area: int,
+):
     output_text = ""
 
     areas_randomized = []

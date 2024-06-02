@@ -165,11 +165,11 @@ def break_open_connection(level_list: list[Area], index: int, link_list: list[li
 
 
 def link_list_to_transitions(
-        link_list: list[list[Area]],
-        transitions_map: dict[tuple[int, int],Transition],
-        origins_bucket: Iterable[Transition],
-        redirections_bucket: Iterable[Transition]
-    ):
+    link_list: list[list[Area]],
+    transitions_map: dict[tuple[int, int], Transition],
+    origins_bucket: Iterable[Transition],
+    redirections_bucket: Iterable[Transition],
+):
     for link in link_list:
         options_original = [
             trans for trans in origins_bucket
