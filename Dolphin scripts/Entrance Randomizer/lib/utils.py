@@ -44,7 +44,10 @@ def draw_text(text: str):
     _draw_text_index += 1
 
 
-def create_vertices(transitions_map, starting_area):
+def create_vertices(
+        transitions_map: Mapping[tuple[int, int], tuple[int, int]],
+        starting_area: int
+    ):
     output_text = ""
 
     areas_randomized = []
@@ -103,7 +106,7 @@ def create_vertices(transitions_map, starting_area):
     return output_text
 
 
-def create_edges(transitions_map):
+def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
     output_text = ""
     connections = []
     connections_two_way = []

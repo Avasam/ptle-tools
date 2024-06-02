@@ -91,18 +91,18 @@ def highjack_transition_rando():
     return redirect
 
 
-def link_two_levels(first, second):
+def link_two_levels(first: Area, second: Area):
     first.con_left -= 1
     second.con_left -= 1
     return [first, second]
 
 
-def unlink_two_levels(first, second):
+def unlink_two_levels(first: Area, second: Area):
     first.con_left += 1
     second.con_left += 1
 
 
-def connect_to_existing(level_list, index, link_list):
+def connect_to_existing(level_list: list[Area], index: int, link_list: list[list[Area]]):
     global total_con_left
     total_con_left += level_list[index].con_left
     levels_available = []
@@ -120,7 +120,7 @@ def connect_to_existing(level_list, index, link_list):
         total_con_left -= 2
 
 
-def check_part_of_loop(link, link_list, area_list):
+def check_part_of_loop(link: list[Area], link_list: list[list[Area]], area_list: list[Area]):
     unchecked_links = link_list.copy()
     unchecked_links.remove(link)
     areas_reachable = [link[0]]
@@ -141,7 +141,7 @@ def check_part_of_loop(link, link_list, area_list):
     return len(areas_reachable) == len(area_list)
 
 
-def break_open_connection(level_list, index, link_list):
+def break_open_connection(level_list: list[Area], index: int, link_list: list[list[Area]]):
     global total_con_left
     direc = random.choice([-1, 1])
     link_i = random.randrange(len(link_list))
@@ -164,7 +164,12 @@ def break_open_connection(level_list, index, link_list):
     total_con_left += 2
 
 
-def link_list_to_transitions(link_list, transitions_map, origins_bucket, redirections_bucket):
+def link_list_to_transitions(
+        link_list: list[list[Area]],
+        transitions_map: dict[tuple[int, int],Transition],
+        origins_bucket: Iterable[Transition],
+        redirections_bucket: Iterable[Transition]
+    ):
     for link in link_list:
         options_original = [
             trans for trans in origins_bucket
