@@ -1,7 +1,8 @@
 # Using Python scripts with Dolphin
 
 1. Use this fork of Dolphin <https://github.com/Felk/dolphin/releases>.
-2. Turn on "Scripting" logs and set Verbosity to "Error" or any option below (not "Notice").
+2. Turn on "Scripting" logs and set Verbosity to "Error" or any option below (not "Notice").\
+  ![Enable scripting log](./enable_scripting_log.png)
 3. Under "Scripts", click "Add new Scripts" and select your Python script.
 
 ## Entrance Randomizer (prototype)
