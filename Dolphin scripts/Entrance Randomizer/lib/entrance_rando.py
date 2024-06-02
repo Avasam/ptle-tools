@@ -9,6 +9,12 @@ import CONFIGS
 from lib.constants import *  # noqa: F403
 from lib.utils import follow_pointer_path, state
 
+
+class Transition(NamedTuple):
+    from_: int
+    to: int
+
+
 _possible_starting_areas = [
     area for area in ALL_TRANSITION_AREAS
     # Remove start areas that instantly softlock you + start areas that give too much progression
@@ -27,11 +33,34 @@ starting_area = random.choice(_possible_starting_areas)
 if CONFIGS.STARTING_AREA is not None:
     starting_area = CONFIGS.STARTING_AREA
 
+transitions_map: dict[tuple[int, int], Transition] = {}
+"""```python
+{
+    (og_from_id, og_to_id): (og_from_id, og_to_id)
+}
+```"""
 
-class Transition(NamedTuple):
-    from_: int
-    to: int
 
+def highjack_transition(from_: int | None, to: int | None, redirect: int):
+    if from_ is None:
+        from_ = state.current_area_old
+    if to is None:
+        to = state.current_area_new
+
+    # Early return. Detect the start of a transition
+    if state.current_area_old == state.current_area_new:
+        return False
+
+    if from_ == state.current_area_old and to == state.current_area_new:
+        print(
+            "highjack_transition |",
+            f"From: {hex(state.current_area_old)},",
+            f"To: {hex(state.current_area_new)}.",
+            f"Redirecting to: {hex(redirect)}",
+        )
+        memory.write_u32(ADDRESSES.current_area, redirect)
+        return True
+    return False
 
 def highjack_transition_rando():
     # Early return, faster check. Detect the start of a transition
@@ -60,61 +89,42 @@ def highjack_transition_rando():
     memory.write_u32(ADDRESSES.current_area, redirect.to)
     return redirect
 
+def link_two_levels(first, second):
+    first.con_left -= 1
+    second.con_left -= 1
+    return [first, second]
 
-def highjack_transition(from_: int | None, to: int | None, redirect: int):
-    if from_ is None:
-        from_ = state.current_area_old
-    if to is None:
-        to = state.current_area_new
+def unlink_two_levels(first, second):
+    first.con_left += 1
+    second.con_left += 1
 
-    # Early return. Detect the start of a transition
-    if state.current_area_old == state.current_area_new:
-        return False
-
-    if from_ == state.current_area_old and to == state.current_area_new:
-        print(
-            "highjack_transition |",
-            f"From: {hex(state.current_area_old)},",
-            f"To: {hex(state.current_area_new)}.",
-            f"Redirecting to: {hex(redirect)}",
-        )
-        memory.write_u32(ADDRESSES.current_area, redirect)
-        return True
-    return False
-
-
-def get_random_redirection(original: Transition, all_redirections: Iterable[Transition]):
-    possible_redirections = [
-        redirect for redirect in all_redirections
-        if original.from_ != redirect.to  # Prevent looping on itself
-    ]
-    if len(possible_redirections) > 0:
-        return random.choice(possible_redirections)
-    return None
-
-
-transitions_map: dict[tuple[int, int], Transition] = {}
-"""```python
-{
-    (og_from_id, og_to_id): (og_from_id, og_to_id)
-}
-```"""
-
+def connect_to_existing(level_list, index, link_list):
+    global total_con_left
+    total_con_left += level_list[index].con_left
+    levels_available = []
+    for i in range(len(level_list)):
+        if i == index:
+            break
+        if level_list[i].con_left > 0:
+            levels_available.append(level_list[i])
+    amount_chosen = random.randint(
+        1, min(level_list[index].con_left, len(levels_available)),
+    )
+    levels_chosen = random.sample(levels_available, amount_chosen)
+    for level_chosen in levels_chosen:
+        link_list.append(link_two_levels(level_list[index], level_chosen))
+        total_con_left -= 2
 
 def check_part_of_loop(link, link_list, area_list):
-    unchecked_links = []
-    for l in link_list:
-        unchecked_links.append(l)
+    unchecked_links = link_list.copy()
     unchecked_links.remove(link)
-
     areas_reachable = [link[0]]
     new_area_reached = True
     while new_area_reached:
         new_area_reached = False
-        new_links_reached = []
-        for un in unchecked_links:
-            if un[0] in areas_reachable or un[1] in areas_reachable:
-                new_links_reached.append(un)
+        new_links_reached = [
+            x for x in unchecked_links if (x[0] in areas_reachable or x[1] in areas_reachable)
+        ]
         if len(new_links_reached) > 0:
             new_area_reached = True
             for nl in new_links_reached:
@@ -125,17 +135,58 @@ def check_part_of_loop(link, link_list, area_list):
                 unchecked_links.remove(nl)
     return len(areas_reachable) == len(area_list)
 
+def break_open_connection(level_list, index, link_list):
+    global total_con_left
+    direc = random.choice([-1, 1])
+    link_i = random.randrange(len(link_list))
+    valid_link = False
+    while not valid_link:
+        linked_areas = []
+        for i in range(len(level_list)):
+            if i == index:
+                break
+            linked_areas.append(level_list[i])
+        valid_link = check_part_of_loop(link_list[link_i], link_list, linked_areas)
+        if not valid_link:
+            link_i += direc
+            if link_i == len(link_list):
+                link_i = 0
+            elif link_i < 0:
+                link_i += len(link_list)
+    level_a, level_b = link_list.pop(link_i)
+    unlink_two_levels(level_a, level_b)
+    total_con_left += 2
 
-def link_two_levels(first, second):
-    first.con_left -= 1
-    second.con_left -= 1
-    return [first, second]
+def link_list_to_transitions(link_list, transitions_map, origins_bucket, redirections_bucket):
+    for link in link_list:
+        options_original = [
+            trans for trans in origins_bucket
+            if trans.from_ == link[0].area_id
+        ]
+        options_redirect = [
+            trans for trans in redirections_bucket
+            if trans.to == link[1].area_id
+        ]
+        original = random.choice(options_original)
+        redirect = random.choice(options_redirect)
+        transitions_map[original] = redirect
+        origins_bucket.remove(original)
+        redirections_bucket.remove(redirect)
 
+        counterpart_original = Transition(from_=redirect.to, to=redirect.from_)
+        counterpart_redirect = Transition(from_=original.to, to=original.from_)
+        transitions_map[counterpart_original] = counterpart_redirect
+        origins_bucket.remove(counterpart_original)
+        redirections_bucket.remove(counterpart_redirect)
 
-def unlink_two_levels(first, second):
-    first.con_left += 1
-    second.con_left += 1
-
+def get_random_redirection(original: Transition, all_redirections: Iterable[Transition]):
+    possible_redirections = [
+        redirect for redirect in all_redirections
+        if original.from_ != redirect.to  # Prevent looping on itself
+    ]
+    if len(possible_redirections) > 0:
+        return random.choice(possible_redirections)
+    return None
 
 def set_transitions_map():
     transitions_map.clear()
@@ -166,9 +217,8 @@ def set_transitions_map():
         random.shuffle(level_list)
         level_list.sort(key=lambda a: a.con_left, reverse=True)
 
-        link_list = []
-        link_list.append(link_two_levels(level_list[0], level_list[1]))
-
+        link_list = [link_two_levels(level_list[0], level_list[1])]
+        global total_con_left
         total_con_left = level_list[0].con_left + level_list[1].con_left
 
         index = 2
@@ -176,20 +226,7 @@ def set_transitions_map():
             r = random.choice([1, 2])
             if total_con_left > 0 and (level_list[index].con_left < 2 or r == 1):
                 # option 1: connect to one or more existing levels
-                total_con_left += level_list[index].con_left
-                levels_available = []
-                for i in range(len(level_list)):
-                    if i == index:
-                        break
-                    if level_list[i].con_left > 0:
-                        levels_available.append(level_list[i])
-                amount_chosen = random.randint(
-                    1, min(level_list[index].con_left, len(levels_available)),
-                )
-                levels_chosen = random.sample(levels_available, amount_chosen)
-                for level_chosen in levels_chosen:
-                    link_list.append(link_two_levels(level_list[index], level_chosen))
-                    total_con_left -= 2
+                connect_to_existing(level_list, index, link_list)
             elif level_list[index].con_left >= 2 and (total_con_left == 0 or r == 2):
                 # option 2: put the current level inbetween an already established connection
                 total_con_left += level_list[index].con_left
@@ -199,50 +236,18 @@ def set_transitions_map():
                 link_list.append(link_two_levels(level_list[index], level_b))
                 total_con_left -= 2
             else:
-                # option 3: break open a connection that's part of a level loop, then
-                # restart this iteration
-                direc = random.choice([-1, 1])
-                link_i = random.randrange(len(link_list))
-                valid_link = False
-                while not valid_link:
-                    linked_areas = []
-                    for i in range(len(level_list)):
-                        if i == index:
-                            break
-                        linked_areas.append(level_list[i])
-                    valid_link = check_part_of_loop(link_list[link_i], link_list, linked_areas)
-                    if not valid_link:
-                        link_i += direc
-                        if link_i == len(link_list):
-                            link_i = 0
-                        elif link_i < 0:
-                            link_i += len(link_list)
-                level_a, level_b = link_list.pop(link_i)
-                unlink_two_levels(level_a, level_b)
-                total_con_left += 2
+                # option 3: break open a connection that's part of a level loop,
+                # then restart this iteration
+                break_open_connection(level_list, index, link_list)
                 continue
             index += 1
 
-        for link in link_list:
-            options_original = [
-                trans for trans in _possible_origins_bucket
-                if trans.from_ == link[0].area_id
-            ]
-            options_redirect = [
-                trans for trans in _possible_redirections_bucket
-                if trans.to == link[1].area_id
-            ]
-            original = random.choice(options_original)
-            redirect = random.choice(options_redirect)
-            transitions_map[original] = redirect
-            _possible_origins_bucket.remove(original)
-            _possible_redirections_bucket.remove(redirect)
-
-            counterpart_original = Transition(from_=redirect.to, to=redirect.from_)
-            counterpart_redirect = Transition(from_=original.to, to=original.from_)
-            transitions_map[counterpart_original] = counterpart_redirect
-            _possible_origins_bucket.remove(counterpart_original)
-            _possible_redirections_bucket.remove(counterpart_redirect)
+        link_list_to_transitions(
+            link_list,
+            transitions_map,
+            _possible_origins_bucket,
+            _possible_redirections_bucket
+        )
 
         one_way_redirects = one_way_list.copy()
         random.shuffle(one_way_redirects)

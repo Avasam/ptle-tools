@@ -61,18 +61,11 @@ def create_graphml(
     counter_y = 0
 
     for area in areas_randomized:
-        graphml_text += ( f'<node positionX="{
-            counter_x *
-            100
-            + counter_y
-            * 20
-        }" positionY="{
-            counter_x *
-            50
-            + counter_y
-            * 50
-        }" ' +
-                          f'id="{area.small_id}" mainText="{area.name}" ' )
+        graphml_text += (
+            f'<node positionX="{counter_x * 100 + counter_y * 20}" '
+            + f'positionY="{counter_x * 50 + counter_y * 50}" '
+            + f'id="{area.small_id}" mainText="{area.name}" '
+        )
         # Starting area: Orange
         if area.area_id == starting_area:
             graphml_text += 'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;#ff8000&quot;}}" '
@@ -99,7 +92,7 @@ def create_graphml(
             LevelCRC.GATES_OF_EL_DORADO,
         ):
             graphml_text += 'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;#ff0000&quot;}}" '
-        graphml_text += "></node>\n"
+        graphml_text += '></node>\n'
         if counter_x == 9:
             counter_x = 0
             counter_y += 1
@@ -131,7 +124,7 @@ def create_graphml(
             + f'id="{counter}" ></edge>\n'
         )
         counter += 1
-    graphml_text += "</graph></graphml>"
+    graphml_text += '</graph></graphml>'
 
     # TODO (Avasam): Get actual user folder based whether Dolphin Emulator is in AppData/Roaming
     # and if the current installation is portable.
