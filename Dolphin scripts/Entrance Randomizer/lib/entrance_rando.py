@@ -7,8 +7,8 @@ from typing import NamedTuple
 
 import CONFIGS
 from lib.constants import *  # noqa: F403
-from lib.utils import follow_pointer_path, state
 from lib.transition_infos import Area
+from lib.utils import follow_pointer_path, state
 
 
 class Transition(NamedTuple):
@@ -25,10 +25,10 @@ _possible_starting_areas = [
         LevelCRC.SCORPION_TEMPLE,
         LevelCRC.SCORPION_SPIRIT,
         # These areas will give too much progression
-        LevelCRC.ST_CLAIRE_DAY, # gives TNT
-        LevelCRC.ST_CLAIRE_NIGHT, # gives all items + access to El Dorado
-        LevelCRC.JAGUAR, # sends to final bosses
-        LevelCRC.PUSCA, # sends to final bosses
+        LevelCRC.ST_CLAIRE_DAY,  # gives TNT
+        LevelCRC.ST_CLAIRE_NIGHT,  # gives all items + access to El Dorado
+        LevelCRC.JAGUAR,  # sends to final bosses
+        LevelCRC.PUSCA,  # sends to final bosses
     }
 ]
 
@@ -145,7 +145,10 @@ def check_part_of_loop(link: list[Area], link_list: list[list[Area]], area_list:
     return len(areas_reachable) == len(area_list)
 
 
-def break_open_connection(level_list: Sequence[Area], index: int, link_list: list[tuple[Area, Area]]):
+def break_open_connection(
+    level_list: Sequence[Area],
+    index: int, link_list: list[tuple[Area, Area]],
+):
     global total_con_left
     direc = random.choice([-1, 1])
     link_i = random.randrange(len(link_list))
