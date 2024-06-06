@@ -50,7 +50,7 @@ def create_vertices(
 ):
     output_text = ""
 
-    areas_randomized = []
+    areas_randomized: list[Area] = []
     for original, redirect in transitions_map.items():
         if TRANSITION_INFOS_DICT[original[0]] not in areas_randomized:
             areas_randomized.append(TRANSITION_INFOS_DICT[original[0]])
@@ -108,9 +108,9 @@ def create_vertices(
 
 def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
     output_text = ""
-    connections = []
-    connections_two_way = []
-    connections_one_way = []
+    connections: list[tuple[tuple[int, int], tuple[int, int]]] = []
+    connections_two_way: list[tuple[tuple[int, int], tuple[int, int]]] = []
+    connections_one_way: list[tuple[tuple[int, int], tuple[int, int]]] = []
     for original, redirect in transitions_map.items():
         connections.append([original[0], redirect[1]])
     for pairing in connections:

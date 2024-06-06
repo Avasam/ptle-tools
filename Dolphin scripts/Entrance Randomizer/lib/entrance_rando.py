@@ -45,7 +45,11 @@ transitions_map: dict[tuple[int, int], Transition] = {}
 ```"""
 
 
-def highjack_transition(from_: int | None, to: int | None, redirect: int):
+def highjack_transition(
+    from_: int | None,
+    to: int | None,
+    redirect: int,
+):
     if from_ is None:
         from_ = state.current_area_old
     if to is None:
@@ -106,10 +110,14 @@ def unlink_two_levels(first: Area, second: Area):
     second.con_left += 1
 
 
-def connect_to_existing(level_list: Sequence[Area], index: int, link_list: list[tuple[Area, Area]]):
+def connect_to_existing(
+    level_list: Sequence[Area],
+    index: int,
+    link_list: list[tuple[Area, Area]],
+):
     global total_con_left
     total_con_left += level_list[index].con_left
-    levels_available = []
+    levels_available: list[Area] = []
     for i in range(len(level_list)):
         if i == index:
             break
@@ -124,7 +132,11 @@ def connect_to_existing(level_list: Sequence[Area], index: int, link_list: list[
         total_con_left -= 2
 
 
-def check_part_of_loop(link: list[Area], link_list: list[list[Area]], area_list: list[Area]):
+def check_part_of_loop(
+    link: list[Area],
+    link_list: list[list[Area]],
+    area_list: list[Area],
+):
     unchecked_links = link_list.copy()
     unchecked_links.remove(link)
     areas_reachable = [link[0]]
@@ -147,14 +159,15 @@ def check_part_of_loop(link: list[Area], link_list: list[list[Area]], area_list:
 
 def break_open_connection(
     level_list: Sequence[Area],
-    index: int, link_list: list[tuple[Area, Area]],
+    index: int,
+    link_list: list[tuple[Area, Area]],
 ):
     global total_con_left
     direc = random.choice([-1, 1])
     link_i = random.randrange(len(link_list))
     valid_link = False
     while not valid_link:
-        linked_areas = []
+        linked_areas: list[Area] = []
         for i in range(len(level_list)):
             if i == index:
                 break
@@ -231,7 +244,7 @@ def set_transitions_map():
 
         _possible_origins_bucket = list(starmap(Transition, ALL_POSSIBLE_TRANSITIONS))
 
-        level_list = []
+        level_list: list[Area] = []
         for area in TRANSITION_INFOS_DICT.values():
             area.con_left = len(area.exits)
             if area.con_left > 0:
