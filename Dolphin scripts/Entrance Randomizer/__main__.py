@@ -68,8 +68,11 @@ async def main_loop():
     draw_text(f"Seed: {seed_string}")
     draw_text(patch_shaman_shop())
     draw_text(
-        f"Starting area: {hex(starting_area).upper()} (Random)" if CONFIGS.STARTING_AREA is None
-        else f"Starting area: {starting_area_name}",
+        "Starting area: " + (
+            f"{hex(starting_area).upper()} (Random)"
+            if CONFIGS.STARTING_AREA is None
+            else starting_area_name
+        ),
     )
     draw_text(
         f"Current area: {hex(state.current_area_new).upper()} "
@@ -84,15 +87,12 @@ async def main_loop():
     if memory.read_u32(ADDRESSES.item_swap) == 1:
         memory.write_u32(ADDRESSES.item_swap, 0)
 
-    # Skip the intro fight and cutscene
-    """
-    This is disabled because we want to fight Jaguar 2 at the end of the game.
-    So we need to fight Jaguar 1 at the start.
-    If we fight Jaguar 1 at any other time we would lose all our items and abilities, which sucks.
-    Instead we just hijack Jaguar -> Plane Crash CUTSCENE to send us to starting_area
-    """
-    # if highjack_transition(0x0, LevelCRC.JAGUAR, starting_area):
-    #     return
+    # Skip both Jaguar fights if noted in CONFIGS
+    if CONFIGS.SKIP_JAGUAR:
+        if highjack_transition(0x0, LevelCRC.JAGUAR, starting_area):
+            return
+        if highjack_transition(LevelCRC.GATES_OF_EL_DORADO, LevelCRC.JAGUAR, LevelCRC.PUSCA):
+            return
 
     # Standardize the Altar of Ages exit to remove the Altar -> BBCamp transition
     if highjack_transition(

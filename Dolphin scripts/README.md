@@ -9,11 +9,12 @@
 ### Features
 - Randomization of almost all basic transitions in the game
 - Randomization of Shaman Shop prices
-- Generation of Spoiler Log .txt file
-- Generation of Randomized Map .graphml file
+- Generation of Spoiler Log `.txt` file
+- Generation of Randomized Map `.graphml` file
 - Option to manually choose a seed, or to get a random seed
 - Option to manually choose a starting area, or to get a random starting area
 - Option to make all transitions 2-directional, or to allow 1-directional transitions
+- Option to skip both Jaguar fights entirely, or to keep them as normal
 - Option to disable maps from the Shaman Shop, or to let them remain
 - Further options for Shaman Shop prices
 
@@ -31,7 +32,7 @@
 
 In order to display the generated map take these steps:
 1. Go to https://graphonline.ru/en/
-2. Under "Graph" choose "Import from file" and choose your generated .graphml file
+2. Under "Graph" choose "Import from file" and choose your generated `.graphml` file
 3. Under "Algorithms" choose "Arrange the graph"
 4. Enjoy your map! You can freely move the dots, and you can use multiple features under the "Algorithms" tab (like "Find all paths" for instance)
 5. You can also save your map at any time by choosing "Graph" --> "Export to file"
@@ -41,12 +42,7 @@ In order to display the generated map take these steps:
 - To generate a new seed, simply reload the script
 - Sometimes a transition does not make you enter the level from the correct entrance, but from the default entrance instead
 - Some seeds will result in impossible to complete configurations, because you might need some items to progress that you don't have yet
-- When using LINKED_TRANSITIONS = False the generated .graphml map will become very hard to read, given the extreme amount of connections that will be drawn
-
-### Solved issues
-
-- All areas will now be guaranteed to be linked to eachother. This means that between any level A and any level B there is always at least 1 route that leads you from one to the other.
-- The game can now be finished because Altar of Ages, St. Claire's Camp, Gates of El Dorado and the Final Bosses all work correctly.
+- When using `LINKED_TRANSITIONS = False` the generated `.graphml` map will become very hard to read, given the extreme amount of connections that will be drawn
 
 ### Developing
 

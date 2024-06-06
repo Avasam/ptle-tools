@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 import random
-from collections.abc import Iterable
+from collections.abc import Iterable, Sequence
 from itertools import starmap
 from typing import NamedTuple
 
 import CONFIGS
 from lib.constants import *  # noqa: F403
 from lib.utils import follow_pointer_path, state
+from lib.transition_infos import Area
 
 
 class Transition(NamedTuple):
@@ -17,19 +18,22 @@ class Transition(NamedTuple):
 
 _possible_starting_areas = [
     area for area in ALL_TRANSITION_AREAS
-    # Remove start areas that instantly softlock you + start areas that give too much progression
+    # Remove certain starting areas from the list of possibilities
     if area not in {
+        # These areas will instantly softlock you
         LevelCRC.APU_ILLAPU_SHRINE,
         LevelCRC.SCORPION_TEMPLE,
         LevelCRC.SCORPION_SPIRIT,
-        LevelCRC.ST_CLAIRE_DAY,
-        LevelCRC.ST_CLAIRE_NIGHT,
-        LevelCRC.JAGUAR,
-        LevelCRC.PUSCA,
+        # These areas will give too much progression
+        LevelCRC.ST_CLAIRE_DAY, # gives TNT
+        LevelCRC.ST_CLAIRE_NIGHT, # gives all items + access to El Dorado
+        LevelCRC.JAGUAR, # sends to final bosses
+        LevelCRC.PUSCA, # sends to final bosses
     }
 ]
 
 starting_area = random.choice(_possible_starting_areas)
+# Call RNG even if this is unused to not impact randomization of other things for the same seed
 if CONFIGS.STARTING_AREA is not None:
     starting_area = CONFIGS.STARTING_AREA
 
@@ -94,7 +98,7 @@ def highjack_transition_rando():
 def link_two_levels(first: Area, second: Area):
     first.con_left -= 1
     second.con_left -= 1
-    return [first, second]
+    return (first, second)
 
 
 def unlink_two_levels(first: Area, second: Area):
@@ -102,7 +106,7 @@ def unlink_two_levels(first: Area, second: Area):
     second.con_left += 1
 
 
-def connect_to_existing(level_list: list[Area], index: int, link_list: list[list[Area]]):
+def connect_to_existing(level_list: Sequence[Area], index: int, link_list: list[tuple[Area, Area]]):
     global total_con_left
     total_con_left += level_list[index].con_left
     levels_available = []
@@ -141,7 +145,7 @@ def check_part_of_loop(link: list[Area], link_list: list[list[Area]], area_list:
     return len(areas_reachable) == len(area_list)
 
 
-def break_open_connection(level_list: list[Area], index: int, link_list: list[list[Area]]):
+def break_open_connection(level_list: Sequence[Area], index: int, link_list: list[tuple[Area, Area]]):
     global total_con_left
     direc = random.choice([-1, 1])
     link_i = random.randrange(len(link_list))
@@ -204,10 +208,11 @@ def get_random_redirection(original: Transition, all_redirections: Iterable[Tran
 
 def set_transitions_map():
     transitions_map.clear()
-    starting_default = TRANSITION_INFOS_DICT[starting_area].default_entrance
-    tutorial_original = Transition(from_=LevelCRC.JAGUAR, to=LevelCRC.PLANE_CUTSCENE)
-    tutorial_redirect = Transition(from_=starting_default, to=starting_area)
-    transitions_map[tutorial_original] = tutorial_redirect
+    if not CONFIGS.SKIP_JAGUAR:
+        starting_default = TRANSITION_INFOS_DICT[starting_area].default_entrance
+        tutorial_original = Transition(from_=LevelCRC.JAGUAR, to=LevelCRC.PLANE_CUTSCENE)
+        tutorial_redirect = Transition(from_=starting_default, to=starting_area)
+        transitions_map[tutorial_original] = tutorial_redirect
 
     _possible_redirections_bucket = list(starmap(Transition, ALL_POSSIBLE_TRANSITIONS))
     one_way_list = [
