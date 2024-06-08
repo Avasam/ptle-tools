@@ -38,6 +38,15 @@ and you will fight Jaguar 2 before fighting Pusca.
 default = True
 """
 
+SKIP_JAGUAR: bool = True
+"""
+If True, you will completely skip both Jaguar fights.
+If False, you will fight Jaguar 1 when you start a New Game (and go to STARTING_AREA afterwards),
+and you will fight Jaguar 2 before fighting Pusca.
+
+default = True
+"""
+
 DISABLE_MAPS_IN_SHOP: bool = True
 """
 Whether you can buy maps in the Shaman Shop.

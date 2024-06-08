@@ -90,7 +90,7 @@ async def main_loop():
     if memory.read_u32(ADDRESSES.item_swap) == 1:
         memory.write_u32(ADDRESSES.item_swap, 0)
 
-    # Skip both Jaguar fights if noted in CONFIGS
+    # Skip both Jaguar fights if configured
     if CONFIGS.SKIP_JAGUAR:
         if highjack_transition(LevelCRC.MAIN_MENU, LevelCRC.JAGUAR, starting_area):
             return
