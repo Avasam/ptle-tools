@@ -31,6 +31,7 @@ IMPORTANT_STORY_TRIGGER_AREAS = {
     LevelCRC.GATES_OF_EL_DORADO,
 }
 
+
 def create_vertices(
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
     starting_area: int,
