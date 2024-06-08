@@ -5,12 +5,11 @@ from pathlib import Path
 
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
-from lib.transition_infos import Area
 from lib.types_ import SeedType
 
 STARTING_AREA_COLOR = "#ff8000"  # Orange
 UPGRADE_AREAS_COLOR = "#0080ff"  # Blue
-STORY_TRIGGER_AREAS_COLOR = "#ff0000"  # Red
+IMPORTANT_STORY_TRIGGER_AREAS_COLOR = "#ff0000"  # Red
 UPGRADE_AREAS = {
     LevelCRC.PLANE_COCKPIT,
     LevelCRC.BITTENBINDERS_CAMP,
@@ -37,37 +36,40 @@ def create_vertices(
     starting_area: int,
 ):
     output_text = ""
-    areas_randomized: list[Area] = []
-    for original, redirect in transitions_map.items():
-        if TRANSITION_INFOS_DICT[original[0]] not in areas_randomized:
-            areas_randomized.append(TRANSITION_INFOS_DICT[original[0]])
-        if TRANSITION_INFOS_DICT[redirect[1]] not in areas_randomized:
-            areas_randomized.append(TRANSITION_INFOS_DICT[redirect[1]])
+    area_ids_randomized = set(
+        chain(
+            *(
+                (original[0], redirect[1])
+                for original, redirect
+                in transitions_map.items()
+            ),
+        ),
+    )
     counter_x = 0
     counter_y = 0
-    for area in areas_randomized:
+    for area_id in area_ids_randomized:
         output_text += (
             f'<node positionX="{counter_x * 100 + counter_y * 20}" '
             + f'positionY="{counter_x * 50 + counter_y * 50}" '
-            + f'id="{area.small_id}" mainText="{area.name}" '
+            + f'id="{area_id}" mainText="{TRANSITION_INFOS_DICT[area_id].name}" '
         )
-        if area.area_id == starting_area:
+        if area_id == starting_area:
             output_text += (
-                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;"
+                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
                 + STARTING_AREA_COLOR
-                + "&quot;}}" '
+                + '&quot;}}" '
             )
-        elif area.area_id in UPGRADE_AREAS:
+        elif area_id in UPGRADE_AREAS:
             output_text += (
-                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;"
+                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
                 + UPGRADE_AREAS_COLOR
-                + "&quot;}}" '
+                + '&quot;}}" '
             )
-        elif area.area_id in IMPORTANT_STORY_TRIGGER_AREAS:
+        elif area_id in IMPORTANT_STORY_TRIGGER_AREAS:
             output_text += (
-                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;"
+                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
                 + IMPORTANT_STORY_TRIGGER_AREAS_COLOR
-                + "&quot;}}" '
+                + '&quot;}}" '
             )
         output_text += "></node>\n"
         row_length = 10
@@ -80,29 +82,27 @@ def create_vertices(
 
 def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
     output_text = ""
-    connections: list[tuple[int, int]] = []
+    connections = [(original[0], redirect[1]) for original, redirect in transitions_map.items()]
     connections_two_way: list[tuple[int, int]] = []
     connections_one_way: list[tuple[int, int]] = []
-    for original, redirect in transitions_map.items():
-        connections.append((original[0], redirect[1]))
     for pairing in connections:
         if (pairing[1], pairing[0]) not in connections_two_way:
             if (pairing[1], pairing[0]) in connections:
                 connections_two_way.append(pairing)
             else:
                 connections_one_way.append(pairing)
-    counter = 10000
+    counter = 1  # Can't start at 0 since that's the MAIN_MENU id
     for pairing in connections_two_way:
         output_text += (
-            f'<edge source="{TRANSITION_INFOS_DICT[pairing[0]].small_id}" '
-            + f'target="{TRANSITION_INFOS_DICT[pairing[1]].small_id}" isDirect="false" '
+            f'<edge source="{TRANSITION_INFOS_DICT[pairing[0]].area_id}" '
+            + f'target="{TRANSITION_INFOS_DICT[pairing[1]].area_id}" isDirect="false" '
             + f'id="{counter}" ></edge>\n'
         )
         counter += 1
     for pairing in connections_one_way:
         output_text += (
-            f'<edge source="{TRANSITION_INFOS_DICT[pairing[0]].small_id}" '
-            + f'target="{TRANSITION_INFOS_DICT[pairing[1]].small_id}" isDirect="true" '
+            f'<edge source="{TRANSITION_INFOS_DICT[pairing[0]].area_id}" '
+            + f'target="{TRANSITION_INFOS_DICT[pairing[1]].area_id}" isDirect="true" '
             + f'id="{counter}" ></edge>\n'
         )
         counter += 1

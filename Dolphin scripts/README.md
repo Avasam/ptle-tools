@@ -1,7 +1,8 @@
 # Using Python scripts with Dolphin
 
 1. Use this fork of Dolphin <https://github.com/Felk/dolphin/releases>.
-2. Turn on "Scripting" logs and set Verbosity to "Error" or any option below (not "Notice").
+2. Turn on "Scripting" logs and set Verbosity to "Error" or any option below (not "Notice").\
+  ![Enable scripting log](./enable_scripting_log.png)
 3. Under "Scripts", click "Add new Scripts" and select your Python script.
 
 ## Entrance Randomizer (still work in progress!)
@@ -28,10 +29,11 @@
 6. In Dolphin, under "Scripts", click "Add new Scripts" and select `Scripts/Entrance Randomizer/__main__.py`.
 7. Enjoy and watch logs for errors 🙂
 
-### About the .graphml file
+### About the `.graphml` file
 
 In order to display the generated map take these steps:
-1. Go to https://graphonline.ru/en/
+
+1. Go to <https://graphonline.ru/en/>
 2. Under "Graph" choose "Import from file" and choose your generated `.graphml` file
 3. Under "Algorithms" choose "Arrange the graph"
 4. Enjoy your map! You can freely move the dots, and you can use multiple features under the "Algorithms" tab (like "Find all paths" for instance)
