@@ -82,9 +82,12 @@ async def main_loop():
     if memory.read_u32(ADDRESSES.item_swap) == 1:
         memory.write_u32(ADDRESSES.item_swap, 0)
 
-    # Skip the intro fight and cutscene
-    if highjack_transition(LevelCRC.MAIN_MENU, LevelCRC.JAGUAR, starting_area):
-        return
+    # Skip both Jaguar fights if configured
+    if CONFIGS.SKIP_JAGUAR:
+        if highjack_transition(LevelCRC.MAIN_MENU, LevelCRC.JAGUAR, starting_area):
+            return
+        if highjack_transition(LevelCRC.GATES_OF_EL_DORADO, LevelCRC.JAGUAR, LevelCRC.PUSCA):
+            return
 
     # Standardize the Altar of Ages exit to remove the Altar -> BBCamp transition
     if highjack_transition(
