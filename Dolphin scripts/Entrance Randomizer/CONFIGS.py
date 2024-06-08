@@ -6,7 +6,7 @@ SEED: SeedType = None
 """
 Set your own seed, can be an `int`, `float`, `str`, `bytes` or `bytearray`.
 
-Use `None` or any False value to generate a random seed.
+Use `None` or any Falsy value to generate a random seed.
 
 default = None
 """
