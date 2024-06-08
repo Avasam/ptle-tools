@@ -89,7 +89,7 @@ async def main_loop():
 
     # Skip both Jaguar fights if noted in CONFIGS
     if CONFIGS.SKIP_JAGUAR:
-        if highjack_transition(0x0, LevelCRC.JAGUAR, starting_area):
+        if highjack_transition(LevelCRC.MAIN_MENU, LevelCRC.JAGUAR, starting_area):
             return
         if highjack_transition(LevelCRC.GATES_OF_EL_DORADO, LevelCRC.JAGUAR, LevelCRC.PUSCA):
             return

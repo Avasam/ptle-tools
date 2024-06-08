@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import random
-from collections.abc import Iterable, Sequence
+from collections.abc import Iterable, Sequence, MutableMapping
 from itertools import starmap
-from typing import NamedTuple
+from typing import NamedTuple, Sized
+from enum import IntEnum
 
 import CONFIGS
 from lib.constants import *  # noqa: F403
@@ -14,6 +15,10 @@ from lib.utils import follow_pointer_path, state
 class Transition(NamedTuple):
     from_: int
     to: int
+
+class Choice(IntEnum):
+    CONNECT = 1
+    INBETWEEN = 2
 
 
 _possible_starting_areas = [
@@ -29,11 +34,14 @@ _possible_starting_areas = [
         LevelCRC.ST_CLAIRE_NIGHT,  # gives all items + access to El Dorado
         LevelCRC.JAGUAR,  # sends to final bosses
         LevelCRC.PUSCA,  # sends to final bosses
+        # Temples and spirits are effectively duplicates, so we remove half of them here
+        LevelCRC.MONKEY_TEMPLE,
+        LevelCRC.PENGUIN_TEMPLE,
     }
 ]
 
-starting_area = random.choice(_possible_starting_areas)
 # Call RNG even if this is unused to not impact randomization of other things for the same seed
+starting_area = random.choice(_possible_starting_areas)
 if CONFIGS.STARTING_AREA is not None:
     starting_area = CONFIGS.STARTING_AREA
 
@@ -133,9 +141,9 @@ def connect_to_existing(
 
 
 def check_part_of_loop(
-    link: list[Area],
-    link_list: list[list[Area]],
-    area_list: list[Area],
+    link: tuple[Area, Area],
+    link_list: list[tuple[Area, Area]],
+    area_list: Sized,
 ):
     unchecked_links = link_list.copy()
     unchecked_links.remove(link)
@@ -185,10 +193,10 @@ def break_open_connection(
 
 
 def link_list_to_transitions(
-    link_list: list[list[Area]],
-    transitions_map: dict[tuple[int, int], Transition],
-    origins_bucket: Iterable[Transition],
-    redirections_bucket: Iterable[Transition],
+    link_list: list[tuple[Area, Area]],
+    transitions_map: MutableMapping[Transition, Transition],
+    origins_bucket: list[Transition],
+    redirections_bucket: list[Transition],
 ):
     for link in link_list:
         options_original = [
@@ -258,11 +266,11 @@ def set_transitions_map():
 
         index = 2
         while index < len(level_list):
-            r = random.choice(["1", "2"])
-            if total_con_left > 0 and (level_list[index].con_left == 1 or r == "1"):
+            choice = random.choice([Choice.CONNECT, Choice.INBETWEEN])
+            if total_con_left > 0 and (level_list[index].con_left == 1 or choice == Choice.CONNECT):
                 # option 1: connect to one or more existing levels
                 connect_to_existing(level_list, index, link_list)
-            elif level_list[index].con_left > 1 and (total_con_left == 0 or r == "2"):
+            elif level_list[index].con_left > 1 and (total_con_left == 0 or choice == Choice.INBETWEEN):
                 # option 2: put the current level inbetween an already established connection
                 total_con_left += level_list[index].con_left
                 level_a, level_b = link_list.pop(random.randrange(len(link_list)))

@@ -7,6 +7,7 @@ from dolphin import gui  # pyright: ignore[reportMissingModuleSource]
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
 from lib.types_ import SeedType
+from lib.transition_infos import Area
 
 DRAW_TEXT_STEP = 24
 DRAW_TEXT_OFFSET_X = 272
