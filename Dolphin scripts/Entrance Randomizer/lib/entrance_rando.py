@@ -53,6 +53,66 @@ transitions_map: dict[tuple[int, int], Transition] = {}
 }
 ```"""
 
+disabled_exits: list[tuple(int, int)] = [
+    # Temporarily disabled levels
+    (LevelCRC.EYES_OF_DOOM, LevelCRC.SCORPION_TEMPLE),
+    (LevelCRC.SCORPION_TEMPLE, LevelCRC.EYES_OF_DOOM),
+    (LevelCRC.ALTAR_OF_HUITACA, LevelCRC.MOUTH_OF_INTI),
+    (LevelCRC.MOUTH_OF_INTI, LevelCRC.ALTAR_OF_HUITACA),
+    (LevelCRC.TWIN_OUTPOSTS, LevelCRC.TWIN_OUTPOSTS_UNDERWATER),
+    (LevelCRC.TWIN_OUTPOSTS_UNDERWATER, LevelCRC.TWIN_OUTPOSTS),
+    # The 4 one-way exits
+    (LevelCRC.WHITE_VALLEY, LevelCRC.MOUNTAIN_SLED_RUN),
+    (LevelCRC.MOUNTAIN_SLED_RUN, LevelCRC.APU_ILLAPU_SHRINE),
+    (LevelCRC.APU_ILLAPU_SHRINE, LevelCRC.WHITE_VALLEY),
+    (LevelCRC.CAVERN_LAKE, LevelCRC.JUNGLE_CANYON),
+    # The 3 Spirit Fights
+    (LevelCRC.MONKEY_TEMPLE, LevelCRC.MONKEY_SPIRIT),
+    (LevelCRC.MONKEY_SPIRIT, LevelCRC.MONKEY_TEMPLE),
+    (LevelCRC.SCORPION_TEMPLE, LevelCRC.SCORPION_SPIRIT),
+    (LevelCRC.SCORPION_SPIRIT, LevelCRC.SCORPION_TEMPLE),
+    (LevelCRC.PENGUIN_TEMPLE, LevelCRC.PENGUIN_SPIRIT),
+    (LevelCRC.PENGUIN_SPIRIT, LevelCRC.PENGUIN_TEMPLE),
+    # The 5 Native Games
+    (LevelCRC.NATIVE_VILLAGE, LevelCRC.WHACK_A_TUCO),
+    (LevelCRC.WHACK_A_TUCO, LevelCRC.NATIVE_VILLAGE),
+    (LevelCRC.NATIVE_VILLAGE, LevelCRC.TUCO_SHOOT),
+    (LevelCRC.TUCO_SHOOT, LevelCRC.NATIVE_VILLAGE),
+    (LevelCRC.NATIVE_VILLAGE, LevelCRC.RAFT_BOWLING),
+    (LevelCRC.RAFT_BOWLING, LevelCRC.NATIVE_VILLAGE),
+    (LevelCRC.NATIVE_VILLAGE, LevelCRC.PICKAXE_RACE),
+    (LevelCRC.PICKAXE_RACE, LevelCRC.NATIVE_VILLAGE),
+    (LevelCRC.NATIVE_VILLAGE, LevelCRC.KABOOM),
+    (LevelCRC.KABOOM, LevelCRC.NATIVE_VILLAGE),
+    # The 2 CUTSCENE Levels
+    (LevelCRC.JAGUAR, LevelCRC.PLANE_CUTSCENE),
+    (LevelCRC.PLANE_CUTSCENE, LevelCRC.CRASH_SITE),
+    (LevelCRC.SPINJA_LAIR, LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE),
+    (LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE, LevelCRC.VIRACOCHA_MONOLITHS),
+    # Specific one-time, one-way warps
+    (LevelCRC.ALTAR_OF_AGES, LevelCRC.BITTENBINDERS_CAMP),
+    (LevelCRC.ST_CLAIRE_DAY, LevelCRC.ST_CLAIRE_NIGHT),
+    (LevelCRC.ST_CLAIRE_NIGHT, LevelCRC.ST_CLAIRE_DAY),
+    (LevelCRC.GATES_OF_EL_DORADO, LevelCRC.JAGUAR),
+    (LevelCRC.JAGUAR, LevelCRC.PUSCA),
+    (LevelCRC.PUSCA, LevelCRC.GATES_OF_EL_DORADO),
+    # The Unused Beta Volcano Level
+    (LevelCRC.BETA_VOLCANO, LevelCRC.JUNGLE_CANYON),
+    (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
+]
+
+
+def remove_disabled_exits():
+    for disabled in disabled_exits:
+        for area in TRANSITION_INFOS_DICT.values():
+            if area.area_id == disabled[0]:
+                for ex in area.exits:
+                    if ex.area_id == disabled[1]:
+                        area.exits.remove(ex)
+                        ALL_POSSIBLE_TRANSITIONS.remove(disabled)
+                        break
+                break
+
 
 def highjack_transition(
     from_: int | None,
