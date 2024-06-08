@@ -4,7 +4,7 @@
 2. Turn on "Scripting" logs and set Verbosity to "Error" or any option below (not "Notice").
 3. Under "Scripts", click "Add new Scripts" and select your Python script.
 
-## Entrance Randomizer
+## Entrance Randomizer (still work in progress!)
 
 ### Features
 - Randomization of almost all basic transitions in the game
@@ -39,10 +39,14 @@ In order to display the generated map take these steps:
 
 ### Known issues and limitations
 
-- To generate a new seed, simply reload the script
-- Sometimes a transition does not make you enter the level from the correct entrance, but from the default entrance instead
+- To generate a new random seed, simply reload the script
+- Saving and Loading is not supported by this randomizer. You can still do it, but the results will be unpredictable
 - Some seeds will result in impossible to complete configurations, because you might need some items to progress that you don't have yet
 - When using `LINKED_TRANSITIONS = False` the generated `.graphml` map will become very hard to read, given the extreme amount of connections that will be drawn
+- In rare occasions, a transition might send you to the game-intended level instead of the level decided by the randomizer
+- In very rare occasions, a transition might not make you enter a level from the correct entrance, but make you enter from the default entrance instead
+  - The odds of this happening increase dramatically if at any point in the run Harry died or a save file was loaded
+- Sometimes the in-game audio becomes a mess and very painful to listen to. There is no solution for this thus far, but luckily it only seems to become an issue once you've had the game running for a long time
 
 ### Developing
 
