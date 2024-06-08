@@ -81,7 +81,7 @@ async def main_loop():
         memory.write_u32(ADDRESSES.item_swap, 0)
 
     # Skip the intro fight and cutscene
-    if highjack_transition(0x0, LevelCRC.JAGUAR, starting_area):
+    if highjack_transition(LevelCRC.MAIN_MENU, LevelCRC.JAGUAR, starting_area):
         return
 
     # Standardize the Altar of Ages exit to remove the Altar -> BBCamp transition
