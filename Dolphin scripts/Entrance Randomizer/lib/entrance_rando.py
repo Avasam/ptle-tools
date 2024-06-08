@@ -255,7 +255,7 @@ def break_open_connection(
 
 def link_list_to_transitions(
     link_list: list[tuple[Area, Area]],
-    transitions_map: MutableMapping[Transition, Transition],
+    transitions_map: MutableMapping[tuple[int, int], Transition],
     origins_bucket: list[Transition],
     redirections_bucket: list[Transition],
 ):

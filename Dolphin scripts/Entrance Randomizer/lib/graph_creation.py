@@ -8,6 +8,28 @@ from lib.constants import __version__
 from lib.transition_infos import Area
 from lib.types_ import SeedType
 
+STARTING_AREA_COLOR = "#ff8000"  # Orange
+UPGRADE_AREAS_COLOR = "#0080ff"  # Blue
+STORY_TRIGGER_AREAS_COLOR = "#ff0000"  # Red
+UPGRADE_AREAS = {
+    LevelCRC.PLANE_COCKPIT,
+    LevelCRC.BITTENBINDERS_CAMP,
+    LevelCRC.MOUTH_OF_INTI,
+    LevelCRC.FLOODED_COURTYARD,
+    LevelCRC.TURTLE_MONUMENT,
+    LevelCRC.NATIVE_VILLAGE,
+    LevelCRC.RENEGADE_HEADQUARTERS,
+    LevelCRC.CAVERN_LAKE,
+    LevelCRC.MOUNTAIN_SLED_RUN,
+    LevelCRC.MOUNTAIN_OVERLOOK,
+    LevelCRC.APU_ILLAPU_SHRINE,
+}
+IMPORTANT_STORY_TRIGGER_AREAS = {
+    LevelCRC.ALTAR_OF_AGES,
+    LevelCRC.ST_CLAIRE_DAY,
+    LevelCRC.ST_CLAIRE_NIGHT,
+    LevelCRC.GATES_OF_EL_DORADO,
+}
 
 def create_vertices(
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
@@ -28,37 +50,23 @@ def create_vertices(
             + f'positionY="{counter_x * 50 + counter_y * 50}" '
             + f'id="{area.small_id}" mainText="{area.name}" '
         )
-        # Starting area: Orange
         if area.area_id == starting_area:
             output_text += (
-                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;#ff8000&quot;}}" '
+                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;"
+                + STARTING_AREA_COLOR
+                + "&quot;}}" '
             )
-        # Areas with Upgrades: Blue
-        elif area.area_id in {
-            LevelCRC.PLANE_COCKPIT,
-            LevelCRC.BITTENBINDERS_CAMP,
-            LevelCRC.MOUTH_OF_INTI,
-            LevelCRC.FLOODED_COURTYARD,
-            LevelCRC.TURTLE_MONUMENT,
-            LevelCRC.NATIVE_VILLAGE,
-            LevelCRC.RENEGADE_HEADQUARTERS,
-            LevelCRC.CAVERN_LAKE,
-            LevelCRC.MOUNTAIN_SLED_RUN,
-            LevelCRC.MOUNTAIN_OVERLOOK,
-            LevelCRC.APU_ILLAPU_SHRINE,
-        }:
+        elif area.area_id in UPGRADE_AREAS:
             output_text += (
-                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;#0080ff&quot;}}" '
+                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;"
+                + UPGRADE_AREAS_COLOR
+                + "&quot;}}" '
             )
-        # Important Story Triggers: Red
-        elif area.area_id in {
-            LevelCRC.ALTAR_OF_AGES,
-            LevelCRC.ST_CLAIRE_DAY,
-            LevelCRC.ST_CLAIRE_NIGHT,
-            LevelCRC.GATES_OF_EL_DORADO,
-        }:
+        elif area.area_id in IMPORTANT_STORY_TRIGGER_AREAS:
             output_text += (
-                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;#ff0000&quot;}}" '
+                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;"
+                + IMPORTANT_STORY_TRIGGER_AREAS_COLOR
+                + "&quot;}}" '
             )
         output_text += "></node>\n"
         row_length = 10
@@ -71,14 +79,14 @@ def create_vertices(
 
 def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
     output_text = ""
-    connections: list[tuple[tuple[int, int], tuple[int, int]]] = []
-    connections_two_way: list[tuple[tuple[int, int], tuple[int, int]]] = []
-    connections_one_way: list[tuple[tuple[int, int], tuple[int, int]]] = []
+    connections: list[tuple[int, int]] = []
+    connections_two_way: list[tuple[int, int]] = []
+    connections_one_way: list[tuple[int, int]] = []
     for original, redirect in transitions_map.items():
-        connections.append([original[0], redirect[1]])
+        connections.append((original[0], redirect[1]))
     for pairing in connections:
-        if [pairing[1], pairing[0]] not in connections_two_way:
-            if [pairing[1], pairing[0]] in connections:
+        if (pairing[1], pairing[0]) not in connections_two_way:
+            if (pairing[1], pairing[0]) in connections:
                 connections_two_way.append(pairing)
             else:
                 connections_one_way.append(pairing)
@@ -105,14 +113,14 @@ def create_graphml(
     seed_string: SeedType,
     starting_area: int,
 ):
-
-    graphml_text = (
-        '<?xml version="1.0" encoding="UTF-8"?>'
-        + '<graphml><graph id="Graph" uidGraph="1" uidEdge="1">\n'
-        + create_vertices(transitions_map, starting_area)
-        + create_edges(transitions_map)
-        + "</graph></graphml>"
-    )
+    graphml_text = f"""\
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml>
+  <graph id="Graph" uidGraph="1" uidEdge="1">
+    {create_vertices(transitions_map, starting_area)}
+    {create_edges(transitions_map)}
+  </graph>
+</graphml>"""
 
     # TODO (Avasam): Get actual user folder based whether Dolphin Emulator is in AppData/Roaming
     # and if the current installation is portable.
