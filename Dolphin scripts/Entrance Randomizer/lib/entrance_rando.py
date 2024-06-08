@@ -101,6 +101,12 @@ def set_transitions_map():
     _possible_transitions_bucket = list(starmap(Transition, ALL_POSSIBLE_TRANSITIONS))
     """A temporary container of transitions to pick from until it is empty."""
     transitions_map.clear()
+    if not CONFIGS.SKIP_JAGUAR:
+        starting_default = TRANSITION_INFOS_DICT[starting_area].default_entrance
+        tutorial_original = Transition(from_=LevelCRC.JAGUAR, to=LevelCRC.PLANE_CUTSCENE)
+        tutorial_redirect = Transition(from_=starting_default, to=starting_area)
+        transitions_map[tutorial_original] = tutorial_redirect
+
     for area in TRANSITION_INFOS_DICT.values():
         for to_og in (exit_.area_id for exit_ in area.exits):
             original = Transition(from_=area.area_id, to=to_og)
