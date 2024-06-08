@@ -268,10 +268,14 @@ def set_transitions_map():
         index = 2
         while index < len(level_list):
             choice = random.choice([Choice.CONNECT, Choice.INBETWEEN])
-            if total_con_left > 0 and (level_list[index].con_left == 1 or choice == Choice.CONNECT):
+            if total_con_left > 0 and (
+                level_list[index].con_left == 1 or choice == Choice.CONNECT
+            ):
                 # option 1: connect to one or more existing levels
                 connect_to_existing(level_list, index, link_list)
-            elif level_list[index].con_left > 1 and (total_con_left == 0 or choice == Choice.INBETWEEN):
+            elif level_list[index].con_left > 1 and (
+                total_con_left == 0 or choice == Choice.INBETWEEN
+            ):
                 # option 2: put the current level inbetween an already established connection
                 total_con_left += level_list[index].con_left
                 level_a, level_b = link_list.pop(random.randrange(len(link_list)))
