@@ -53,7 +53,7 @@ transitions_map: dict[tuple[int, int], Transition] = {}
 }
 ```"""
 
-disabled_exits: list[tuple(int, int)] = [
+disabled_exits: list[tuple[int, int]] = [
     # Temporarily disabled levels
     (LevelCRC.EYES_OF_DOOM, LevelCRC.SCORPION_TEMPLE),
     (LevelCRC.SCORPION_TEMPLE, LevelCRC.EYES_OF_DOOM),
