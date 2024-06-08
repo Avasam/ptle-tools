@@ -28,15 +28,15 @@ seed_string = hex(seed).upper() if isinstance(seed, int) else seed
 print("Seed set to:", seed_string)
 
 
-@dataclass
+@dataclass(frozen=True)
 class Addresses:
     version_string: str
-    prev_area: list[int]
+    prev_area: tuple[int, ...]
     current_area: int
     area_load_state: int
-    player_x: list[int]
-    player_y: list[int]
-    player_z: list[int]
+    player_x: tuple[int, ...]
+    player_y: tuple[int, ...]
+    player_z: tuple[int, ...]
     item_swap: int
     shaman_shop_struct: int
 
@@ -44,12 +44,12 @@ class Addresses:
 TRANSITION_INFOS_DICT = {
     area.area_id: area for area in chain(*transition_infos)
 }
-ALL_TRANSITION_AREAS = {area.area_id for area in chain(*transition_infos)}
-ALL_POSSIBLE_TRANSITIONS = [
+ALL_TRANSITION_AREAS = frozenset(area.area_id for area in chain(*transition_infos))
+ALL_POSSIBLE_TRANSITIONS = tuple(
     (area.area_id, exit_.area_id)
     for area in TRANSITION_INFOS_DICT.values()
     for exit_ in area.exits
-]
+)
 
 
 _game_id_base = "".join([
@@ -75,45 +75,45 @@ _addresses_map = {
     "GPH": {
         "D": Addresses(
             version_string="GC DE 0-00",
-            prev_area=[0x80747648],
+            prev_area=(0x80747648,),
             current_area=0x80417F50,
             area_load_state=TODO,
-            player_x=[],
-            player_y=[],
-            player_z=[],
+            player_x=(),
+            player_y=(),
+            player_z=(),
             item_swap=0x804C7734,
             shaman_shop_struct=TODO,
         ),
         "E": Addresses(
             version_string="GC US 0-00",
-            prev_area=[0x8072B648],
+            prev_area=(0x8072B648,),
             current_area=0x8041BEB4,
             area_load_state=0x8041BEC8,
-            player_x=[0x8041BE4C, 0x338],
-            player_y=[0x8041BE4C, 0x33C],
-            player_z=[0x8041BE4C, 0x340],
+            player_x=(0x8041BE4C, 0x338),
+            player_y=(0x8041BE4C, 0x33C),
+            player_z=(0x8041BE4C, 0x340),
             item_swap=0x804CB694,
             shaman_shop_struct=0x7E00955C,
         ),
         "F": Addresses(
             version_string="GC FR 0-00",
-            prev_area=[0x80747648],
+            prev_area=(0x80747648,),
             current_area=0x80417F30,
             area_load_state=TODO,
-            player_x=[],
-            player_y=[],
-            player_z=[],
+            player_x=(),
+            player_y=(),
+            player_z=(),
             item_swap=0x804C7714,
             shaman_shop_struct=TODO,
         ),
         "P": Addresses(
             version_string="GC EU 0-00",
-            prev_area=[0x80747648],
+            prev_area=(0x80747648,),
             current_area=0x80417F10,
             area_load_state=TODO,
-            player_x=[],
-            player_y=[],
-            player_z=[],
+            player_x=(),
+            player_y=(),
+            player_z=(),
             item_swap=0x804C76F4,
             shaman_shop_struct=TODO,
         ),
@@ -121,23 +121,23 @@ _addresses_map = {
     "RPF": {
         "E": Addresses(
             version_string="Wii US 0-00",
-            prev_area=[0x804542DC, 0x8],
+            prev_area=(0x804542DC, 0x8),
             current_area=0x80448D04,
             area_load_state=TODO,
-            player_x=[],
-            player_y=[],
-            player_z=[],
+            player_x=(),
+            player_y=(),
+            player_z=(),
             item_swap=0x80446608,
             shaman_shop_struct=TODO,
         ),
         "P": Addresses(
             version_string="Wii EU 0-00",
-            prev_area=[0x804546DC, 0x18],
+            prev_area=(0x804546DC, 0x18),
             current_area=0x80449104,
             area_load_state=TODO,
-            player_x=[],
-            player_y=[],
-            player_z=[],
+            player_x=(),
+            player_y=(),
+            player_z=(),
             item_swap=0x80446A08,
             shaman_shop_struct=TODO,
         ),
