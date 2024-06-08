@@ -17,6 +17,16 @@
 6. In Dolphin, under "Scripts", click "Add new Scripts" and select `Scripts/Entrance Randomizer/__main__.py`.
 7. Enjoy and watch logs for errors 🙂
 
+### About the `.graphml` file
+
+In order to display the generated map take these steps:
+
+1. Go to <https://graphonline.ru/en/>
+2. Under "Graph" choose "Import from file" and choose your generated `.graphml` file
+3. Under "Algorithms" choose "Arrange the graph"
+4. Enjoy your map! You can freely move the dots, and you can use multiple features under the "Algorithms" tab (like "Find all paths" for instance)
+5. You can also save your map at any time by choosing "Graph" --> "Export to file"
+
 ### Known issues and limitations
 
 - To generate a new seed, simply reload the script.

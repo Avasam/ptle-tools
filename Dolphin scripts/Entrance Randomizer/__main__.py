@@ -26,6 +26,7 @@ from lib.entrance_rando import (
     starting_area,
     transitions_map,
 )
+from lib.graph_creation import create_graphml
 from lib.shaman_shop import patch_shaman_shop, randomize_shaman_shop
 from lib.utils import (
     draw_text,
@@ -47,6 +48,7 @@ except KeyError:
 
 # Dump spoiler logs
 dump_spoiler_logs(starting_area_name, transitions_map, seed_string)
+create_graphml(transitions_map, seed_string, starting_area)
 
 
 async def main_loop():
