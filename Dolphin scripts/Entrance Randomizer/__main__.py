@@ -26,9 +26,9 @@ from lib.entrance_rando import (
     starting_area,
     transitions_map,
 )
+from lib.graph_creation import create_graphml
 from lib.shaman_shop import patch_shaman_shop, randomize_shaman_shop
 from lib.utils import (
-    create_graphml,
     draw_text,
     dump_spoiler_logs,
     follow_pointer_path,
