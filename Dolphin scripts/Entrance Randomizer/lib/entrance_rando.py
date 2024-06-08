@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 import random
-from collections.abc import Iterable, Sequence, MutableMapping
+from collections.abc import Iterable, MutableMapping, Sequence
+from enum import IntEnum
 from itertools import starmap
 from typing import NamedTuple, Sized
-from enum import IntEnum
 
 import CONFIGS
 from lib.constants import *  # noqa: F403
@@ -15,6 +15,7 @@ from lib.utils import follow_pointer_path, state
 class Transition(NamedTuple):
     from_: int
     to: int
+
 
 class Choice(IntEnum):
     CONNECT = 1
