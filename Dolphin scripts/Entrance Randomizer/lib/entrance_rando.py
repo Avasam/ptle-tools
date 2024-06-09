@@ -331,7 +331,7 @@ def set_transitions_map():
 
         index = 2
         while index < len(level_list):
-            choice = random.choice([Choice.CONNECT, Choice.INBETWEEN])
+            choice = random.choice(tuple(Choice))
             if total_con_left > 0 and (
                 level_list[index].con_left == 1 or choice == Choice.CONNECT
             ):
@@ -378,9 +378,11 @@ def set_transitions_map():
             for to_og in (exit_.area_id for exit_ in area.exits):
                 original = Transition(from_=area.area_id, to=to_og)
                 redirect = get_random_redirection(original, _possible_redirections_bucket)
-                transitions_map[original] = redirect
-                _possible_redirections_bucket.remove(redirect)
+                if redirect is not None:
+                    transitions_map[original] = redirect
+                    _possible_redirections_bucket.remove(redirect)
         for original in one_way_list:
             redirect = get_random_redirection(original, _possible_redirections_bucket)
-            transitions_map[original] = redirect
-            _possible_redirections_bucket.remove(redirect)
+            if redirect is not None:
+                transitions_map[original] = redirect
+                _possible_redirections_bucket.remove(redirect)

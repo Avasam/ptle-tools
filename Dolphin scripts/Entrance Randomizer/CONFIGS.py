@@ -22,8 +22,8 @@ default = None
 
 LINKED_TRANSITIONS: bool = True
 """
-If True, going through any given transition and then backing out will always result
-in you returning to the area you came from (assuming it's not a one-way transition).
+If True, going through any given transition and then backing out
+will always result in you returning to the area you came from.
 If False, no such guarantees are given.
 
 default = True
