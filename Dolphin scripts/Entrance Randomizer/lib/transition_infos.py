@@ -66,7 +66,7 @@ class MajorAreas(NamedTuple):
 
 
 def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):  # noqa: N802
-    major_areas = (
+    major_areas = [
         tuple(
             Area(
                 int(area["area_id"], 16),
@@ -85,7 +85,7 @@ def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):  # noqa: 
             for area in major_area
         )
         for major_area in transition_infos_json.values()
-    )
+    ]
     for major_area in major_areas:
         for area in major_area:
             area.con_left = len(area.exits)
