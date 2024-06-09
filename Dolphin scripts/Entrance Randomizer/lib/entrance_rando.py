@@ -103,13 +103,16 @@ disabled_exits: list[tuple[int, int]] = [
 
 
 def remove_disabled_exits():
+    global ALL_POSSIBLE_TRANSITIONS
+    ALL_POSSIBLE_TRANSITIONS = tuple(  # pyright: ignore[reportConstantRedefinition]
+        filter(lambda x: x not in disabled_exits, ALL_POSSIBLE_TRANSITIONS),
+    )
     for disabled in disabled_exits:
         for area in TRANSITION_INFOS_DICT.values():
             if area.area_id == disabled[0]:
                 for ex in area.exits:
                     if ex.area_id == disabled[1]:
-                        area.exits.remove(ex)
-                        ALL_POSSIBLE_TRANSITIONS.remove(disabled)
+                        area.exits = tuple(filter(lambda x: x != ex, area.exits))
                         break
                 break
 

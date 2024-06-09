@@ -44,7 +44,7 @@ class Exit:
     requires: None | list[list[str]]
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=False)  # TODO: Change code that mutates this and change this back to True
 class Area:
     area_id: int
     name: str
@@ -79,13 +79,13 @@ def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):  # noqa: 
                         exit_["requires"],
                     )
                     for exit_ in area["exits"]
-                ],
+                ),
                 0,
             )
             for area in major_area
         )
         for major_area in transition_infos_json.values()
-    ]
+    )
     for major_area in major_areas:
         for area in major_area:
             area.con_left = len(area.exits)
