@@ -42,9 +42,6 @@ remove_disabled_exits()
 set_transitions_map()
 randomize_shaman_shop()
 
-# Create .graphml file
-create_graphml(transitions_map, seed_string, starting_area)
-
 # This is necessary until/unless I map all areas even those not randomized.
 try:
     starting_area_name = TRANSITION_INFOS_DICT[starting_area].name
