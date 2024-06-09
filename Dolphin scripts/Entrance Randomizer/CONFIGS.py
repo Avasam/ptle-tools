@@ -42,7 +42,7 @@ DISABLE_MAPS_IN_SHOP: bool = True
 """
 Whether you can buy maps in the Shaman Shop.
 
-When maps are disabled (and using original shop prices)
+When maps are disabled and using original shop prices,
 the 4 lowest prices (0, 1, 2, 2) are also removed from the pool.
 
 default = True

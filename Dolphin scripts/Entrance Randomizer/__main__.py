@@ -51,7 +51,7 @@ try:
 except KeyError:
     starting_area_name = hex(starting_area).upper() + " (not in randomization)"
 
-# Dump spoiler logs
+# Dump spoiler logs and graph
 dump_spoiler_logs(starting_area_name, transitions_map, seed_string)
 create_graphml(transitions_map, seed_string, starting_area)
 

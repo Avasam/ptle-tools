@@ -24,7 +24,8 @@ class Choice(IntEnum):
 
 _possible_starting_areas = [
     area for area in ALL_TRANSITION_AREAS
-    # Remove certain starting areas from the list of possibilities
+    # Remove unwanted starting areas from the list of possibilities
+    # Even if they're not used or randomized, it doesn't hurt to mention them here
     if area not in {
         # These areas will instantly softlock you
         LevelCRC.APU_ILLAPU_SHRINE,
