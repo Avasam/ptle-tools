@@ -24,7 +24,8 @@ Watch and modify useful memory regions. Basically practice tools.
 
 Various graphical modifications and post-processing effects using [Dolphin's Graphics Mods](https://wiki.dolphin-emu.org/index.php?title=Graphics_Mods)
 
-- [Clear HUD](https://github.com/Avasam/ptle-tools/tree/main/Graphics%20Mods#clear-hud)
+- [Clear HUD](/Graphics%20Mods#clear-hud)
+- [Sharp load animation](/Graphics%20Mods#sharp-load-animation)
 
 ### Texture Packs & Resource Packs
 
