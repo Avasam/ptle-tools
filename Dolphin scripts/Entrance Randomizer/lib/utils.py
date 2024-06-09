@@ -52,9 +52,9 @@ def dump_spoiler_logs(
     spoiler_logs = f"Starting area: {starting_area_name}\n"
     for original, redirect in transitions_map.items():
         spoiler_logs += (
-            f"From: {TRANSITION_INFOS_DICT[original[0]].name}, "
-            + f"To: {TRANSITION_INFOS_DICT[original[1]].name}. "
-            + f"Redirecting to: {TRANSITION_INFOS_DICT[redirect[1]].name} "
+            f"{TRANSITION_INFOS_DICT[original[0]].name} "
+            + f"({TRANSITION_INFOS_DICT[original[1]].name} exit) "
+            + f"will redirect to: {TRANSITION_INFOS_DICT[redirect[1]].name} "
             + f"({TRANSITION_INFOS_DICT[redirect[0]].name} entrance)\n"
         )
 
