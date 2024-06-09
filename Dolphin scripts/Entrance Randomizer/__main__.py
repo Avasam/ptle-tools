@@ -46,7 +46,7 @@ try:
 except KeyError:
     starting_area_name = hex(starting_area).upper() + " (not in randomization)"
 
-# Dump spoiler logs
+# Dump spoiler logs and graph
 dump_spoiler_logs(starting_area_name, transitions_map, seed_string)
 create_graphml(transitions_map, seed_string, starting_area)
 
@@ -66,8 +66,11 @@ async def main_loop():
     draw_text(f"Seed: {seed_string}")
     draw_text(patch_shaman_shop())
     draw_text(
-        f"Starting area: {hex(starting_area).upper()}"
-        + " (Random)" if CONFIGS.STARTING_AREA is None else f"{starting_area_name}",
+        "Starting area: " + (
+            f"{hex(starting_area).upper()} (Random)"
+            if CONFIGS.STARTING_AREA is None
+            else starting_area_name
+        ),
     )
     draw_text(
         f"Current area: {hex(state.current_area_new).upper()} "
