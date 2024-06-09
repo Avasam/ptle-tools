@@ -56,7 +56,7 @@ def dump_spoiler_logs(
             f"{TRANSITION_INFOS_DICT[original[0]].name} "
             + f"({TRANSITION_INFOS_DICT[original[1]].name} exit) "
             + f"will redirect to: {TRANSITION_INFOS_DICT[redirect[1]].name} "
-            + f"({TRANSITION_INFOS_DICT[redirect[0]].name} entrance)\n"
+            + f"({TRANSITION_INFOS_DICT[redirect[0]].name} entrance)\n",
         )
     red_string_list.sort()
     for string in red_string_list:
@@ -69,7 +69,7 @@ def dump_spoiler_logs(
         for transition in unrandomized_transitions:
             non_random_string_list.append(
                 f"From: {TRANSITION_INFOS_DICT[transition[0]].name}, "
-                + f"To: {TRANSITION_INFOS_DICT[transition[1]].name}.\n"
+                + f"To: {TRANSITION_INFOS_DICT[transition[1]].name}.\n",
             )
         non_random_string_list.sort()
         for string in non_random_string_list:
