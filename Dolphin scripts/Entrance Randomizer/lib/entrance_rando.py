@@ -9,22 +9,36 @@ import CONFIGS
 from lib.constants import *  # noqa: F403
 from lib.utils import follow_pointer_path, state
 
-_possible_starting_areas = [
-    area for area in ALL_TRANSITION_AREAS
-    # Remove impossible start areas + Don't immediately give TNT
-    if area not in {
-        LevelCRC.APU_ILLAPU_SHRINE,
-        LevelCRC.SCORPION_TEMPLE,
-        LevelCRC.ST_CLAIRE_DAY,
-    }
-]
-
-starting_area = CONFIGS.STARTING_AREA or random.choice(_possible_starting_areas)
-
 
 class Transition(NamedTuple):
     from_: int
     to: int
+
+
+_possible_starting_areas = [
+    area for area in ALL_TRANSITION_AREAS
+    # Remove unwanted starting areas from the list of possibilities
+    # Even if they're not used or randomized, it doesn't hurt to mention them here
+    if area not in {
+        # These areas will instantly softlock you
+        LevelCRC.APU_ILLAPU_SHRINE,
+        LevelCRC.SCORPION_TEMPLE,
+        LevelCRC.SCORPION_SPIRIT,
+        # These areas will give too much progression
+        LevelCRC.ST_CLAIRE_DAY,  # gives TNT
+        LevelCRC.ST_CLAIRE_NIGHT,  # gives all items + access to El Dorado
+        LevelCRC.JAGUAR,  # sends to final bosses
+        LevelCRC.PUSCA,  # sends to final bosses
+        # Temples and spirits are effectively duplicates, so we remove half of them here
+        LevelCRC.MONKEY_TEMPLE,
+        LevelCRC.PENGUIN_TEMPLE,
+    }
+]
+
+# Call RNG even if this is unused to not impact randomization of other things for the same seed
+starting_area = random.choice(_possible_starting_areas)
+if CONFIGS.STARTING_AREA is not None:
+    starting_area = CONFIGS.STARTING_AREA
 
 
 def highjack_transition_rando():
