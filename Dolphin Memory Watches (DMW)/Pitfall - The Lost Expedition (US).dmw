@@ -139,6 +139,41 @@
             {
               "address": "8041BE4C",
               "baseIndex": 0,
+              "label": "X",
+              "pointerOffsets": [
+                "338"
+              ],
+              "typeIndex": 3,
+              "unsigned": false
+            },
+            {
+              "address": "8041BE4C",
+              "baseIndex": 0,
+              "label": "Y",
+              "pointerOffsets": [
+                "33C"
+              ],
+              "typeIndex": 3,
+              "unsigned": false
+            },
+            {
+              "address": "8041BE4C",
+              "baseIndex": 0,
+              "label": "Z",
+              "pointerOffsets": [
+                "340"
+              ],
+              "typeIndex": 3,
+              "unsigned": false
+            }
+          ],
+          "groupName": "Position"
+        },
+        {
+          "groupEntries": [
+            {
+              "address": "8041BE4C",
+              "baseIndex": 0,
               "label": "Amount",
               "pointerOffsets": [
                 "65C"
@@ -200,7 +235,7 @@
                 },
                 {
                   "groupEntries": [],
-                  "groupName": "01 -> Floor (can't move)"
+                  "groupName": "00/03 -> Fall through"
                 },
                 {
                   "groupEntries": [],
@@ -208,11 +243,11 @@
                 },
                 {
                   "groupEntries": [],
-                  "groupName": "03 -> Fall through floor"
+                  "groupName": "04 -> Sinking"
                 },
                 {
                   "groupEntries": [],
-                  "groupName": "04 -> Sinking"
+                  "groupName": "XX -> Floor (can't move)"
                 }
               ],
               "groupName": "Collide state"
@@ -372,23 +407,16 @@
               "unsigned": false
             },
             {
-              "address": "8041A2F0",
+              "address": "8041A248",
               "baseIndex": 0,
-              "label": "Gas Mask",
+              "label": "Slingshot",
               "typeIndex": 2,
               "unsigned": false
             },
             {
-              "address": "8041A280",
+              "address": "8041A264",
               "baseIndex": 0,
-              "label": "Pickaxes",
-              "typeIndex": 2,
-              "unsigned": false
-            },
-            {
-              "address": "8041A2D4",
-              "baseIndex": 0,
-              "label": "Raft",
+              "label": "Torch",
               "typeIndex": 2,
               "unsigned": false
             },
@@ -400,9 +428,23 @@
               "unsigned": false
             },
             {
-              "address": "8041A248",
+              "address": "8041A2F0",
               "baseIndex": 0,
-              "label": "Slingshot",
+              "label": "Gas Mask",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A2D4",
+              "baseIndex": 0,
+              "label": "Raft",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A280",
+              "baseIndex": 0,
+              "label": "Pickaxes",
               "typeIndex": 2,
               "unsigned": false
             },
@@ -410,13 +452,6 @@
               "address": "8041A29C",
               "baseIndex": 0,
               "label": "TNT",
-              "typeIndex": 2,
-              "unsigned": false
-            },
-            {
-              "address": "8041A264",
-              "baseIndex": 0,
-              "label": "Torch",
               "typeIndex": 2,
               "unsigned": false
             },
