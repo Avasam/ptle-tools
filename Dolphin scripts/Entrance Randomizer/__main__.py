@@ -98,28 +98,23 @@ async def main_loop():
             LevelCRC.BITTENBINDERS_CAMP,
             LevelCRC.MYSTERIOUS_TEMPLE,
     ):
-        state.current_area_new = LevelCRC.MYSTERIOUS_TEMPLE
         # Even if the cutscene isn't actually watched.
         # Just leaving the Altar is good enough for the rando.
         state.visited_altar_of_ages = True
 
     # Standardize the Viracocha Monoliths cutscene
-    if highjack_transition(
+    highjack_transition(
             None,
             LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE,
             LevelCRC.VIRACOCHA_MONOLITHS,
-    ):
-        state.current_area_new = LevelCRC.VIRACOCHA_MONOLITHS
+    )
 
     # Standardize St. Claire's Excavation Camp
-    if highjack_transition(None, LevelCRC.ST_CLAIRE_NIGHT, LevelCRC.ST_CLAIRE_DAY):
-        state.current_area_new = LevelCRC.ST_CLAIRE_DAY
+    highjack_transition(None, LevelCRC.ST_CLAIRE_NIGHT, LevelCRC.ST_CLAIRE_DAY)
 
     # TODO: Skip swim levels (3)
 
-    redirect = highjack_transition_rando()
-    if redirect:
-        state.current_area_new = redirect[1]
+    highjack_transition_rando()
 
     prevent_transition_softlocks()
 

@@ -52,6 +52,7 @@ def highjack_transition_rando():
     )
     memory.write_u32(follow_pointer_path(ADDRESSES.prev_area), redirect.from_)
     memory.write_u32(ADDRESSES.current_area, redirect.to)
+    state.current_area_new = redirect[1]
     return redirect
 
 
@@ -73,6 +74,7 @@ def highjack_transition(from_: int | None, to: int | None, redirect: int):
             f"Redirecting to: {hex(redirect)}",
         )
         memory.write_u32(ADDRESSES.current_area, redirect)
+        state.current_area_new = redirect
         return True
     return False
 
