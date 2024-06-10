@@ -54,27 +54,41 @@ transitions_map: dict[tuple[int, int], Transition] = {}
 }
 ```"""
 
+one_way_exits: list[tuple[int, int]] = [
+    (LevelCRC.WHITE_VALLEY, LevelCRC.MOUNTAIN_SLED_RUN),  # the White Valley geyser
+    (LevelCRC.MOUNTAIN_SLED_RUN, LevelCRC.APU_ILLAPU_SHRINE),  # the Apu Illapu Shrine one-way door
+    (LevelCRC.APU_ILLAPU_SHRINE, LevelCRC.WHITE_VALLEY),  # the Apu Illapu Shrine geyser
+    (LevelCRC.CAVERN_LAKE, LevelCRC.JUNGLE_CANYON),  # the Jungle Canyon waterfall
+]
+
 disabled_exits: list[tuple[int, int]] = [
-    # Temporarily disabled levels
+    # Scorpion Temple softlocks you once you enter it without Torch/Pickaxes,
+    # So for now just don't randomize it. That way runs don't just end out of nowhere
     (LevelCRC.EYES_OF_DOOM, LevelCRC.SCORPION_TEMPLE),
     (LevelCRC.SCORPION_TEMPLE, LevelCRC.EYES_OF_DOOM),
+    # Mouth of Inti has 2 connections with Altar of Huitaca, which causes problems,
+    # basically it's very easy to get softlocked by the spider web when entering Altar of Huitaca
+    # So for now just don't randomize it. That way runs don't just end out of nowhere
     (LevelCRC.ALTAR_OF_HUITACA, LevelCRC.MOUTH_OF_INTI),
     (LevelCRC.MOUTH_OF_INTI, LevelCRC.ALTAR_OF_HUITACA),
+    # Twin Outposts has a very unusual connection with Twin Outposts Underwater,
+    # If randomized normally this may cause the game to be completely unbeatable
+    # because you might never be able to reach Burning Outposts
+    # So for now just don't randomize it. That way we won't have to worry about that yet
     (LevelCRC.TWIN_OUTPOSTS, LevelCRC.TWIN_OUTPOSTS_UNDERWATER),
     (LevelCRC.TWIN_OUTPOSTS_UNDERWATER, LevelCRC.TWIN_OUTPOSTS),
-    # The 4 one-way exits
-    (LevelCRC.WHITE_VALLEY, LevelCRC.MOUNTAIN_SLED_RUN),
-    (LevelCRC.MOUNTAIN_SLED_RUN, LevelCRC.APU_ILLAPU_SHRINE),
-    (LevelCRC.APU_ILLAPU_SHRINE, LevelCRC.WHITE_VALLEY),
-    (LevelCRC.CAVERN_LAKE, LevelCRC.JUNGLE_CANYON),
-    # The 3 Spirit Fights
+    # The 3 Spirit Fights are currently chosen to not be randomized.
+    # If we at some point DO decide to randomize them they'll need some special code anyway,
+    # because we don't want to fight any given animal spirit more than once in a run
     (LevelCRC.MONKEY_TEMPLE, LevelCRC.MONKEY_SPIRIT),
     (LevelCRC.MONKEY_SPIRIT, LevelCRC.MONKEY_TEMPLE),
     (LevelCRC.SCORPION_TEMPLE, LevelCRC.SCORPION_SPIRIT),
     (LevelCRC.SCORPION_SPIRIT, LevelCRC.SCORPION_TEMPLE),
     (LevelCRC.PENGUIN_TEMPLE, LevelCRC.PENGUIN_SPIRIT),
     (LevelCRC.PENGUIN_SPIRIT, LevelCRC.PENGUIN_TEMPLE),
-    # The 5 Native Games
+    # The 5 Native Games are currently chosen to not be randomized.
+    # If we at some point decide to randomize them anyway we'll have to do some rigorous testing
+    # Because it's very much possible this will cause some bugs
     (LevelCRC.NATIVE_VILLAGE, LevelCRC.WHACK_A_TUCO),
     (LevelCRC.WHACK_A_TUCO, LevelCRC.NATIVE_VILLAGE),
     (LevelCRC.NATIVE_VILLAGE, LevelCRC.TUCO_SHOOT),
@@ -85,37 +99,52 @@ disabled_exits: list[tuple[int, int]] = [
     (LevelCRC.PICKAXE_RACE, LevelCRC.NATIVE_VILLAGE),
     (LevelCRC.NATIVE_VILLAGE, LevelCRC.KABOOM),
     (LevelCRC.KABOOM, LevelCRC.NATIVE_VILLAGE),
-    # The 2 CUTSCENE Levels
+    # The 2 CUTSCENE Levels are currently chosen to not be randomized.
+    # As of right now both of these cutscenes are hijacked to be skipped entirely
     (LevelCRC.JAGUAR, LevelCRC.PLANE_CUTSCENE),
     (LevelCRC.PLANE_CUTSCENE, LevelCRC.CRASH_SITE),
     (LevelCRC.SPINJA_LAIR, LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE),
     (LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE, LevelCRC.VIRACOCHA_MONOLITHS),
-    # Specific one-time, one-way warps
+    # Specific one-time, one-way warps are not randomized.
+    # These 3 are handled elsewhere in the randomizer
+    # Currently there are no plans to randomize these transitions.
     (LevelCRC.ALTAR_OF_AGES, LevelCRC.BITTENBINDERS_CAMP),
     (LevelCRC.ST_CLAIRE_DAY, LevelCRC.ST_CLAIRE_NIGHT),
     (LevelCRC.ST_CLAIRE_NIGHT, LevelCRC.ST_CLAIRE_DAY),
+    # The Endgame El Dorado transitions are not randomized.
+    # Currently there are no plans to randomize these transitions.
     (LevelCRC.GATES_OF_EL_DORADO, LevelCRC.JAGUAR),
     (LevelCRC.JAGUAR, LevelCRC.PUSCA),
     (LevelCRC.PUSCA, LevelCRC.GATES_OF_EL_DORADO),
-    # The Unused Beta Volcano Level
+    # The Unused Beta Volcano Level is not randomized yet,
+    # but this can absolutely be randomized later at some point.
+    # It will require some special code though.
     (LevelCRC.BETA_VOLCANO, LevelCRC.JUNGLE_CANYON),
     (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
 ]
 
+TRANSITION_INFOS_DICT_RANDO = TRANSITION_INFOS_DICT.copy()
+ALL_POSSIBLE_TRANSITIONS_RANDO = ALL_POSSIBLE_TRANSITIONS
+
 
 def remove_disabled_exits():
-    global ALL_POSSIBLE_TRANSITIONS
-    ALL_POSSIBLE_TRANSITIONS = tuple(  # pyright: ignore[reportConstantRedefinition]
-        filter(lambda x: x not in disabled_exits, ALL_POSSIBLE_TRANSITIONS),
-    )
-    for disabled in disabled_exits:
-        for area in TRANSITION_INFOS_DICT.values():
-            if area.area_id == disabled[0]:
-                for ex in area.exits:
-                    if ex.area_id == disabled[1]:
-                        area.exits = tuple(filter(lambda x: x != ex, area.exits))
-                        break
-                break
+    # remove exits from TRANSITION_INFOS_DICT_RANDO
+    global TRANSITION_INFOS_DICT_RANDO
+    for area in TRANSITION_INFOS_DICT.values():
+        for ex in area.exits:
+            current = tuple([area.area_id, ex.area_id])
+            if current in one_way_exits or current in disabled_exits:
+                TRANSITION_INFOS_DICT_RANDO[area.area_id].exits = [
+                    x for x in TRANSITION_INFOS_DICT_RANDO[area.area_id].exits if x != ex
+                ]
+
+    # remove exits from ALL_POSSIBLE_TRANSITIONS_RANDO
+    global ALL_POSSIBLE_TRANSITIONS_RANDO
+    for trans in ALL_POSSIBLE_TRANSITIONS:
+        if trans in one_way_exits or trans in disabled_exits:
+            ALL_POSSIBLE_TRANSITIONS_RANDO = [
+                x for x in ALL_POSSIBLE_TRANSITIONS_RANDO if x != trans
+            ]
 
 
 def highjack_transition(
@@ -297,28 +326,28 @@ def get_random_redirection(original: Transition, all_redirections: Iterable[Tran
 
 def set_transitions_map():  # noqa: PLR0912, PLR0915 # TODO: Break up in smaller functions
     transitions_map.clear()
+    remove_disabled_exits()
     if not CONFIGS.SKIP_JAGUAR:
-        starting_default = TRANSITION_INFOS_DICT[starting_area].default_entrance
+        starting_default = TRANSITION_INFOS_DICT_RANDO[starting_area].default_entrance
         tutorial_original = Transition(from_=LevelCRC.JAGUAR, to=LevelCRC.PLANE_CUTSCENE)
         tutorial_redirect = Transition(from_=starting_default, to=starting_area)
         transitions_map[tutorial_original] = tutorial_redirect
 
-    _possible_redirections_bucket = list(starmap(Transition, ALL_POSSIBLE_TRANSITIONS))
+    _possible_redirections_bucket = list(starmap(Transition, ALL_POSSIBLE_TRANSITIONS_RANDO))
     one_way_list = [
-        Transition(from_=LevelCRC.WHITE_VALLEY, to=LevelCRC.MOUNTAIN_SLED_RUN),
-        Transition(from_=LevelCRC.MOUNTAIN_SLED_RUN, to=LevelCRC.APU_ILLAPU_SHRINE),
-        Transition(from_=LevelCRC.APU_ILLAPU_SHRINE, to=LevelCRC.WHITE_VALLEY),
-        Transition(from_=LevelCRC.CAVERN_LAKE, to=LevelCRC.JUNGLE_CANYON),
+        Transition(from_=trans[0], to=trans[1])
+        for trans in one_way_exits
     ]
+
     if CONFIGS.LINKED_TRANSITIONS:
         # Ground rules:
         # 1. you can't make a transition from a level to itself
         # 2. any 2 levels may have a maximum of 1 connection between them (as long as it's 2-way)
 
-        _possible_origins_bucket = list(starmap(Transition, ALL_POSSIBLE_TRANSITIONS))
+        _possible_origins_bucket = list(starmap(Transition, ALL_POSSIBLE_TRANSITIONS_RANDO))
 
         level_list: list[Area] = []
-        for area in TRANSITION_INFOS_DICT.values():
+        for area in TRANSITION_INFOS_DICT_RANDO.values():
             area.con_left = len(area.exits)
             if area.con_left > 0:
                 level_list.append(area)
@@ -374,7 +403,7 @@ def set_transitions_map():  # noqa: PLR0912, PLR0915 # TODO: Break up in smaller
         # Ground rules:
         # 1. you can't make a transition from a level to itself
         _possible_redirections_bucket.extend(one_way_list)
-        for area in TRANSITION_INFOS_DICT.values():
+        for area in TRANSITION_INFOS_DICT_RANDO.values():
             for to_og in (exit_.area_id for exit_ in area.exits):
                 original = Transition(from_=area.area_id, to=to_og)
                 redirect = get_random_redirection(original, _possible_redirections_bucket)

@@ -22,7 +22,6 @@ from lib.constants import __version__
 from lib.entrance_rando import (
     highjack_transition,
     highjack_transition_rando,
-    remove_disabled_exits,
     set_transitions_map,
     starting_area,
     transitions_map,
@@ -38,7 +37,6 @@ from lib.utils import (
     state,
 )
 
-remove_disabled_exits()
 set_transitions_map()
 randomize_shaman_shop()
 
