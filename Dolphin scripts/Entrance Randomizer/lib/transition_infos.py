@@ -80,15 +80,12 @@ def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):  # noqa: 
                     )
                     for exit_ in area["exits"]
                 ),
-                0,
+                len(area["exits"]),
             )
             for area in major_area
         )
         for major_area in transition_infos_json.values()
     ]
-    for major_area in major_areas:
-        for area in major_area:
-            area.con_left = len(area.exits)
     return MajorAreas(*major_areas)
 
 

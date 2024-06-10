@@ -136,6 +136,7 @@ def remove_disabled_exits():
                 TRANSITION_INFOS_DICT_RANDO[area.area_id].exits = [
                     x for x in TRANSITION_INFOS_DICT_RANDO[area.area_id].exits if x != ex
                 ]
+                area.con_left -= 1
 
     # remove exits from ALL_POSSIBLE_TRANSITIONS_RANDO
     global ALL_POSSIBLE_TRANSITIONS_RANDO
@@ -345,11 +346,9 @@ def set_transitions_map():  # noqa: PLR0912, PLR0915 # TODO: Break up in smaller
 
         _possible_origins_bucket = list(starmap(Transition, ALL_POSSIBLE_TRANSITIONS_RANDO))
 
-        level_list: list[Area] = []
-        for area in TRANSITION_INFOS_DICT_RANDO.values():
-            area.con_left = len(area.exits)
-            if area.con_left > 0:
-                level_list.append(area)
+        level_list = [
+            area for area in TRANSITION_INFOS_DICT_RANDO.values() if area.con_left > 0
+        ]
         random.shuffle(level_list)
         level_list.sort(key=lambda a: a.con_left, reverse=True)
 
