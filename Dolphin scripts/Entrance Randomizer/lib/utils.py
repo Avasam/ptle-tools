@@ -143,6 +143,7 @@ def prevent_item_softlock():
             )
         )
     ):
+        draw_text("Missing requirements to complete Apu Illapu Shrine. Kicking you out!")
         memory.write_u32(
             follow_pointer_path((ADDRESSES.player_ptr, PlayerPtrOffset.CollideState)),
             0,
