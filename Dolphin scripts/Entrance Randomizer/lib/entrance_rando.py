@@ -129,10 +129,9 @@ ALL_POSSIBLE_TRANSITIONS_RANDO = ALL_POSSIBLE_TRANSITIONS
 
 def remove_disabled_exits():
     # remove exits from TRANSITION_INFOS_DICT_RANDO
-    global TRANSITION_INFOS_DICT_RANDO
     for area in TRANSITION_INFOS_DICT.values():
         for ex in area.exits:
-            current = tuple([area.area_id, ex.area_id])
+            current = (area.area_id, ex.area_id)
             if current in one_way_exits or current in disabled_exits:
                 TRANSITION_INFOS_DICT_RANDO[area.area_id].exits = [
                     x for x in TRANSITION_INFOS_DICT_RANDO[area.area_id].exits if x != ex
