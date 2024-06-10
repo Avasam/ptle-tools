@@ -34,9 +34,8 @@ class Addresses:
     prev_area: tuple[int, ...]
     current_area: int
     area_load_state: int
-    player_x: tuple[int, ...]
-    player_y: tuple[int, ...]
-    player_z: tuple[int, ...]
+    player_ptr: int
+
     item_swap: int
     shaman_shop_struct: int
     backpack_struct: int
@@ -52,6 +51,19 @@ class BackpackOffset(IntEnum):
     Raft = 140
     Pickaxes = 56
     TNT = 84
+
+
+class PlayerPtrOffset(IntEnum):
+    PositionX = 0x338
+    PositionY = 0x33C
+    PositionZ = 0x340
+
+    RisingStrike = 0x1960
+    SmashStrike = 0x1988
+    Breakdance = 0x1970
+    HeroicDash = 0x1978
+    HeroicDive = 0x1980
+    SuperSling = 0x1968
 
 
 TRANSITION_INFOS_DICT = {
@@ -91,9 +103,7 @@ _addresses_map = {
             prev_area=(0x80747648,),
             current_area=0x80417F50,
             area_load_state=TODO,
-            player_x=(),
-            player_y=(),
-            player_z=(),
+            player_ptr=TODO,
             item_swap=0x804C7734,
             shaman_shop_struct=TODO,
             backpack_struct=TODO,
@@ -103,9 +113,7 @@ _addresses_map = {
             prev_area=(0x8072B648,),
             current_area=0x8041BEB4,
             area_load_state=0x8041BEC8,
-            player_x=(0x8041BE4C, 0x338),
-            player_y=(0x8041BE4C, 0x33C),
-            player_z=(0x8041BE4C, 0x340),
+            player_ptr=TODO,
             item_swap=0x804CB694,
             shaman_shop_struct=0x7E00955C,
             backpack_struct=0x8041A248,
@@ -115,9 +123,7 @@ _addresses_map = {
             prev_area=(0x80747648,),
             current_area=0x80417F30,
             area_load_state=TODO,
-            player_x=(),
-            player_y=(),
-            player_z=(),
+            player_ptr=0x80417EC8,
             item_swap=0x804C7714,
             shaman_shop_struct=TODO,
             backpack_struct=TODO,
@@ -127,9 +133,7 @@ _addresses_map = {
             prev_area=(0x80747648,),
             current_area=0x80417F10,
             area_load_state=TODO,
-            player_x=(),
-            player_y=(),
-            player_z=(),
+            player_ptr=TODO,
             item_swap=0x804C76F4,
             shaman_shop_struct=TODO,
             backpack_struct=TODO,
@@ -141,9 +145,7 @@ _addresses_map = {
             prev_area=(0x804542DC, 0x8),
             current_area=0x80448D04,
             area_load_state=TODO,
-            player_x=(),
-            player_y=(),
-            player_z=(),
+            player_ptr=TODO,
             item_swap=0x80446608,
             shaman_shop_struct=TODO,
             backpack_struct=TODO,
@@ -153,9 +155,7 @@ _addresses_map = {
             prev_area=(0x804546DC, 0x18),
             current_area=0x80449104,
             area_load_state=TODO,
-            player_x=(),
-            player_y=(),
-            player_z=(),
+            player_ptr=TODO,
             item_swap=0x80446A08,
             shaman_shop_struct=TODO,
             backpack_struct=TODO,
@@ -172,6 +172,11 @@ if not _addresses or _developer_id != "52":
 
 ADDRESSES = _addresses
 print(f"Detected {ADDRESSES.version_string} version!")
+
+
+GC_MIN_ADDRESS = 0x80000000
+GC_MEM_SIZE = 0x1800000
+GC_MAX_ADDRESS = 0x80000000 + GC_MEM_SIZE - 1  # so 0x817FFFFF
 
 
 class LevelCRC(IntEnum):
@@ -246,9 +251,5 @@ SOFTLOCKABLE_ENTRANCES = {
     int(LevelCRC.VALLEY_OF_THE_SPIRITS): 8,
     int(LevelCRC.COPACANTI_LAKE): 8,
 }
-"""Entrances that can softlock by infinitly running into a door.
+"""Entrances that can softlock by infinitely running into a door.
 Value is the minimum height boost needed to regain control."""
-
-GC_MIN_ADDRESS = 0x80000000
-GC_MEM_SIZE = 0x1800000
-GC_MAX_ADDRESS = 0x80000000 + GC_MEM_SIZE - 1  # so 0x817FFFFF
