@@ -118,6 +118,35 @@ def prevent_item_softlock():
 
     # Penguin Temple: https://youtu.be/LHglikRqeAw
 
+    # Apu Illapu Shrine
+    if (
+        state.current_area_new == LevelCRC.APU_ILLAPU_SHRINE
+        and not any(
+            memory.read_u32(ADDRESSES.backpack_struct + item)
+            for item in (
+                BackpackOffset.Canteen,
+                BackpackOffset.Slingshot,
+                BackpackOffset.Torch,
+                BackpackOffset.Shield,
+                BackpackOffset.GasMask,
+                BackpackOffset.TNT,
+            )
+        )
+        and not memory.read_u32(
+            follow_pointer_path((ADDRESSES.player_ptr, PlayerPtrOffset.Breakdance)),
+        )
+    ):
+        # Lets just give the player the Canteen so they can Item Slide out.
+        memory.write_u32(ADDRESSES.backpack_struct + BackpackOffset.Canteen, 1)
+
+        # # Trying to highjack the transition instead to send them back where they came from!
+        # memory.write_u32(ADDRESSES.current_area, state.current_area_old)
+        # # TODO: with area rando we need to send back through a specific transition
+        # # prev_area breaks with death and reloads rn anyway, so not too important
+        # memory.write_u32(follow_pointer_path(ADDRESSES.prev_area), state.current_area_old)
+        # state.current_area_new = state.current_area_old
+        return
+
 
 def prevent_transition_softlocks():
     """Prevents softlocking on closed doors by making Harry land."""
