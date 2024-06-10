@@ -133,9 +133,9 @@ def remove_disabled_exits():
         for ex in area.exits:
             current = (area.area_id, ex.area_id)
             if current in one_way_exits or current in disabled_exits:
-                TRANSITION_INFOS_DICT_RANDO[area.area_id].exits = [
+                TRANSITION_INFOS_DICT_RANDO[area.area_id].exits = (
                     x for x in TRANSITION_INFOS_DICT_RANDO[area.area_id].exits if x != ex
-                ]
+                )
                 area.con_left -= 1
 
     # remove exits from ALL_POSSIBLE_TRANSITIONS_RANDO
