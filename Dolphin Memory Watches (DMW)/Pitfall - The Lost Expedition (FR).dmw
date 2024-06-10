@@ -1,6 +1,13 @@
 {
   "watchList": [
     {
+      "address": "803D3798",
+      "baseIndex": 0,
+      "label": "Aspect Ratio",
+      "typeIndex": 3,
+      "unsigned": true
+    },
+    {
       "address": "80417F30",
       "baseIndex": 1,
       "label": "Current Area",

@@ -1,6 +1,13 @@
 {
   "watchList": [
     {
+      "address": "803D75E0",
+      "baseIndex": 0,
+      "label": "Aspect Ratio",
+      "typeIndex": 3,
+      "unsigned": true
+    },
+    {
       "address": "8041BEB4",
       "baseIndex": 1,
       "label": "Current Area",
@@ -55,18 +62,99 @@
     {
       "groupEntries": [
         {
-          "address": "8045D9A4",
+          "address": "8045DA3C",
+          "baseIndex": 1,
+          "label": "Code string",
+          "length": 10,
+          "typeIndex": 5,
+          "unsigned": true
+        },
+        {
+          "address": "8045D9B8",
           "baseIndex": 0,
-          "label": "Slow motion",
+          "label": "Stink Bombs",
           "typeIndex": 2,
           "unsigned": false
         },
         {
           "address": "8045D9C0",
           "baseIndex": 0,
-          "label": "Super Punches",
+          "label": "Hyperpunch Mode",
           "typeIndex": 2,
           "unsigned": false
+        },
+        {
+          "address": "8045D9BC",
+          "baseIndex": 0,
+          "label": "Bottomless Canteen",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "8045D9B0",
+          "baseIndex": 0,
+          "label": "Emulator: Pitfall!",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "8045D9B4",
+          "baseIndex": 0,
+          "label": "Emulator: Pitfall II: Lost Caverns",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "groupEntries": [
+            {
+              "address": "8045D990",
+              "baseIndex": 0,
+              "label": "Nicole Outfit",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8045D994",
+              "baseIndex": 0,
+              "label": "Native Outfit",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8045D9AC",
+              "baseIndex": 0,
+              "label": "Old School Harry Outfit",
+              "typeIndex": 2,
+              "unsigned": false
+            }
+          ],
+          "groupName": "Outfits"
+        },
+        {
+          "groupEntries": [
+            {
+              "address": "8045D9A8",
+              "baseIndex": 0,
+              "label": "Global Fast Motion",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8045D9A0",
+              "baseIndex": 0,
+              "label": "Global Slow Motion",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8045D9A4",
+              "baseIndex": 0,
+              "label": "Global Super Slow Motion",
+              "typeIndex": 2,
+              "unsigned": false
+            }
+          ],
+          "groupName": "Global Speed"
         }
       ],
       "groupName": "Cheats"
@@ -171,6 +259,16 @@
         },
         {
           "groupEntries": [
+            {
+              "address": "8041BE4C",
+              "baseIndex": 0,
+              "label": "Invincible",
+              "pointerOffsets": [
+                "960"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
             {
               "address": "8041BE4C",
               "baseIndex": 0,
@@ -308,6 +406,16 @@
               "label": "Is Harry visible",
               "pointerOffsets": [
                 "418"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041BE4C",
+              "baseIndex": 0,
+              "label": "Blue attacks",
+              "pointerOffsets": [
+                "1A20"
               ],
               "typeIndex": 2,
               "unsigned": false
@@ -456,6 +564,13 @@
               "unsigned": false
             },
             {
+              "address": "8045D9B8",
+              "baseIndex": 0,
+              "label": "Stink Bombs",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
               "address": "8041BE4C",
               "baseIndex": 0,
               "label": "Idols",
@@ -473,6 +588,129 @@
     },
     {
       "groupEntries": [
+        {
+          "groupEntries": [
+            {
+              "address": "8041BE4C",
+              "baseIndex": 1,
+              "label": "Top Item",
+              "pointerOffsets": [
+                "970",
+                "0"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041BE4C",
+              "baseIndex": 1,
+              "label": "Right Item",
+              "pointerOffsets": [
+                "970",
+                "4"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041BE4C",
+              "baseIndex": 1,
+              "label": "Bottom Item",
+              "pointerOffsets": [
+                "970",
+                "8"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041BE4C",
+              "baseIndex": 1,
+              "label": "Left Item",
+              "pointerOffsets": [
+                "970",
+                "C"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "groupEntries": [],
+              "groupName": "--- Item values ---"
+            },
+            {
+              "address": "8041A21C",
+              "baseIndex": 1,
+              "label": "Empty Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A2FC",
+              "baseIndex": 1,
+              "label": "Canteen Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A238",
+              "baseIndex": 1,
+              "label": "Sling Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A254",
+              "baseIndex": 1,
+              "label": "Torch Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A2A8",
+              "baseIndex": 1,
+              "label": "Shield Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A2E0",
+              "baseIndex": 1,
+              "label": "Gas Mask Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A2C4",
+              "baseIndex": 1,
+              "label": "Raft Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A270",
+              "baseIndex": 1,
+              "label": "Pickaxes ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A28C",
+              "baseIndex": 1,
+              "label": "TNT Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A318",
+              "baseIndex": 1,
+              "label": "Strink Bomb Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            }
+          ],
+          "groupName": "D-Pad"
+        },
         {
           "groupEntries": [
             {
@@ -535,6 +773,13 @@
           "label": "Explorer Idol Reward",
           "typeIndex": 1,
           "unsigned": false
+        },
+        {
+          "address": "804CB93C",
+          "baseIndex": 0,
+          "label": "Show second health bar",
+          "typeIndex": 2,
+          "unsigned": true
         }
       ],
       "groupName": "Misc"
