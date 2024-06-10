@@ -22,15 +22,16 @@ _possible_starting_areas = [
     if area not in {
         # These areas will instantly softlock you
         LevelCRC.APU_ILLAPU_SHRINE,
-        LevelCRC.SCORPION_TEMPLE,
-        LevelCRC.SCORPION_SPIRIT,
         # These areas will give too much progression
         LevelCRC.ST_CLAIRE_DAY,  # gives TNT
         LevelCRC.ST_CLAIRE_NIGHT,  # gives all items + access to El Dorado
         LevelCRC.JAGUAR,  # sends to final bosses
         LevelCRC.PUSCA,  # sends to final bosses
-        # Temples and spirits are effectively duplicates, so we remove half of them here
+        # Temples and spirits are effectively duplicates, so we remove half of them here.
+        # Spawning directly in a temple forces you to do the fight. By convenience let's spawn
+        # directly in the fight (it's also funnier to start the rando as the animal spirit).
         LevelCRC.MONKEY_TEMPLE,
+        LevelCRC.SCORPION_TEMPLE,
         LevelCRC.PENGUIN_TEMPLE,
     }
 ]

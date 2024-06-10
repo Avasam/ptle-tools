@@ -32,6 +32,7 @@ from lib.utils import (
     draw_text,
     dump_spoiler_logs,
     follow_pointer_path,
+    prevent_item_softlock,
     prevent_transition_softlocks,
     reset_draw_text_index,
     state,
@@ -104,9 +105,9 @@ async def main_loop():
 
     # Standardize the Viracocha Monoliths cutscene
     highjack_transition(
-            None,
-            LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE,
-            LevelCRC.VIRACOCHA_MONOLITHS,
+        None,
+        LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE,
+        LevelCRC.VIRACOCHA_MONOLITHS,
     )
 
     # Standardize St. Claire's Excavation Camp
@@ -116,6 +117,7 @@ async def main_loop():
 
     highjack_transition_rando()
 
+    prevent_item_softlock()
     prevent_transition_softlocks()
 
 

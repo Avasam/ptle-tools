@@ -39,6 +39,19 @@ class Addresses:
     player_z: tuple[int, ...]
     item_swap: int
     shaman_shop_struct: int
+    backpack_struct: int
+    """Same address as Slingshot"""
+
+
+class BackpackOffset(IntEnum):
+    Canteen = 196
+    Slingshot = 0
+    Torch = 28
+    Shield = 112
+    GasMask = 168
+    Raft = 140
+    Pickaxes = 56
+    TNT = 84
 
 
 TRANSITION_INFOS_DICT = {
@@ -83,6 +96,7 @@ _addresses_map = {
             player_z=(),
             item_swap=0x804C7734,
             shaman_shop_struct=TODO,
+            backpack_struct=TODO,
         ),
         "E": Addresses(
             version_string="GC US 0-00",
@@ -94,6 +108,7 @@ _addresses_map = {
             player_z=(0x8041BE4C, 0x340),
             item_swap=0x804CB694,
             shaman_shop_struct=0x7E00955C,
+            backpack_struct=0x8041A248,
         ),
         "F": Addresses(
             version_string="GC FR 0-00",
@@ -105,6 +120,7 @@ _addresses_map = {
             player_z=(),
             item_swap=0x804C7714,
             shaman_shop_struct=TODO,
+            backpack_struct=TODO,
         ),
         "P": Addresses(
             version_string="GC EU 0-00",
@@ -116,6 +132,7 @@ _addresses_map = {
             player_z=(),
             item_swap=0x804C76F4,
             shaman_shop_struct=TODO,
+            backpack_struct=TODO,
         ),
     },
     "RPF": {
@@ -129,6 +146,7 @@ _addresses_map = {
             player_z=(),
             item_swap=0x80446608,
             shaman_shop_struct=TODO,
+            backpack_struct=TODO,
         ),
         "P": Addresses(
             version_string="Wii EU 0-00",
@@ -140,6 +158,7 @@ _addresses_map = {
             player_z=(),
             item_swap=0x80446A08,
             shaman_shop_struct=TODO,
+            backpack_struct=TODO,
         ),
     },
 }

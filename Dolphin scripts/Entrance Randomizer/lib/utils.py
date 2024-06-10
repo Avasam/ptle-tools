@@ -92,12 +92,39 @@ def follow_pointer_path(ppath: Sequence[int]):
     return addr
 
 
+def prevent_item_softlock():
+    """
+    Prevent softlocking by missing the right items.
+
+    Even with logic this can happen if the player bypasses logic.
+    """
+    # TODO: A better fix would be to just teleport the player to the entrance of the temple,
+    # but we can't reliably do that yet.
+    # And we can't use position-based fix as the game checks for walls even when teleporting
+
+    # Pickaxe lets you escape everything
+    if memory.read_u32(ADDRESSES.backpack_struct + BackpackOffset.Pickaxes):
+        return
+
+    # Scorpion Temple
+    if (
+        not memory.read_u32(ADDRESSES.backpack_struct + BackpackOffset.Torch)
+        and state.current_area_old == LevelCRC.SCORPION_SPIRIT
+        and state.current_area_new == LevelCRC.SCORPION_TEMPLE
+    ):
+        # Lets just give the player the torch, it's not like it unlocks much outside convenience.
+        memory.write_u32(ADDRESSES.backpack_struct + BackpackOffset.Torch, 1)
+        return
+
+    # Penguin Temple: https://youtu.be/LHglikRqeAw
+
+
 def prevent_transition_softlocks():
-    """Prevents softlocking on closed door by making Harry land."""
-    # As far as we're concerned, these are indeed magic numbers.
-    # We haven't identified a name for these states yet.
+    """Prevents softlocking on closed doors by making Harry land."""
     height_offset = SOFTLOCKABLE_ENTRANCES.get(state.current_area_new)
     if (
+        # As far as we're concerned, these are indeed magic numbers.
+        # We haven't identified a name for these states yet.
         state.area_load_state_old == 5 and state.area_load_state_new == 6  # noqa: PLR2004
         # TODO: Include "from" transition to only bump player up when needed
         and height_offset
