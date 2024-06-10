@@ -120,31 +120,45 @@ def prevent_item_softlock():
 
     # Apu Illapu Shrine
     if (
-        state.current_area_new == LevelCRC.APU_ILLAPU_SHRINE
-        and not any(
-            memory.read_u32(ADDRESSES.backpack_struct + item)
-            for item in (
-                BackpackOffset.Canteen,
-                BackpackOffset.Slingshot,
-                BackpackOffset.Torch,
-                BackpackOffset.Shield,
-                BackpackOffset.GasMask,
-                BackpackOffset.TNT,
-            )
-        )
+        state.area_load_state_new == 6
+        and state.current_area_new == LevelCRC.APU_ILLAPU_SHRINE
+        and not memory.read_u32(ADDRESSES.backpack_struct + BackpackOffset.TNT)
         and not memory.read_u32(
             follow_pointer_path((ADDRESSES.player_ptr, PlayerPtrOffset.Breakdance)),
         )
+        # Item sliding check
+        and not (
+            memory.read_u32(
+                follow_pointer_path((ADDRESSES.player_ptr, PlayerPtrOffset.HeroicDash)),
+            ) and any(
+                memory.read_u32(ADDRESSES.backpack_struct + item)
+                for item in (
+                    BackpackOffset.Canteen,
+                    BackpackOffset.Slingshot,
+                    BackpackOffset.Torch,
+                    BackpackOffset.Shield,
+                    BackpackOffset.GasMask,
+                    BackpackOffset.TNT,
+                )
+            )
+        )
     ):
-        # Lets just give the player the Canteen so they can Item Slide out.
-        memory.write_u32(ADDRESSES.backpack_struct + BackpackOffset.Canteen, 1)
-
-        # # Trying to highjack the transition instead to send them back where they came from!
-        # memory.write_u32(ADDRESSES.current_area, state.current_area_old)
-        # # TODO: with area rando we need to send back through a specific transition
-        # # prev_area breaks with death and reloads rn anyway, so not too important
-        # memory.write_u32(follow_pointer_path(ADDRESSES.prev_area), state.current_area_old)
-        # state.current_area_new = state.current_area_old
+        memory.write_u32(
+            follow_pointer_path((ADDRESSES.player_ptr, PlayerPtrOffset.CollideState)),
+            0,
+        )
+        memory.write_f32(
+            follow_pointer_path((ADDRESSES.player_ptr, PlayerPtrOffset.PositionX)),
+            -24,
+        )
+        memory.write_f32(
+            follow_pointer_path((ADDRESSES.player_ptr, PlayerPtrOffset.PositionY)),
+            38,
+        )
+        memory.write_f32(
+            follow_pointer_path((ADDRESSES.player_ptr, PlayerPtrOffset.PositionZ)),
+            20,
+        )
         return
 
 

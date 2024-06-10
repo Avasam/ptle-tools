@@ -57,6 +57,7 @@ class PlayerPtrOffset(IntEnum):
     PositionX = 0x338
     PositionY = 0x33C
     PositionZ = 0x340
+    CollideState = 0x3D0
 
     RisingStrike = 0x1960
     SmashStrike = 0x1988
@@ -113,7 +114,7 @@ _addresses_map = {
             prev_area=(0x8072B648,),
             current_area=0x8041BEB4,
             area_load_state=0x8041BEC8,
-            player_ptr=TODO,
+            player_ptr=0x8041BE4C,
             item_swap=0x804CB694,
             shaman_shop_struct=0x7E00955C,
             backpack_struct=0x8041A248,
