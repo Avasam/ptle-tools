@@ -295,7 +295,7 @@ def get_random_redirection(original: Transition, all_redirections: Iterable[Tran
     return None
 
 
-def set_transitions_map():
+def set_transitions_map():  # noqa: PLR0912, PLR0915 # TODO: Break up in smaller functions
     transitions_map.clear()
     if not CONFIGS.SKIP_JAGUAR:
         starting_default = TRANSITION_INFOS_DICT[starting_area].default_entrance
