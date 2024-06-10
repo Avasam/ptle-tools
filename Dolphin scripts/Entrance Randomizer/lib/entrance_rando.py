@@ -21,7 +21,7 @@ _possible_starting_areas = [
     # Even if they're not used or randomized, it doesn't hurt to mention them here
     if area not in {
         # These areas will instantly softlock you
-        LevelCRC.APU_ILLAPU_SHRINE,
+        LevelCRC.APU_ILLAPU_SHRINE,  # Even with softlock prevention it just shoves you in the Geyser anyway
         # These areas will give too much progression
         LevelCRC.ST_CLAIRE_DAY,  # gives TNT
         LevelCRC.ST_CLAIRE_NIGHT,  # gives all items + access to El Dorado
