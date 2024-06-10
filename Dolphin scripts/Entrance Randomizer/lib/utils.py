@@ -120,7 +120,7 @@ def prevent_item_softlock():
 
     # Apu Illapu Shrine
     if (
-        state.area_load_state_new == 6
+        state.area_load_state_new == 6  # noqa: PLR2004
         and state.current_area_new == LevelCRC.APU_ILLAPU_SHRINE
         and not memory.read_u32(ADDRESSES.backpack_struct + BackpackOffset.TNT)
         and not memory.read_u32(
