@@ -23,9 +23,9 @@ import dolphin_memory as memory
 import dolphin_savestate as savestate
 
 __all__ = [
-    "event",
-    "memory",
-    "gui",
-    "savestate",
     "controller",
+    "event",
+    "gui",
+    "memory",
+    "savestate",
 ]

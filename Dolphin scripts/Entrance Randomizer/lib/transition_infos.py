@@ -37,48 +37,48 @@ else:
     TransitionInfosJSON = None
 
 
-@dataclass
+@dataclass(frozen=True)
 class Exit:
     area_id: int
     area_name: str
     requires: None | list[list[str]]
 
 
-@dataclass
+@dataclass(frozen=True)
 class Area:
     area_id: int
     name: str
     default_entrance: int
-    exits: list[Exit]
+    exits: tuple[Exit, ...]
 
 
 class MajorAreas(NamedTuple):
-    jungle: list[Area]
-    native_territory: list[Area]
-    lost_caverns: list[Area]
-    snowy_mountains: list[Area]
+    jungle: tuple[Area, ...]
+    native_territory: tuple[Area, ...]
+    lost_caverns: tuple[Area, ...]
+    snowy_mountains: tuple[Area, ...]
 
 
 def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):  # noqa: N802
-    major_areas = [
-        [
+    major_areas = (
+        tuple(
             Area(
                 int(area["area_id"], 16),
                 area["area_name"],
                 int(area["default_entrance"] or "0x0", 16),
-                [
+                tuple(
                     Exit(
                         int(exit_["area_id"] or "0x0", 16),
                         exit_["area_name"],
                         exit_["requires"],
                     )
                     for exit_ in area["exits"]
-                ],
+                ),
             )
             for area in major_area
-        ]
+        )
         for major_area in transition_infos_json.values()
-    ]
+    )
     return MajorAreas(*major_areas)
 
 

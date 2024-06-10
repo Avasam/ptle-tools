@@ -3,7 +3,7 @@
 ## Usage
 
 1. Have the PC version of "Pitfall: The Lost Expedition" installed
-2. [Download the release folder](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/Avasam/ptle-tools/tree/main/Texture%20packs/Dolphin%20PC%20texture%20pack%20generator/Console%20Generator/bin/Release/net7.0&fileName=PCTexturePackGenerator&rootDirectory=PCTexturePackGenerator) and extract it
+2. [Download the release folder](https://chris1111.github.io/DownGit/#/home?url=https://github.com/Avasam/ptle-tools/tree/main/Texture%20packs/Dolphin%20PC%20texture%20pack%20generator/Console%20Generator/bin/Release/net7.0&fileName=PCTexturePackGenerator&rootDirectory=PCTexturePackGenerator) and extract it
 3. Run the application
    - Console Application:
      \

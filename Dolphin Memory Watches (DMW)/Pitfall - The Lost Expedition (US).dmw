@@ -333,7 +333,7 @@
                 },
                 {
                   "groupEntries": [],
-                  "groupName": "01 -> Floor (can't move)"
+                  "groupName": "00/03 -> Fall through"
                 },
                 {
                   "groupEntries": [],
@@ -341,11 +341,11 @@
                 },
                 {
                   "groupEntries": [],
-                  "groupName": "03 -> Fall through floor"
+                  "groupName": "04 -> Sinking"
                 },
                 {
                   "groupEntries": [],
-                  "groupName": "04 -> Sinking"
+                  "groupName": "XX -> Floor (can't move)"
                 }
               ],
               "groupName": "Collide state"

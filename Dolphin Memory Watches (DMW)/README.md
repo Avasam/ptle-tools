@@ -13,12 +13,18 @@ It even explains how to deal with dynamic pointers, which is my current issue wi
 
 All codes below are for NTSC Gamecube only
 
-Start in specific Level (by Avasam):  
+Start in specific Level (by Avasam):\
 Replace `XXXX XXXX` by the `asset_crc32` found in [world_infos.json](/Various%20technical%20notes/world_infos.json)
 
 ```txt
 0216A136 0000XXXX
 0216A13E 0000XXXX
+```
+
+16:9 Aspect Ratio (by Avasam):
+
+```txt
+043D75E0 3FE38E39
 ```
 
 _**The codes below are a bit jank because they don't follow pointers and can randomly break**_

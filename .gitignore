@@ -1,5 +1,6 @@
 # Project-specific .gitignore
 *.zip
+!Texture packs/**/*.zip
 .ruff_cache/
 
 ## Ignore Visual Studio temporary files, build results, and
