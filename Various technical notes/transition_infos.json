@@ -42,25 +42,6 @@
   ],
   "Jungle": [
     {
-      "area_id": "0xEE8F6900",
-      "area_name": "Crash Site",
-      "default_entrance": "0x53257119",
-      "exits": [
-        {
-          "area_id": "0xDEDA69BC",
-          "area_name": "Jungle Canyon",
-          "requires": null
-        },
-        {
-          "area_id": "0x4A3E4058",
-          "area_name": "Plane Cockpit",
-          "requires": [
-            "SPEEDRUN"
-          ]
-        }
-      ]
-    },
-    {
       "area_id": "0x0081082C",
       "area_name": "Chameleon Temple",
       "default_entrance": "0xDEDA69BC",
@@ -411,6 +392,25 @@
           "area_id": "0x0081082C",
           "area_name": "Chameleon Temple",
           "requires": []
+        }
+      ]
+    },
+    {
+      "area_id": "0xEE8F6900",
+      "area_name": "Crash Site",
+      "default_entrance": "0x53257119",
+      "exits": [
+        {
+          "area_id": "0xDEDA69BC",
+          "area_name": "Jungle Canyon",
+          "requires": null
+        },
+        {
+          "area_id": "0x4A3E4058",
+          "area_name": "Plane Cockpit",
+          "requires": [
+            "SPEEDRUN"
+          ]
         }
       ]
     },
