@@ -44,7 +44,7 @@ randomize_shaman_shop()
 try:
     starting_area_name = TRANSITION_INFOS_DICT[starting_area].name
 except KeyError:
-    starting_area_name = hex(starting_area).upper() + " (not in transition_infos.json)"
+    starting_area_name = hex(starting_area).upper() + " (unknown level)"
 
 # Dump spoiler logs and graph
 dump_spoiler_logs(starting_area_name, transitions_map, seed_string)

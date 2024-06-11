@@ -54,12 +54,16 @@ transitions_map: dict[tuple[int, int], Transition] = {}
 }
 ```"""
 
-one_way_exits: list[tuple[int, int]] = [
-    (LevelCRC.WHITE_VALLEY, LevelCRC.MOUNTAIN_SLED_RUN),  # the White Valley geyser
-    (LevelCRC.MOUNTAIN_SLED_RUN, LevelCRC.APU_ILLAPU_SHRINE),  # the Apu Illapu Shrine one-way door
-    (LevelCRC.APU_ILLAPU_SHRINE, LevelCRC.WHITE_VALLEY),  # the Apu Illapu Shrine geyser
-    (LevelCRC.CAVERN_LAKE, LevelCRC.JUNGLE_CANYON),  # the Jungle Canyon waterfall
-]
+one_way_exits = (
+    # the White Valley geyser
+    Transition(LevelCRC.WHITE_VALLEY, LevelCRC.MOUNTAIN_SLED_RUN),
+    # the Apu Illapu Shrine geyser
+    Transition(LevelCRC.APU_ILLAPU_SHRINE, LevelCRC.WHITE_VALLEY),
+    # the Apu Illapu Shrine one-way door
+    Transition(LevelCRC.MOUNTAIN_SLED_RUN, LevelCRC.APU_ILLAPU_SHRINE),
+    # the Jungle Canyon waterfall
+    Transition(LevelCRC.CAVERN_LAKE, LevelCRC.JUNGLE_CANYON),
+)
 
 disabled_exits: list[tuple[int, int]] = [
     # Scorpion Temple softlocks you once you enter it without Torch/Pickaxes,
@@ -133,7 +137,7 @@ def remove_disabled_exits():
         for ex in area.exits:
             current = (area.area_id, ex.area_id)
             if current in one_way_exits or current in disabled_exits:
-                TRANSITION_INFOS_DICT_RANDO[area.area_id].exits = (
+                TRANSITION_INFOS_DICT_RANDO[area.area_id].exits = tuple(
                     x for x in TRANSITION_INFOS_DICT_RANDO[area.area_id].exits if x != ex
                 )
                 area.con_left -= 1
@@ -142,7 +146,7 @@ def remove_disabled_exits():
     global ALL_POSSIBLE_TRANSITIONS_RANDO
     for trans in ALL_POSSIBLE_TRANSITIONS:
         if trans in one_way_exits or trans in disabled_exits:
-            ALL_POSSIBLE_TRANSITIONS_RANDO = [
+            ALL_POSSIBLE_TRANSITIONS_RANDO = [  # pyright: ignore[reportConstantRedefinition]
                 x for x in ALL_POSSIBLE_TRANSITIONS_RANDO if x != trans
             ]
 
