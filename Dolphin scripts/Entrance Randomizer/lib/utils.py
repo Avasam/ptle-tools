@@ -113,6 +113,7 @@ def prevent_item_softlock():
         and state.current_area_new == LevelCRC.SCORPION_TEMPLE
     ):
         # Lets just give the player the torch, it's not like it unlocks much outside convenience.
+        # TODO: Remove Scorpion Temple from UPGRADE_AREAS once we don,t give the torch anymore
         memory.write_u32(ADDRESSES.backpack_struct + BackpackOffset.Torch, 1)
         return
 
