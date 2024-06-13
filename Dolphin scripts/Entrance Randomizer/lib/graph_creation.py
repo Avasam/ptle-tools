@@ -11,25 +11,24 @@ STARTING_AREA_COLOR = "#ff8000"  # Orange
 UPGRADE_AREAS_COLOR = "#0080ff"  # Blue
 IMPORTANT_STORY_TRIGGER_AREAS_COLOR = "#ff0000"  # Red
 UPGRADE_AREAS = {
-    LevelCRC.APU_ILLAPU_SHRINE,
-    LevelCRC.BITTENBINDERS_CAMP,
-    LevelCRC.CAVERN_LAKE,
-    LevelCRC.FLOODED_COURTYARD,
-    LevelCRC.MOUNTAIN_OVERLOOK,
-    LevelCRC.MOUNTAIN_SLED_RUN,
-    LevelCRC.MOUTH_OF_INTI,
-    LevelCRC.NATIVE_VILLAGE,
-    LevelCRC.PLANE_COCKPIT,
-    LevelCRC.RENEGADE_HEADQUARTERS,
-    LevelCRC.TURTLE_MONUMENT,
-    # Temporary due to the current Scorpion Temple anti-softlock in `prevent_item_softlock`
-    LevelCRC.SCORPION_TEMPLE,
+    LevelCRC.PLANE_COCKPIT,  # Canteen
+    LevelCRC.BITTENBINDERS_CAMP,  # Sling + Rising Strike
+    LevelCRC.NATIVE_VILLAGE,  # Shield
+    LevelCRC.MOUTH_OF_INTI,  # Torch
+    LevelCRC.SCORPION_TEMPLE,  # Torch, temporary due to the current Scorpion Temple anti-softlock
+    LevelCRC.RENEGADE_HEADQUARTERS,  # Gas Mask
+    LevelCRC.CAVERN_LAKE,  # Raft
+    LevelCRC.MOUNTAIN_SLED_RUN,  # Raft
+    LevelCRC.MOUNTAIN_OVERLOOK,  # Pickaxes
+    LevelCRC.APU_ILLAPU_SHRINE,  # TNT
+    LevelCRC.FLOODED_COURTYARD,  # Dash
+    LevelCRC.TURTLE_MONUMENT,  # Dive
 }
 IMPORTANT_STORY_TRIGGER_AREAS = {
     LevelCRC.ALTAR_OF_AGES,
-    LevelCRC.GATES_OF_EL_DORADO,
-    LevelCRC.ST_CLAIRE_DAY,
     LevelCRC.ST_CLAIRE_NIGHT,
+    LevelCRC.ST_CLAIRE_DAY,
+    LevelCRC.GATES_OF_EL_DORADO,
 }
 
 

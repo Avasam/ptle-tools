@@ -121,11 +121,17 @@ def prevent_item_softlock():
 
     # Apu Illapu Shrine
     if (
-        state.area_load_state_new == 6  # noqa: PLR2004
+        state.area_load_state_new == 6  # noqa: PLR2004, PLR0916
         and state.current_area_new == LevelCRC.APU_ILLAPU_SHRINE
+        # Pickaxe (already checked), TNT and Breakdance are an easy out
         and not memory.read_u32(ADDRESSES.backpack_struct + BackpackOffset.TNT)
         and not memory.read_u32(
             follow_pointer_path((ADDRESSES.player_ptr, PlayerPtrOffset.Breakdance)),
+        )
+        # Super sling check
+        and not (
+            memory.read_u32(follow_pointer_path((ADDRESSES.player_ptr, PlayerPtrOffset.SuperSling)))
+            and memory.read_u32(ADDRESSES.backpack_struct + BackpackOffset.Slingshot)
         )
         # Item sliding check
         and not (
