@@ -50,21 +50,28 @@ def dump_spoiler_logs(
     seed_string: SeedType,
 ):
     spoiler_logs = f"Starting area: {starting_area_name}\n"
-    for original, redirect in transitions_map.items():
-        spoiler_logs += (
-            f"{TRANSITION_INFOS_DICT[original[0]].name} "
-            + f"({TRANSITION_INFOS_DICT[original[1]].name} exit) "
-            + f"will redirect to: {TRANSITION_INFOS_DICT[redirect[1]].name} "
-            + f"({TRANSITION_INFOS_DICT[redirect[0]].name} entrance)\n"
-        )
+    red_string_list = [
+        f"{TRANSITION_INFOS_DICT[original[0]].name} "
+        + f"({TRANSITION_INFOS_DICT[original[1]].name} exit) "
+        + f"will redirect to: {TRANSITION_INFOS_DICT[redirect[1]].name} "
+        + f"({TRANSITION_INFOS_DICT[redirect[0]].name} entrance)\n"
+        for original, redirect in transitions_map.items()
+    ]
+    red_string_list.sort()
+    for string in red_string_list:
+        spoiler_logs += string
 
     unrandomized_transitions = ALL_POSSIBLE_TRANSITIONS - transitions_map.keys()
-    spoiler_logs += "\nUnrandomized transitions:\n"
-    for transition in unrandomized_transitions:
-        spoiler_logs += (
+    if len(unrandomized_transitions) > 0:
+        spoiler_logs += "\nUnrandomized transitions:\n"
+        non_random_string_list = [
             f"From: {TRANSITION_INFOS_DICT[transition[0]].name}, "
             + f"To: {TRANSITION_INFOS_DICT[transition[1]].name}.\n"
-        )
+            for transition in unrandomized_transitions
+        ]
+        non_random_string_list.sort()
+        for string in non_random_string_list:
+            spoiler_logs += string
 
     # TODO (Avasam): Get actual user folder based whether Dolphin Emulator is in AppData/Roaming
     # and if the current installation is portable.

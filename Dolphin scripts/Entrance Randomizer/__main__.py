@@ -41,11 +41,11 @@ from lib.utils import (
 set_transitions_map()
 randomize_shaman_shop()
 
-# This is necessary until/unless I map all areas even those not randomized.
+# This is necessary as long as the player can choose an unused level (which isn't in the json)
 try:
     starting_area_name = TRANSITION_INFOS_DICT[starting_area].name
 except KeyError:
-    starting_area_name = hex(starting_area).upper() + " (not in randomization)"
+    starting_area_name = hex(starting_area).upper() + " (unknown level)"
 
 # Dump spoiler logs and graph
 dump_spoiler_logs(starting_area_name, transitions_map, seed_string)
@@ -68,7 +68,7 @@ async def main_loop():
     draw_text(patch_shaman_shop())
     draw_text(
         "Starting area: " + (
-            f"{hex(starting_area).upper()} (Random)"
+            f"RANDOM [{TRANSITION_INFOS_DICT[starting_area].name}]"
             if CONFIGS.STARTING_AREA is None
             else starting_area_name
         ),

@@ -44,12 +44,13 @@ class Exit:
     requires: None | list[list[str]]
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=False)  # TODO: Change code that mutates this and change this back to True
 class Area:
     area_id: int
     name: str
     default_entrance: int
     exits: tuple[Exit, ...]
+    con_left: int
 
 
 class MajorAreas(NamedTuple):
@@ -57,10 +58,15 @@ class MajorAreas(NamedTuple):
     native_territory: tuple[Area, ...]
     lost_caverns: tuple[Area, ...]
     snowy_mountains: tuple[Area, ...]
+    spirit_fights: tuple[Area, ...]
+    el_dorado: tuple[Area, ...]
+    native_games: tuple[Area, ...]
+    cutscenes: tuple[Area, ...]
+    unused: tuple[Area, ...]
 
 
 def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):  # noqa: N802
-    major_areas = (
+    major_areas = [
         tuple(
             Area(
                 int(area["area_id"], 16),
@@ -74,11 +80,12 @@ def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):  # noqa: 
                     )
                     for exit_ in area["exits"]
                 ),
+                len(area["exits"]),
             )
             for area in major_area
         )
         for major_area in transition_infos_json.values()
-    )
+    ]
     return MajorAreas(*major_areas)
 
 
