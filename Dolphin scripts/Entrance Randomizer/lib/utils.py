@@ -106,3 +106,45 @@ def prevent_transition_softlocks():
         # memory.write_f32(player_x_addr, memory.read_f32(player_x_addr) + 30)
         # memory.write_f32(player_y_addr, memory.read_f32(player_y_addr) + 30)
         memory.write_f32(player_z_addr, memory.read_f32(player_z_addr) + height_offset)
+
+
+class PreviousArea:
+    _previous_area_address = 0
+    __ALL_LEVELS = ALL_TRANSITION_AREAS | set(LevelCRC) - {LevelCRC.MAIN_MENU}
+
+    @classmethod
+    def get(cls):
+        return cls.__update_previous_area_address()
+
+    @classmethod
+    def set(cls, value: int):
+        cls.__update_previous_area_address()
+        memory.write_u32(cls._previous_area_address, value)
+
+    @classmethod
+    def __update_previous_area_address(cls):
+        # First check that the current value is a sensible known level
+        previous_area = memory.read_u32(cls._previous_area_address)
+        if previous_area in cls.__ALL_LEVELS:
+            return previous_area
+
+        # If not, start iterating over 16-bit blocks,
+        # where the first half is consistent (a pointer?)
+        # and the second half is maybe the value we're looking for
+        block_address = memory.read_u32(ADDRESSES.previous_area_blocks_ptr)
+        prefix = memory.read_u32(block_address)
+        for _ in range(32):  # Limited iteration as extra safety for infinite loops
+            # Check if the current block is a valid level id
+            block_address += 8
+            previous_area = memory.read_u32(block_address)
+            if previous_area in cls.__ALL_LEVELS:
+                # Valid id. Assume this is our address
+                cls._previous_area_address = block_address
+                return previous_area
+
+            # Check if the next block is still part of the dynamic data
+            block_address += 8
+            next_prefix = memory.read_u32(block_address)
+            if next_prefix != prefix:
+                return -1  # We went the entire dynamic data structure w/o finding a valid ID !
+        return -1

@@ -29,9 +29,9 @@ from lib.entrance_rando import (
 from lib.graph_creation import create_graphml
 from lib.shaman_shop import patch_shaman_shop, randomize_shaman_shop
 from lib.utils import (
+    PreviousArea,
     draw_text,
     dump_spoiler_logs,
-    follow_pointer_path,
     prevent_transition_softlocks,
     reset_draw_text_index,
     state,
@@ -60,8 +60,7 @@ async def main_loop():
     state.current_area_new = memory.read_u32(ADDRESSES.current_area)
     state.area_load_state_new = memory.read_u32(ADDRESSES.area_load_state)
     current_area = TRANSITION_INFOS_DICT.get(state.current_area_new)
-    previous_area_id = memory.read_u32(follow_pointer_path(ADDRESSES.prev_area))
-    previous_area = TRANSITION_INFOS_DICT.get(previous_area_id)
+    previous_area_id = PreviousArea.get()
     draw_text(f"Rando version: {__version__}")
     draw_text(f"Seed: {seed_string}")
     draw_text(patch_shaman_shop())
@@ -76,10 +75,19 @@ async def main_loop():
         f"Current area: {hex(state.current_area_new).upper()} "
         + (f"({current_area.name})" if current_area else ""),
     )
-    draw_text(
-        f"From entrance: {hex(previous_area_id).upper()} "
-        + (f"({previous_area.name})" if previous_area else ""),
-    )
+    if previous_area_id != -1 or state.current_area_new in {starting_area, 0}:
+        previous_area = TRANSITION_INFOS_DICT.get(previous_area_id)
+        draw_text(
+            f"From entrance: {hex(previous_area_id).upper()} "
+            + (f"({previous_area.name})" if previous_area else ""),
+        )
+    else:
+        draw_text(
+            "From entrance: NOT FOUND!!!\n"
+            + "This is either an entrance using a special ID we're not aware of, or a bug!\n"
+            + "PLEASE REPORT THIS TO RANDO DEVS\n"
+            + f"ID might be: {hex(memory.read_u32(PreviousArea._previous_area_address)).upper()}",  # noqa: SLF001 # pyright: ignore[reportPrivateUsage]
+        )
 
     # Always re-enable Item Swap.
     if memory.read_u32(ADDRESSES.item_swap) == 1:
