@@ -5,7 +5,19 @@
   ![Enable scripting log](./enable_scripting_log.png)
 3. Under "Scripts", click "Add new Scripts" and select your Python script.
 
-## Entrance Randomizer (prototype)
+## Entrance Randomizer (still work in progress!)
+
+### Features
+- Randomization of almost all basic transitions in the game
+- Randomization of Shaman Shop prices
+- Generation of Spoiler Log `.txt` file
+- Generation of Randomized Map `.graphml` file
+- Option to manually choose a seed, or to get a random seed
+- Option to manually choose a starting area, or to get a random starting area
+- Option to make all transitions 2-directional, or to allow 1-directional transitions
+- Option to skip both Jaguar fights entirely, or to keep them as normal
+- Option to disable maps from the Shaman Shop, or to let them remain
+- Further options for Shaman Shop prices
 
 ### Installing
 
@@ -61,7 +73,7 @@ In order to display the generated map take these steps:
 - Some linked transitions are not spawning at the right entrance and use the default entrance instead. Known cases:
   - Jungle Canyon from Punchau Shrine
   - Bittenbinder's Camp from Mysterious Temple
-- One-way transitions are not linked together. This can be a bit confusing when sometimes going back leads to a different area.
+- With `LINKED_TRANSITIONS = True`, one-way transitions are not randomized at all.
 
 ### Developing
 

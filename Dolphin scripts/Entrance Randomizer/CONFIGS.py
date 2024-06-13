@@ -22,8 +22,9 @@ default = None
 
 LINKED_TRANSITIONS: bool = True
 """
-Whether the new destination will contain an exit back to the area you came from.
-Assuming both areas have as many entrances as they have exits.
+If True, going through any given transition and then backing out
+will always result in you returning to the area you came from.
+If False, no such guarantees are given.
 
 default = True
 """
