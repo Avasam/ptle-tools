@@ -13,9 +13,9 @@ IMPORTANT_STORY_TRIGGER_AREAS_COLOR = "#ff0000"  # Red
 UPGRADE_AREAS = {
     LevelCRC.PLANE_COCKPIT,  # Canteen
     LevelCRC.BITTENBINDERS_CAMP,  # Sling + Rising Strike
-    LevelCRC.NATIVE_VILLAGE,  # Shield
     LevelCRC.MOUTH_OF_INTI,  # Torch
     LevelCRC.SCORPION_TEMPLE,  # Torch, temporary due to the current Scorpion Temple anti-softlock
+    LevelCRC.NATIVE_VILLAGE,  # Shield
     LevelCRC.RENEGADE_HEADQUARTERS,  # Gas Mask
     LevelCRC.CAVERN_LAKE,  # Raft
     LevelCRC.MOUNTAIN_SLED_RUN,  # Raft
