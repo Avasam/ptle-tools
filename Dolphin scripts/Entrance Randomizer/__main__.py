@@ -67,13 +67,6 @@ async def main_loop():
     draw_text(f"Seed: {seed_string}")
     draw_text(patch_shaman_shop())
     draw_text(
-        "Starting area: " + (
-            f"RANDOM [{TRANSITION_INFOS_DICT[starting_area].name}]"
-            if CONFIGS.STARTING_AREA is None
-            else starting_area_name
-        ),
-    )
-    draw_text(
         f"Current area: {hex(state.current_area_new).upper()} "
         + (f"({current_area.name})" if current_area else ""),
     )
