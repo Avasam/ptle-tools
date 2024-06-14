@@ -40,6 +40,18 @@ _possible_starting_areas = [
         LevelCRC.MONKEY_TEMPLE,
         LevelCRC.SCORPION_TEMPLE,
         LevelCRC.PENGUIN_TEMPLE,
+        # Spawning in a Native Minigame is equivalent to spawning in Native Village
+        # as they are currently not randomized.
+        LevelCRC.WHACK_A_TUCO,
+        LevelCRC.TUCO_SHOOT,
+        LevelCRC.RAFT_BOWLING,
+        LevelCRC.PICKAXE_RACE,
+        LevelCRC.KABOOM,
+        # See `disabled_exits` below. This is equivalent to spawning in Twin Outposts
+        LevelCRC.TWIN_OUTPOSTS_UNDERWATER,
+        # Cutscenes
+        LevelCRC.PLANE_CUTSCENE,
+        LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE,
     }
 ]
 

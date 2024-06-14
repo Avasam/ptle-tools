@@ -49,10 +49,20 @@ def create_vertices(
     counter_x = 0
     counter_y = 0
     for area_id in area_ids_randomized:
+        # We special case St. Claire Day or Night to be the same level.
+        # Specifying is irrelevant on a graph and could be confusing.
+        area_name = (
+            TRANSITION_INFOS_DICT
+            [area_id]
+            .name
+            .replace(" (Day)", "")
+            .replace(" (Night)", "")
+        )
+
         output_text += (
             f'<node positionX="{counter_x * 100 + counter_y * 20}" '
             + f'positionY="{counter_x * 50 + counter_y * 50}" '
-            + f'id="{int(area_id)}" mainText="{TRANSITION_INFOS_DICT[area_id].name}" '
+            + f'id="{int(area_id)}" mainText="{area_name}" '
         )
         if area_id == starting_area:
             output_text += (
