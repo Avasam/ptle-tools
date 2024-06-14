@@ -32,6 +32,7 @@ from lib.utils import (
     PreviousArea,
     draw_text,
     dump_spoiler_logs,
+    prevent_item_softlock,
     prevent_transition_softlocks,
     reset_draw_text_index,
     state,
@@ -40,11 +41,11 @@ from lib.utils import (
 set_transitions_map()
 randomize_shaman_shop()
 
-# This is necessary until/unless I map all areas even those not randomized.
+# This is necessary as long as the player can choose an unused level (which isn't in the json)
 try:
     starting_area_name = TRANSITION_INFOS_DICT[starting_area].name
 except KeyError:
-    starting_area_name = hex(starting_area).upper() + " (not in randomization)"
+    starting_area_name = hex(starting_area).upper() + " (unknown level)"
 
 # Dump spoiler logs and graph
 dump_spoiler_logs(starting_area_name, transitions_map, seed_string)
@@ -64,13 +65,6 @@ async def main_loop():
     draw_text(f"Rando version: {__version__}")
     draw_text(f"Seed: {seed_string}")
     draw_text(patch_shaman_shop())
-    draw_text(
-        "Starting area: " + (
-            f"{hex(starting_area).upper()} (Random)"
-            if CONFIGS.STARTING_AREA is None
-            else starting_area_name
-        ),
-    )
     draw_text(
         f"Current area: {hex(state.current_area_new).upper()} "
         + (f"({current_area.name})" if current_area else ""),
@@ -106,29 +100,25 @@ async def main_loop():
             LevelCRC.BITTENBINDERS_CAMP,
             LevelCRC.MYSTERIOUS_TEMPLE,
     ):
-        state.current_area_new = LevelCRC.MYSTERIOUS_TEMPLE
         # Even if the cutscene isn't actually watched.
         # Just leaving the Altar is good enough for the rando.
         state.visited_altar_of_ages = True
 
     # Standardize the Viracocha Monoliths cutscene
-    if highjack_transition(
-            None,
-            LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE,
-            LevelCRC.VIRACOCHA_MONOLITHS,
-    ):
-        state.current_area_new = LevelCRC.VIRACOCHA_MONOLITHS
+    highjack_transition(
+        None,
+        LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE,
+        LevelCRC.VIRACOCHA_MONOLITHS,
+    )
 
     # Standardize St. Claire's Excavation Camp
-    if highjack_transition(None, LevelCRC.ST_CLAIRE_NIGHT, LevelCRC.ST_CLAIRE_DAY):
-        state.current_area_new = LevelCRC.ST_CLAIRE_DAY
+    highjack_transition(None, LevelCRC.ST_CLAIRE_NIGHT, LevelCRC.ST_CLAIRE_DAY)
 
     # TODO: Skip swim levels (3)
 
-    redirect = highjack_transition_rando()
-    if redirect:
-        state.current_area_new = redirect[1]
+    highjack_transition_rando()
 
+    prevent_item_softlock()
     prevent_transition_softlocks()
 
 

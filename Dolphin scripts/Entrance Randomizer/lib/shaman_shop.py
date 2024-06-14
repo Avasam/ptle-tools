@@ -48,7 +48,7 @@ class ShopCountOffset(IntEnum):
     MysteryItem = ShopPriceOffset.MysteryItem - 4
 
 
-_shaman_shop_prices = DEFAULT_SHOP_PRICES
+_shaman_shop_prices = list(DEFAULT_SHOP_PRICES)
 _shaman_shop_prices_string = ""
 
 
@@ -91,8 +91,7 @@ def randint_with_bias(
 
 
 def randomize_shaman_shop():
-    global _shaman_shop_prices
-    global _shaman_shop_prices_string
+    global _shaman_shop_prices, _shaman_shop_prices_string
     if ADDRESSES.shaman_shop_struct == TODO:
         return
 
