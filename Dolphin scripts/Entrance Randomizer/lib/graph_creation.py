@@ -52,7 +52,7 @@ def create_vertices(
         output_text += (
             f'<node positionX="{counter_x * 100 + counter_y * 20}" '
             + f'positionY="{counter_x * 50 + counter_y * 50}" '
-            + f'id="{area_id}" mainText="{TRANSITION_INFOS_DICT[area_id].name}" '
+            + f'id="{int(area_id)}" mainText="{TRANSITION_INFOS_DICT[area_id].name}" '
         )
         if area_id == starting_area:
             output_text += (
@@ -82,7 +82,6 @@ def create_vertices(
 
 
 def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
-    output_text = ""
     connections = [(original[0], redirect[1]) for original, redirect in transitions_map.items()]
     connections_two_way: list[tuple[int, int]] = []
     connections_one_way: list[tuple[int, int]] = []
@@ -92,6 +91,8 @@ def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
                 connections_two_way.append(pairing)
             else:
                 connections_one_way.append(pairing)
+
+    output_text = ""
     counter = 1  # Can't start at 0 since that's the MAIN_MENU id
     for pairing in connections_two_way:
         output_text += (

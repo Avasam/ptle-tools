@@ -48,7 +48,7 @@ class ShopCountOffset(IntEnum):
     MysteryItem = ShopPriceOffset.MysteryItem - 4
 
 
-_shaman_shop_prices = DEFAULT_SHOP_PRICES
+_shaman_shop_prices = list(DEFAULT_SHOP_PRICES)
 _shaman_shop_prices_string = ""
 
 

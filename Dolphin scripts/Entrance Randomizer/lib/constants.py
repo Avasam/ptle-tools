@@ -71,11 +71,11 @@ TRANSITION_INFOS_DICT = {
     area.area_id: area for area in chain(*transition_infos)
 }
 ALL_TRANSITION_AREAS = frozenset(area.area_id for area in chain(*transition_infos))
-ALL_POSSIBLE_TRANSITIONS = tuple(
+ALL_POSSIBLE_TRANSITIONS = tuple([
     (area.area_id, exit_.area_id)
     for area in TRANSITION_INFOS_DICT.values()
     for exit_ in area.exits
-)
+])
 
 
 _game_id_base = "".join([
