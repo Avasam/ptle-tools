@@ -11,22 +11,23 @@ STARTING_AREA_COLOR = "#ff8000"  # Orange
 UPGRADE_AREAS_COLOR = "#0080ff"  # Blue
 IMPORTANT_STORY_TRIGGER_AREAS_COLOR = "#ff0000"  # Red
 UPGRADE_AREAS = {
-    LevelCRC.PLANE_COCKPIT,
-    LevelCRC.BITTENBINDERS_CAMP,
-    LevelCRC.MOUTH_OF_INTI,
-    LevelCRC.FLOODED_COURTYARD,
-    LevelCRC.TURTLE_MONUMENT,
-    LevelCRC.NATIVE_VILLAGE,
-    LevelCRC.RENEGADE_HEADQUARTERS,
-    LevelCRC.CAVERN_LAKE,
-    LevelCRC.MOUNTAIN_SLED_RUN,
-    LevelCRC.MOUNTAIN_OVERLOOK,
-    LevelCRC.APU_ILLAPU_SHRINE,
+    LevelCRC.PLANE_COCKPIT,  # Canteen
+    LevelCRC.BITTENBINDERS_CAMP,  # Sling + Rising Strike
+    LevelCRC.MOUTH_OF_INTI,  # Torch
+    LevelCRC.SCORPION_TEMPLE,  # Torch, temporary due to the current Scorpion Temple anti-softlock
+    LevelCRC.NATIVE_VILLAGE,  # Shield
+    LevelCRC.RENEGADE_HEADQUARTERS,  # Gas Mask
+    LevelCRC.CAVERN_LAKE,  # Raft
+    LevelCRC.MOUNTAIN_SLED_RUN,  # Raft
+    LevelCRC.MOUNTAIN_OVERLOOK,  # Pickaxes
+    LevelCRC.APU_ILLAPU_SHRINE,  # TNT
+    LevelCRC.FLOODED_COURTYARD,  # Dash
+    LevelCRC.TURTLE_MONUMENT,  # Dive
 }
 IMPORTANT_STORY_TRIGGER_AREAS = {
     LevelCRC.ALTAR_OF_AGES,
-    LevelCRC.ST_CLAIRE_DAY,
     LevelCRC.ST_CLAIRE_NIGHT,
+    LevelCRC.ST_CLAIRE_DAY,
     LevelCRC.GATES_OF_EL_DORADO,
 }
 
@@ -48,10 +49,20 @@ def create_vertices(
     counter_x = 0
     counter_y = 0
     for area_id in area_ids_randomized:
+        # We special case St. Claire Day or Night to be the same level.
+        # Specifying is irrelevant on a graph and could be confusing.
+        area_name = (
+            TRANSITION_INFOS_DICT
+            [area_id]
+            .name
+            .replace(" (Day)", "")
+            .replace(" (Night)", "")
+        )
+
         output_text += (
             f'<node positionX="{counter_x * 100 + counter_y * 20}" '
             + f'positionY="{counter_x * 50 + counter_y * 50}" '
-            + f'id="{area_id}" mainText="{TRANSITION_INFOS_DICT[area_id].name}" '
+            + f'id="{int(area_id)}" mainText="{area_name}" '
         )
         if area_id == starting_area:
             output_text += (
@@ -81,7 +92,6 @@ def create_vertices(
 
 
 def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
-    output_text = ""
     connections = [(original[0], redirect[1]) for original, redirect in transitions_map.items()]
     connections_two_way: list[tuple[int, int]] = []
     connections_one_way: list[tuple[int, int]] = []
@@ -91,6 +101,8 @@ def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
                 connections_two_way.append(pairing)
             else:
                 connections_one_way.append(pairing)
+
+    output_text = ""
     counter = 1  # Can't start at 0 since that's the MAIN_MENU id
     for pairing in connections_two_way:
         output_text += (
