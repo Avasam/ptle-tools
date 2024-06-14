@@ -28,17 +28,30 @@ _possible_starting_areas = [
     # Even if they're not used or randomized, it doesn't hurt to mention them here
     if area not in {
         # These areas will instantly softlock you
-        LevelCRC.APU_ILLAPU_SHRINE,
-        LevelCRC.SCORPION_TEMPLE,
-        LevelCRC.SCORPION_SPIRIT,
+        LevelCRC.APU_ILLAPU_SHRINE,  # Softlock prevention just shoves you in the geyser anyway
         # These areas will give too much progression
         LevelCRC.ST_CLAIRE_DAY,  # gives TNT
         LevelCRC.ST_CLAIRE_NIGHT,  # gives all items + access to El Dorado
         LevelCRC.JAGUAR,  # sends to final bosses
         LevelCRC.PUSCA,  # sends to final bosses
-        # Temples and spirits are effectively duplicates, so we remove half of them here
+        # Temples and spirits are effectively duplicates, so we remove half of them here.
+        # Spawning directly in a temple forces you to do the fight. By convenience let's spawn
+        # directly in the fight (it's also funnier to start the rando as the animal spirit).
         LevelCRC.MONKEY_TEMPLE,
+        LevelCRC.SCORPION_TEMPLE,
         LevelCRC.PENGUIN_TEMPLE,
+        # Spawning in a Native Minigame is equivalent to spawning in Native Village
+        # as they are currently not randomized.
+        LevelCRC.WHACK_A_TUCO,
+        LevelCRC.TUCO_SHOOT,
+        LevelCRC.RAFT_BOWLING,
+        LevelCRC.PICKAXE_RACE,
+        LevelCRC.KABOOM,
+        # See `disabled_exits` below. This is equivalent to spawning in Twin Outposts
+        LevelCRC.TWIN_OUTPOSTS_UNDERWATER,
+        # Cutscenes
+        LevelCRC.PLANE_CUTSCENE,
+        LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE,
     }
 ]
 
@@ -65,7 +78,7 @@ one_way_exits = (
     Transition(LevelCRC.CAVERN_LAKE, LevelCRC.JUNGLE_CANYON),
 )
 
-disabled_exits: list[tuple[int, int]] = [
+disabled_exits = (
     # Scorpion Temple softlocks you once you enter it without Torch/Pickaxes,
     # So for now just don't randomize it. That way runs don't just end out of nowhere
     (LevelCRC.EYES_OF_DOOM, LevelCRC.SCORPION_TEMPLE),
@@ -125,7 +138,7 @@ disabled_exits: list[tuple[int, int]] = [
     # It will require some special code though.
     (LevelCRC.BETA_VOLCANO, LevelCRC.JUNGLE_CANYON),
     (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
-]
+)
 
 TRANSITION_INFOS_DICT_RANDO = TRANSITION_INFOS_DICT.copy()
 ALL_POSSIBLE_TRANSITIONS_RANDO = ALL_POSSIBLE_TRANSITIONS
@@ -137,9 +150,9 @@ def remove_disabled_exits():
         for ex in area.exits:
             current = (area.area_id, ex.area_id)
             if current in one_way_exits or current in disabled_exits:
-                TRANSITION_INFOS_DICT_RANDO[area.area_id].exits = tuple(
+                TRANSITION_INFOS_DICT_RANDO[area.area_id].exits = tuple([
                     x for x in TRANSITION_INFOS_DICT_RANDO[area.area_id].exits if x != ex
-                )
+                ])
                 area.con_left -= 1
 
     # remove exits from ALL_POSSIBLE_TRANSITIONS_RANDO
@@ -202,6 +215,7 @@ def highjack_transition_rando():
     )
     memory.write_u32(follow_pointer_path(ADDRESSES.prev_area), redirect.from_)
     memory.write_u32(ADDRESSES.current_area, redirect.to)
+    state.current_area_new = redirect[1]
     return redirect
 
 
@@ -338,10 +352,6 @@ def set_transitions_map():  # TODO: Break up in smaller functions
         transitions_map[tutorial_original] = tutorial_redirect
 
     _possible_redirections_bucket = list(starmap(Transition, ALL_POSSIBLE_TRANSITIONS_RANDO))
-    one_way_list = [
-        Transition(from_=trans[0], to=trans[1])
-        for trans in one_way_exits
-    ]
 
     if CONFIGS.LINKED_TRANSITIONS:
         # Ground rules:
@@ -394,9 +404,9 @@ def set_transitions_map():  # TODO: Break up in smaller functions
             _possible_redirections_bucket,
         )
 
-        one_way_redirects = one_way_list.copy()
+        one_way_redirects = list(one_way_exits)
         random.shuffle(one_way_redirects)
-        for original in one_way_list:
+        for original in one_way_exits:
             if one_way_redirects[0].to == original.from_:
                 transitions_map[original] = one_way_redirects.pop(1)
             else:
@@ -404,7 +414,7 @@ def set_transitions_map():  # TODO: Break up in smaller functions
     else:
         # Ground rules:
         # 1. you can't make a transition from a level to itself
-        _possible_redirections_bucket.extend(one_way_list)
+        _possible_redirections_bucket.extend(one_way_exits)
         for area in TRANSITION_INFOS_DICT_RANDO.values():
             for to_og in (exit_.area_id for exit_ in area.exits):
                 original = Transition(from_=area.area_id, to=to_og)
@@ -412,7 +422,7 @@ def set_transitions_map():  # TODO: Break up in smaller functions
                 if redirect is not None:
                     transitions_map[original] = redirect
                     _possible_redirections_bucket.remove(redirect)
-        for original in one_way_list:
+        for original in one_way_exits:
             redirect = get_random_redirection(original, _possible_redirections_bucket)
             if redirect is not None:
                 transitions_map[original] = redirect
