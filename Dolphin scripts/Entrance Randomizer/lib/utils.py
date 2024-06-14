@@ -115,12 +115,17 @@ def prevent_item_softlock():
 
     # Scorpion Temple
     if (
-        not memory.read_u32(ADDRESSES.backpack_struct + BackpackOffset.Torch)
-        and state.current_area_old == LevelCRC.SCORPION_SPIRIT
+        state.area_load_state_new == 5  # noqa: PLR2004
         and state.current_area_new == LevelCRC.SCORPION_TEMPLE
+        and -1 < memory.read_f32(
+            follow_pointer_path((ADDRESSES.player_ptr, PlayerPtrOffset.PositionX)),
+        ) < 1
+        and -1 < memory.read_f32(
+            follow_pointer_path((ADDRESSES.player_ptr, PlayerPtrOffset.PositionY)),
+        ) < 1
     ):
         # Lets just give the player the torch, it's not like it unlocks much outside convenience.
-        # TODO: Remove Scorpion Temple from UPGRADE_AREAS once we don,t give the torch anymore
+        # TODO: Remove Scorpion Temple from UPGRADE_AREAS once we don't give the torch anymore
         memory.write_u32(ADDRESSES.backpack_struct + BackpackOffset.Torch, 1)
         return
 
