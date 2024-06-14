@@ -91,8 +91,7 @@ def randint_with_bias(
 
 
 def randomize_shaman_shop():
-    global _shaman_shop_prices
-    global _shaman_shop_prices_string
+    global _shaman_shop_prices, _shaman_shop_prices_string
     if ADDRESSES.shaman_shop_struct == TODO:
         return
 
