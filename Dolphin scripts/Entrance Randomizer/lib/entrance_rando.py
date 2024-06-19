@@ -146,6 +146,7 @@ disabled_exits = (
 TRANSITION_INFOS_DICT_RANDO = TRANSITION_INFOS_DICT.copy()
 ALL_POSSIBLE_TRANSITIONS_RANDO = ALL_POSSIBLE_TRANSITIONS
 
+
 def initialize_connections_left():
     for area in TRANSITION_INFOS_DICT.values():
         __connections_left[area.area_id] = len(area.exits)
