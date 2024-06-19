@@ -67,7 +67,8 @@ transitions_map: dict[tuple[int, int], Transition] = {}
 }
 ```"""
 
-connections_left: dict[int, int] = {}
+__connections_left: dict[int, int] = {}
+"""Used in randomization process to track per Area how many exits aren't connected yet."""
 
 one_way_exits = (
     # the White Valley geyser
@@ -147,7 +148,7 @@ ALL_POSSIBLE_TRANSITIONS_RANDO = ALL_POSSIBLE_TRANSITIONS
 
 def initialize_connections_left():
     for area in TRANSITION_INFOS_DICT.values():
-        connections_left[area.area_id] = len(area.exits)
+        __connections_left[area.area_id] = len(area.exits)
 
 
 def remove_disabled_exits():
@@ -162,9 +163,9 @@ def remove_disabled_exits():
                     area.default_entrance,
                     tuple([
                         x for x in TRANSITION_INFOS_DICT_RANDO[area.area_id].exits if x != ex
-                    ])
+                    ]),
                 )
-                connections_left[area.area_id] -= 1
+                __connections_left[area.area_id] -= 1
 
     # remove exits from ALL_POSSIBLE_TRANSITIONS_RANDO
     global ALL_POSSIBLE_TRANSITIONS_RANDO
@@ -231,14 +232,14 @@ def highjack_transition_rando():
 
 
 def link_two_levels(first: Area, second: Area):
-    connections_left[first.area_id] -= 1
-    connections_left[second.area_id] -= 1
+    __connections_left[first.area_id] -= 1
+    __connections_left[second.area_id] -= 1
     return (first, second)
 
 
 def unlink_two_levels(first: Area, second: Area):
-    connections_left[first.area_id] += 1
-    connections_left[second.area_id] += 1
+    __connections_left[first.area_id] += 1
+    __connections_left[second.area_id] += 1
 
 
 def connect_to_existing(
@@ -247,15 +248,15 @@ def connect_to_existing(
     link_list: list[tuple[Area, Area]],
 ):
     global total_con_left
-    total_con_left += connections_left[level_list[index].area_id]
+    total_con_left += __connections_left[level_list[index].area_id]
     levels_available: list[Area] = []
     for i in range(len(level_list)):
         if i == index:
             break
-        if connections_left[level_list[i].area_id] > 0:
+        if __connections_left[level_list[i].area_id] > 0:
             levels_available.append(level_list[i])
     amount_chosen = random.randint(
-        1, min(connections_left[level_list[index].area_id], len(levels_available)),
+        1, min(__connections_left[level_list[index].area_id], len(levels_available)),
     )
     levels_chosen = random.sample(levels_available, amount_chosen)
     for level_chosen in levels_chosen:
@@ -353,7 +354,7 @@ def get_random_redirection(original: Transition, all_redirections: Iterable[Tran
     return None
 
 
-def set_transitions_map():  # TODO: Break up in smaller functions
+def set_transitions_map():  # noqa: PLR0915 # TODO: Break up in smaller functions
     transitions_map.clear()
     initialize_connections_left()
     remove_disabled_exits()
@@ -374,29 +375,29 @@ def set_transitions_map():  # TODO: Break up in smaller functions
 
         level_list = [
             area for area in TRANSITION_INFOS_DICT_RANDO.values()
-            if connections_left[area.area_id] > 0
+            if __connections_left[area.area_id] > 0
         ]
         random.shuffle(level_list)
-        level_list.sort(key=lambda a: connections_left[a.area_id], reverse=True)
+        level_list.sort(key=lambda a: __connections_left[a.area_id], reverse=True)
 
         link_list = [link_two_levels(level_list[0], level_list[1])]
         global total_con_left
-        total_con_left = connections_left[level_list[0].area_id]
-        total_con_left += connections_left[level_list[1].area_id]
+        total_con_left = __connections_left[level_list[0].area_id]
+        total_con_left += __connections_left[level_list[1].area_id]
 
         index = 2
         while index < len(level_list):
             choice = random.choice(tuple(Choice))
             if total_con_left > 0 and (
-                connections_left[level_list[index].area_id] == 1 or choice == Choice.CONNECT
+                __connections_left[level_list[index].area_id] == 1 or choice == Choice.CONNECT
             ):
                 # option 1: connect to one or more existing levels
                 connect_to_existing(level_list, index, link_list)
-            elif connections_left[level_list[index].area_id] > 1 and (
+            elif __connections_left[level_list[index].area_id] > 1 and (
                 total_con_left == 0 or choice == Choice.INBETWEEN
             ):
                 # option 2: put the current level inbetween an already established connection
-                total_con_left += connections_left[level_list[index].area_id]
+                total_con_left += __connections_left[level_list[index].area_id]
                 level_a, level_b = link_list.pop(random.randrange(len(link_list)))
                 unlink_two_levels(level_a, level_b)
                 link_list.extend((
