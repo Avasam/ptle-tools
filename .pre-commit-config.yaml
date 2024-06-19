@@ -43,7 +43,7 @@ repos:
     hooks:
       - id: add-trailing-comma
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: "v1.1.367" # Must match requirements-dev.txt
+    rev: "v1.1.368" # Must match requirements-dev.txt
     hooks:
       - id: pyright
 
