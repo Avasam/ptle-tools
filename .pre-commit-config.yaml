@@ -35,7 +35,7 @@ repos:
       - id: ruff
         args: [--fix]
   - repo: https://github.com/hhatto/autopep8
-    rev: "v2.2.0" # Must match requirements-dev.txt
+    rev: "v2.3.0" # Must match requirements-dev.txt
     hooks:
       - id: autopep8
   - repo: https://github.com/asottile/add-trailing-comma
@@ -43,12 +43,12 @@ repos:
     hooks:
       - id: add-trailing-comma
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: "v1.1.367"
+    rev: "v1.1.367" # Must match requirements-dev.txt
     hooks:
       - id: pyright
 
 ci:
-  autoupdate_schedule: monthly
+  autoupdate_schedule: quarterly # Should already be handled by Renovate
   skip:
     - dprint # https://github.com/adamchainz/pre-commit-dprint/issues/4
     - pyright # https://github.com/RobertCraigie/pyright-python/issues/164
