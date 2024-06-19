@@ -156,9 +156,14 @@ def remove_disabled_exits():
         for ex in area.exits:
             current = (area.area_id, ex.area_id)
             if current in one_way_exits or current in disabled_exits:
-                TRANSITION_INFOS_DICT_RANDO[area.area_id].exits = tuple([
-                    x for x in TRANSITION_INFOS_DICT_RANDO[area.area_id].exits if x != ex
-                ])
+                TRANSITION_INFOS_DICT_RANDO[area.area_id] = Area(
+                    area.area_id,
+                    area.name,
+                    area.default_entrance,
+                    tuple([
+                        x for x in TRANSITION_INFOS_DICT_RANDO[area.area_id].exits if x != ex
+                    ])
+                )
                 connections_left[area.area_id] -= 1
 
     # remove exits from ALL_POSSIBLE_TRANSITIONS_RANDO

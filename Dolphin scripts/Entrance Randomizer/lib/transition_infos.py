@@ -44,7 +44,7 @@ class Exit:
     requires: None | list[list[str]]
 
 
-@dataclass(frozen=False)  # TODO: Change code that mutates this and change this back to True
+@dataclass(frozen=True)
 class Area:
     area_id: int
     name: str
