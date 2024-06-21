@@ -221,7 +221,7 @@ def highjack_transition_rando():
     # Check if you're visiting a Temple for the first time, if so go directly to Spirit Fight
     if redirect.to in temples:
         spirit = TRANSITION_INFOS_DICT[redirect.to].exits[1].area_id
-        if state.visited_spirits[spirit] == False:
+        if not state.visited_spirits[spirit]:
             redirect = Transition(from_=redirect.to, to=spirit)
 
     print(
