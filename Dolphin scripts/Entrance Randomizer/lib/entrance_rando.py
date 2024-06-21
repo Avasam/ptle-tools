@@ -21,6 +21,7 @@ class Choice(IntEnum):
     CONNECT = 1
     INBETWEEN = 2
 
+
 temples = (
     LevelCRC.MONKEY_TEMPLE,
     LevelCRC.SCORPION_TEMPLE,
