@@ -2,6 +2,6 @@ pre-commit
 typing_extensions
 # Below must match .pre-commit-config.yaml, this is handled by Renovate
 add-trailing-comma==3.1.0
-autopep8==2.3.0
-pyright==1.1.367
-ruff==0.4.9
+autopep8==2.3.1
+pyright==1.1.369
+ruff==0.4.10
