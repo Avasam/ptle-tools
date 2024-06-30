@@ -9,7 +9,7 @@ from typing import NamedTuple, Sized
 import CONFIGS
 from lib.constants import *  # noqa: F403
 from lib.transition_infos import Area
-from lib.utils import follow_pointer_path, state
+from lib.utils import PreviousArea, state
 
 
 class Transition(NamedTuple):
@@ -204,6 +204,7 @@ def highjack_transition(
 
 
 def highjack_transition_rando():
+    return None
     # Early return, faster check. Detect the start of a transition
     if state.current_area_old == state.current_area_new:
         return False
@@ -232,7 +233,7 @@ def highjack_transition_rando():
         f"Redirecting to: {hex(redirect.to)}",
         f"({hex(redirect.from_)} entrance)\n",
     )
-    memory.write_u32(follow_pointer_path(ADDRESSES.prev_area), redirect.from_)
+    PreviousArea.set(redirect.from_)
     memory.write_u32(ADDRESSES.current_area, redirect.to)
     state.current_area_new = redirect[1]
     return redirect
