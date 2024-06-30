@@ -22,6 +22,12 @@ class Choice(IntEnum):
     INBETWEEN = 2
 
 
+temples = (
+    LevelCRC.MONKEY_TEMPLE,
+    LevelCRC.SCORPION_TEMPLE,
+    LevelCRC.PENGUIN_TEMPLE,
+)
+
 _possible_starting_areas = [
     area for area in ALL_TRANSITION_AREAS
     # Remove unwanted starting areas from the list of possibilities
@@ -35,11 +41,9 @@ _possible_starting_areas = [
         LevelCRC.JAGUAR,  # sends to final bosses
         LevelCRC.PUSCA,  # sends to final bosses
         # Temples and spirits are effectively duplicates, so we remove half of them here.
-        # Spawning directly in a temple forces you to do the fight. By convenience let's spawn
+        # Spawning in a temple forces you to do the fight anyway. For convenience let's spawn
         # directly in the fight (it's also funnier to start the rando as the animal spirit).
-        LevelCRC.MONKEY_TEMPLE,
-        LevelCRC.SCORPION_TEMPLE,
-        LevelCRC.PENGUIN_TEMPLE,
+        *temples,
         # Spawning in a Native Minigame is equivalent to spawning in Native Village
         # as they are currently not randomized.
         LevelCRC.WHACK_A_TUCO,
@@ -82,10 +86,6 @@ one_way_exits = (
 )
 
 disabled_exits = (
-    # Scorpion Temple softlocks you once you enter it without Torch/Pickaxes,
-    # So for now just don't randomize it. That way runs don't just end out of nowhere
-    (LevelCRC.EYES_OF_DOOM, LevelCRC.SCORPION_TEMPLE),
-    (LevelCRC.SCORPION_TEMPLE, LevelCRC.EYES_OF_DOOM),
     # Mouth of Inti has 2 connections with Altar of Huitaca, which causes problems,
     # basically it's very easy to get softlocked by the spider web when entering Altar of Huitaca
     # So for now just don't randomize it. That way runs don't just end out of nowhere
@@ -97,9 +97,9 @@ disabled_exits = (
     # So for now just don't randomize it. That way we won't have to worry about that yet
     (LevelCRC.TWIN_OUTPOSTS, LevelCRC.TWIN_OUTPOSTS_UNDERWATER),
     (LevelCRC.TWIN_OUTPOSTS_UNDERWATER, LevelCRC.TWIN_OUTPOSTS),
-    # The 3 Spirit Fights are currently chosen to not be randomized.
-    # If we at some point DO decide to randomize them they'll need some special code anyway,
-    # because we don't want to fight any given animal spirit more than once in a run
+    # The 3 Spirit Fights are not randomized,
+    # because that will cause issues with the transformation cutscene trigger.
+    # Plus it wouldn't really improve anything, given that the Temples are randomized anyway.
     (LevelCRC.MONKEY_TEMPLE, LevelCRC.MONKEY_SPIRIT),
     (LevelCRC.MONKEY_SPIRIT, LevelCRC.MONKEY_TEMPLE),
     (LevelCRC.SCORPION_TEMPLE, LevelCRC.SCORPION_SPIRIT),
@@ -218,6 +218,12 @@ def highjack_transition_rando():
             redirect.from_,
             to=LevelCRC.ST_CLAIRE_NIGHT if state.visited_altar_of_ages else LevelCRC.ST_CLAIRE_DAY,
         )
+
+    # Check if you're visiting a Temple for the first time, if so go directly to Spirit Fight
+    if redirect.to in temples:
+        spirit = TRANSITION_INFOS_DICT[redirect.to].exits[1].area_id
+        if not state.visited_spirits[spirit]:
+            redirect = Transition(from_=redirect.to, to=spirit)
 
     print(
         "highjack_transition_rando |",

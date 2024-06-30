@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from pathlib import Path
+from typing import ClassVar
 
 from dolphin import gui  # pyright: ignore[reportMissingModuleSource]
 from lib.constants import *  # noqa: F403
@@ -24,6 +25,11 @@ class State:
     current_area_new = 0
     """Area ID of the current frame"""
     visited_altar_of_ages = False
+    visited_spirits: ClassVar[dict[int, bool]] = {
+        LevelCRC.MONKEY_SPIRIT: False,
+        LevelCRC.SCORPION_SPIRIT: False,
+        LevelCRC.PENGUIN_SPIRIT: False,
+    }
 
 
 state = State()
