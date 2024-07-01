@@ -20,8 +20,6 @@ import CONFIGS
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
 from lib.entrance_rando import (
-    highjack_transition,
-    highjack_transition_rando,
     set_transitions_map,
     starting_area,
     transitions_map,
@@ -32,6 +30,8 @@ from lib.utils import (
     draw_text,
     dump_spoiler_logs,
     follow_pointer_path,
+    highjack_transition,
+    highjack_transition_rando,
     prevent_item_softlock,
     prevent_transition_softlocks,
     reset_draw_text_index,
