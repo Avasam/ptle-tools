@@ -128,7 +128,7 @@ def create_graphml(
     seed_string: SeedType,
     starting_area: int,
 ):
-    all_transitions = transitions_map.copy()
+    all_transitions: Mapping[tuple[int, int], tuple[int, int]] = transitions_map.copy()
     for item in temp_disabled_exits:
         all_transitions[item] = item
 

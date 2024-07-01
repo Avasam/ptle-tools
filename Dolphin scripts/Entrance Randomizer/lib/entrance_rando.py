@@ -69,7 +69,7 @@ _possible_starting_areas = [
     }
 ]
 
-temp_disabled_exits = (
+temp_disabled_exits = [
     # Mouth of Inti has 2 connections with Altar of Huitaca, which causes problems,
     # basically it's very easy to get softlocked by the spider web when entering Altar of Huitaca
     # So for now just don't randomize it. That way runs don't just end out of nowhere
@@ -81,7 +81,7 @@ temp_disabled_exits = (
     # So for now just don't randomize it. That way we won't have to worry about that yet
     (LevelCRC.TWIN_OUTPOSTS, LevelCRC.TWIN_OUTPOSTS_UNDERWATER),
     (LevelCRC.TWIN_OUTPOSTS_UNDERWATER, LevelCRC.TWIN_OUTPOSTS),
-)
+]
 
 disabled_exits = (
     *temp_disabled_exits,
