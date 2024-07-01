@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from pathlib import Path
 
 from lib.constants import *  # noqa: F403
@@ -124,7 +124,7 @@ def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
 
 def create_graphml(
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
-    temp_disabled_exits: list[tuple[int, int]],
+    temp_disabled_exits: Sequence[tuple[int, int]],
     seed_string: SeedType,
     starting_area: int,
 ):
