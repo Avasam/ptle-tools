@@ -124,15 +124,20 @@ def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
 
 def create_graphml(
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
+    temp_disabled_exits: list[tuple[int, int]],
     seed_string: SeedType,
     starting_area: int,
 ):
+    all_transitions = transitions_map.copy()
+    for item in temp_disabled_exits:
+        all_transitions[item] = item
+
     graphml_text = f"""\
 <?xml version="1.0" encoding="UTF-8"?>
 <graphml>
   <graph id="Graph" uidGraph="1" uidEdge="1">
-    {create_vertices(transitions_map, starting_area)}
-    {create_edges(transitions_map)}
+    {create_vertices(all_transitions, starting_area)}
+    {create_edges(all_transitions)}
   </graph>
 </graphml>"""
 
