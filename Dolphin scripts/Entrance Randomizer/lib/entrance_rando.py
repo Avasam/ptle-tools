@@ -9,7 +9,6 @@ from typing import NamedTuple, Sized
 import CONFIGS
 from lib.constants import *  # noqa: F403
 from lib.transition_infos import Area
-from lib.utils import follow_pointer_path, state
 
 
 class Transition(NamedTuple):
@@ -26,6 +25,17 @@ temples = (
     LevelCRC.MONKEY_TEMPLE,
     LevelCRC.SCORPION_TEMPLE,
     LevelCRC.PENGUIN_TEMPLE,
+)
+
+one_way_exits = (
+    # the White Valley geyser
+    Transition(LevelCRC.WHITE_VALLEY, LevelCRC.MOUNTAIN_SLED_RUN),
+    # the Apu Illapu Shrine geyser
+    Transition(LevelCRC.APU_ILLAPU_SHRINE, LevelCRC.WHITE_VALLEY),
+    # the Apu Illapu Shrine one-way door
+    Transition(LevelCRC.MOUNTAIN_SLED_RUN, LevelCRC.APU_ILLAPU_SHRINE),
+    # the Jungle Canyon waterfall
+    Transition(LevelCRC.CAVERN_LAKE, LevelCRC.JUNGLE_CANYON),
 )
 
 _possible_starting_areas = [
@@ -59,33 +69,7 @@ _possible_starting_areas = [
     }
 ]
 
-# Call RNG even if this is unused to not impact randomization of other things for the same seed
-starting_area = random.choice(_possible_starting_areas)
-if CONFIGS.STARTING_AREA is not None:
-    starting_area = CONFIGS.STARTING_AREA
-
-transitions_map: dict[tuple[int, int], Transition] = {}
-"""```python
-{
-    (og_from_id, og_to_id): (og_from_id, og_to_id)
-}
-```"""
-
-__connections_left: dict[int, int] = {}
-"""Used in randomization process to track per Area how many exits aren't connected yet."""
-
-one_way_exits = (
-    # the White Valley geyser
-    Transition(LevelCRC.WHITE_VALLEY, LevelCRC.MOUNTAIN_SLED_RUN),
-    # the Apu Illapu Shrine geyser
-    Transition(LevelCRC.APU_ILLAPU_SHRINE, LevelCRC.WHITE_VALLEY),
-    # the Apu Illapu Shrine one-way door
-    Transition(LevelCRC.MOUNTAIN_SLED_RUN, LevelCRC.APU_ILLAPU_SHRINE),
-    # the Jungle Canyon waterfall
-    Transition(LevelCRC.CAVERN_LAKE, LevelCRC.JUNGLE_CANYON),
-)
-
-disabled_exits = (
+temp_disabled_exits = [
     # Mouth of Inti has 2 connections with Altar of Huitaca, which causes problems,
     # basically it's very easy to get softlocked by the spider web when entering Altar of Huitaca
     # So for now just don't randomize it. That way runs don't just end out of nowhere
@@ -97,6 +81,10 @@ disabled_exits = (
     # So for now just don't randomize it. That way we won't have to worry about that yet
     (LevelCRC.TWIN_OUTPOSTS, LevelCRC.TWIN_OUTPOSTS_UNDERWATER),
     (LevelCRC.TWIN_OUTPOSTS_UNDERWATER, LevelCRC.TWIN_OUTPOSTS),
+]
+
+disabled_exits = (
+    *temp_disabled_exits,
     # The 3 Spirit Fights are not randomized,
     # because that will cause issues with the transformation cutscene trigger.
     # Plus it wouldn't really improve anything, given that the Temples are randomized anyway.
@@ -143,8 +131,23 @@ disabled_exits = (
     (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
 )
 
+# Call RNG even if this is unused to not impact randomization of other things for the same seed
+starting_area = random.choice(_possible_starting_areas)
+if CONFIGS.STARTING_AREA is not None:
+    starting_area = CONFIGS.STARTING_AREA
+
 TRANSITION_INFOS_DICT_RANDO = TRANSITION_INFOS_DICT.copy()
 ALL_POSSIBLE_TRANSITIONS_RANDO = ALL_POSSIBLE_TRANSITIONS
+
+transitions_map: dict[tuple[int, int], Transition] = {}
+"""```python
+{
+    (og_from_id, og_to_id): (og_from_id, og_to_id)
+}
+```"""
+
+__connections_left: dict[int, int] = {}
+"""Used in randomization process to track per Area how many exits aren't connected yet."""
 
 
 def initialize_connections_left():
@@ -175,67 +178,6 @@ def remove_disabled_exits():
             ALL_POSSIBLE_TRANSITIONS_RANDO = [  # pyright: ignore[reportConstantRedefinition]
                 x for x in ALL_POSSIBLE_TRANSITIONS_RANDO if x != trans
             ]
-
-
-def highjack_transition(
-    from_: int | None,
-    to: int | None,
-    redirect: int,
-):
-    if from_ is None:
-        from_ = state.current_area_old
-    if to is None:
-        to = state.current_area_new
-
-    # Early return. Detect the start of a transition
-    if state.current_area_old == state.current_area_new:
-        return False
-
-    if from_ == state.current_area_old and to == state.current_area_new:
-        print(
-            "highjack_transition |",
-            f"From: {hex(state.current_area_old)},",
-            f"To: {hex(state.current_area_new)}.",
-            f"Redirecting to: {hex(redirect)}",
-        )
-        memory.write_u32(ADDRESSES.current_area, redirect)
-        return True
-    return False
-
-
-def highjack_transition_rando():
-    # Early return, faster check. Detect the start of a transition
-    if state.current_area_old == state.current_area_new:
-        return False
-
-    redirect = transitions_map.get((state.current_area_old, state.current_area_new))
-    if not redirect:
-        return False
-
-    # Apply Altar of Ages logic to St. Claire's Excavation Camp
-    if redirect.to in {LevelCRC.ST_CLAIRE_DAY, LevelCRC.ST_CLAIRE_NIGHT}:
-        redirect = Transition(
-            redirect.from_,
-            to=LevelCRC.ST_CLAIRE_NIGHT if state.visited_altar_of_ages else LevelCRC.ST_CLAIRE_DAY,
-        )
-
-    # Check if you're visiting a Temple for the first time, if so go directly to Spirit Fight
-    if redirect.to in temples:
-        spirit = TRANSITION_INFOS_DICT[redirect.to].exits[1].area_id
-        if not state.visited_spirits[spirit]:
-            redirect = Transition(from_=redirect.to, to=spirit)
-
-    print(
-        "highjack_transition_rando |",
-        f"From: {hex(state.current_area_old)},",
-        f"To: {hex(state.current_area_new)}.",
-        f"Redirecting to: {hex(redirect.to)}",
-        f"({hex(redirect.from_)} entrance)\n",
-    )
-    memory.write_u32(follow_pointer_path(ADDRESSES.prev_area), redirect.from_)
-    memory.write_u32(ADDRESSES.current_area, redirect.to)
-    state.current_area_new = redirect[1]
-    return redirect
 
 
 def link_two_levels(first: Area, second: Area):
