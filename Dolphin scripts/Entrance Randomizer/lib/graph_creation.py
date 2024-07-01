@@ -63,25 +63,25 @@ def create_vertices(
         output_text += (
             f'<node positionX="{counter_x * 100 + counter_y * 20}" '
             + f'positionY="{counter_x * 50 + counter_y * 50}" '
-            + f'id="{int(area_id)}" mainText="{area_name}" '
+            + f'id="{int(area_id)}" mainText="{area_name}"'
         )
         if area_id == starting_area:
             output_text += (
-                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
+                ' ownStyles="{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
                 + STARTING_AREA_COLOR
-                + '&quot;}}" '
+                + '&quot;}}"'
             )
         elif area_id in UPGRADE_AREAS:
             output_text += (
-                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
+                ' ownStyles="{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
                 + UPGRADE_AREAS_COLOR
-                + '&quot;}}" '
+                + '&quot;}}"'
             )
         elif area_id in IMPORTANT_STORY_TRIGGER_AREAS:
             output_text += (
-                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
+                ' ownStyles="{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
                 + IMPORTANT_STORY_TRIGGER_AREAS_COLOR
-                + '&quot;}}" '
+                + '&quot;}}"'
             )
         output_text += "></node>\n"
         row_length = 10
@@ -109,14 +109,14 @@ def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
         output_text += (
             f'<edge source="{TRANSITION_INFOS_DICT[pairing[0]].area_id}" '
             + f'target="{TRANSITION_INFOS_DICT[pairing[1]].area_id}" isDirect="false" '
-            + f'id="{counter}" ></edge>\n'
+            + f'id="{counter}"></edge>\n'
         )
         counter += 1
     for pairing in connections_one_way:
         output_text += (
             f'<edge source="{TRANSITION_INFOS_DICT[pairing[0]].area_id}" '
             + f'target="{TRANSITION_INFOS_DICT[pairing[1]].area_id}" isDirect="true" '
-            + f'id="{counter}" ></edge>\n'
+            + f'id="{counter}"></edge>\n'
         )
         counter += 1
     return output_text
@@ -132,14 +132,13 @@ def create_graphml(
     for item in temp_disabled_exits:
         all_transitions[item] = item
 
-    graphml_text = f"""\
-<?xml version="1.0" encoding="UTF-8"?>
-<graphml>
-  <graph id="Graph" uidGraph="1" uidEdge="1">
-    {create_vertices(all_transitions, starting_area)}
-    {create_edges(all_transitions)}
-  </graph>
-</graphml>"""
+    graphml_text = (
+        '<?xml version="1.0" encoding="UTF-8"?>'
+        + '<graphml><graph id="Graph" uidGraph="1" uidEdge="1">\n'
+        + create_vertices(all_transitions, starting_area)
+        + create_edges(all_transitions)
+        + '</graph></graphml>'
+    )
 
     # TODO (Avasam): Get actual user folder based whether Dolphin Emulator is in AppData/Roaming
     # and if the current installation is portable.
