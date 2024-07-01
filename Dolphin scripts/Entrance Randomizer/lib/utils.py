@@ -7,12 +7,7 @@ from typing import ClassVar
 from dolphin import gui  # pyright: ignore[reportMissingModuleSource]
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
-from lib.entrance_rando import (
-    temples,
-    Transition,
-    TRANSITION_INFOS_DICT,
-    transitions_map,
-)
+from lib.entrance_rando import TRANSITION_INFOS_DICT, Transition, temples, transitions_map
 from lib.types_ import SeedType
 
 DRAW_TEXT_STEP = 24

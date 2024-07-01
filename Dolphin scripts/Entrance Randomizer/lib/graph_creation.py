@@ -137,7 +137,7 @@ def create_graphml(
         + '<graphml><graph id="Graph" uidGraph="1" uidEdge="1">\n'
         + create_vertices(all_transitions, starting_area)
         + create_edges(all_transitions)
-        + '</graph></graphml>'
+        + "</graph></graphml>"
     )
 
     # TODO (Avasam): Get actual user folder based whether Dolphin Emulator is in AppData/Roaming
