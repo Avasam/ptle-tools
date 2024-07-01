@@ -28,6 +28,17 @@ temples = (
     LevelCRC.PENGUIN_TEMPLE,
 )
 
+one_way_exits = (
+    # the White Valley geyser
+    Transition(LevelCRC.WHITE_VALLEY, LevelCRC.MOUNTAIN_SLED_RUN),
+    # the Apu Illapu Shrine geyser
+    Transition(LevelCRC.APU_ILLAPU_SHRINE, LevelCRC.WHITE_VALLEY),
+    # the Apu Illapu Shrine one-way door
+    Transition(LevelCRC.MOUNTAIN_SLED_RUN, LevelCRC.APU_ILLAPU_SHRINE),
+    # the Jungle Canyon waterfall
+    Transition(LevelCRC.CAVERN_LAKE, LevelCRC.JUNGLE_CANYON),
+)
+
 _possible_starting_areas = [
     area for area in ALL_TRANSITION_AREAS
     # Remove unwanted starting areas from the list of possibilities
@@ -58,32 +69,6 @@ _possible_starting_areas = [
         LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE,
     }
 ]
-
-# Call RNG even if this is unused to not impact randomization of other things for the same seed
-starting_area = random.choice(_possible_starting_areas)
-if CONFIGS.STARTING_AREA is not None:
-    starting_area = CONFIGS.STARTING_AREA
-
-transitions_map: dict[tuple[int, int], Transition] = {}
-"""```python
-{
-    (og_from_id, og_to_id): (og_from_id, og_to_id)
-}
-```"""
-
-__connections_left: dict[int, int] = {}
-"""Used in randomization process to track per Area how many exits aren't connected yet."""
-
-one_way_exits = (
-    # the White Valley geyser
-    Transition(LevelCRC.WHITE_VALLEY, LevelCRC.MOUNTAIN_SLED_RUN),
-    # the Apu Illapu Shrine geyser
-    Transition(LevelCRC.APU_ILLAPU_SHRINE, LevelCRC.WHITE_VALLEY),
-    # the Apu Illapu Shrine one-way door
-    Transition(LevelCRC.MOUNTAIN_SLED_RUN, LevelCRC.APU_ILLAPU_SHRINE),
-    # the Jungle Canyon waterfall
-    Transition(LevelCRC.CAVERN_LAKE, LevelCRC.JUNGLE_CANYON),
-)
 
 disabled_exits = (
     # Mouth of Inti has 2 connections with Altar of Huitaca, which causes problems,
@@ -143,8 +128,23 @@ disabled_exits = (
     (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
 )
 
+# Call RNG even if this is unused to not impact randomization of other things for the same seed
+starting_area = random.choice(_possible_starting_areas)
+if CONFIGS.STARTING_AREA is not None:
+    starting_area = CONFIGS.STARTING_AREA
+
 TRANSITION_INFOS_DICT_RANDO = TRANSITION_INFOS_DICT.copy()
 ALL_POSSIBLE_TRANSITIONS_RANDO = ALL_POSSIBLE_TRANSITIONS
+
+transitions_map: dict[tuple[int, int], Transition] = {}
+"""```python
+{
+    (og_from_id, og_to_id): (og_from_id, og_to_id)
+}
+```"""
+
+__connections_left: dict[int, int] = {}
+"""Used in randomization process to track per Area how many exits aren't connected yet."""
 
 
 def initialize_connections_left():
