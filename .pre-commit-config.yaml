@@ -30,7 +30,7 @@ repos:
         additional_dependencies: ["dprint@~0.46.0"]
         pass_filenames: false # https://github.com/adamchainz/pre-commit-dprint/issues/3#issuecomment-1483410008
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.5.0" # Must match requirements-dev.txt
+    rev: "v0.5.1" # Must match requirements-dev.txt
     hooks:
       - id: ruff
         args: [--fix]
