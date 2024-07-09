@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: '& $env:GITHUB_ACTION_PATH/Dolphin scripts/pack-rando.ps1'
+      - run: '& "$env:GITHUB_ACTION_PATH/Dolphin scripts/pack-rando.ps1"'
         shell: pwsh
       - uses: actions/upload-artifact@v4
         with:
