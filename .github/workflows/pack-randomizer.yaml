@@ -9,6 +9,7 @@ on:
       - "Dolphin scripts/Entrance Randomizer/**"
       - "Dolphin scripts/pack-rando.ps1"
       - "Various technical notes/transition_infos.json"
+      - ".github/workflows/pack-randomizer.yaml"
   pull_request:
     branches:
       - main
@@ -16,6 +17,7 @@ on:
       - "Dolphin scripts/Entrance Randomizer/**"
       - "Dolphin scripts/pack-rando.ps1"
       - "Various technical notes/transition_infos.json"
+      - ".github/workflows/pack-randomizer.yaml"
 
 env:
   PIP_DISABLE_PIP_VERSION_CHECK: 1
@@ -26,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: '& $env:GITHUB_ACTION_PATH/Dolphin scripts/pack-rando.ps1'
+      - run: '& "Dolphin scripts/pack-rando.ps1"'
         shell: pwsh
       - uses: actions/upload-artifact@v4
         with:
