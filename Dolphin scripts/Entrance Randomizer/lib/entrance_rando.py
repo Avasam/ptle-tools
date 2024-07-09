@@ -213,16 +213,22 @@ def highjack_transition_rando():
         return False
 
     # Apply Altar of Ages logic to St. Claire's Excavation Camp
+    # Even if the cutscene wasn't actually watched.
+    # Just leaving the Altar is good enough for the rando.
     if redirect.to in {LevelCRC.ST_CLAIRE_DAY, LevelCRC.ST_CLAIRE_NIGHT}:
         redirect = Transition(
             redirect.from_,
-            to=LevelCRC.ST_CLAIRE_NIGHT if state.visited_altar_of_ages else LevelCRC.ST_CLAIRE_DAY,
+            to=(
+                LevelCRC.ST_CLAIRE_NIGHT
+                if LevelCRC.ALTAR_OF_AGES in state.visited_levels
+                else LevelCRC.ST_CLAIRE_DAY
+            ),
         )
 
     # Check if you're visiting a Temple for the first time, if so go directly to Spirit Fight
     if redirect.to in temples:
         spirit = TRANSITION_INFOS_DICT[redirect.to].exits[1].area_id
-        if not state.visited_spirits[spirit]:
+        if spirit not in state.visited_levels:
             redirect = Transition(from_=redirect.to, to=spirit)
 
     print(

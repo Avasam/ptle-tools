@@ -79,12 +79,9 @@ async def main_loop():
     if memory.read_u32(ADDRESSES.item_swap) == 1:
         memory.write_u32(ADDRESSES.item_swap, 0)
 
-    # Note if you're currently visiting a spirit fight
-    if (
-        state.current_area_old in state.visited_spirits
-        and not state.visited_spirits.get(state.current_area_old)
-    ):
-        state.visited_spirits[state.current_area_old] = True
+    # Track the visited levels for different purposes.
+    # We only consider a level "visited" once leaving it.
+    state.visited_levels.add(state.current_area_old)
 
     # Skip both Jaguar fights if configured
     if CONFIGS.SKIP_JAGUAR:
@@ -94,14 +91,11 @@ async def main_loop():
             return
 
     # Standardize the Altar of Ages exit to remove the Altar -> BBCamp transition
-    if highjack_transition(
-            LevelCRC.ALTAR_OF_AGES,
-            LevelCRC.BITTENBINDERS_CAMP,
-            LevelCRC.MYSTERIOUS_TEMPLE,
-    ):
-        # Even if the cutscene isn't actually watched.
-        # Just leaving the Altar is good enough for the rando.
-        state.visited_altar_of_ages = True
+    highjack_transition(
+        LevelCRC.ALTAR_OF_AGES,
+        LevelCRC.BITTENBINDERS_CAMP,
+        LevelCRC.MYSTERIOUS_TEMPLE,
+    )
 
     # Standardize the Viracocha Monoliths cutscene
     highjack_transition(
