@@ -49,16 +49,17 @@ def create_vertices(
     counter_x = 0
     counter_y = 0
     for area_id in area_ids_randomized:
-        # We special case St. Claire Day or Night to be the same level.
-        # Specifying is irrelevant on a graph and could be confusing.
+        # Currently St. Claire Night will never appear on the map,
+        # so we remove the (Day) suffix as it's irrelevant and it clutters the map.
+        # The same logic applies to the Spirit Fights:
+        # these will never appear on the map, therefore we remove the (Harry) suffix.
         area_name = (
             TRANSITION_INFOS_DICT
             [area_id]
             .name
             .replace(" (Day)", "")
-            .replace(" (Night)", "")
+            .replace(" (Harry)", "")
         )
-
         output_text += (
             f'<node positionX="{counter_x * 100 + counter_y * 20}" '
             + f'positionY="{counter_x * 50 + counter_y * 50}" '

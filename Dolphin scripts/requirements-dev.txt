@@ -1,5 +1,7 @@
-add-trailing-comma>=3.1.0  # Must match .pre-commit-config.yaml
-autopep8>=2.2.0 # Must match .pre-commit-config.yaml
 pre-commit
-ruff>=0.4.7 # Must match .pre-commit-config.yaml
 typing_extensions
+# Below must match .pre-commit-config.yaml, this is handled by Renovate
+add-trailing-comma==3.1.0
+autopep8==2.3.1
+pyright==1.1.370
+ruff==0.5.1

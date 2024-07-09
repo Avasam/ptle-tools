@@ -44,13 +44,12 @@ class Exit:
     requires: None | list[list[str]]
 
 
-@dataclass(frozen=False)  # TODO: Change code that mutates this and change this back to True
+@dataclass(frozen=True)
 class Area:
     area_id: int
     name: str
     default_entrance: int
     exits: tuple[Exit, ...]
-    con_left: int
 
 
 class MajorAreas(NamedTuple):
@@ -80,7 +79,6 @@ def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):  # noqa: 
                     )
                     for exit_ in area["exits"]
                 ]),
-                len(area["exits"]),
             )
             for area in major_area
         ])

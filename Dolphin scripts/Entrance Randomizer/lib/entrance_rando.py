@@ -22,6 +22,12 @@ class Choice(IntEnum):
     INBETWEEN = 2
 
 
+temples = (
+    LevelCRC.MONKEY_TEMPLE,
+    LevelCRC.SCORPION_TEMPLE,
+    LevelCRC.PENGUIN_TEMPLE,
+)
+
 _possible_starting_areas = [
     area for area in ALL_TRANSITION_AREAS
     # Remove unwanted starting areas from the list of possibilities
@@ -35,11 +41,9 @@ _possible_starting_areas = [
         LevelCRC.JAGUAR,  # sends to final bosses
         LevelCRC.PUSCA,  # sends to final bosses
         # Temples and spirits are effectively duplicates, so we remove half of them here.
-        # Spawning directly in a temple forces you to do the fight. By convenience let's spawn
+        # Spawning in a temple forces you to do the fight anyway. For convenience let's spawn
         # directly in the fight (it's also funnier to start the rando as the animal spirit).
-        LevelCRC.MONKEY_TEMPLE,
-        LevelCRC.SCORPION_TEMPLE,
-        LevelCRC.PENGUIN_TEMPLE,
+        *temples,
         # Spawning in a Native Minigame is equivalent to spawning in Native Village
         # as they are currently not randomized.
         LevelCRC.WHACK_A_TUCO,
@@ -67,6 +71,9 @@ transitions_map: dict[tuple[int, int], Transition] = {}
 }
 ```"""
 
+__connections_left: dict[int, int] = {}
+"""Used in randomization process to track per Area how many exits aren't connected yet."""
+
 one_way_exits = (
     # the White Valley geyser
     Transition(LevelCRC.WHITE_VALLEY, LevelCRC.MOUNTAIN_SLED_RUN),
@@ -79,10 +86,6 @@ one_way_exits = (
 )
 
 disabled_exits = (
-    # Scorpion Temple softlocks you once you enter it without Torch/Pickaxes,
-    # So for now just don't randomize it. That way runs don't just end out of nowhere
-    (LevelCRC.EYES_OF_DOOM, LevelCRC.SCORPION_TEMPLE),
-    (LevelCRC.SCORPION_TEMPLE, LevelCRC.EYES_OF_DOOM),
     # Mouth of Inti has 2 connections with Altar of Huitaca, which causes problems,
     # basically it's very easy to get softlocked by the spider web when entering Altar of Huitaca
     # So for now just don't randomize it. That way runs don't just end out of nowhere
@@ -94,9 +97,9 @@ disabled_exits = (
     # So for now just don't randomize it. That way we won't have to worry about that yet
     (LevelCRC.TWIN_OUTPOSTS, LevelCRC.TWIN_OUTPOSTS_UNDERWATER),
     (LevelCRC.TWIN_OUTPOSTS_UNDERWATER, LevelCRC.TWIN_OUTPOSTS),
-    # The 3 Spirit Fights are currently chosen to not be randomized.
-    # If we at some point DO decide to randomize them they'll need some special code anyway,
-    # because we don't want to fight any given animal spirit more than once in a run
+    # The 3 Spirit Fights are not randomized,
+    # because that will cause issues with the transformation cutscene trigger.
+    # Plus it wouldn't really improve anything, given that the Temples are randomized anyway.
     (LevelCRC.MONKEY_TEMPLE, LevelCRC.MONKEY_SPIRIT),
     (LevelCRC.MONKEY_SPIRIT, LevelCRC.MONKEY_TEMPLE),
     (LevelCRC.SCORPION_TEMPLE, LevelCRC.SCORPION_SPIRIT),
@@ -144,16 +147,26 @@ TRANSITION_INFOS_DICT_RANDO = TRANSITION_INFOS_DICT.copy()
 ALL_POSSIBLE_TRANSITIONS_RANDO = ALL_POSSIBLE_TRANSITIONS
 
 
+def initialize_connections_left():
+    for area in TRANSITION_INFOS_DICT.values():
+        __connections_left[area.area_id] = len(area.exits)
+
+
 def remove_disabled_exits():
     # remove exits from TRANSITION_INFOS_DICT_RANDO
     for area in TRANSITION_INFOS_DICT.values():
         for ex in area.exits:
             current = (area.area_id, ex.area_id)
             if current in one_way_exits or current in disabled_exits:
-                TRANSITION_INFOS_DICT_RANDO[area.area_id].exits = tuple([
-                    x for x in TRANSITION_INFOS_DICT_RANDO[area.area_id].exits if x != ex
-                ])
-                area.con_left -= 1
+                TRANSITION_INFOS_DICT_RANDO[area.area_id] = Area(
+                    area.area_id,
+                    area.name,
+                    area.default_entrance,
+                    tuple([
+                        x for x in TRANSITION_INFOS_DICT_RANDO[area.area_id].exits if x != ex
+                    ]),
+                )
+                __connections_left[area.area_id] -= 1
 
     # remove exits from ALL_POSSIBLE_TRANSITIONS_RANDO
     global ALL_POSSIBLE_TRANSITIONS_RANDO
@@ -206,6 +219,12 @@ def highjack_transition_rando():
             to=LevelCRC.ST_CLAIRE_NIGHT if state.visited_altar_of_ages else LevelCRC.ST_CLAIRE_DAY,
         )
 
+    # Check if you're visiting a Temple for the first time, if so go directly to Spirit Fight
+    if redirect.to in temples:
+        spirit = TRANSITION_INFOS_DICT[redirect.to].exits[1].area_id
+        if not state.visited_spirits[spirit]:
+            redirect = Transition(from_=redirect.to, to=spirit)
+
     print(
         "highjack_transition_rando |",
         f"From: {hex(state.current_area_old)},",
@@ -220,14 +239,14 @@ def highjack_transition_rando():
 
 
 def link_two_levels(first: Area, second: Area):
-    first.con_left -= 1
-    second.con_left -= 1
+    __connections_left[first.area_id] -= 1
+    __connections_left[second.area_id] -= 1
     return (first, second)
 
 
 def unlink_two_levels(first: Area, second: Area):
-    first.con_left += 1
-    second.con_left += 1
+    __connections_left[first.area_id] += 1
+    __connections_left[second.area_id] += 1
 
 
 def connect_to_existing(
@@ -236,15 +255,15 @@ def connect_to_existing(
     link_list: list[tuple[Area, Area]],
 ):
     global total_con_left
-    total_con_left += level_list[index].con_left
+    total_con_left += __connections_left[level_list[index].area_id]
     levels_available: list[Area] = []
     for i in range(len(level_list)):
         if i == index:
             break
-        if level_list[i].con_left > 0:
+        if __connections_left[level_list[i].area_id] > 0:
             levels_available.append(level_list[i])
     amount_chosen = random.randint(
-        1, min(level_list[index].con_left, len(levels_available)),
+        1, min(__connections_left[level_list[index].area_id], len(levels_available)),
     )
     levels_chosen = random.sample(levels_available, amount_chosen)
     for level_chosen in levels_chosen:
@@ -342,8 +361,9 @@ def get_random_redirection(original: Transition, all_redirections: Iterable[Tran
     return None
 
 
-def set_transitions_map():  # TODO: Break up in smaller functions
+def set_transitions_map():  # noqa: PLR0915 # TODO: Break up in smaller functions
     transitions_map.clear()
+    initialize_connections_left()
     remove_disabled_exits()
     if not CONFIGS.SKIP_JAGUAR:
         starting_default = TRANSITION_INFOS_DICT_RANDO[starting_area].default_entrance
@@ -361,28 +381,30 @@ def set_transitions_map():  # TODO: Break up in smaller functions
         _possible_origins_bucket = list(starmap(Transition, ALL_POSSIBLE_TRANSITIONS_RANDO))
 
         level_list = [
-            area for area in TRANSITION_INFOS_DICT_RANDO.values() if area.con_left > 0
+            area for area in TRANSITION_INFOS_DICT_RANDO.values()
+            if __connections_left[area.area_id] > 0
         ]
         random.shuffle(level_list)
-        level_list.sort(key=lambda a: a.con_left, reverse=True)
+        level_list.sort(key=lambda a: __connections_left[a.area_id], reverse=True)
 
         link_list = [link_two_levels(level_list[0], level_list[1])]
         global total_con_left
-        total_con_left = level_list[0].con_left + level_list[1].con_left
+        total_con_left = __connections_left[level_list[0].area_id]
+        total_con_left += __connections_left[level_list[1].area_id]
 
         index = 2
         while index < len(level_list):
             choice = random.choice(tuple(Choice))
             if total_con_left > 0 and (
-                level_list[index].con_left == 1 or choice == Choice.CONNECT
+                __connections_left[level_list[index].area_id] == 1 or choice == Choice.CONNECT
             ):
                 # option 1: connect to one or more existing levels
                 connect_to_existing(level_list, index, link_list)
-            elif level_list[index].con_left > 1 and (
+            elif __connections_left[level_list[index].area_id] > 1 and (
                 total_con_left == 0 or choice == Choice.INBETWEEN
             ):
                 # option 2: put the current level inbetween an already established connection
-                total_con_left += level_list[index].con_left
+                total_con_left += __connections_left[level_list[index].area_id]
                 level_a, level_b = link_list.pop(random.randrange(len(link_list)))
                 unlink_two_levels(level_a, level_b)
                 link_list.extend((

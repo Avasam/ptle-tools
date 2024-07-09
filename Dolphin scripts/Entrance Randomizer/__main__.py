@@ -75,9 +75,16 @@ async def main_loop():
         + (f"({previous_area.name})" if previous_area else ""),
     )
 
-    # Always re-enable Item Swap.
+    # Always re-enable Item Swap
     if memory.read_u32(ADDRESSES.item_swap) == 1:
         memory.write_u32(ADDRESSES.item_swap, 0)
+
+    # Note if you're currently visiting a spirit fight
+    if (
+        state.current_area_old in state.visited_spirits
+        and not state.visited_spirits.get(state.current_area_old)
+    ):
+        state.visited_spirits[state.current_area_old] = True
 
     # Skip both Jaguar fights if configured
     if CONFIGS.SKIP_JAGUAR:
