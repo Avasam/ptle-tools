@@ -1,0 +1,8 @@
+{
+  "name": "pre-commit-dprint",
+  "description": "Force pre-commit to dry-run dprint on install to build the cache, which will be used at runtime, bypassing the runtime proxy issue.",
+  "version": "0.0.0",
+  "scripts": {
+    "postinstall": "echo %PWD% %% cd %PWD% %% dprint check"
+  }
+}
