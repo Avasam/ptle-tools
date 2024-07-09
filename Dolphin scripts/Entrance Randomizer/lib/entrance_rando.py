@@ -22,12 +22,6 @@ class Choice(IntEnum):
     INBETWEEN = 2
 
 
-temples = (
-    LevelCRC.MONKEY_TEMPLE,
-    LevelCRC.SCORPION_TEMPLE,
-    LevelCRC.PENGUIN_TEMPLE,
-)
-
 _possible_starting_areas = [
     area for area in ALL_TRANSITION_AREAS
     # Remove unwanted starting areas from the list of possibilities
@@ -43,7 +37,11 @@ _possible_starting_areas = [
         # Temples and spirits are effectively duplicates, so we remove half of them here.
         # Spawning in a temple forces you to do the fight anyway. For convenience let's spawn
         # directly in the fight (it's also funnier to start the rando as the animal spirit).
-        *temples,
+        *(
+            TEMPLES_WITH_FIGHT.keys()
+            if CONFIGS.IMMEDIATE_SPIRIT_FIGHTS
+            else TEMPLES_WITH_FIGHT.values()
+        ),
         # Spawning in a Native Minigame is equivalent to spawning in Native Village
         # as they are currently not randomized.
         LevelCRC.WHACK_A_TUCO,
@@ -226,8 +224,8 @@ def highjack_transition_rando():
         )
 
     # Check if you're visiting a Temple for the first time, if so go directly to Spirit Fight
-    if redirect.to in temples:
-        spirit = TRANSITION_INFOS_DICT[redirect.to].exits[1].area_id
+    if CONFIGS.IMMEDIATE_SPIRIT_FIGHTS and redirect.to in TEMPLES_WITH_FIGHT:
+        spirit = TEMPLES_WITH_FIGHT[redirect.to]
         if spirit not in state.visited_levels:
             redirect = Transition(from_=redirect.to, to=spirit)
 
@@ -240,7 +238,7 @@ def highjack_transition_rando():
     )
     memory.write_u32(follow_pointer_path(ADDRESSES.prev_area), redirect.from_)
     memory.write_u32(ADDRESSES.current_area, redirect.to)
-    state.current_area_new = redirect[1]
+    state.current_area_new = redirect.to
     return redirect
 
 
