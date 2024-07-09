@@ -38,6 +38,15 @@ and you will fight Jaguar 2 before fighting Pusca.
 default = True
 """
 
+IMMEDIATE_SPIRIT_FIGHTS: bool = True
+"""
+If True, entering a Temple for which you haven't completed the spirit fight yet will immediately
+spawn you in the fight.
+If False, you keep the option to leave, given you have access to pickaxes.
+
+default = True
+"""
+
 DISABLE_MAPS_IN_SHOP: bool = True
 """
 Whether you can buy maps in the Shaman Shop.
