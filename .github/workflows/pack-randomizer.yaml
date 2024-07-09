@@ -1,0 +1,33 @@
+name: Pack Randomizer
+
+on:
+  workflow_dispatch: #  Allows manual triggers
+  push:
+    branches:
+      - main
+    paths:
+      - "Dolphin scripts/Entrance Randomizer/**"
+      - "Dolphin scripts/pack-rando.ps1"
+      - "Various technical notes/transition_infos.json"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "Dolphin scripts/Entrance Randomizer/**"
+      - "Dolphin scripts/pack-rando.ps1"
+      - "Various technical notes/transition_infos.json"
+
+env:
+  PIP_DISABLE_PIP_VERSION_CHECK: 1
+  FORCE_COLOR: 1
+
+jobs:
+  pack-randomizer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: '& $env:GITHUB_ACTION_PATH/Dolphin scripts/pack-rando.ps1'
+        shell: pwsh
+      - uses: actions/upload-artifact@v4
+        with:
+          path: "Entrance Randomizer v*.zip"
