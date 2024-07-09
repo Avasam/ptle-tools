@@ -24,12 +24,7 @@ class State:
     """Area ID of the previous frame"""
     current_area_new = 0
     """Area ID of the current frame"""
-    visited_altar_of_ages = False
-    visited_spirits: ClassVar[dict[int, bool]] = {
-        LevelCRC.MONKEY_SPIRIT: False,
-        LevelCRC.SCORPION_SPIRIT: False,
-        LevelCRC.PENGUIN_SPIRIT: False,
-    }
+    visited_levels: ClassVar[set[int]] = set()
 
 
 state = State()
