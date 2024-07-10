@@ -20,15 +20,20 @@ repos:
         args: [--autofix, --indent, "2", --offset, "2", --preserve-quotes, --line-width, "100"]
       - id: pretty-format-ini
         args: [--autofix]
-  - repo: local # https://github.com/dprint/dprint
+  - repo: https://github.com/Avasam/pre-commit-dprint/
+    rev: 2711573e472307f9ead398f45a8449993921bb94
     hooks:
       - id: dprint
-        name: dprint
-        entry: dprint fmt
-        language: node
-        types: [text]
-        additional_dependencies: ["dprint@~0.46.0"]
-        pass_filenames: false # https://github.com/adamchainz/pre-commit-dprint/issues/3#issuecomment-1483410008
+        args: [--config https://raw.githubusercontent.com/BesLogic/shared-configs/main/dprint.json]
+  # - repo: local # https://github.com/dprint/dprint
+  #   hooks:
+  #     - id: dprint
+  #       name: dprint
+  #       entry: dprint fmt
+  #       language: node
+  #       types: [text]
+  #       additional_dependencies: ["dprint@~0.46.0"]
+  #       pass_filenames: false # https://github.com/adamchainz/pre-commit-dprint/issues/3#issuecomment-1483410008
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: "v0.5.1" # Must match requirements-dev.txt
     hooks:
