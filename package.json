@@ -3,6 +3,6 @@
   "description": "Force pre-commit to dry-run dprint on install to build the cache, which will be used at runtime, bypassing the runtime proxy issue.",
   "version": "0.0.0",
   "scripts": {
-    "postinstall": "dprint check --config https://raw.githubusercontent.com/BesLogic/shared-configs/main/dprint.json"
+    "postinstall": "dprint output-file-paths --config https://raw.githubusercontent.com/BesLogic/shared-configs/main/dprint.json"
   }
 }

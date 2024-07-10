@@ -21,14 +21,16 @@ repos:
       - id: pretty-format-ini
         args: [--autofix]
   - repo: https://github.com/Avasam/pre-commit-dprint/
-    rev: 16ed4c0
-
-
-
-
+    rev: cd5c8d9
 
     hooks:
       - id: dprint
+        additional_dependencies:
+          - "@dprint/typescript@0.84.1"
+          - "@dprint/json@0.17.1"
+          - "@dprint/markdown@0.15.2"
+          - "@dprint/dockerfile@0.3.0"
+          - "@dprint/toml@0.5.4"
         # args: [--config, https://raw.githubusercontent.com/BesLogic/shared-configs/main/dprint.json]
   # - repo: local # https://github.com/dprint/dprint
   #   hooks:
