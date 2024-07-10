@@ -22,7 +22,6 @@ repos:
         args: [--autofix]
   - repo: https://github.com/spinergie/pre-commit-dprint
     rev: v0.45.0
-
     hooks:
       - id: dprint
         additional_dependencies:
