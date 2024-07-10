@@ -20,13 +20,13 @@ repos:
         args: [--autofix, --indent, "2", --offset, "2", --preserve-quotes, --line-width, "100"]
       - id: pretty-format-ini
         args: [--autofix]
-  - repo: https://github.com/Avasam/pre-commit-dprint/
-    rev: 30b13eb
- 
+  - repo: https://github.com/spinergie/pre-commit-dprint
+    rev: v0.45.0
 
     hooks:
       - id: dprint
         additional_dependencies:
+          - dprint@0.45.0
           - "@dprint/typescript@0.84.1"
           - "@dprint/json@0.17.1"
           - "@dprint/markdown@0.15.2"
