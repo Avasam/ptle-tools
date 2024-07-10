@@ -24,7 +24,7 @@ repos:
     rev: 2711573e472307f9ead398f45a8449993921bb94
     hooks:
       - id: dprint
-        args: [--config https://raw.githubusercontent.com/BesLogic/shared-configs/main/dprint.json]
+        args: [--config, https://raw.githubusercontent.com/BesLogic/shared-configs/main/dprint.json]
   # - repo: local # https://github.com/dprint/dprint
   #   hooks:
   #     - id: dprint
