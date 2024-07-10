@@ -21,7 +21,7 @@ repos:
       - id: pretty-format-ini
         args: [--autofix]
   - repo: https://github.com/Avasam/pre-commit-dprint/
-    rev: ab14001
+    rev: ab14001657564176f9f1472103e557246a26cb14
     hooks:
       - id: dprint
         # args: [--config, https://raw.githubusercontent.com/BesLogic/shared-configs/main/dprint.json]
