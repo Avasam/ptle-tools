@@ -21,7 +21,7 @@ repos:
       - id: pretty-format-ini
         args: [--autofix]
   - repo: https://github.com/Avasam/pre-commit-dprint/
-    rev: 645ba8e
+    rev: 9fb8adb
 
     hooks:
       - id: dprint
