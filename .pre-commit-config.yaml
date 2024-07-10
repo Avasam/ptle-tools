@@ -23,6 +23,10 @@ repos:
   - repo: https://github.com/Avasam/pre-commit-dprint/
     rev: 9d717f5
 
+
+
+
+
     hooks:
       - id: dprint
         # args: [--config, https://raw.githubusercontent.com/BesLogic/shared-configs/main/dprint.json]
