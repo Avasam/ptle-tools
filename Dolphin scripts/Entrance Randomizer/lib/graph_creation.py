@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import Mapping, MutableMapping, Sequence
+from copy import copy
 from pathlib import Path
-from typing import Any
 
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
@@ -34,7 +34,7 @@ IMPORTANT_STORY_TRIGGER_AREAS = {
 
 
 def create_vertices(
-    transitions_map: dict[tuple[int, int], tuple[int, int]],
+    transitions_map: Mapping[tuple[int, int], tuple[int, int]],
     starting_area: int,
 ):
     output_text = ""
@@ -93,7 +93,7 @@ def create_vertices(
     return output_text
 
 
-def create_edges(transitions_map: dict[tuple[int, int], tuple[int, int]]):
+def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
     connections = [(original[0], redirect[1]) for original, redirect in transitions_map.items()]
     connections_two_way: list[tuple[int, int]] = []
     connections_one_way: list[tuple[int, int]] = []
@@ -124,13 +124,12 @@ def create_edges(transitions_map: dict[tuple[int, int], tuple[int, int]]):
 
 
 def create_graphml(
-    # NOTE: dict is invariant, but Mapping doesn't implement copy
-    transitions_map: dict[tuple[int, int], tuple[int, int]] | dict[tuple[int, int], Any],
+    transitions_map: MutableMapping[tuple[int, int], tuple[int, int]],
     temp_disabled_exits: Sequence[tuple[int, int]],
     seed_string: SeedType,
     starting_area: int,
 ):
-    all_transitions = transitions_map.copy()
+    all_transitions = copy(transitions_map)
     for item in temp_disabled_exits:
         all_transitions[item] = item
 

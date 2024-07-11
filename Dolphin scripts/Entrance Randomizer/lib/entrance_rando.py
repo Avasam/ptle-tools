@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import random
-from collections.abc import Iterable, MutableMapping, Sequence
+from collections.abc import Iterable, MutableMapping, MutableSequence, Sequence
+from copy import copy
 from enum import IntEnum
 from itertools import starmap
 from typing import NamedTuple, Sized
@@ -261,10 +262,10 @@ def connect_to_existing(
 
 def check_part_of_loop(
     link: tuple[Area, Area],
-    link_list: list[tuple[Area, Area]],
+    link_list: MutableSequence[tuple[Area, Area]],
     area_list: Sized,
 ):
-    unchecked_links = link_list.copy()
+    unchecked_links = copy(link_list)
     unchecked_links.remove(link)
     areas_reachable = [link[0]]
     new_area_reached = True
