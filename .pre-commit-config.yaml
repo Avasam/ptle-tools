@@ -30,12 +30,12 @@ repos:
         additional_dependencies: ["dprint@~0.46.0"]
         pass_filenames: false # https://github.com/adamchainz/pre-commit-dprint/issues/3#issuecomment-1483410008
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.4.9" # Must match requirements-dev.txt
+    rev: "v0.5.1" # Must match requirements-dev.txt
     hooks:
       - id: ruff
         args: [--fix]
   - repo: https://github.com/hhatto/autopep8
-    rev: "v2.2.0" # Must match requirements-dev.txt
+    rev: "v2.3.1" # Must match requirements-dev.txt
     hooks:
       - id: autopep8
   - repo: https://github.com/asottile/add-trailing-comma
@@ -43,12 +43,12 @@ repos:
     hooks:
       - id: add-trailing-comma
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: "v1.1.367"
+    rev: "v1.1.370" # Must match requirements-dev.txt
     hooks:
       - id: pyright
 
 ci:
-  autoupdate_schedule: monthly
+  autoupdate_schedule: quarterly # Should already be handled by Renovate
   skip:
     - dprint # https://github.com/adamchainz/pre-commit-dprint/issues/4
     - pyright # https://github.com/RobertCraigie/pyright-python/issues/164
