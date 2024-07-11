@@ -2,7 +2,7 @@
 
 1. Use this fork of Dolphin <https://github.com/Felk/dolphin/releases>.
 2. Turn on "Scripting" logs and set Verbosity to "Error" or any option below (not "Notice").\
-  ![Enable scripting log](./enable_scripting_log.png)
+   ![Enable scripting log](./enable_scripting_log.png)
 3. Under "Scripts", click "Add new Scripts" and select your Python script.
 
 ## Entrance Randomizer (still work in progress!)
@@ -21,6 +21,7 @@ Transitions:
 - Option to manually choose a starting area, or to get a random starting area
 - Option to make all transitions 2-directional, or to allow 1-directional transitions
 - Option to skip both Jaguar fights entirely, or to keep them as normal
+- Option to immediately spawn in the Spirit Fight when entering a temple, or to enter normally
 
 Shaman Shop:
 

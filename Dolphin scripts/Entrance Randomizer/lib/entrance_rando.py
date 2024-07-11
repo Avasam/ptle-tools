@@ -54,7 +54,11 @@ _possible_starting_areas = [
         # Temples and spirits are effectively duplicates, so we remove half of them here.
         # Spawning in a temple forces you to do the fight anyway. For convenience let's spawn
         # directly in the fight (it's also funnier to start the rando as the animal spirit).
-        *temples,
+        *(
+            TEMPLES_WITH_FIGHT.keys()
+            if CONFIGS.IMMEDIATE_SPIRIT_FIGHTS
+            else TEMPLES_WITH_FIGHT.values()
+        ),
         # Spawning in a Native Minigame is equivalent to spawning in Native Village
         # as they are currently not randomized.
         LevelCRC.WHACK_A_TUCO,
@@ -161,16 +165,22 @@ def highjack_transition_rando():
         return False
 
     # Apply Altar of Ages logic to St. Claire's Excavation Camp
+    # Even if the cutscene wasn't actually watched.
+    # Just leaving the Altar is good enough for the rando.
     if redirect.to in {LevelCRC.ST_CLAIRE_DAY, LevelCRC.ST_CLAIRE_NIGHT}:
         redirect = Transition(
             redirect.from_,
-            to=LevelCRC.ST_CLAIRE_NIGHT if state.visited_altar_of_ages else LevelCRC.ST_CLAIRE_DAY,
+            to=(
+                LevelCRC.ST_CLAIRE_NIGHT
+                if LevelCRC.ALTAR_OF_AGES in state.visited_levels
+                else LevelCRC.ST_CLAIRE_DAY
+            ),
         )
 
     # Check if you're visiting a Temple for the first time, if so go directly to Spirit Fight
-    if redirect.to in temples:
-        spirit = TRANSITION_INFOS_DICT[redirect.to].exits[1].area_id
-        if not state.visited_spirits[spirit]:
+    if CONFIGS.IMMEDIATE_SPIRIT_FIGHTS and redirect.to in TEMPLES_WITH_FIGHT:
+        spirit = TEMPLES_WITH_FIGHT[redirect.to]
+        if spirit not in state.visited_levels:
             redirect = Transition(from_=redirect.to, to=spirit)
 
     print(
@@ -182,7 +192,7 @@ def highjack_transition_rando():
     )
     memory.write_u32(follow_pointer_path(ADDRESSES.prev_area), redirect.from_)
     memory.write_u32(ADDRESSES.current_area, redirect.to)
-    state.current_area_new = redirect[1]
+    state.current_area_new = redirect.to
     return redirect
 
 
