@@ -6,6 +6,7 @@ from pathlib import Path
 
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
+from lib.entrance_rando import TRANSITION_INFOS_DICT_RANDO
 from lib.types_ import SeedType
 
 STARTING_AREA_COLOR = "#ff8000"  # Orange
@@ -27,7 +28,6 @@ UPGRADE_AREAS = {
 }
 IMPORTANT_STORY_TRIGGER_AREAS = {
     LevelCRC.ALTAR_OF_AGES,
-    LevelCRC.ST_CLAIRE_NIGHT,
     LevelCRC.ST_CLAIRE_DAY,
     LevelCRC.GATES_OF_EL_DORADO,
 }
@@ -55,7 +55,7 @@ def create_vertices(
         # The same logic applies to the Spirit Fights:
         # these will never appear on the map, therefore we remove the (Harry) suffix.
         area_name = (
-            TRANSITION_INFOS_DICT
+            TRANSITION_INFOS_DICT_RANDO
             [area_id]
             .name
             .replace(" (Day)", "")
@@ -93,13 +93,53 @@ def create_vertices(
     return output_text
 
 
-def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
-    connections = [(original[0], redirect[1]) for original, redirect in transitions_map.items()]
-    connections_two_way: list[tuple[int, int]] = []
-    connections_one_way: list[tuple[int, int]] = []
+def edge_text(
+    start: int,
+    end: int,
+    counter: int,
+    direct: str,
+    color: str | None,
+    dashed: bool,
+):
+    output = (
+        f'<edge source="{TRANSITION_INFOS_DICT_RANDO[start].area_id}" '
+        + f'target="{TRANSITION_INFOS_DICT_RANDO[end].area_id}" isDirect="{direct}" '
+        + f'id="{counter}"'
+    )
+    if dashed or color is not None:
+        output += ' ownStyles="{&quot;0&quot;:{'
+        if color is not None:
+            output += f'&quot;strokeStyle&quot;:&quot;{color}&quot;'
+            if dashed:
+                output += ','
+        if dashed:
+            output += '&quot;lineDash&quot;:&quot;2&quot;'
+        output += '}}"'
+    output += '></edge>\n'
+    return output
+
+
+def create_edges(
+    transitions_map: Mapping[tuple[int, int], tuple[int, int]],
+    temp_disabled_exits: list[tuple[int, int]],
+    closed_door_exits: list[tuple[int, int]],
+):
+    connections = [(original, redirect) for original, redirect in transitions_map.items()]
+    connections_two_way: list[tuple[tuple[int, int], tuple[int, int]]] = []
+    connections_one_way: list[tuple[tuple[int, int], tuple[int, int]]] = []
+    connections_closed_door: list[tuple[tuple[int, int], tuple[int, int]]] = []
     for pairing in connections:
-        if (pairing[1], pairing[0]) not in connections_two_way:
-            if (pairing[1], pairing[0]) in connections:
+        reverse = (
+            (pairing[1][1], pairing[1][0]),
+            (pairing[0][1], pairing[0][0])
+        )
+        if reverse not in connections_two_way and reverse not in connections_closed_door:
+            if pairing[1] in closed_door_exits:
+                connections_closed_door.append(pairing)
+                continue
+            if reverse[1] in closed_door_exits:
+                continue
+            if reverse in connections:
                 connections_two_way.append(pairing)
             else:
                 connections_one_way.append(pairing)
@@ -107,18 +147,16 @@ def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
     output_text = ""
     counter = 1  # Can't start at 0 since that's the MAIN_MENU id
     for pairing in connections_two_way:
-        output_text += (
-            f'<edge source="{TRANSITION_INFOS_DICT[pairing[0]].area_id}" '
-            + f'target="{TRANSITION_INFOS_DICT[pairing[1]].area_id}" isDirect="false" '
-            + f'id="{counter}"></edge>\n'
-        )
+        if pairing[1] in temp_disabled_exits:
+            output_text += edge_text(pairing[0][0],pairing[1][1],counter,'false','#000000',False)
+        else:
+            output_text += edge_text(pairing[0][0],pairing[1][1],counter,'false',None,False)
         counter += 1
     for pairing in connections_one_way:
-        output_text += (
-            f'<edge source="{TRANSITION_INFOS_DICT[pairing[0]].area_id}" '
-            + f'target="{TRANSITION_INFOS_DICT[pairing[1]].area_id}" isDirect="true" '
-            + f'id="{counter}"></edge>\n'
-        )
+        output_text += edge_text(pairing[0][0],pairing[1][1],counter,'true',None,True)
+        counter += 1
+    for pairing in connections_closed_door:
+        output_text += edge_text(pairing[1][1],pairing[0][0],counter,'true','#ff0000',False)
         counter += 1
     return output_text
 
@@ -126,6 +164,7 @@ def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
 def create_graphml(
     transitions_map: MutableMapping[tuple[int, int], tuple[int, int]],
     temp_disabled_exits: Sequence[tuple[int, int]],
+    closed_door_exits: list[tuple[int, int]],
     seed_string: SeedType,
     starting_area: int,
 ):
@@ -137,8 +176,8 @@ def create_graphml(
         '<?xml version="1.0" encoding="UTF-8"?>'
         + '<graphml><graph id="Graph" uidGraph="1" uidEdge="1">\n'
         + create_vertices(all_transitions, starting_area)
-        + create_edges(all_transitions)
-        + "</graph></graphml>"
+        + create_edges(all_transitions, temp_disabled_exits, closed_door_exits)
+        + '</graph></graphml>'
     )
 
     # TODO (Avasam): Get actual user folder based whether Dolphin Emulator is in AppData/Roaming
