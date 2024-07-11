@@ -22,6 +22,23 @@ class Choice(IntEnum):
     INBETWEEN = 2
 
 
+temples = (
+    LevelCRC.MONKEY_TEMPLE,
+    LevelCRC.SCORPION_TEMPLE,
+    LevelCRC.PENGUIN_TEMPLE,
+)
+
+one_way_exits = (
+    # the White Valley geyser
+    Transition(LevelCRC.WHITE_VALLEY, LevelCRC.MOUNTAIN_SLED_RUN),
+    # the Apu Illapu Shrine geyser
+    Transition(LevelCRC.APU_ILLAPU_SHRINE, LevelCRC.WHITE_VALLEY),
+    # the Apu Illapu Shrine one-way door
+    Transition(LevelCRC.MOUNTAIN_SLED_RUN, LevelCRC.APU_ILLAPU_SHRINE),
+    # the Jungle Canyon waterfall
+    Transition(LevelCRC.CAVERN_LAKE, LevelCRC.JUNGLE_CANYON),
+)
+
 _possible_starting_areas = [
     area for area in ALL_TRANSITION_AREAS
     # Remove unwanted starting areas from the list of possibilities
@@ -57,33 +74,7 @@ _possible_starting_areas = [
     }
 ]
 
-# Call RNG even if this is unused to not impact randomization of other things for the same seed
-starting_area = random.choice(_possible_starting_areas)
-if CONFIGS.STARTING_AREA is not None:
-    starting_area = CONFIGS.STARTING_AREA
-
-transitions_map: dict[tuple[int, int], Transition] = {}
-"""```python
-{
-    (og_from_id, og_to_id): (og_from_id, og_to_id)
-}
-```"""
-
-__connections_left: dict[int, int] = {}
-"""Used in randomization process to track per Area how many exits aren't connected yet."""
-
-one_way_exits = (
-    # the White Valley geyser
-    Transition(LevelCRC.WHITE_VALLEY, LevelCRC.MOUNTAIN_SLED_RUN),
-    # the Apu Illapu Shrine geyser
-    Transition(LevelCRC.APU_ILLAPU_SHRINE, LevelCRC.WHITE_VALLEY),
-    # the Apu Illapu Shrine one-way door
-    Transition(LevelCRC.MOUNTAIN_SLED_RUN, LevelCRC.APU_ILLAPU_SHRINE),
-    # the Jungle Canyon waterfall
-    Transition(LevelCRC.CAVERN_LAKE, LevelCRC.JUNGLE_CANYON),
-)
-
-disabled_exits = (
+temp_disabled_exits = [
     # Mouth of Inti has 2 connections with Altar of Huitaca, which causes problems,
     # basically it's very easy to get softlocked by the spider web when entering Altar of Huitaca
     # So for now just don't randomize it. That way runs don't just end out of nowhere
@@ -95,6 +86,10 @@ disabled_exits = (
     # So for now just don't randomize it. That way we won't have to worry about that yet
     (LevelCRC.TWIN_OUTPOSTS, LevelCRC.TWIN_OUTPOSTS_UNDERWATER),
     (LevelCRC.TWIN_OUTPOSTS_UNDERWATER, LevelCRC.TWIN_OUTPOSTS),
+]
+
+disabled_exits = (
+    *temp_disabled_exits,
     # The 3 Spirit Fights are not randomized,
     # because that will cause issues with the transformation cutscene trigger.
     # Plus it wouldn't really improve anything, given that the Temples are randomized anyway.
@@ -141,64 +136,23 @@ disabled_exits = (
     (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
 )
 
+# Call RNG even if this is unused to not impact randomization of other things for the same seed
+starting_area = random.choice(_possible_starting_areas)
+if CONFIGS.STARTING_AREA is not None:
+    starting_area = CONFIGS.STARTING_AREA
+
 TRANSITION_INFOS_DICT_RANDO = TRANSITION_INFOS_DICT.copy()
 ALL_POSSIBLE_TRANSITIONS_RANDO = ALL_POSSIBLE_TRANSITIONS
 
+transitions_map: dict[tuple[int, int], Transition] = {}
+"""```python
+{
+    (og_from_id, og_to_id): (og_from_id, og_to_id)
+}
+```"""
 
-def initialize_connections_left():
-    for area in TRANSITION_INFOS_DICT.values():
-        __connections_left[area.area_id] = len(area.exits)
-
-
-def remove_disabled_exits():
-    # remove exits from TRANSITION_INFOS_DICT_RANDO
-    for area in TRANSITION_INFOS_DICT.values():
-        for ex in area.exits:
-            current = (area.area_id, ex.area_id)
-            if current in one_way_exits or current in disabled_exits:
-                TRANSITION_INFOS_DICT_RANDO[area.area_id] = Area(
-                    area.area_id,
-                    area.name,
-                    area.default_entrance,
-                    tuple([
-                        x for x in TRANSITION_INFOS_DICT_RANDO[area.area_id].exits if x != ex
-                    ]),
-                )
-                __connections_left[area.area_id] -= 1
-
-    # remove exits from ALL_POSSIBLE_TRANSITIONS_RANDO
-    global ALL_POSSIBLE_TRANSITIONS_RANDO
-    for trans in ALL_POSSIBLE_TRANSITIONS:
-        if trans in one_way_exits or trans in disabled_exits:
-            ALL_POSSIBLE_TRANSITIONS_RANDO = [  # pyright: ignore[reportConstantRedefinition]
-                x for x in ALL_POSSIBLE_TRANSITIONS_RANDO if x != trans
-            ]
-
-
-def highjack_transition(
-    from_: int | None,
-    to: int | None,
-    redirect: int,
-):
-    if from_ is None:
-        from_ = state.current_area_old
-    if to is None:
-        to = state.current_area_new
-
-    # Early return. Detect the start of a transition
-    if state.current_area_old == state.current_area_new:
-        return False
-
-    if from_ == state.current_area_old and to == state.current_area_new:
-        print(
-            "highjack_transition |",
-            f"From: {hex(state.current_area_old)},",
-            f"To: {hex(state.current_area_new)}.",
-            f"Redirecting to: {hex(redirect)}",
-        )
-        memory.write_u32(ADDRESSES.current_area, redirect)
-        return True
-    return False
+__connections_left: dict[int, int] = {}
+"""Used in randomization process to track per Area how many exits aren't connected yet."""
 
 
 def highjack_transition_rando():
@@ -240,6 +194,36 @@ def highjack_transition_rando():
     memory.write_u32(ADDRESSES.current_area, redirect.to)
     state.current_area_new = redirect.to
     return redirect
+
+
+def initialize_connections_left():
+    for area in TRANSITION_INFOS_DICT.values():
+        __connections_left[area.area_id] = len(area.exits)
+
+
+def remove_disabled_exits():
+    # remove exits from TRANSITION_INFOS_DICT_RANDO
+    for area in TRANSITION_INFOS_DICT.values():
+        for ex in area.exits:
+            current = (area.area_id, ex.area_id)
+            if current in one_way_exits or current in disabled_exits:
+                TRANSITION_INFOS_DICT_RANDO[area.area_id] = Area(
+                    area.area_id,
+                    area.name,
+                    area.default_entrance,
+                    tuple([
+                        x for x in TRANSITION_INFOS_DICT_RANDO[area.area_id].exits if x != ex
+                    ]),
+                )
+                __connections_left[area.area_id] -= 1
+
+    # remove exits from ALL_POSSIBLE_TRANSITIONS_RANDO
+    global ALL_POSSIBLE_TRANSITIONS_RANDO
+    for trans in ALL_POSSIBLE_TRANSITIONS:
+        if trans in one_way_exits or trans in disabled_exits:
+            ALL_POSSIBLE_TRANSITIONS_RANDO = [  # pyright: ignore[reportConstantRedefinition]
+                x for x in ALL_POSSIBLE_TRANSITIONS_RANDO if x != trans
+            ]
 
 
 def link_two_levels(first: Area, second: Area):
