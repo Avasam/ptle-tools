@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from pathlib import Path
+from typing import Any
 
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
@@ -123,7 +124,8 @@ def create_edges(transitions_map: dict[tuple[int, int], tuple[int, int]]):
 
 
 def create_graphml(
-    transitions_map: dict[tuple[int, int], tuple[int, int]],
+    # NOTE: dict is invariant, but Mapping doesn't implement copy
+    transitions_map: dict[tuple[int, int], tuple[int, int]] | dict[tuple[int, int], Any],
     temp_disabled_exits: Sequence[tuple[int, int]],
     seed_string: SeedType,
     starting_area: int,
