@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import random
-from collections.abc import Iterable, MutableMapping, MutableSequence, Sequence
+from collections.abc import MutableSequence, Sequence
 from copy import copy
 from enum import IntEnum
 from itertools import starmap
@@ -271,12 +271,7 @@ def create_connection(
     origin: Transition,
     redirect: Transition,
 ):
-    global _possible_origins_bucket
-    global _possible_redirections_bucket
-    global link_list
-    global total_con_left
-    global loose_ends
-    global sacred_pairs
+    global _possible_origins_bucket, _possible_redirections_bucket, link_list, total_con_left, loose_ends, sacred_pairs
 
     if len(loose_ends) > 0 and (origin.from_ == __current_hub or redirect.to == __current_hub):
         sacred_pairs.append((origin.from_, redirect.to))
@@ -306,10 +301,7 @@ def delete_connection(
     origin: Transition,
     redirect: Transition,
 ):
-    global _possible_origins_bucket
-    global _possible_redirections_bucket
-    global link_list
-    global total_con_left
+    global _possible_origins_bucket, _possible_redirections_bucket, link_list, total_con_left
 
     link_list.remove((origin, redirect))
     _possible_origins_bucket.append(origin)
@@ -356,8 +348,7 @@ def choose_random_exit(
         ]
     if len(preferred_exits) > 0:
         return random.choice(preferred_exits)
-    else:
-        return random.choice(all_exits_available)
+    return random.choice(all_exits_available)
 
 
 def connect_two_areas(
@@ -416,7 +407,7 @@ def insert_area_inbetween(
     pair = tuple([old_origin.from_, old_redirect.to])
     mirror_pair = tuple([old_redirect.to, old_origin.from_])
     if pair in sacred_pairs or mirror_pair in sacred_pairs:
-        sacred_pairs = [ x for x in sacred_pairs if x != pair and x != mirror_pair]
+        sacred_pairs = [x for x in sacred_pairs if x != pair and x != mirror_pair]
         sacred_pairs.extend([
             (new_level, old_origin.from_),
             (new_level, old_redirect.to),
@@ -480,8 +471,7 @@ def check_part_of_loop(
 
     if can_reach_other_side(chosen_link, unchecked_links):
         return can_reach_other_side(chosen_mirror, unchecked_links)
-    else:
-        return False
+    return False
 
 
 def find_and_break_open_connection(link_list: list[tuple[Transition, Transition]]):
@@ -520,8 +510,7 @@ def set_transitions_map():  # noqa: PLR0915 # TODO: Break up in smaller function
         tutorial_redirect = Transition(from_=starting_default, to=starting_area)
         transitions_map[tutorial_original] = tutorial_redirect
 
-    global _possible_origins_bucket
-    global _possible_redirections_bucket
+    global _possible_origins_bucket, _possible_redirections_bucket
 
     _possible_origins_bucket = list(starmap(Transition, ALL_POSSIBLE_TRANSITIONS_RANDO))
     _possible_redirections_bucket = _possible_origins_bucket.copy()
@@ -540,13 +529,13 @@ def set_transitions_map():  # noqa: PLR0915 # TODO: Break up in smaller function
             if __connections_left[area.area_id] > 0
         ]
         random.shuffle(level_list)
-        level_list.sort(key=lambda a: (
-            a.area_id in closed_door_levels, __connections_left[a.area_id]
-        ), reverse=True)
+        level_list.sort(
+            key=lambda a: (
+                a.area_id in closed_door_levels, __connections_left[a.area_id],
+            ), reverse=True,
+        )
 
-        global __current_hub
-        global loose_ends
-        global total_con_left
+        global __current_hub, loose_ends, total_con_left
 
         __current_hub = closed_door_levels[0]  # this list is shuffled, so just pick the first one
         loose_ends = [*closed_door_exits]
@@ -594,14 +583,13 @@ def set_transitions_map():  # noqa: PLR0915 # TODO: Break up in smaller function
                 try:
                     find_and_break_open_connection(link_list)
                 except Exception as e:
-                    if str(e) == 'NO CONNECTION FOUND':
-                        print('')
-                        print('ATTENTION ATTENTION: THE RANDOMIZER CRASHED!!!')
-                        print('Please notify a developer!')
-                        print('')
+                    if str(e) == "NO CONNECTION FOUND":
+                        print()
+                        print("ATTENTION ATTENTION: THE RANDOMIZER CRASHED!!!")
+                        print("Please notify a developer!")
+                        print()
                         break
-                    else:
-                        raise
+                    raise
                 continue
 
             index += 1

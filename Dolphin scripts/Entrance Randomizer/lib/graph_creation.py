@@ -109,13 +109,13 @@ def edge_text(
     if dashed or color is not None:
         output += ' ownStyles="{&quot;0&quot;:{'
         if color is not None:
-            output += f'&quot;strokeStyle&quot;:&quot;{color}&quot;'
+            output += f"&quot;strokeStyle&quot;:&quot;{color}&quot;"
             if dashed:
-                output += ','
+                output += ","
         if dashed:
-            output += '&quot;lineDash&quot;:&quot;2&quot;'
+            output += "&quot;lineDash&quot;:&quot;2&quot;"
         output += '}}"'
-    output += '></edge>\n'
+    output += "></edge>\n"
     return output
 
 
@@ -131,7 +131,7 @@ def create_edges(
     for pairing in connections:
         reverse = (
             (pairing[1][1], pairing[1][0]),
-            (pairing[0][1], pairing[0][0])
+            (pairing[0][1], pairing[0][0]),
         )
         if reverse not in connections_two_way and reverse not in connections_closed_door:
             if pairing[1] in closed_door_exits:
@@ -148,15 +148,18 @@ def create_edges(
     counter = 1  # Can't start at 0 since that's the MAIN_MENU id
     for pairing in connections_two_way:
         if pairing[1] in temp_disabled_exits:
-            output_text += edge_text(pairing[0][0],pairing[1][1],counter,'false','#000000',False)
+            output_text += edge_text(
+                pairing[0][0], pairing[1][1],
+                counter, "false", "#000000", False,
+            )
         else:
-            output_text += edge_text(pairing[0][0],pairing[1][1],counter,'false',None,False)
+            output_text += edge_text(pairing[0][0], pairing[1][1], counter, "false", None, False)
         counter += 1
     for pairing in connections_one_way:
-        output_text += edge_text(pairing[0][0],pairing[1][1],counter,'true',None,True)
+        output_text += edge_text(pairing[0][0], pairing[1][1], counter, "true", None, True)
         counter += 1
     for pairing in connections_closed_door:
-        output_text += edge_text(pairing[1][1],pairing[0][0],counter,'true','#ff0000',False)
+        output_text += edge_text(pairing[1][1], pairing[0][0], counter, "true", "#ff0000", False)
         counter += 1
     return output_text
 
@@ -177,7 +180,7 @@ def create_graphml(
         + '<graphml><graph id="Graph" uidGraph="1" uidEdge="1">\n'
         + create_vertices(all_transitions, starting_area)
         + create_edges(all_transitions, temp_disabled_exits, closed_door_exits)
-        + '</graph></graphml>'
+        + "</graph></graphml>"
     )
 
     # TODO (Avasam): Get actual user folder based whether Dolphin Emulator is in AppData/Roaming
