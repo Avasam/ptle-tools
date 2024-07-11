@@ -221,6 +221,7 @@ class PreviousArea:
                 return -1  # We went the entire dynamic data structure w/o finding a valid ID !
         return -1
 
+
 def dump_spoiler_logs(
     starting_area_name: str,
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],

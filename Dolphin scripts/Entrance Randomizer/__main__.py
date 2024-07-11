@@ -32,7 +32,6 @@ from lib.utils import (
     PreviousArea,
     draw_text,
     dump_spoiler_logs,
-    follow_pointer_path,
     highjack_transition,
     prevent_item_softlock,
     prevent_transition_softlocks,
