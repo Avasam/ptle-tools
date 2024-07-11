@@ -7,7 +7,6 @@ from typing import ClassVar
 from dolphin import gui  # pyright: ignore[reportMissingModuleSource]
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
-from lib.entrance_rando import TRANSITION_INFOS_DICT, Transition, temples, transitions_map
 from lib.types_ import SeedType
 
 DRAW_TEXT_STEP = 24
@@ -87,41 +86,6 @@ def highjack_transition(
         memory.write_u32(ADDRESSES.current_area, redirect)
         return True
     return False
-
-
-def highjack_transition_rando():
-    # Early return, faster check. Detect the start of a transition
-    if state.current_area_old == state.current_area_new:
-        return False
-
-    redirect = transitions_map.get((state.current_area_old, state.current_area_new))
-    if not redirect:
-        return False
-
-    # Apply Altar of Ages logic to St. Claire's Excavation Camp
-    if redirect.to in {LevelCRC.ST_CLAIRE_DAY, LevelCRC.ST_CLAIRE_NIGHT}:
-        redirect = Transition(
-            redirect.from_,
-            to=LevelCRC.ST_CLAIRE_NIGHT if state.visited_altar_of_ages else LevelCRC.ST_CLAIRE_DAY,
-        )
-
-    # Check if you're visiting a Temple for the first time, if so go directly to Spirit Fight
-    if redirect.to in temples:
-        spirit = TRANSITION_INFOS_DICT[redirect.to].exits[1].area_id
-        if not state.visited_spirits[spirit]:
-            redirect = Transition(from_=redirect.to, to=spirit)
-
-    print(
-        "highjack_transition_rando |",
-        f"From: {hex(state.current_area_old)},",
-        f"To: {hex(state.current_area_new)}.",
-        f"Redirecting to: {hex(redirect.to)}",
-        f"({hex(redirect.from_)} entrance)\n",
-    )
-    memory.write_u32(follow_pointer_path(ADDRESSES.prev_area), redirect.from_)
-    memory.write_u32(ADDRESSES.current_area, redirect.to)
-    state.current_area_new = redirect[1]
-    return redirect
 
 
 def prevent_transition_softlocks():
