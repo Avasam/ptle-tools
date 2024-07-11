@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+from collections.abc import Sequence
 from pathlib import Path
 
 from lib.constants import *  # noqa: F403
@@ -33,7 +33,7 @@ IMPORTANT_STORY_TRIGGER_AREAS = {
 
 
 def create_vertices(
-    transitions_map: Mapping[tuple[int, int], tuple[int, int]],
+    transitions_map: dict[tuple[int, int], tuple[int, int]],
     starting_area: int,
 ):
     output_text = ""
@@ -92,7 +92,7 @@ def create_vertices(
     return output_text
 
 
-def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
+def create_edges(transitions_map: dict[tuple[int, int], tuple[int, int]]):
     connections = [(original[0], redirect[1]) for original, redirect in transitions_map.items()]
     connections_two_way: list[tuple[int, int]] = []
     connections_one_way: list[tuple[int, int]] = []
@@ -123,12 +123,12 @@ def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
 
 
 def create_graphml(
-    transitions_map: Mapping[tuple[int, int], tuple[int, int]],
+    transitions_map: dict[tuple[int, int], tuple[int, int]],
     temp_disabled_exits: Sequence[tuple[int, int]],
     seed_string: SeedType,
     starting_area: int,
 ):
-    all_transitions: Mapping[tuple[int, int], tuple[int, int]] = transitions_map.copy()
+    all_transitions = transitions_map.copy()
     for item in temp_disabled_exits:
         all_transitions[item] = item
 
