@@ -10,7 +10,7 @@ import CONFIGS
 from dolphin import memory  # pyright: ignore[reportMissingModuleSource]
 from lib.transition_infos import transition_infos
 
-__version__ = "0.4.0"
+__version__ = "0.4.5"
 """
 Major: New major feature or functionality
 
