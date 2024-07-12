@@ -7,7 +7,7 @@ from pathlib import Path
 
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
-from lib.entrance_rando import TRANSITION_INFOS_DICT_RANDO
+from lib.entrance_rando import transition_infos_dict_rando
 from lib.types_ import SeedType
 
 
@@ -67,7 +67,7 @@ def create_vertices(
         # The same logic applies to the Spirit Fights:
         # these will never appear on the map, therefore we remove the (Harry) suffix.
         area_name = (
-            TRANSITION_INFOS_DICT_RANDO
+            transition_infos_dict_rando
             [area_id]
             .name
             .replace(" (Day)", "")
@@ -117,8 +117,8 @@ def edge_text(
     if direct == Direction.TWOWAY:
         direct_str = "false"
     output = (
-        f'<edge source="{TRANSITION_INFOS_DICT_RANDO[start].area_id}" '
-        + f'target="{TRANSITION_INFOS_DICT_RANDO[end].area_id}" isDirect="{direct_str}" '
+        f'<edge source="{transition_infos_dict_rando[start].area_id}" '
+        + f'target="{transition_infos_dict_rando[end].area_id}" isDirect="{direct_str}" '
         + f'id="{counter}"'
     )
     if line_type == LineType.DASHED or color is not None:
