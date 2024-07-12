@@ -170,19 +170,19 @@ def create_edges(
         else:
             output_text += edge_text(
                 pairing[0][0], pairing[1][1],
-                counter, Direction.TWOWAY, None, LineType.SOLID
+                counter, Direction.TWOWAY, None, LineType.SOLID,
             )
         counter += 1
     for pairing in connections_one_way:
         output_text += edge_text(
             pairing[0][0], pairing[1][1],
-            counter, Direction.ONEWAY, None, LineType.DASHED
+            counter, Direction.ONEWAY, None, LineType.DASHED,
         )
         counter += 1
     for pairing in connections_closed_door:
         output_text += edge_text(
             pairing[1][1], pairing[0][0],
-            counter, Direction.ONEWAY, "#ff0000", LineType.SOLID
+            counter, Direction.ONEWAY, "#ff0000", LineType.SOLID,
         )
         counter += 1
     return output_text
