@@ -241,7 +241,7 @@ def delete_exit(area: Area, ex: Exit):
     global ALL_POSSIBLE_TRANSITIONS_RANDO
     ALL_POSSIBLE_TRANSITIONS_RANDO = [
         x for x in ALL_POSSIBLE_TRANSITIONS_RANDO
-        if x != tuple([area.area_id, ex.area_id])
+        if x != (area.area_id, ex.area_id)
     ]
 
 
@@ -271,9 +271,9 @@ def create_connection(
     origin: Transition,
     redirect: Transition,
 ):
-    global _possible_origins_bucket, _possible_redirections_bucket, link_list, total_con_left, loose_ends, sacred_pairs
+    global total_con_left
 
-    if len(loose_ends) > 0 and (origin.from_ == __current_hub or redirect.to == __current_hub):
+    if len(loose_ends) > 0 and __current_hub in (origin.from_, redirect.to):
         sacred_pairs.append((origin.from_, redirect.to))
 
     link_list.append((origin, redirect))
@@ -301,7 +301,7 @@ def delete_connection(
     origin: Transition,
     redirect: Transition,
 ):
-    global _possible_origins_bucket, _possible_redirections_bucket, link_list, total_con_left
+    global total_con_left
 
     link_list.remove((origin, redirect))
     _possible_origins_bucket.append(origin)
@@ -404,10 +404,10 @@ def insert_area_inbetween(
     new_level: int,
 ):
     global sacred_pairs
-    pair = tuple([old_origin.from_, old_redirect.to])
-    mirror_pair = tuple([old_redirect.to, old_origin.from_])
+    pair = (old_origin.from_, old_redirect.to)
+    mirror_pair = (old_redirect.to, old_origin.from_)
     if pair in sacred_pairs or mirror_pair in sacred_pairs:
-        sacred_pairs = [x for x in sacred_pairs if x != pair and x != mirror_pair]
+        sacred_pairs = [x for x in sacred_pairs if x not in (pair, mirror_pair)]
         sacred_pairs.extend([
             (new_level, old_origin.from_),
             (new_level, old_redirect.to),
@@ -458,8 +458,8 @@ def check_part_of_loop(
                 unchecked_links.remove(link)
                 break
 
-    pair = tuple([chosen_link[0].from_, chosen_link[1].to])
-    mirror_pair = tuple([chosen_link[1].to, chosen_link[0].from_])
+    pair = (chosen_link[0].from_, chosen_link[1].to)
+    mirror_pair = (chosen_link[1].to, chosen_link[0].from_)
 
     if pair in sacred_pairs or mirror_pair in sacred_pairs:
         return False
