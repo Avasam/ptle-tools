@@ -273,7 +273,7 @@ def create_connection(
 ):
     global total_con_left
 
-    if len(loose_ends) > 0 and __current_hub in (origin.from_, redirect.to):
+    if len(loose_ends) > 0 and __current_hub in {origin.from_, redirect.to}:
         sacred_pairs.append((origin.from_, redirect.to))
 
     link_list.append((origin, redirect))
@@ -407,7 +407,7 @@ def insert_area_inbetween(
     pair = (old_origin.from_, old_redirect.to)
     mirror_pair = (old_redirect.to, old_origin.from_)
     if pair in sacred_pairs or mirror_pair in sacred_pairs:
-        sacred_pairs = [x for x in sacred_pairs if x not in (pair, mirror_pair)]
+        sacred_pairs = [x for x in sacred_pairs if x not in {pair, mirror_pair}]
         sacred_pairs.extend([
             (new_level, old_origin.from_),
             (new_level, old_redirect.to),
@@ -478,13 +478,13 @@ def find_and_break_open_connection(link_list: list[tuple[Transition, Transition]
     direc = random.choice([-1, 1])
     index = random.randrange(len(link_list))
     valid_link = False
-    CRASH_COUNTER = 0
+    crash_counter = 0
     while not valid_link:
         valid_link = check_part_of_loop(link_list[index], link_list)
         if not valid_link:
             index = increment_index(index, len(link_list), direc)
-            CRASH_COUNTER += 1
-            if CRASH_COUNTER > 1000:
+            crash_counter += 1
+            if crash_counter > len(link_list):
                 raise Exception("NO CONNECTION FOUND")
     delete_connection(link_list[index][0], link_list[index][1])
 

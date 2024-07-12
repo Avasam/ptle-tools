@@ -2,12 +2,24 @@ from __future__ import annotations
 
 from collections.abc import Mapping, MutableMapping, Sequence
 from copy import copy
+from enum import IntEnum
 from pathlib import Path
 
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
 from lib.entrance_rando import TRANSITION_INFOS_DICT_RANDO
 from lib.types_ import SeedType
+
+
+class Direction(IntEnum):
+    ONEWAY = 1
+    TWOWAY = 2
+
+
+class LineType(IntEnum):
+    SOLID = 1
+    DASHED = 2
+
 
 STARTING_AREA_COLOR = "#ff8000"  # Orange
 UPGRADE_AREAS_COLOR = "#0080ff"  # Blue
@@ -97,22 +109,25 @@ def edge_text(
     start: int,
     end: int,
     counter: int,
-    direct: str,
+    direct: Direction,
     color: str | None,
-    dashed: bool,
+    line_type: LineType,
 ):
+    direct_str = "true"
+    if direct == Direction.TWOWAY:
+        direct_str = "false"
     output = (
         f'<edge source="{TRANSITION_INFOS_DICT_RANDO[start].area_id}" '
-        + f'target="{TRANSITION_INFOS_DICT_RANDO[end].area_id}" isDirect="{direct}" '
+        + f'target="{TRANSITION_INFOS_DICT_RANDO[end].area_id}" isDirect="{direct_str}" '
         + f'id="{counter}"'
     )
-    if dashed or color is not None:
+    if line_type == LineType.DASHED or color is not None:
         output += ' ownStyles="{&quot;0&quot;:{'
         if color is not None:
             output += f"&quot;strokeStyle&quot;:&quot;{color}&quot;"
-            if dashed:
+            if line_type == LineType.DASHED:
                 output += ","
-        if dashed:
+        if line_type == LineType.DASHED:
             output += "&quot;lineDash&quot;:&quot;2&quot;"
         output += '}}"'
     output += "></edge>\n"
@@ -124,7 +139,7 @@ def create_edges(
     temp_disabled_exits: list[tuple[int, int]],
     closed_door_exits: list[tuple[int, int]],
 ):
-    connections = [(original, redirect) for original, redirect in transitions_map.items()]
+    connections = list(transitions_map.items())
     connections_two_way: list[tuple[tuple[int, int], tuple[int, int]]] = []
     connections_one_way: list[tuple[tuple[int, int], tuple[int, int]]] = []
     connections_closed_door: list[tuple[tuple[int, int], tuple[int, int]]] = []
@@ -150,16 +165,25 @@ def create_edges(
         if pairing[1] in temp_disabled_exits:
             output_text += edge_text(
                 pairing[0][0], pairing[1][1],
-                counter, "false", "#000000", False,
+                counter, Direction.TWOWAY, "#000000", LineType.SOLID,
             )
         else:
-            output_text += edge_text(pairing[0][0], pairing[1][1], counter, "false", None, False)
+            output_text += edge_text(
+                pairing[0][0], pairing[1][1],
+                counter, Direction.TWOWAY, None, LineType.SOLID
+            )
         counter += 1
     for pairing in connections_one_way:
-        output_text += edge_text(pairing[0][0], pairing[1][1], counter, "true", None, True)
+        output_text += edge_text(
+            pairing[0][0], pairing[1][1],
+            counter, Direction.ONEWAY, None, LineType.DASHED
+        )
         counter += 1
     for pairing in connections_closed_door:
-        output_text += edge_text(pairing[1][1], pairing[0][0], counter, "true", "#ff0000", False)
+        output_text += edge_text(
+            pairing[1][1], pairing[0][0],
+            counter, Direction.ONEWAY, "#ff0000", LineType.SOLID
+        )
         counter += 1
     return output_text
 
