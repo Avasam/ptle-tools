@@ -35,9 +35,9 @@ jobs:
       - name: Get pack filename
         id: packname
         run: |
-          echo "{packname=$(
+          echo "packname=$(
             find -name 'Entrance Randomizer v*.zip' | sed 's/\.zip$//1' | sed 's/^\.\///1'
-          )}" >> $GITHUB_OUTPUT
+          )" >> $GITHUB_OUTPUT
       - name: Extract premade archive
         run: |
           7z x \
