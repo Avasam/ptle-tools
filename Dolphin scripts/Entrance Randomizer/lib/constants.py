@@ -10,7 +10,7 @@ import CONFIGS
 from dolphin import memory  # pyright: ignore[reportMissingModuleSource]
 from lib.transition_infos import transition_infos
 
-__version__ = "0.4.0"
+__version = "0.4.0"
 """
 Major: New major feature or functionality
 
@@ -18,6 +18,8 @@ Minor: Affects seed
 
 Patch: Does't affect seed (assuming same settings)
 """
+__dev_version = "local"
+__version__ = f"{__version}-{__dev_version}"
 print(f"Python version: {sys.version}")
 print(f"Rando version: {__version__}")
 
