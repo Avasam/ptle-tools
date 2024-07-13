@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Mapping, MutableMapping, Sequence
-from copy import copy
+from collections.abc import Mapping, Sequence
 from pathlib import Path
 
 from lib.constants import *  # noqa: F403
@@ -124,14 +123,13 @@ def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
 
 
 def create_graphml(
-    transitions_map: MutableMapping[tuple[int, int], tuple[int, int]],
+    transitions_map: Mapping[tuple[int, int], tuple[int, int]],
     temp_disabled_exits: Sequence[tuple[int, int]],
     seed_string: SeedType,
     starting_area: int,
 ):
-    all_transitions = copy(transitions_map)
-    for item in temp_disabled_exits:
-        all_transitions[item] = item
+    # In Python 3.9 this can be simplified to |
+    all_transitions = {**transitions_map, **{item: item for item in temp_disabled_exits}}
 
     graphml_text = (
         '<?xml version="1.0" encoding="UTF-8"?>'
