@@ -33,7 +33,10 @@ Shaman Shop:
 
 1. Use this fork of Dolphin <https://github.com/Felk/dolphin/releases>.
 2. Turn on "Scripting" logs and set Verbosity to "Error" or any option below (not "Notice").
-3. Download the zip file from Discord or zip it yourself using `pack-rando.ps1`.
+3. Download the randomizer zip file, either:
+    - from Discord;
+    - zip it yourself using `pack-rando.ps1`;
+    - download an unreleased [development build](https://github.com/Avasam/ptle-tools/actions/workflows/pack-randomizer.yaml?query=branch%3Amain+is%3Asuccess) (requires a GitHub account);
 4. Open this zip file and drop "Scripts" at the root of your Dolphin installation (the location and names are important!).
 5. Configurations are found in `Scripts/Entrance Randomizer/CONFIGS.py`.
 6. In Dolphin, under "Scripts", click "Add new Scripts" and select `Scripts/Entrance Randomizer/__main__.py`.
@@ -57,12 +60,11 @@ In order to display the generated map take these steps:
 - Some seeds will result in impossible to complete configurations, because you might need some items to progress that you don't have yet.
 - When using `LINKED_TRANSITIONS = False` the generated `.graphml` map will become very hard to read, given the extreme amount of connections that will be drawn.
 - In rare occasions, a transition might send you to the game-intended level instead of the level decided by the randomizer (this is an issue with the script patching the destination).
-- In very rare occasions, a transition might not make you enter a level from the correct entrance, but make you enter from the default entrance instead
+- In rare occasions, a transition might not make you enter a level from the correct entrance, but make you enter from the default entrance instead
   - The odds of this happening increase dramatically if at any point in the run Harry died or a save file was loaded.
 - Some linked transitions are not spawning at the right entrance and use the default entrance instead. Known cases:
   - Jungle Canyon from Punchau Shrine
   - Bittenbinder's Camp from Mysterious Temple
-- With `LINKED_TRANSITIONS = True`, one-way transitions are not randomized at all.
 
 ### Developing
 
