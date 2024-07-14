@@ -128,8 +128,7 @@ def create_graphml(
     seed_string: SeedType,
     starting_area: int,
 ):
-    # In Python 3.9 this can be simplified to |
-    all_transitions = {**transitions_map, **{item: item for item in temp_disabled_exits}}
+    all_transitions = dict(transitions_map) | {item: item for item in temp_disabled_exits}
 
     graphml_text = (
         '<?xml version="1.0" encoding="UTF-8"?>'
