@@ -47,6 +47,19 @@ UNRANDOMIZED_EDGE_COLOR = "#000000"  # Black
 CLOSED_DOOR_EDGE_COLOR = "#ff0000"  # Red
 
 
+def create_own_style(params: dict):
+    output_text = ' ownStyles="{&quot;0&quot;:{'
+    first_key = True
+    for key in params.keys():
+        if params[key] is not None:
+            if not first_key:
+                output_text += ', '
+            output_text += f'&quot;{key}&quot;:&quot;{params[key]}&quot;'
+            first_key = False
+    output_text += '}}"'
+    return output_text
+
+
 def create_vertices(
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
     starting_area: int,
@@ -82,23 +95,11 @@ def create_vertices(
             + f'mainText="{area_name}"'
         )
         if area_id == starting_area:
-            output_text += (
-                ' ownStyles="{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
-                + STARTING_AREA_COLOR
-                + '&quot;}}"'
-            )
+            output_text += create_own_style({"fillStyle": STARTING_AREA_COLOR})
         elif area_id in UPGRADE_AREAS:
-            output_text += (
-                ' ownStyles="{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
-                + UPGRADE_AREAS_COLOR
-                + '&quot;}}"'
-            )
+            output_text += create_own_style({"fillStyle": UPGRADE_AREAS_COLOR})
         elif area_id in IMPORTANT_STORY_TRIGGER_AREAS:
-            output_text += (
-                ' ownStyles="{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
-                + IMPORTANT_STORY_TRIGGER_AREAS_COLOR
-                + '&quot;}}"'
-            )
+            output_text += create_own_style({"fillStyle": IMPORTANT_STORY_TRIGGER_AREAS_COLOR})
         output_text += "></node>\n"
         row_length = 10
         counter_x += 1
@@ -124,14 +125,10 @@ def edge_component(
         + f'id="{counter}"'
     )
     if line_type == LineType.DASHED or color is not None:
-        output += ' ownStyles="{&quot;0&quot;:{'
-        if color is not None:
-            output += f"&quot;strokeStyle&quot;:&quot;{color}&quot;"
-            if line_type == LineType.DASHED:
-                output += ","
-        if line_type == LineType.DASHED:
-            output += "&quot;lineDash&quot;:&quot;2&quot;"
-        output += '}}"'
+        output += create_own_style({
+            'strokeStyle': color,
+            'lineDash': '2' if line_type == LineType.DASHED else None,
+        })
     output += "></edge>\n"
     return output
 
