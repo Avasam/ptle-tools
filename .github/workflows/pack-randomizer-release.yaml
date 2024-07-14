@@ -1,4 +1,4 @@
-name: Pack Randomizer
+name: Pack Randomizer (Release)
 
 on:
   workflow_dispatch: #  Allows manual triggers
@@ -6,18 +6,15 @@ on:
     branches:
       - main
     paths:
-      - "Dolphin scripts/Entrance Randomizer/**"
-      - "Dolphin scripts/pack-rando.ps1"
-      - "Various technical notes/transition_infos.json"
-      - ".github/workflows/pack-randomizer.yaml"
+      # Release trigger
+      - "Dolphin scripts/Entrance Randomizer/CHANGELOG.md"
   pull_request:
     branches:
       - main
     paths:
-      - "Dolphin scripts/Entrance Randomizer/**"
+      # Release tooling
       - "Dolphin scripts/pack-rando.ps1"
-      - "Various technical notes/transition_infos.json"
-      - ".github/workflows/pack-randomizer.yaml"
+      - ".github/workflows/pack-randomizer-release.yaml"
 
 env:
   PIP_DISABLE_PIP_VERSION_CHECK: 1
@@ -28,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: '& "Dolphin scripts/pack-rando.ps1"'
+      - run: '& "Dolphin scripts/pack-rando.ps1" -Release'
         shell: pwsh
       # upload-artifact will double zip, so unpack first
       # https://github.com/actions/upload-artifact/issues/39
