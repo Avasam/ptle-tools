@@ -1,4 +1,4 @@
-name: Typecheck
+name: Tests
 
 on:
   workflow_dispatch: #  Allows manual triggers

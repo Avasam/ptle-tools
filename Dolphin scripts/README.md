@@ -36,7 +36,7 @@ Shaman Shop:
 3. Download the randomizer zip file, either:
     - latest release:
       - from [#randomizer](https://discord.com/channels/334793217138622464/1083867986068254760) channel on Discord;
-      - [release artefacts](https://github.com/Avasam/ptle-tools/actions/workflows/pack-randomizer-release.yaml?query=branch%3Amain+is%3Asuccess) (requires a GitHub account);
+      - [release artefacts](https://github.com/Avasam/ptle-tools/actions/workflows/pack-randomizer-release.yaml?query=branch%3Amain+is%3Asuccess+event%3Apush) (requires a GitHub account);
     - development build:
       - zip it yourself using `pack-rando.ps1`;
       - [development builds](https://github.com/Avasam/ptle-tools/actions/workflows/pack-randomizer.yaml?query=branch%3Amain+is%3Asuccess+event%3Apush) (requires a GitHub account);
@@ -81,7 +81,7 @@ In order to display the generated map take these steps:
 
 This section serves as a reminder for myself. To create a new release:
 
-1. Run [version-bump.ps1](/Dolphin%20scripts/version-bump.ps1)
-2. Push to `main`. Any change to `CHANGELOG.md` should trigger a release pack
-3. Share on Discord with a link to the latest release section
-4. Unpin old version message, pin new version message
+1. Run [version-bump.ps1](/Dolphin%20scripts/version-bump.ps1).
+2. Push to `main`. Any change to `CHANGELOG.md` should trigger a release pack.
+3. Share on Discord with a link to the latest release section.
+4. Unpin old version message, pin new version message.

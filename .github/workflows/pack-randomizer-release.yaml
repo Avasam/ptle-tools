@@ -8,6 +8,10 @@ on:
     paths:
       # Release trigger
       - "Dolphin scripts/Entrance Randomizer/CHANGELOG.md"
+  pull_request:
+    branches:
+      - main
+    paths:
       # Release tooling
       - "Dolphin scripts/pack-rando.ps1"
       - ".github/workflows/pack-randomizer-release.yaml"
