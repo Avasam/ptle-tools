@@ -47,7 +47,7 @@ UNRANDOMIZED_EDGE_COLOR = "#000000"  # Black
 CLOSED_DOOR_EDGE_COLOR = "#ff0000"  # Red
 
 
-def create_own_style(params: dict[str, str]):
+def create_own_style(params: dict[str, str | None]):
     output_text = ' ownStyles="{&quot;0&quot;:{'
     first_key = True
     for key, value in params.items():
