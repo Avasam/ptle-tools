@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Literal, Tuple, Union
+from typing import TYPE_CHECKING, Literal
 
 if TYPE_CHECKING:
-    from typing_extensions import TypeAlias
+    from typing import TypeAlias
 
-    SeedType: TypeAlias = Union[int, float, str, bytes, bytearray, Literal[False], None]
-    PriceRange: TypeAlias = Union[Tuple[int, int], Tuple[()], Literal[False], None]
+    SeedType: TypeAlias = int | float | str | bytes | bytearray | Literal[False] | None
+    PriceRange: TypeAlias = tuple[int, int] | tuple[()] | Literal[False] | None
 else:
     SeedType = None
     PriceRange = None

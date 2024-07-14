@@ -20,9 +20,7 @@ class AreaJSON(TypedDict):
 
 
 if TYPE_CHECKING:
-    from typing import Literal
-
-    from typing_extensions import TypeAlias
+    from typing import Literal, TypeAlias
 
     TransitionInfosJSON: TypeAlias = dict[  # pyright: ignore  # Safe inside TYPE_CHECKING
         Literal[
