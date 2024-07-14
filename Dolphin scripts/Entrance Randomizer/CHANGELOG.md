@@ -12,11 +12,9 @@ Minor: Affects seed
 Patch: Does't affect seed (assuming same settings)
 ```
 
-This project uses [*towncrier*](https://towncrier.readthedocs.io/) and the changes for the upcoming release can be found in <https://github.com/Avasam/ptle-tools/blob/main/Dolphin%20scripts/Entrance%20Randomizer/newsfragments>.
+This project uses [*towncrier*](https://towncrier.readthedocs.io/) and the changes for the upcoming release can be found in [newsfragments](./newsfragments).
 
 To add a changelog entry, add a new file `<issue_or_pr_#>.<type>.md` to the `newsfragments` folder.
 (See the different [fragment types](https://towncrier.readthedocs.io/en/latest/tutorial.html#creating-news-fragments))
 
 <!-- towncrier release notes start -->
-
-## 5.0.0 - 2024-07-13
