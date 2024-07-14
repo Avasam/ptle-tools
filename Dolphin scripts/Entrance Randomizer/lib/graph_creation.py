@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping, MutableMapping, Sequence
 from copy import copy
-from enum import IntEnum
+from enum import IntEnum, auto
 from pathlib import Path
 
 from lib.constants import *  # noqa: F403
@@ -12,13 +12,13 @@ from lib.types_ import SeedType
 
 
 class Direction(IntEnum):
-    ONEWAY = 1
-    TWOWAY = 2
+    ONEWAY = auto()
+    TWOWAY = auto()
 
 
 class LineType(IntEnum):
-    SOLID = 1
-    DASHED = 2
+    SOLID = auto()
+    DASHED = auto()
 
 
 STARTING_AREA_COLOR = "#ff8000"  # Orange
@@ -43,6 +43,9 @@ IMPORTANT_STORY_TRIGGER_AREAS = {
     LevelCRC.ST_CLAIRE_DAY,
     LevelCRC.GATES_OF_EL_DORADO,
 }
+
+UNRANDOMIZED_EDGE_COLOR = "#000000"  # Black
+CLOSED_DOOR_EDGE_COLOR = "#ff0000"  # Red
 
 
 def create_vertices(
@@ -76,7 +79,8 @@ def create_vertices(
         output_text += (
             f'<node positionX="{counter_x * 100 + counter_y * 20}" '
             + f'positionY="{counter_x * 50 + counter_y * 50}" '
-            + f'id="{int(area_id)}" mainText="{area_name}"'
+            + f'id="{int(area_id)}" '
+            + f'mainText="{area_name}"'
         )
         if area_id == starting_area:
             output_text += (
@@ -105,7 +109,7 @@ def create_vertices(
     return output_text
 
 
-def edge_text(
+def edge_component(
     start: int,
     end: int,
     counter: int,
@@ -113,12 +117,11 @@ def edge_text(
     color: str | None,
     line_type: LineType,
 ):
-    direct_str = "true"
-    if direct == Direction.TWOWAY:
-        direct_str = "false"
+    direct_str = str(direct == Direction.ONEWAY).lower()
     output = (
         f'<edge source="{transition_infos_dict_rando[start].area_id}" '
-        + f'target="{transition_infos_dict_rando[end].area_id}" isDirect="{direct_str}" '
+        + f'target="{transition_infos_dict_rando[end].area_id}" '
+        + f'isDirect="{direct_str}" '
         + f'id="{counter}"'
     )
     if line_type == LineType.DASHED or color is not None:
@@ -136,8 +139,8 @@ def edge_text(
 
 def create_edges(
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
-    temp_disabled_exits: list[tuple[int, int]],
-    closed_door_exits: list[tuple[int, int]],
+    temp_disabled_exits: Iterable[tuple[int, int]],
+    closed_door_exits: Container[tuple[int, int]],
 ):
     connections = list(transitions_map.items())
     connections_two_way: list[tuple[tuple[int, int], tuple[int, int]]] = []
@@ -163,26 +166,26 @@ def create_edges(
     counter = 1  # Can't start at 0 since that's the MAIN_MENU id
     for pairing in connections_two_way:
         if pairing[1] in temp_disabled_exits:
-            output_text += edge_text(
+            output_text += edge_component(
                 pairing[0][0], pairing[1][1],
-                counter, Direction.TWOWAY, "#000000", LineType.SOLID,
+                counter, Direction.TWOWAY, UNRANDOMIZED_EDGE_COLOR, LineType.SOLID,
             )
         else:
-            output_text += edge_text(
+            output_text += edge_component(
                 pairing[0][0], pairing[1][1],
                 counter, Direction.TWOWAY, None, LineType.SOLID,
             )
         counter += 1
     for pairing in connections_one_way:
-        output_text += edge_text(
+        output_text += edge_component(
             pairing[0][0], pairing[1][1],
             counter, Direction.ONEWAY, None, LineType.DASHED,
         )
         counter += 1
     for pairing in connections_closed_door:
-        output_text += edge_text(
+        output_text += edge_component(
             pairing[1][1], pairing[0][0],
-            counter, Direction.ONEWAY, "#ff0000", LineType.SOLID,
+            counter, Direction.ONEWAY, CLOSED_DOOR_EDGE_COLOR, LineType.SOLID,
         )
         counter += 1
     return output_text
@@ -191,7 +194,7 @@ def create_edges(
 def create_graphml(
     transitions_map: MutableMapping[tuple[int, int], tuple[int, int]],
     temp_disabled_exits: Sequence[tuple[int, int]],
-    closed_door_exits: list[tuple[int, int]],
+    closed_door_exits: Container[tuple[int, int]],
     seed_string: SeedType,
     starting_area: int,
 ):

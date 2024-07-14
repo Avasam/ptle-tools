@@ -3,7 +3,7 @@ from __future__ import annotations
 import random
 from collections.abc import MutableSequence, Sequence
 from copy import copy
-from enum import IntEnum
+from enum import IntEnum, auto
 from itertools import starmap
 from typing import NamedTuple
 
@@ -13,24 +13,29 @@ from lib.transition_infos import Area, Exit
 from lib.utils import follow_pointer_path, state
 
 
+class NoConnectionFoundError(Exception):
+    "Raised when the algorithm fails to find a valid connection to break open"
+    pass
+
+
 class Transition(NamedTuple):
     from_: int
     to: int
 
 
 class Choice(IntEnum):
-    CONNECT = 1
-    INBETWEEN = 2
+    CONNECT = auto()
+    INBETWEEN = auto()
 
 
 class BucketType(IntEnum):
-    ORIGIN = 1
-    REDIRECT = 2
+    ORIGIN = auto()
+    REDIRECT = auto()
 
 
 class Priority(IntEnum):
-    CLOSED = 1
-    OPEN = 2
+    CLOSED = auto()
+    OPEN = auto()
 
 
 one_way_exits = (
@@ -485,7 +490,7 @@ def find_and_break_open_connection(link_list: list[tuple[Transition, Transition]
             index = increment_index(index, len(link_list), direc)
             crash_counter += 1
             if crash_counter > len(link_list):
-                raise Exception("NO CONNECTION FOUND")
+                raise NoConnectionFoundError()
     delete_connection(link_list[index][0], link_list[index][1])
 
 
@@ -582,14 +587,12 @@ def set_transitions_map():  # noqa: PLR0915 # TODO: Break up in smaller function
             else:
                 try:
                     find_and_break_open_connection(link_list)
-                except Exception as e:
-                    if str(e) == "NO CONNECTION FOUND":
-                        print()
-                        print("ATTENTION ATTENTION: THE RANDOMIZER CRASHED!!!")
-                        print("Please notify a developer!")
-                        print()
-                        break
-                    raise
+                except NoConnectionFoundError:
+                    print(" ")
+                    print("ATTENTION ATTENTION: THE RANDOMIZER CRASHED!!!")
+                    print("Please notify a developer!")
+                    print(" ")
+                    break
                 continue
 
             index += 1
