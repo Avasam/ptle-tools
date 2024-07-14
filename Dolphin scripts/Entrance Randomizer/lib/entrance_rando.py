@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import random
-from collections.abc import Iterable, MutableMapping, MutableSequence, Sequence
+from collections.abc import Iterable, MutableMapping, MutableSequence, Sequence, Sized
 from copy import copy
 from enum import IntEnum
 from itertools import starmap
-from typing import NamedTuple, Sized
+from typing import NamedTuple
 
 import CONFIGS
 from lib.constants import *  # noqa: F403
