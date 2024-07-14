@@ -14,8 +14,7 @@ from lib.utils import follow_pointer_path, state
 
 
 class NoConnectionFoundError(Exception):
-    "Raised when the algorithm fails to find a valid connection to break open"
-    pass
+    """Raised when the algorithm fails to find a valid connection to break open"""
 
 
 class Transition(NamedTuple):
@@ -490,7 +489,7 @@ def find_and_break_open_connection(link_list: list[tuple[Transition, Transition]
             index = increment_index(index, len(link_list), direc)
             crash_counter += 1
             if crash_counter > len(link_list):
-                raise NoConnectionFoundError()
+                raise NoConnectionFoundError
     delete_connection(link_list[index][0], link_list[index][1])
 
 
