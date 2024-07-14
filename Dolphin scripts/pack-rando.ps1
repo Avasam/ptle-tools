@@ -21,4 +21,4 @@ else {
 $VersionFileContent -replace '^\s*__dev_version.*', "__dev_version = `"$DevVersion`"" | Set-Content $VersionFilePath
 
 Compress-Archive -Path $ScriptsFolder -DestinationPath "$RandoFolderName v$RandoVersion-$DevVersion.zip" -Force
-Remove-Item -Path $ScriptsFolder -Recurse
+Remove-Item -Path $ScriptsFolder -Recurse -ErrorAction SilentlyContinue

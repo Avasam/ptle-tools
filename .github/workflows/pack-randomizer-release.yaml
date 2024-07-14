@@ -21,7 +21,7 @@ env:
   FORCE_COLOR: 1
 
 jobs:
-  pack-randomizer:
+  pack:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
