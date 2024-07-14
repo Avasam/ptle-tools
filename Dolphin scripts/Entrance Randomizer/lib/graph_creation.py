@@ -50,11 +50,11 @@ CLOSED_DOOR_EDGE_COLOR = "#ff0000"  # Red
 def create_own_style(params: dict):
     output_text = ' ownStyles="{&quot;0&quot;:{'
     first_key = True
-    for key in params:
-        if params[key] is not None:
+    for key, value in params.items():
+        if value is not None:
             if not first_key:
                 output_text += ", "
-            output_text += f"&quot;{key}&quot;:&quot;{params[key]}&quot;"
+            output_text += f"&quot;{key}&quot;:&quot;{value}&quot;"
             first_key = False
     output_text += '}}"'
     return output_text

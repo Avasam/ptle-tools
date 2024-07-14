@@ -14,7 +14,7 @@ from lib.utils import follow_pointer_path, state
 
 
 class NoConnectionFoundError(Exception):
-    """Raised when the algorithm fails to find a valid connection to break open"""
+    """Raised when the algorithm fails to find a valid connection to break open."""
 
 
 class Transition(NamedTuple):
