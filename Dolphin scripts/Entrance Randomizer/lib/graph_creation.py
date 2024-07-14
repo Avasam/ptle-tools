@@ -50,11 +50,11 @@ CLOSED_DOOR_EDGE_COLOR = "#ff0000"  # Red
 def create_own_style(params: dict):
     output_text = ' ownStyles="{&quot;0&quot;:{'
     first_key = True
-    for key in params.keys():
+    for key in params:
         if params[key] is not None:
             if not first_key:
-                output_text += ', '
-            output_text += f'&quot;{key}&quot;:&quot;{params[key]}&quot;'
+                output_text += ", "
+            output_text += f"&quot;{key}&quot;:&quot;{params[key]}&quot;"
             first_key = False
     output_text += '}}"'
     return output_text
@@ -126,8 +126,8 @@ def edge_component(
     )
     if line_type == LineType.DASHED or color is not None:
         output += create_own_style({
-            'strokeStyle': color,
-            'lineDash': '2' if line_type == LineType.DASHED else None,
+            "strokeStyle": color,
+            "lineDash": "2" if line_type == LineType.DASHED else None,
         })
     output += "></edge>\n"
     return output
