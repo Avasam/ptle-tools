@@ -34,9 +34,12 @@ Shaman Shop:
 1. Use this fork of Dolphin <https://github.com/Felk/dolphin/releases>.
 2. Turn on "Scripting" logs and set Verbosity to "Error" or any option below (not "Notice").
 3. Download the randomizer zip file, either:
-    - from Discord;
-    - zip it yourself using `pack-rando.ps1`;
-    - download an unreleased [development build](https://github.com/Avasam/ptle-tools/actions/workflows/pack-randomizer.yaml?query=branch%3Amain+is%3Asuccess) (requires a GitHub account);
+    - latest release:
+      - from [#randomizer](https://discord.com/channels/334793217138622464/1083867986068254760) channel on Discord;
+      - [release artefacts](https://github.com/Avasam/ptle-tools/actions/workflows/pack-randomizer-release.yaml?query=branch%3Amain+is%3Asuccess+event%3Apush) (requires a GitHub account);
+    - development build:
+      - zip it yourself using `pack-rando.ps1`;
+      - [development builds](https://github.com/Avasam/ptle-tools/actions/workflows/pack-randomizer.yaml?query=branch%3Amain+is%3Asuccess+event%3Apush) (requires a GitHub account);
 4. Open this zip file and drop "Scripts" at the root of your Dolphin installation (the location and names are important!).
 5. Configurations are found in `Scripts/Entrance Randomizer/CONFIGS.py`.
 6. In Dolphin, under "Scripts", click "Add new Scripts" and select `Scripts/Entrance Randomizer/__main__.py`.
@@ -73,3 +76,12 @@ In order to display the generated map take these steps:
 3. Clone this repository.
 4. Run `symlink-scripts.ps1 "<path to dolphin-scripting>"`.
 5. In Dolphin, under "Scripts", click "Add new Scripts" and select `Scripts/Entrance Randomizer/__main__.py`.
+
+#### Creating a release
+
+This section serves as a reminder for myself. To create a new release:
+
+1. Run [version-bump.ps1](/Dolphin%20scripts/version-bump.ps1).
+2. Push to `main`. Any change to `CHANGELOG.md` should trigger a release pack.
+3. Share on Discord with a link to the latest release section.
+4. Unpin old version message, pin new version message.

@@ -193,3 +193,15 @@ reportUnnecessaryComparison = "warning"
 # Too strict
 reportMissingSuperCall = "none"
 reportUnusedCallResult = "none"
+
+# Once we have multiple changelogs to maintain, see
+# https://towncrier.readthedocs.io/en/latest/monorepo.html
+[tool.towncrier]
+directory = "Dolphin scripts/Entrance Randomizer/newsfragments"
+filename = "Dolphin scripts/Entrance Randomizer/CHANGELOG.md"
+issue_format = "[#{issue}](https://github.com/Avasam/ptle-tools/issues/{issue})"
+package = "Entrance Randomizer"
+package_dir = "Dolphin scripts"
+start_string = "<!-- towncrier release notes start -->\n"
+title_format = "## {version} - {project_date}"
+underlines = ["", "", ""]
