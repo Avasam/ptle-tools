@@ -2,11 +2,14 @@
 # https://github.com/BesLogic/shared-configs/blob/main/ruff.toml
 # Modifications to this file that are not project-specific should also be done upstream.
 # These configs were last updated for ruff==0.3.7
+
 # https://docs.astral.sh/ruff/configuration/
 [tool.ruff]
 line-length = 100
 preview = true
-target-version = "py38" # Change this to the oldest supported version by your application
+# Change this to the oldest supported version by your application
+# (same as https://github.com/Felk/dolphin/releases/tag/scripting-preview3 )
+target-version = "py311"
 # Exclude auto-generated files
 # exclude = [""]
 
@@ -77,6 +80,12 @@ ignore = [
 
   # False-positives
   "TCH004", # https://github.com/astral-sh/ruff/issues/3821
+
+  ###
+  # Conflict with formatter (you can remove this section if you don't use Ruff as a formatter)
+  ###
+  # "COM812", # missing-trailing-comma
+  # "ISC001", # single-line-implicit-string-concatenation
 
   ###
   # Specific to this project
@@ -171,9 +180,9 @@ per_file_ignores = ["*.pyi: E302"]
 
 # https://github.com/microsoft/pyright/blob/main/docs/configuration.md#sample-pyprojecttoml-file
 [tool.pyright]
-# Minimal python version supported
 extraPaths = ["Dolphin scripts/typings"]
-pythonVersion = "3.8"
+# Minimal python version supported (same as https://github.com/Felk/dolphin/releases/tag/scripting-preview3 )
+pythonVersion = "3.11"
 typeCheckingMode = "strict"
 # Extra strict
 reportCallInDefaultInitializer = "error"
