@@ -324,8 +324,8 @@ def delete_connection(
 
 def choose_random_exit(
     level: int,
-    bucket_type: int,
-    priority: int,
+    bucket_type: BucketType,
+    priority: Priority,
 ):
     all_exits_available: list[int] = []
     if bucket_type == BucketType.ORIGIN:
@@ -362,9 +362,10 @@ def connect_two_areas(
     from_exit = choose_random_exit(level_from, BucketType.ORIGIN, Priority.CLOSED)
     to_entrance = choose_random_exit(level_to, BucketType.REDIRECT, Priority.OPEN)
 
-    origin = Transition(level_from, from_exit)
-    redirect = Transition(to_entrance, level_to)
-    create_connection(origin, redirect)
+    create_connection(
+        origin=Transition(level_from, from_exit),
+        redirect=Transition(to_entrance, level_to),
+    )
 
 
 def connect_to_existing(
@@ -479,7 +480,7 @@ def check_part_of_loop(
 
 
 def find_and_break_open_connection(link_list: list[tuple[Transition, Transition]]):
-    direc = random.choice([-1, 1])
+    direc = random.choice((-1, 1))
     index = random.randrange(len(link_list))
     valid_link = False
     crash_counter = 0
@@ -503,7 +504,8 @@ def get_random_one_way_redirection(original: Transition):
     return None
 
 
-def set_transitions_map():  # noqa: PLR0915 # TODO: Break up in smaller functions
+# TODO: Break up in smaller functions before changing anything else
+def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
     transitions_map.clear()
     remove_disabled_exits()
     initialize_connections_left()
@@ -542,11 +544,11 @@ def set_transitions_map():  # noqa: PLR0915 # TODO: Break up in smaller function
         global __current_hub, loose_ends, total_con_left
 
         __current_hub = closed_door_levels[0]  # this list is shuffled, so just pick the first one
-        loose_ends = [*closed_door_exits]
+        loose_ends = list(closed_door_exits)
         total_con_left = sum(__connections_left[level] for level in closed_door_levels)
 
         for index in range(1, len(closed_door_levels)):  # we skip the HUB, so we don't start at 0
-            direc = random.choice([-1, 1])
+            direc = random.choice((-1, 1))
             index_chosen = random.randrange(index)
             valid_level = False
             for loose_end in loose_ends:
@@ -597,8 +599,7 @@ def set_transitions_map():  # noqa: PLR0915 # TODO: Break up in smaller function
             index += 1
 
         # Once the link_list is completed, it's time to fill the transitions_map:
-        for link in link_list:
-            transitions_map[link[0]] = link[1]
+        transitions_map.update(link_list)
 
         # the one_way_transitions are added last in order to keep the rest as simple as possible
         one_way_redirects = list(one_way_exits)

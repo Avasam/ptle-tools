@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+from collections.abc import Container, Mapping, Sequence
 from enum import IntEnum, auto
 from pathlib import Path
 
@@ -48,16 +48,12 @@ CLOSED_DOOR_EDGE_COLOR = "#ff0000"  # Red
 
 
 def create_own_style(params: dict[str, str | None]):
-    output_text = ' ownStyles="{&quot;0&quot;:{'
-    first_key = True
-    for key, value in params.items():
-        if value is not None:
-            if not first_key:
-                output_text += ", "
-            output_text += f"&quot;{key}&quot;:&quot;{value}&quot;"
-            first_key = False
-    output_text += '}}"'
-    return output_text
+    style = ", ".join([
+        f"&quot;{key}&quot;:&quot;{value}&quot;"
+        for key, value in params.items()
+        if value is not None
+    ])
+    return ' ownStyles="{&quot;0&quot;:{' + style + '}}"' if style else ""
 
 
 def create_vertices(
@@ -118,19 +114,15 @@ def edge_component(
     line_type: LineType,
 ):
     direct_str = str(direct == Direction.ONEWAY).lower()
-    output = (
+    return (
         f'<edge source="{transition_infos_dict_rando[start].area_id}" '
         + f'target="{transition_infos_dict_rando[end].area_id}" '
         + f'isDirect="{direct_str}" '
         + f'id="{counter}"'
-    )
-    if line_type == LineType.DASHED or color is not None:
-        output += create_own_style({
-            "strokeStyle": color,
-            "lineDash": "2" if line_type == LineType.DASHED else None,
-        })
-    output += "></edge>\n"
-    return output
+    ) + create_own_style({
+        "strokeStyle": color,
+        "lineDash": "2" if line_type == LineType.DASHED else None,
+    }) + "></edge>\n"
 
 
 def create_edges(
