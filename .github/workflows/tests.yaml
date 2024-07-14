@@ -31,7 +31,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: pip install typing_extensions
       - name: Get pyright version
         id: pyright_version
         run: |
