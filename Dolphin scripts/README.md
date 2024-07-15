@@ -63,11 +63,13 @@ In order to display the generated map take these steps:
 - Some seeds will result in impossible to complete configurations, because you might need some items to progress that you don't have yet.
 - When using `LINKED_TRANSITIONS = False` the generated `.graphml` map will become very hard to read, given the extreme amount of connections that will be drawn.
 - In rare occasions, a transition might send you to the game-intended level instead of the level decided by the randomizer (this is an issue with the script patching the destination).
-- In rare occasions, a transition might not make you enter a level from the correct entrance, but make you enter from the default entrance instead
-  - The odds of this happening increase dramatically if at any point in the run Harry died or a save file was loaded.
-- Some linked transitions are not spawning at the right entrance and use the default entrance instead. Known cases:
-  - Jungle Canyon from Punchau Shrine
-  - Bittenbinder's Camp from Mysterious Temple
+- Dying may cause you to respawn from a different entrance (the game tries to spawn you where you *would've* entered if the rando didn't highjack the transition).
+- The following entrances are not randomized as the randomizer currently isn't aware that two levels can have two entrances between them:
+  - Altar of Huitaca from Mouth of Inti (both entrances)
+  - Mouth of Inti from from Altar of Huitaca (both entrances)
+  - Twin Outpost (Underwater) from the Jungle side
+  - Twin Outposts from Jungle side well
+  - Flooded Courtyard from Native Jungle (Scorpion/Explorer entrance)
 
 ### Developing
 
