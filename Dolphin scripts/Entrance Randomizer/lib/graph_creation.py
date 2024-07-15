@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from pathlib import Path
 
 from lib.constants import *  # noqa: F403
@@ -49,38 +49,39 @@ def create_vertices(
     counter_x = 0
     counter_y = 0
     for area_id in area_ids_randomized:
-        # We special case St. Claire Day or Night to be the same level.
-        # Specifying is irrelevant on a graph and could be confusing.
+        # Currently St. Claire Night will never appear on the map,
+        # so we remove the (Day) suffix as it's irrelevant and it clutters the map.
+        # The same logic applies to the Spirit Fights:
+        # these will never appear on the map, therefore we remove the (Harry) suffix.
         area_name = (
             TRANSITION_INFOS_DICT
             [area_id]
             .name
             .replace(" (Day)", "")
-            .replace(" (Night)", "")
+            .replace(" (Harry)", "")
         )
-
         output_text += (
             f'<node positionX="{counter_x * 100 + counter_y * 20}" '
             + f'positionY="{counter_x * 50 + counter_y * 50}" '
-            + f'id="{int(area_id)}" mainText="{area_name}" '
+            + f'id="{int(area_id)}" mainText="{area_name}"'
         )
         if area_id == starting_area:
             output_text += (
-                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
+                ' ownStyles="{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
                 + STARTING_AREA_COLOR
-                + '&quot;}}" '
+                + '&quot;}}"'
             )
         elif area_id in UPGRADE_AREAS:
             output_text += (
-                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
+                ' ownStyles="{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
                 + UPGRADE_AREAS_COLOR
-                + '&quot;}}" '
+                + '&quot;}}"'
             )
         elif area_id in IMPORTANT_STORY_TRIGGER_AREAS:
             output_text += (
-                'ownStyles = "{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
+                ' ownStyles="{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
                 + IMPORTANT_STORY_TRIGGER_AREAS_COLOR
-                + '&quot;}}" '
+                + '&quot;}}"'
             )
         output_text += "></node>\n"
         row_length = 10
@@ -108,14 +109,14 @@ def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
         output_text += (
             f'<edge source="{TRANSITION_INFOS_DICT[pairing[0]].area_id}" '
             + f'target="{TRANSITION_INFOS_DICT[pairing[1]].area_id}" isDirect="false" '
-            + f'id="{counter}" ></edge>\n'
+            + f'id="{counter}"></edge>\n'
         )
         counter += 1
     for pairing in connections_one_way:
         output_text += (
             f'<edge source="{TRANSITION_INFOS_DICT[pairing[0]].area_id}" '
             + f'target="{TRANSITION_INFOS_DICT[pairing[1]].area_id}" isDirect="true" '
-            + f'id="{counter}" ></edge>\n'
+            + f'id="{counter}"></edge>\n'
         )
         counter += 1
     return output_text
@@ -123,17 +124,19 @@ def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
 
 def create_graphml(
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
+    temp_disabled_exits: Sequence[tuple[int, int]],
     seed_string: SeedType,
     starting_area: int,
 ):
-    graphml_text = f"""\
-<?xml version="1.0" encoding="UTF-8"?>
-<graphml>
-  <graph id="Graph" uidGraph="1" uidEdge="1">
-    {create_vertices(transitions_map, starting_area)}
-    {create_edges(transitions_map)}
-  </graph>
-</graphml>"""
+    all_transitions = dict(transitions_map) | {item: item for item in temp_disabled_exits}
+
+    graphml_text = (
+        '<?xml version="1.0" encoding="UTF-8"?>'
+        + '<graphml><graph id="Graph" uidGraph="1" uidEdge="1">\n'
+        + create_vertices(all_transitions, starting_area)
+        + create_edges(all_transitions)
+        + "</graph></graphml>"
+    )
 
     # TODO (Avasam): Get actual user folder based whether Dolphin Emulator is in AppData/Roaming
     # and if the current installation is portable.

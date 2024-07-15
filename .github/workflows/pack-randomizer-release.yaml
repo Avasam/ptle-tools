@@ -1,0 +1,46 @@
+name: Pack Randomizer (Release)
+
+on:
+  workflow_dispatch: #  Allows manual triggers
+  push:
+    branches:
+      - main
+    paths:
+      # Release trigger
+      - "Dolphin scripts/Entrance Randomizer/CHANGELOG.md"
+  pull_request:
+    branches:
+      - main
+    paths:
+      # Release tooling
+      - "Dolphin scripts/pack-rando.ps1"
+      - ".github/workflows/pack-randomizer-release.yaml"
+
+env:
+  PIP_DISABLE_PIP_VERSION_CHECK: 1
+  FORCE_COLOR: 1
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: '& "Dolphin scripts/pack-rando.ps1" -Release'
+        shell: pwsh
+      # upload-artifact will double zip, so unpack first
+      # https://github.com/actions/upload-artifact/issues/39
+      - name: Get pack filename
+        id: packname
+        run: |
+          echo "packname=$(
+            find -name 'Entrance Randomizer v*.zip' | sed 's/\.zip$//1' | sed 's/^\.\///1'
+          )" >> $GITHUB_OUTPUT
+      - name: Extract premade archive
+        run: |
+          7z x \
+          '${{ steps.packname.outputs.packname }}.zip' \
+          -o'${{ steps.packname.outputs.packname }}'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.packname.outputs.packname }}
+          path: ${{ steps.packname.outputs.packname }}/*

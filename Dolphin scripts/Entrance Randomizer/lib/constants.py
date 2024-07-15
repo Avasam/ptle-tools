@@ -10,14 +10,10 @@ import CONFIGS
 from dolphin import memory  # pyright: ignore[reportMissingModuleSource]
 from lib.transition_infos import transition_infos
 
-__version__ = "0.4.0"
-"""
-Major: New major feature or functionality
-
-Minor: Affects seed
-
-Patch: Does't affect seed (assuming same settings)
-"""
+__version = "0.4.0"
+"""See CHANGELOG.md for version semantics."""
+__dev_version = "local"
+__version__ = f"{__version}-{__dev_version}"
 print(f"Python version: {sys.version}")
 print(f"Rando version: {__version__}")
 
@@ -239,17 +235,23 @@ class LevelCRC(IntEnum):
     TWIN_OUTPOSTS = 0xE6B9138A
     TWIN_OUTPOSTS_UNDERWATER = 0xDE524DA6
     UNDERGROUND_DAM = 0x9D6149E1
-    VALLEY_OF_THE_SPIRITS = 0x08E3C641
+    VALLEY_OF_SPIRITS = 0x08E3C641
     VIRACOCHA_MONOLITHS = 0x6F498BBD
     VIRACOCHA_MONOLITHS_CUTSCENE = 0xE8362F5F
     WHACK_A_TUCO = 0x0A1F2526
     WHITE_VALLEY = 0x62548B77
 
 
+TEMPLES_WITH_FIGHT = {
+    LevelCRC.MONKEY_TEMPLE: LevelCRC.MONKEY_SPIRIT,
+    LevelCRC.SCORPION_TEMPLE: LevelCRC.SCORPION_SPIRIT,
+    LevelCRC.PENGUIN_TEMPLE: LevelCRC.PENGUIN_SPIRIT,
+}
+
 SOFTLOCKABLE_ENTRANCES = {
     int(LevelCRC.FLOODED_COURTYARD): 8,  # From st claire: 7
     int(LevelCRC.EYES_OF_DOOM): 9,
-    int(LevelCRC.VALLEY_OF_THE_SPIRITS): 8,
+    int(LevelCRC.VALLEY_OF_SPIRITS): 8,
     int(LevelCRC.COPACANTI_LAKE): 8,
 }
 """Entrances that can softlock by infinitely running into a door.

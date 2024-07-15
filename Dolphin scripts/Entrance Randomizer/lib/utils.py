@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from pathlib import Path
+from typing import ClassVar
 
 from dolphin import gui  # pyright: ignore[reportMissingModuleSource]
 from lib.constants import *  # noqa: F403
@@ -23,7 +24,7 @@ class State:
     """Area ID of the previous frame"""
     current_area_new = 0
     """Area ID of the current frame"""
-    visited_altar_of_ages = False
+    visited_levels: ClassVar[set[int]] = set()
 
 
 state = State()
@@ -44,49 +45,6 @@ def draw_text(text: str):
     _draw_text_index += 1
 
 
-def dump_spoiler_logs(
-    starting_area_name: str,
-    transitions_map: Mapping[tuple[int, int], tuple[int, int]],
-    seed_string: SeedType,
-):
-    spoiler_logs = f"Starting area: {starting_area_name}\n"
-    red_string_list = [
-        f"{TRANSITION_INFOS_DICT[original[0]].name} "
-        + f"({TRANSITION_INFOS_DICT[original[1]].name} exit) "
-        + f"will redirect to: {TRANSITION_INFOS_DICT[redirect[1]].name} "
-        + f"({TRANSITION_INFOS_DICT[redirect[0]].name} entrance)\n"
-        for original, redirect in transitions_map.items()
-    ]
-    red_string_list.sort()
-    for string in red_string_list:
-        spoiler_logs += string
-
-    unrandomized_transitions = ALL_POSSIBLE_TRANSITIONS - transitions_map.keys()
-    if len(unrandomized_transitions) > 0:
-        spoiler_logs += "\nUnrandomized transitions:\n"
-        non_random_string_list = [
-            f"From: {TRANSITION_INFOS_DICT[transition[0]].name}, "
-            + f"To: {TRANSITION_INFOS_DICT[transition[1]].name}.\n"
-            for transition in unrandomized_transitions
-        ]
-        non_random_string_list.sort()
-        for string in non_random_string_list:
-            spoiler_logs += string
-
-    # TODO (Avasam): Get actual user folder based whether Dolphin Emulator is in AppData/Roaming
-    # and if the current installation is portable.
-    dolphin_path = Path().absolute()
-    spoiler_logs_file = (
-        dolphin_path
-        / "User"
-        / "Logs"
-        / f"SPOILER_LOGS_v{__version__}_{seed_string}.txt"
-    )
-    Path.mkdir(spoiler_logs_file.parent, parents=True, exist_ok=True)
-    Path.write_text(spoiler_logs_file, spoiler_logs)
-    print("Spoiler logs written to", spoiler_logs_file)
-
-
 def follow_pointer_path(ppath: Sequence[int]):
     addr = ppath[0]
     for i in range(len(ppath) - 1):
@@ -97,6 +55,46 @@ def follow_pointer_path(ppath: Sequence[int]):
                 + str([hex(level).upper() for level in ppath]),
             )
     return addr
+
+
+def highjack_transition(
+    from_: int | None,
+    to: int | None,
+    redirect: int,
+):
+    if from_ is None:
+        from_ = state.current_area_old
+    if to is None:
+        to = state.current_area_new
+
+    # Early return. Detect the start of a transition
+    if state.current_area_old == state.current_area_new:
+        return False
+
+    if from_ == state.current_area_old and to == state.current_area_new:
+        print(
+            "highjack_transition |",
+            f"From: {hex(state.current_area_old)},",
+            f"To: {hex(state.current_area_new)}.",
+            f"Redirecting to: {hex(redirect)}",
+        )
+        memory.write_u32(ADDRESSES.current_area, redirect)
+        return True
+    return False
+
+
+def prevent_transition_softlocks():
+    """Prevents softlocking on closed doors by making Harry land."""
+    height_offset = SOFTLOCKABLE_ENTRANCES.get(state.current_area_new)
+    if (
+        # As far as we're concerned, these are indeed magic numbers.
+        # We haven't identified a name for these states yet.
+        state.area_load_state_old == 5 and state.area_load_state_new == 6  # noqa: PLR2004
+        # TODO: Include "from" transition to only bump player up when needed
+        and height_offset
+    ):
+        player_z_addr = follow_pointer_path((ADDRESSES.player_ptr, PlayerPtrOffset.PositionZ))
+        memory.write_f32(player_z_addr, memory.read_f32(player_z_addr) + height_offset)
 
 
 def prevent_item_softlock():
@@ -182,22 +180,6 @@ def prevent_item_softlock():
         return
 
 
-def prevent_transition_softlocks():
-    """Prevents softlocking on closed doors by making Harry land."""
-    height_offset = SOFTLOCKABLE_ENTRANCES.get(state.current_area_new)
-    if (
-        # As far as we're concerned, these are indeed magic numbers.
-        # We haven't identified a name for these states yet.
-        state.area_load_state_old == 5 and state.area_load_state_new == 6  # noqa: PLR2004
-        # TODO: Include "from" transition to only bump player up when needed
-        and height_offset
-    ):
-        player_z_addr = follow_pointer_path((ADDRESSES.player_ptr, PlayerPtrOffset.PositionZ))
-        # memory.write_f32(player_x_addr, memory.read_f32(player_x_addr) + 30)
-        # memory.write_f32(player_y_addr, memory.read_f32(player_y_addr) + 30)
-        memory.write_f32(player_z_addr, memory.read_f32(player_z_addr) + height_offset)
-
-
 class PreviousArea:
     _previous_area_address = 0
     __ALL_LEVELS = ALL_TRANSITION_AREAS | set(LevelCRC) - {LevelCRC.MAIN_MENU}
@@ -238,3 +220,46 @@ class PreviousArea:
             if next_prefix != prefix:
                 return -1  # We went the entire dynamic data structure w/o finding a valid ID !
         return -1
+
+
+def dump_spoiler_logs(
+    starting_area_name: str,
+    transitions_map: Mapping[tuple[int, int], tuple[int, int]],
+    seed_string: SeedType,
+):
+    spoiler_logs = f"Starting area: {starting_area_name}\n"
+    red_string_list = [
+        f"{TRANSITION_INFOS_DICT[original[0]].name} "
+        + f"({TRANSITION_INFOS_DICT[original[1]].name} exit) "
+        + f"will redirect to: {TRANSITION_INFOS_DICT[redirect[1]].name} "
+        + f"({TRANSITION_INFOS_DICT[redirect[0]].name} entrance)\n"
+        for original, redirect in transitions_map.items()
+    ]
+    red_string_list.sort()
+    for string in red_string_list:
+        spoiler_logs += string
+
+    unrandomized_transitions = ALL_POSSIBLE_TRANSITIONS - transitions_map.keys()
+    if len(unrandomized_transitions) > 0:
+        spoiler_logs += "\nUnrandomized transitions:\n"
+        non_random_string_list = [
+            f"From: {TRANSITION_INFOS_DICT[transition[0]].name}, "
+            + f"To: {TRANSITION_INFOS_DICT[transition[1]].name}.\n"
+            for transition in unrandomized_transitions
+        ]
+        non_random_string_list.sort()
+        for string in non_random_string_list:
+            spoiler_logs += string
+
+    # TODO (Avasam): Get actual user folder based whether Dolphin Emulator is in AppData/Roaming
+    # and if the current installation is portable.
+    dolphin_path = Path().absolute()
+    spoiler_logs_file = (
+        dolphin_path
+        / "User"
+        / "Logs"
+        / f"SPOILER_LOGS_v{__version__}_{seed_string}.txt"
+    )
+    Path.mkdir(spoiler_logs_file.parent, parents=True, exist_ok=True)
+    Path.write_text(spoiler_logs_file, spoiler_logs)
+    print("Spoiler logs written to", spoiler_logs_file)

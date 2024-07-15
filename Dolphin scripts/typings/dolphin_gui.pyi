@@ -5,7 +5,7 @@ All colors are in ARGB.
 All positions are (x, y) with (0, 0) being top left. X is the horizontal axis.
 """
 
-from typing_extensions import TypeAlias
+from typing import TypeAlias
 
 Position: TypeAlias = tuple[float, float]
 

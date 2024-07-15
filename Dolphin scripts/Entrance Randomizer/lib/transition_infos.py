@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING, NamedTuple, TypedDict
+from typing import Literal, NamedTuple, TypeAlias, TypedDict
 
 
 class ExitJSON(TypedDict):
@@ -19,22 +19,15 @@ class AreaJSON(TypedDict):
     exits: list[ExitJSON]
 
 
-if TYPE_CHECKING:
-    from typing import Literal
-
-    from typing_extensions import TypeAlias
-
-    TransitionInfosJSON: TypeAlias = dict[  # pyright: ignore  # Safe inside TYPE_CHECKING
-        Literal[
-            "Jungle",
-            "Native Territory",
-            "Lost Caverns",
-            "Snowy Mountains",
-        ],
-        list[AreaJSON],  # pyright: ignore  # Safe inside TYPE_CHECKING
-    ]
-else:
-    TransitionInfosJSON = None
+TransitionInfosJSON: TypeAlias = dict[
+    Literal[
+        "Jungle",
+        "Native Territory",
+        "Lost Caverns",
+        "Snowy Mountains",
+    ],
+    list[AreaJSON],
+]
 
 
 @dataclass(frozen=True)
@@ -44,13 +37,12 @@ class Exit:
     requires: None | list[list[str]]
 
 
-@dataclass(frozen=False)  # TODO: Change code that mutates this and change this back to True
+@dataclass(frozen=True)
 class Area:
     area_id: int
     name: str
     default_entrance: int
     exits: tuple[Exit, ...]
-    con_left: int
 
 
 class MajorAreas(NamedTuple):
@@ -80,7 +72,6 @@ def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):  # noqa: 
                     )
                     for exit_ in area["exits"]
                 ]),
-                len(area["exits"]),
             )
             for area in major_area
         ])

@@ -20,10 +20,10 @@ import CONFIGS
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
 from lib.entrance_rando import (
-    highjack_transition,
     highjack_transition_rando,
     set_transitions_map,
     starting_area,
+    temp_disabled_exits,
     transitions_map,
 )
 from lib.graph_creation import create_graphml
@@ -32,6 +32,7 @@ from lib.utils import (
     PreviousArea,
     draw_text,
     dump_spoiler_logs,
+    highjack_transition,
     prevent_item_softlock,
     prevent_transition_softlocks,
     reset_draw_text_index,
@@ -49,7 +50,7 @@ except KeyError:
 
 # Dump spoiler logs and graph
 dump_spoiler_logs(starting_area_name, transitions_map, seed_string)
-create_graphml(transitions_map, seed_string, starting_area)
+create_graphml(transitions_map, temp_disabled_exits, seed_string, starting_area)
 
 
 async def main_loop():
@@ -83,9 +84,13 @@ async def main_loop():
             + f"ID might be: {hex(memory.read_u32(PreviousArea._previous_area_address)).upper()}",  # noqa: SLF001 # pyright: ignore[reportPrivateUsage]
         )
 
-    # Always re-enable Item Swap.
+    # Always re-enable Item Swap
     if memory.read_u32(ADDRESSES.item_swap) == 1:
         memory.write_u32(ADDRESSES.item_swap, 0)
+
+    # Track the visited levels for different purposes.
+    # We only consider a level "visited" once leaving it.
+    state.visited_levels.add(state.current_area_old)
 
     # Skip both Jaguar fights if configured
     if CONFIGS.SKIP_JAGUAR:
@@ -95,14 +100,11 @@ async def main_loop():
             return
 
     # Standardize the Altar of Ages exit to remove the Altar -> BBCamp transition
-    if highjack_transition(
-            LevelCRC.ALTAR_OF_AGES,
-            LevelCRC.BITTENBINDERS_CAMP,
-            LevelCRC.MYSTERIOUS_TEMPLE,
-    ):
-        # Even if the cutscene isn't actually watched.
-        # Just leaving the Altar is good enough for the rando.
-        state.visited_altar_of_ages = True
+    highjack_transition(
+        LevelCRC.ALTAR_OF_AGES,
+        LevelCRC.BITTENBINDERS_CAMP,
+        LevelCRC.MYSTERIOUS_TEMPLE,
+    )
 
     # Standardize the Viracocha Monoliths cutscene
     highjack_transition(

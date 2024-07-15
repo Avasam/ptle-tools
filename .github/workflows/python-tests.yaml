@@ -1,4 +1,4 @@
-name: Typecheck
+name: Python tests
 
 on:
   workflow_dispatch: #  Allows manual triggers
@@ -10,7 +10,7 @@ on:
       - "**.pyi"
       - "**/requirements*.txt"
       - "**/pyproject.toml"
-      - ".github/workflows/typecheck.yaml"
+      - ".github/workflows/python-tests.yaml"
   pull_request:
     branches:
       - main
@@ -19,7 +19,7 @@ on:
       - "**.pyi"
       - "**/requirements*.txt"
       - "**/pyproject.toml"
-      - ".github/workflows/typecheck.yaml"
+      - ".github/workflows/python-tests.yaml"
 
 env:
   PIP_DISABLE_PIP_VERSION_CHECK: 1
@@ -31,5 +31,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: pip install typing_extensions
+      - name: Get pyright version
+        id: pyright_version
+        run: |
+          PYRIGHT_VERSION=$(grep pyright== 'Dolphin scripts/requirements-dev.txt' | cut -d "#" -f 1 | cut -d \; -f 1 | cut -d = -f 3)
+          echo pyright version: "${PYRIGHT_VERSION}"
+          echo PYRIGHT_VERSION="${PYRIGHT_VERSION}" >> "${GITHUB_OUTPUT}"
       - uses: jakebailey/pyright-action@v2
+        with:
+          version: ${{ steps.pyright_version.outputs.PYRIGHT_VERSION }}
