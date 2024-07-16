@@ -12,8 +12,8 @@ from lib.transition_infos import Transition, transition_infos
 
 __version = "0.5.0"
 """See CHANGELOG.md for version semantics."""
-__dev_version = "local"
-__version__ = f"{__version}-{__dev_version}"
+__dev_version = "-local"
+__version__ = f"{__version}{__dev_version}"
 print(f"Python version: {sys.version}")
 print(f"Rando version: {__version__}")
 
