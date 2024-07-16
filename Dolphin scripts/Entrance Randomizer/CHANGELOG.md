@@ -23,6 +23,11 @@ To add a changelog entry, add a new file `<issue_or_pr_#>.<type>.md` to the `new
 
 ### Features
 
+- Added informational styling to graph edges
+  - One-way-transitions are marked by using a dashed line
+  - Transitions that are disabled but we plan on re-enabling are marked in black
+
+  -- by @wossnameGitHub
 - When being sent to an Animal Temple that you haven't beaten yet, you will now instead be redirected to the Spirit Fight immediately -- by @wossnameGitHub ([#87](https://github.com/Avasam/ptle-tools/issues/87))
 - "Immediate spirit fights" is optional and configurable -- by @Avasam ([#65](https://github.com/Avasam/ptle-tools/issues/65))
 

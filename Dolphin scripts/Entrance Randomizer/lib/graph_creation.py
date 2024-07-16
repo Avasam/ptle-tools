@@ -23,6 +23,9 @@ class LineType(IntEnum):
 STARTING_AREA_COLOR = "#ff8000"  # Orange
 UPGRADE_AREAS_COLOR = "#0080ff"  # Blue
 IMPORTANT_STORY_TRIGGER_AREAS_COLOR = "#ff0000"  # Red
+UNRANDOMIZED_EDGE_COLOR = "#000000"  # Black
+CLOSED_DOOR_EDGE_COLOR = "#ff0000"  # Red
+
 UPGRADE_AREAS = {
     LevelCRC.PLANE_COCKPIT,  # Canteen
     LevelCRC.BITTENBINDERS_CAMP,  # Sling + Rising Strike
@@ -42,9 +45,6 @@ IMPORTANT_STORY_TRIGGER_AREAS = {
     LevelCRC.ST_CLAIRE_DAY,
     LevelCRC.GATES_OF_EL_DORADO,
 }
-
-UNRANDOMIZED_EDGE_COLOR = "#000000"  # Black
-CLOSED_DOOR_EDGE_COLOR = "#ff0000"  # Red
 
 
 def create_own_style(params: dict[str, str | None]):
@@ -119,10 +119,12 @@ def edge_component(
         + f'target="{_transition_infos_dict_rando[end].area_id}" '
         + f'isDirect="{direct_str}" '
         + f'id="{counter}"'
-    ) + create_own_style({
-        "strokeStyle": color,
-        "lineDash": "2" if line_type == LineType.DASHED else None,
-    }) + "></edge>\n"
+        + create_own_style({
+            "strokeStyle": color,
+            "lineDash": "2" if line_type == LineType.DASHED else None,
+        })
+        + "></edge>\n"
+    )
 
 
 def create_edges(
