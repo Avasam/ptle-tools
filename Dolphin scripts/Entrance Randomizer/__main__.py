@@ -79,12 +79,9 @@ async def main_loop():
     draw_text(
         f"From entrance addr: {hex(PreviousArea._previous_area_address).upper()} ",  # noqa: SLF001 # pyright: ignore[reportPrivateUsage]
     )
-    if previous_area_id != -1 or state.current_area_new in {starting_area, LevelCRC.MAIN_MENU}:
+    if previous_area_id or state.current_area_new in {starting_area, LevelCRC.MAIN_MENU}:
         previous_area_name = PreviousArea.get_name(previous_area_id)
-        draw_text(
-            f"From entrance: {hex(previous_area_id).upper()} "
-            + (f"({previous_area_name})" if previous_area_name else ""),
-        )
+        draw_text(f"From entrance: {hex(previous_area_id).upper()} ({previous_area_name})")
     else:
         draw_text(
             "From entrance: NOT FOUND!!!\n"

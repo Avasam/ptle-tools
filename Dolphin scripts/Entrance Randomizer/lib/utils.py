@@ -243,7 +243,7 @@ class PreviousArea:
     Some entrances are mapped to a different ID than the level the player actually comes from.
     This maps the fake ID to the real ID.
     """
-    __ALL_LEVELS = (
+    __ALL_ENTRANCE_IDS = (
         ALL_TRANSITION_AREAS
         | set(CORRECTED_PREV_ID)
         | set(LevelCRC)
@@ -280,13 +280,13 @@ class PreviousArea:
         If a "fake ID" is passed, it'll be mapped to the real "from level".
         """
         area = TRANSITION_INFOS_DICT.get(cls.CORRECTED_PREV_ID.get(area_id, area_id))
-        return area.name if area else ""
+        return area.name if area else "Default"
 
     @classmethod
     def __update_previous_area_address(cls):
         # First check that the current value is a sensible known level
         previous_area = memory.read_u32(cls._previous_area_address)
-        if previous_area in cls.__ALL_LEVELS:
+        if previous_area in cls.__ALL_ENTRANCE_IDS:
             return previous_area
 
         # If not, start iterating over 16-bit blocks,
@@ -298,7 +298,7 @@ class PreviousArea:
             # Check if the current block is a valid level id
             block_address += 8
             previous_area = memory.read_u32(block_address)
-            if previous_area in cls.__ALL_LEVELS:
+            if previous_area in cls.__ALL_ENTRANCE_IDS:
                 # Valid id. Assume this is our address
                 cls._previous_area_address = block_address
                 return previous_area
@@ -307,8 +307,8 @@ class PreviousArea:
             block_address += 8
             next_prefix = memory.read_u32(block_address)
             if next_prefix != prefix:
-                return -1  # We went the entire dynamic data structure w/o finding a valid ID !
-        return -1
+                return 0  # We went the entire dynamic data structure w/o finding a valid ID !
+        return 0
 
 
 def dump_spoiler_logs(
