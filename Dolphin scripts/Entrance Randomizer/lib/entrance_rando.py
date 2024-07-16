@@ -126,8 +126,8 @@ starting_area = random.choice(_possible_starting_areas)
 if CONFIGS.STARTING_AREA is not None:
     starting_area = CONFIGS.STARTING_AREA
 
-TRANSITION_INFOS_DICT_RANDO = TRANSITION_INFOS_DICT.copy()
-ALL_POSSIBLE_TRANSITIONS_RANDO = ALL_POSSIBLE_TRANSITIONS
+_transition_infos_dict_rando = TRANSITION_INFOS_DICT.copy()
+_all_possible_transitions_rando = list(ALL_POSSIBLE_TRANSITIONS)
 
 transitions_map: dict[tuple[int, int], Transition] = {}
 """```python
@@ -187,28 +187,25 @@ def initialize_connections_left():
 
 
 def remove_disabled_exits():
-    # remove exits from TRANSITION_INFOS_DICT_RANDO
+    # remove exits from _transition_infos_dict_rando
     for area in TRANSITION_INFOS_DICT.values():
         for ex in area.exits:
             current = (area.area_id, ex.area_id)
             if current in ONE_WAY_TRANSITIONS or current in DISABLED_TRANSITIONS:
-                TRANSITION_INFOS_DICT_RANDO[area.area_id] = Area(
+                _transition_infos_dict_rando[area.area_id] = Area(
                     area.area_id,
                     area.name,
                     area.default_entrance,
                     tuple([
-                        x for x in TRANSITION_INFOS_DICT_RANDO[area.area_id].exits if x != ex
+                        x for x in _transition_infos_dict_rando[area.area_id].exits if x != ex
                     ]),
                 )
                 __connections_left[area.area_id] -= 1
 
-    # remove exits from ALL_POSSIBLE_TRANSITIONS_RANDO
-    global ALL_POSSIBLE_TRANSITIONS_RANDO
+    # remove exits from _all_possible_transitions_rando
     for trans in ALL_POSSIBLE_TRANSITIONS:
         if trans in ONE_WAY_TRANSITIONS or trans in DISABLED_TRANSITIONS:
-            ALL_POSSIBLE_TRANSITIONS_RANDO = [  # pyright: ignore[reportConstantRedefinition]
-                x for x in ALL_POSSIBLE_TRANSITIONS_RANDO if x != trans
-            ]
+            _all_possible_transitions_rando.remove(trans)
 
 
 def link_two_levels(first: Area, second: Area):
@@ -339,22 +336,22 @@ def set_transitions_map():  # noqa: PLR0915 # TODO: Break up in smaller function
     initialize_connections_left()
     remove_disabled_exits()
     if not CONFIGS.SKIP_JAGUAR:
-        starting_default = TRANSITION_INFOS_DICT_RANDO[starting_area].default_entrance
+        starting_default = _transition_infos_dict_rando[starting_area].default_entrance
         tutorial_original = Transition(from_=LevelCRC.JAGUAR, to=LevelCRC.PLANE_CUTSCENE)
         tutorial_redirect = Transition(from_=starting_default, to=starting_area)
         transitions_map[tutorial_original] = tutorial_redirect
 
-    _possible_redirections_bucket = list(starmap(Transition, ALL_POSSIBLE_TRANSITIONS_RANDO))
+    _possible_redirections_bucket = list(starmap(Transition, _all_possible_transitions_rando))
 
     if CONFIGS.LINKED_TRANSITIONS:
         # Ground rules:
         # 1. you can't make a transition from a level to itself
         # 2. any 2 levels may have a maximum of 1 connection between them (as long as it's 2-way)
 
-        _possible_origins_bucket = list(starmap(Transition, ALL_POSSIBLE_TRANSITIONS_RANDO))
+        _possible_origins_bucket = list(starmap(Transition, _all_possible_transitions_rando))
 
         level_list = [
-            area for area in TRANSITION_INFOS_DICT_RANDO.values()
+            area for area in _transition_infos_dict_rando.values()
             if __connections_left[area.area_id] > 0
         ]
         random.shuffle(level_list)
@@ -410,7 +407,7 @@ def set_transitions_map():  # noqa: PLR0915 # TODO: Break up in smaller function
         # Ground rules:
         # 1. you can't make a transition from a level to itself
         _possible_redirections_bucket.extend(ONE_WAY_TRANSITIONS)
-        for area in TRANSITION_INFOS_DICT_RANDO.values():
+        for area in _transition_infos_dict_rando.values():
             for to_og in (exit_.area_id for exit_ in area.exits):
                 original = Transition(from_=area.area_id, to=to_og)
                 redirect = get_random_redirection(original, _possible_redirections_bucket)

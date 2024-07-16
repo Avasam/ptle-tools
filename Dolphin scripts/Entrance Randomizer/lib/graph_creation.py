@@ -1,15 +1,29 @@
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+from collections.abc import Iterable, Mapping, Sequence
+from enum import IntEnum, auto
 from pathlib import Path
 
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
 from lib.types_ import SeedType
 
+
+class Direction(IntEnum):
+    ONEWAY = auto()
+    TWOWAY = auto()
+
+
+class LineType(IntEnum):
+    SOLID = auto()
+    DASHED = auto()
+
+
 STARTING_AREA_COLOR = "#ff8000"  # Orange
 UPGRADE_AREAS_COLOR = "#0080ff"  # Blue
 IMPORTANT_STORY_TRIGGER_AREAS_COLOR = "#ff0000"  # Red
+UNRANDOMIZED_EDGE_COLOR = "#000000"  # Black
+
 UPGRADE_AREAS = {
     LevelCRC.PLANE_COCKPIT,  # Canteen
     LevelCRC.BITTENBINDERS_CAMP,  # Sling + Rising Strike
@@ -26,10 +40,18 @@ UPGRADE_AREAS = {
 }
 IMPORTANT_STORY_TRIGGER_AREAS = {
     LevelCRC.ALTAR_OF_AGES,
-    LevelCRC.ST_CLAIRE_NIGHT,
     LevelCRC.ST_CLAIRE_DAY,
     LevelCRC.GATES_OF_EL_DORADO,
 }
+
+
+def create_own_style(params: dict[str, str | None]):
+    style = ", ".join([
+        f"&quot;{key}&quot;:&quot;{value}&quot;"
+        for key, value in params.items()
+        if value is not None
+    ])
+    return ' ownStyles="{&quot;0&quot;:{' + style + '}}"' if style else ""
 
 
 def create_vertices(
@@ -63,26 +85,15 @@ def create_vertices(
         output_text += (
             f'<node positionX="{counter_x * 100 + counter_y * 20}" '
             + f'positionY="{counter_x * 50 + counter_y * 50}" '
-            + f'id="{int(area_id)}" mainText="{area_name}"'
+            + f'id="{int(area_id)}" '
+            + f'mainText="{area_name}"'
         )
         if area_id == starting_area:
-            output_text += (
-                ' ownStyles="{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
-                + STARTING_AREA_COLOR
-                + '&quot;}}"'
-            )
+            output_text += create_own_style({"fillStyle": STARTING_AREA_COLOR})
         elif area_id in UPGRADE_AREAS:
-            output_text += (
-                ' ownStyles="{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
-                + UPGRADE_AREAS_COLOR
-                + '&quot;}}"'
-            )
+            output_text += create_own_style({"fillStyle": UPGRADE_AREAS_COLOR})
         elif area_id in IMPORTANT_STORY_TRIGGER_AREAS:
-            output_text += (
-                ' ownStyles="{&quot;0&quot;:{&quot;fillStyle&quot;:&quot;'
-                + IMPORTANT_STORY_TRIGGER_AREAS_COLOR
-                + '&quot;}}"'
-            )
+            output_text += create_own_style({"fillStyle": IMPORTANT_STORY_TRIGGER_AREAS_COLOR})
         output_text += "></node>\n"
         row_length = 10
         counter_x += 1
@@ -92,13 +103,42 @@ def create_vertices(
     return output_text
 
 
-def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
-    connections = [(original[0], redirect[1]) for original, redirect in transitions_map.items()]
-    connections_two_way: list[tuple[int, int]] = []
-    connections_one_way: list[tuple[int, int]] = []
+def edge_component(
+    start: int,
+    end: int,
+    counter: int,
+    direct: Direction,
+    color: str | None,
+    line_type: LineType,
+):
+    direct_str = str(direct == Direction.ONEWAY).lower()
+    return (
+        f'<edge source="{TRANSITION_INFOS_DICT[start].area_id}" '
+        + f'target="{TRANSITION_INFOS_DICT[end].area_id}" '
+        + f'isDirect="{direct_str}" '
+        + f'id="{counter}"'
+        + create_own_style({
+            "strokeStyle": color,
+            "lineDash": "2" if line_type == LineType.DASHED else None,
+        })
+        + "></edge>\n"
+    )
+
+
+def create_edges(
+    transitions_map: Mapping[tuple[int, int], tuple[int, int]],
+    shown_disabled_transitions: Iterable[tuple[int, int]],
+):
+    connections = list(transitions_map.items())
+    connections_two_way: list[tuple[tuple[int, int], tuple[int, int]]] = []
+    connections_one_way: list[tuple[tuple[int, int], tuple[int, int]]] = []
     for pairing in connections:
-        if (pairing[1], pairing[0]) not in connections_two_way:
-            if (pairing[1], pairing[0]) in connections:
+        reverse = (
+            (pairing[1][1], pairing[1][0]),
+            (pairing[0][1], pairing[0][0]),
+        )
+        if reverse not in connections_two_way:
+            if reverse in connections:
                 connections_two_way.append(pairing)
             else:
                 connections_one_way.append(pairing)
@@ -106,17 +146,23 @@ def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
     output_text = ""
     counter = 1  # Can't start at 0 since that's the MAIN_MENU id
     for pairing in connections_two_way:
-        output_text += (
-            f'<edge source="{TRANSITION_INFOS_DICT[pairing[0]].area_id}" '
-            + f'target="{TRANSITION_INFOS_DICT[pairing[1]].area_id}" isDirect="false" '
-            + f'id="{counter}"></edge>\n'
+        output_text += edge_component(
+            pairing[0][0],
+            pairing[1][1],
+            counter,
+            Direction.TWOWAY,
+            UNRANDOMIZED_EDGE_COLOR if pairing[1] in shown_disabled_transitions else None,
+            LineType.SOLID,
         )
         counter += 1
     for pairing in connections_one_way:
-        output_text += (
-            f'<edge source="{TRANSITION_INFOS_DICT[pairing[0]].area_id}" '
-            + f'target="{TRANSITION_INFOS_DICT[pairing[1]].area_id}" isDirect="true" '
-            + f'id="{counter}"></edge>\n'
+        output_text += edge_component(
+            pairing[0][0],
+            pairing[1][1],
+            counter,
+            Direction.ONEWAY,
+            None,
+            LineType.DASHED,
         )
         counter += 1
     return output_text
@@ -134,7 +180,7 @@ def create_graphml(
         '<?xml version="1.0" encoding="UTF-8"?>'
         + '<graphml><graph id="Graph" uidGraph="1" uidEdge="1">\n'
         + create_vertices(all_transitions, starting_area)
-        + create_edges(all_transitions)
+        + create_edges(all_transitions, shown_disabled_transitions)
         + "</graph></graphml>"
     )
 
