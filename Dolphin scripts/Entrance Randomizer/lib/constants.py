@@ -250,7 +250,7 @@ TEMPLES_WITH_FIGHT = {
 
 SOFTLOCKABLE_ENTRANCES = {
     int(LevelCRC.FLOODED_COURTYARD): 8,  # From st claire: 7
-    int(LevelCRC.EYES_OF_DOOM): 9,
+    int(LevelCRC.EYES_OF_DOOM): 12,  # From Scorpion Temple: 9
     int(LevelCRC.VALLEY_OF_SPIRITS): 8,
     int(LevelCRC.COPACANTI_LAKE): 8,
 }
