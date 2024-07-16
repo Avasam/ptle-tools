@@ -9,8 +9,6 @@ from lib.constants import *  # noqa: F403
 from lib.constants import __version__
 from lib.types_ import SeedType
 
-from .constants import LevelCRC
-
 DRAW_TEXT_STEP = 24
 DRAW_TEXT_OFFSET_X = 272
 _draw_text_index = 0
