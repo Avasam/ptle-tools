@@ -3,7 +3,7 @@ from __future__ import annotations
 import random
 from collections.abc import Iterable, MutableMapping, MutableSequence, Sequence, Sized
 from copy import copy
-from enum import IntEnum
+from enum import IntEnum, auto
 from itertools import starmap
 
 import CONFIGS
@@ -13,8 +13,8 @@ from lib.utils import follow_pointer_path, state
 
 
 class Choice(IntEnum):
-    CONNECT = 1
-    INBETWEEN = 2
+    CONNECT = auto()
+    INBETWEEN = auto()
 
 
 _possible_starting_areas = [
