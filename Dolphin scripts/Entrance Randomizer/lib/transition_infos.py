@@ -1,9 +1,20 @@
+"""
+Expose `transition_infos.json` with static Python classes.
+
+No other information should be found here other than the imported data and helper classes.
+"""
+
 from __future__ import annotations
 
 import json
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal, NamedTuple, TypeAlias, TypedDict
+
+
+class Transition(NamedTuple):
+    from_: int
+    to: int
 
 
 class ExitJSON(TypedDict):

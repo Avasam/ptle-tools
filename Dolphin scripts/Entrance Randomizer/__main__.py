@@ -20,10 +20,10 @@ import CONFIGS
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
 from lib.entrance_rando import (
+    DISABLED_TRANSITIONS,
     highjack_transition_rando,
     set_transitions_map,
     starting_area,
-    temp_disabled_exits,
     transitions_map,
 )
 from lib.graph_creation import create_graphml
@@ -50,7 +50,7 @@ except KeyError:
 
 # Dump spoiler logs and graph
 dump_spoiler_logs(starting_area_name, transitions_map, seed_string)
-create_graphml(transitions_map, temp_disabled_exits, seed_string, starting_area)
+create_graphml(transitions_map, DISABLED_TRANSITIONS, seed_string, starting_area)
 
 
 async def main_loop():

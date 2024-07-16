@@ -3,9 +3,8 @@ from __future__ import annotations
 import random
 from collections.abc import Iterable, MutableMapping, MutableSequence, Sequence, Sized
 from copy import copy
-from enum import IntEnum
+from enum import IntEnum, auto
 from itertools import starmap
-from typing import NamedTuple
 
 import CONFIGS
 from lib.constants import *  # noqa: F403
@@ -13,32 +12,10 @@ from lib.transition_infos import Area
 from lib.utils import follow_pointer_path, state
 
 
-class Transition(NamedTuple):
-    from_: int
-    to: int
-
-
 class Choice(IntEnum):
-    CONNECT = 1
-    INBETWEEN = 2
+    CONNECT = auto()
+    INBETWEEN = auto()
 
-
-temples = (
-    LevelCRC.MONKEY_TEMPLE,
-    LevelCRC.SCORPION_TEMPLE,
-    LevelCRC.PENGUIN_TEMPLE,
-)
-
-one_way_exits = (
-    # the White Valley geyser
-    Transition(LevelCRC.WHITE_VALLEY, LevelCRC.MOUNTAIN_SLED_RUN),
-    # the Apu Illapu Shrine geyser
-    Transition(LevelCRC.APU_ILLAPU_SHRINE, LevelCRC.WHITE_VALLEY),
-    # the Apu Illapu Shrine one-way door
-    Transition(LevelCRC.MOUNTAIN_SLED_RUN, LevelCRC.APU_ILLAPU_SHRINE),
-    # the Jungle Canyon waterfall
-    Transition(LevelCRC.CAVERN_LAKE, LevelCRC.JUNGLE_CANYON),
-)
 
 _possible_starting_areas = [
     area for area in ALL_TRANSITION_AREAS
@@ -75,7 +52,13 @@ _possible_starting_areas = [
     }
 ]
 
-temp_disabled_exits = [
+SHOWN_DISABLED_TRANSITIONS = (
+    # Until we can set the "previous area id" in memory consistently,
+    # Crash Site is a risk of progress reset
+    (LevelCRC.CRASH_SITE, LevelCRC.JUNGLE_CANYON),
+    (LevelCRC.CRASH_SITE, LevelCRC.PLANE_COCKPIT),
+    (LevelCRC.JUNGLE_CANYON, LevelCRC.CRASH_SITE),
+    (LevelCRC.PLANE_COCKPIT, LevelCRC.CRASH_SITE),
     # Mouth of Inti has 2 connections with Altar of Huitaca, which causes problems,
     # basically it's very easy to get softlocked by the spider web when entering Altar of Huitaca
     # So for now just don't randomize it. That way runs don't just end out of nowhere
@@ -87,10 +70,11 @@ temp_disabled_exits = [
     # So for now just don't randomize it. That way we won't have to worry about that yet
     (LevelCRC.TWIN_OUTPOSTS, LevelCRC.TWIN_OUTPOSTS_UNDERWATER),
     (LevelCRC.TWIN_OUTPOSTS_UNDERWATER, LevelCRC.TWIN_OUTPOSTS),
-]
+)
+"""These disabled exits are to be shown on the graph."""
 
-disabled_exits = (
-    *temp_disabled_exits,
+DISABLED_TRANSITIONS = (
+    *SHOWN_DISABLED_TRANSITIONS,
     # The 3 Spirit Fights are not randomized,
     # because that will cause issues with the transformation cutscene trigger.
     # Plus it wouldn't really improve anything, given that the Temples are randomized anyway.
@@ -207,7 +191,7 @@ def remove_disabled_exits():
     for area in TRANSITION_INFOS_DICT.values():
         for ex in area.exits:
             current = (area.area_id, ex.area_id)
-            if current in one_way_exits or current in disabled_exits:
+            if current in ONE_WAY_TRANSITIONS or current in DISABLED_TRANSITIONS:
                 TRANSITION_INFOS_DICT_RANDO[area.area_id] = Area(
                     area.area_id,
                     area.name,
@@ -221,7 +205,7 @@ def remove_disabled_exits():
     # remove exits from ALL_POSSIBLE_TRANSITIONS_RANDO
     global ALL_POSSIBLE_TRANSITIONS_RANDO
     for trans in ALL_POSSIBLE_TRANSITIONS:
-        if trans in one_way_exits or trans in disabled_exits:
+        if trans in ONE_WAY_TRANSITIONS or trans in DISABLED_TRANSITIONS:
             ALL_POSSIBLE_TRANSITIONS_RANDO = [  # pyright: ignore[reportConstantRedefinition]
                 x for x in ALL_POSSIBLE_TRANSITIONS_RANDO if x != trans
             ]
@@ -415,9 +399,9 @@ def set_transitions_map():  # noqa: PLR0915 # TODO: Break up in smaller function
             _possible_redirections_bucket,
         )
 
-        one_way_redirects = list(one_way_exits)
+        one_way_redirects = list(ONE_WAY_TRANSITIONS)
         random.shuffle(one_way_redirects)
-        for original in one_way_exits:
+        for original in ONE_WAY_TRANSITIONS:
             if one_way_redirects[0].to == original.from_:
                 transitions_map[original] = one_way_redirects.pop(1)
             else:
@@ -425,7 +409,7 @@ def set_transitions_map():  # noqa: PLR0915 # TODO: Break up in smaller function
     else:
         # Ground rules:
         # 1. you can't make a transition from a level to itself
-        _possible_redirections_bucket.extend(one_way_exits)
+        _possible_redirections_bucket.extend(ONE_WAY_TRANSITIONS)
         for area in TRANSITION_INFOS_DICT_RANDO.values():
             for to_og in (exit_.area_id for exit_ in area.exits):
                 original = Transition(from_=area.area_id, to=to_og)
@@ -433,7 +417,7 @@ def set_transitions_map():  # noqa: PLR0915 # TODO: Break up in smaller function
                 if redirect is not None:
                     transitions_map[original] = redirect
                     _possible_redirections_bucket.remove(redirect)
-        for original in one_way_exits:
+        for original in ONE_WAY_TRANSITIONS:
             redirect = get_random_redirection(original, _possible_redirections_bucket)
             if redirect is not None:
                 transitions_map[original] = redirect
