@@ -157,8 +157,8 @@ starting_area = random.choice(_possible_starting_areas)
 if CONFIGS.STARTING_AREA is not None:
     starting_area = CONFIGS.STARTING_AREA
 
-transition_infos_dict_rando = TRANSITION_INFOS_DICT.copy()
-all_possible_transitions_rando = ALL_POSSIBLE_TRANSITIONS
+_transition_infos_dict_rando = TRANSITION_INFOS_DICT.copy()
+_all_possible_transitions_rando = list(ALL_POSSIBLE_TRANSITIONS)
 
 transitions_map: dict[tuple[int, int], Transition] = {}
 
@@ -226,17 +226,13 @@ def increment_index(
 
 
 def delete_exit(area: Area, ex: Exit):
-    transition_infos_dict_rando[area.area_id] = Area(
+    _transition_infos_dict_rando[area.area_id] = Area(
         area.area_id,
         area.name,
         area.default_entrance,
-        tuple([x for x in transition_infos_dict_rando[area.area_id].exits if x != ex]),
+        tuple([x for x in _transition_infos_dict_rando[area.area_id].exits if x != ex]),
     )
-    global all_possible_transitions_rando
-    all_possible_transitions_rando = [
-        x for x in all_possible_transitions_rando
-        if x != (area.area_id, ex.area_id)
-    ]
+    _all_possible_transitions_rando.remove((area.area_id, ex.area_id))
 
 
 def remove_disabled_exits():
@@ -248,7 +244,7 @@ def remove_disabled_exits():
 
 
 def initialize_connections_left():
-    for area in transition_infos_dict_rando.values():
+    for area in _transition_infos_dict_rando.values():
         __connections_left[area.area_id] = len(area.exits)
 
 
@@ -501,14 +497,14 @@ def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
     initialize_connections_left()
 
     if not CONFIGS.SKIP_JAGUAR:
-        starting_default = transition_infos_dict_rando[starting_area].default_entrance
+        starting_default = _transition_infos_dict_rando[starting_area].default_entrance
         tutorial_original = Transition(from_=LevelCRC.JAGUAR, to=LevelCRC.PLANE_CUTSCENE)
         tutorial_redirect = Transition(from_=starting_default, to=starting_area)
         transitions_map[tutorial_original] = tutorial_redirect
 
     global _possible_origins_bucket, _possible_redirections_bucket
 
-    _possible_origins_bucket = list(starmap(Transition, all_possible_transitions_rando))
+    _possible_origins_bucket = list(starmap(Transition, _all_possible_transitions_rando))
     _possible_redirections_bucket = _possible_origins_bucket.copy()
 
     if CONFIGS.LINKED_TRANSITIONS:
@@ -521,7 +517,7 @@ def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
         random.shuffle(closed_door_levels)
 
         level_list = [
-            area for area in transition_infos_dict_rando.values()
+            area for area in _transition_infos_dict_rando.values()
             if __connections_left[area.area_id] > 0
         ]
         random.shuffle(level_list)
@@ -603,7 +599,7 @@ def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
         # Ground rules:
         # 1. you can't make a transition from a level to itself
         _possible_redirections_bucket.extend(ONE_WAY_TRANSITIONS)
-        for area in transition_infos_dict_rando.values():
+        for area in _transition_infos_dict_rando.values():
             for to_og in (exit_.area_id for exit_ in area.exits):
                 original = Transition(from_=area.area_id, to=to_og)
                 redirect = get_random_one_way_redirection(original)
