@@ -5,17 +5,11 @@ from collections.abc import Iterable, MutableMapping, MutableSequence, Sequence,
 from copy import copy
 from enum import IntEnum
 from itertools import starmap
-from typing import NamedTuple
 
 import CONFIGS
 from lib.constants import *  # noqa: F403
 from lib.transition_infos import Area
-from lib.utils import follow_pointer_path, state
-
-
-class Transition(NamedTuple):
-    from_: int
-    to: int
+from lib.utils import PreviousArea, Transition, state
 
 
 class Choice(IntEnum):
@@ -157,6 +151,7 @@ __connections_left: dict[int, int] = {}
 
 
 def highjack_transition_rando():
+    return None
     # Early return, faster check. Detect the start of a transition
     if state.current_area_old == state.current_area_new:
         return False
@@ -191,7 +186,7 @@ def highjack_transition_rando():
         f"Redirecting to: {hex(redirect.to)}",
         f"({hex(redirect.from_)} entrance)\n",
     )
-    memory.write_u32(follow_pointer_path(ADDRESSES.prev_area), redirect.from_)
+    PreviousArea.set(redirect)
     memory.write_u32(ADDRESSES.current_area, redirect.to)
     state.current_area_new = redirect.to
     return redirect

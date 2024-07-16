@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from pathlib import Path
-from typing import ClassVar
+from typing import ClassVar, NamedTuple
 
 from dolphin import gui  # pyright: ignore[reportMissingModuleSource]
 from lib.constants import *  # noqa: F403
@@ -58,27 +58,36 @@ def follow_pointer_path(ppath: Sequence[int]):
 
 
 def highjack_transition(
-    from_: int | None,
-    to: int | None,
-    redirect: int,
+    original_from: int | None,
+    original_to: int | None,
+    redirect_from: int,
+    redirect_to: int,
 ):
-    if from_ is None:
-        from_ = state.current_area_old
-    if to is None:
-        to = state.current_area_new
+    """
+    Highjack a transition to transport the player elsewhere.
+
+    `original_from=None` means that any entrance will match.
+    `original_from=None` means that any exit will match.
+    """
+    if original_from is None:
+        original_from = state.current_area_old
+    if original_to is None:
+        original_to = state.current_area_new
 
     # Early return. Detect the start of a transition
     if state.current_area_old == state.current_area_new:
         return False
 
-    if from_ == state.current_area_old and to == state.current_area_new:
+    if original_from == state.current_area_old and original_to == state.current_area_new:
         print(
             "highjack_transition |",
             f"From: {hex(state.current_area_old)},",
             f"To: {hex(state.current_area_new)}.",
-            f"Redirecting to: {hex(redirect)}",
+            f"Redirecting to: {hex(redirect_to)} ",
+            f"from {hex(redirect_from)} entrance",
         )
-        memory.write_u32(ADDRESSES.current_area, redirect)
+        PreviousArea.set(Transition(redirect_from, redirect_to))
+        memory.write_u32(ADDRESSES.current_area, redirect_to)
         return True
     return False
 
@@ -94,8 +103,6 @@ def prevent_transition_softlocks():
         and height_offset
     ):
         player_z_addr = follow_pointer_path((ADDRESSES.player_ptr, PlayerPtrOffset.PositionZ))
-        # memory.write_f32(player_x_addr, memory.read_f32(player_x_addr) + 30)
-        # memory.write_f32(player_y_addr, memory.read_f32(player_y_addr) + 30)
         memory.write_f32(player_z_addr, memory.read_f32(player_z_addr) + height_offset)
 
 
@@ -180,6 +187,128 @@ def prevent_item_softlock():
             20,
         )
         return
+
+
+class Transition(NamedTuple):
+    from_: int
+    to: int
+
+
+class PreviousArea:
+    _previous_area_address = 0
+    # TODO: This information is going to be extremely important for the transition rando,
+    # we're gonna have to update out data structure to be able to make use of this.
+    CORRECTED_TRANSITION_FROM: ClassVar[dict[Transition, int]] = {
+        Transition(from_=LevelCRC.APU_ILLAPU_SHRINE, to=LevelCRC.WHITE_VALLEY): 0xF3ACDE92,
+        # Probably a leftover from when plane crash + cockpit was a single map
+        Transition(from_=LevelCRC.CRASH_SITE, to=LevelCRC.JUNGLE_CANYON): 0xD33711E2,
+        # Scorpion/Explorer entrance
+        # Transition(from_=LevelCRC.NATIVE_JUNGLE, to=LevelCRC.FLOODED_COURTYARD): 0x83A6748F,
+        # HACK for CORRECTED_PREV_ID
+        Transition(from_=LevelCRC.NATIVE_JUNGLE, to=0): 0x83A6748F,
+        # Dark cave entrance
+        Transition(from_=LevelCRC.NATIVE_JUNGLE, to=LevelCRC.FLOODED_COURTYARD): 0x1AAF2535,
+        # Dark cave entrance
+        Transition(from_=LevelCRC.FLOODED_COURTYARD, to=LevelCRC.NATIVE_JUNGLE): 0x402D3708,
+        # Jungle Outpost well
+        # Transition(from_=LevelCRC.TWIN_OUTPOSTS, to=LevelCRC.TWIN_OUTPOSTS_UNDERWATER): 0x9D1A6D4A,  # noqa: E501
+        # HACK for CORRECTED_PREV_ID
+        Transition(from_=LevelCRC.TWIN_OUTPOSTS, to=0): 0x9D1A6D4A,
+        # Burning Outpost well
+        Transition(from_=LevelCRC.TWIN_OUTPOSTS, to=LevelCRC.TWIN_OUTPOSTS_UNDERWATER): 0x7C65128A,
+        # Jungle Outpost side
+        # Transition(from_=LevelCRC.TWIN_OUTPOSTS_UNDERWATER, to=LevelCRC.TWIN_OUTPOSTS): 0x00D15464,  # noqa: E501
+        # HACK for CORRECTED_PREV_ID
+        Transition(from_=LevelCRC.TWIN_OUTPOSTS_UNDERWATER, to=0): 0x00D15464,
+        # Burning Outpost side
+        Transition(from_=LevelCRC.TWIN_OUTPOSTS_UNDERWATER, to=LevelCRC.TWIN_OUTPOSTS): 0xE1AE2BA4,
+        # Native Village uses its own ID to spawn at the Native Games gate
+        Transition(from_=LevelCRC.KABOOM, to=LevelCRC.NATIVE_VILLAGE): LevelCRC.NATIVE_VILLAGE,
+        Transition(from_=LevelCRC.PICKAXE_RACE, to=LevelCRC.NATIVE_VILLAGE): LevelCRC.NATIVE_VILLAGE,  # noqa: E501
+        Transition(from_=LevelCRC.RAFT_BOWLING, to=LevelCRC.NATIVE_VILLAGE): LevelCRC.NATIVE_VILLAGE,  # noqa: E501
+        Transition(from_=LevelCRC.TUCO_SHOOT, to=LevelCRC.NATIVE_VILLAGE): LevelCRC.NATIVE_VILLAGE,
+        Transition(from_=LevelCRC.WHACK_A_TUCO, to=LevelCRC.NATIVE_VILLAGE): LevelCRC.NATIVE_VILLAGE,  # noqa: E501
+    }
+    """
+    Some entrances are mapped to a different ID than the level the player actually comes from.
+    This maps the transition to the fake ID.
+    """
+
+    CORRECTED_PREV_ID: ClassVar[dict[int, int]] = {
+        area_id: transition.from_
+        for transition, area_id
+        in CORRECTED_TRANSITION_FROM.items()
+    }
+    """
+    Some entrances are mapped to a different ID than the level the player actually comes from.
+    This maps the fake ID to the real ID.
+    """
+    __ALL_ENTRANCE_IDS = (
+        ALL_TRANSITION_AREAS
+        | set(CORRECTED_PREV_ID)
+        | set(LevelCRC)
+        - {LevelCRC.MAIN_MENU}
+    )
+
+    @classmethod
+    def get(cls) -> int | LevelCRC:
+        return cls.__update_previous_area_address()
+
+    @classmethod
+    def set(cls, value: Transition):
+        """
+        Sets the "previous area id" in memory.
+
+        `value` is a `Transition` because this method tries to the fake ID
+        to spawn the player on the proper entrance.
+
+        If no mapping is found (ie: either value is incorrect),
+        then `value.from_` is used directly,
+        which at worst causes use the default entrance.
+        """
+        cls.__update_previous_area_address()
+        memory.write_u32(
+            cls._previous_area_address,
+            cls.CORRECTED_TRANSITION_FROM.get(value, value.from_),
+        )
+
+    @classmethod
+    def get_name(cls, area_id: int):
+        """
+        Gets the name of an area.
+
+        If a "fake ID" is passed, it'll be mapped to the real "from level".
+        """
+        area = TRANSITION_INFOS_DICT.get(cls.CORRECTED_PREV_ID.get(area_id, area_id))
+        return area.name if area else "Default"
+
+    @classmethod
+    def __update_previous_area_address(cls):
+        # First check that the current value is a sensible known level
+        previous_area = memory.read_u32(cls._previous_area_address)
+        if previous_area in cls.__ALL_ENTRANCE_IDS:
+            return previous_area
+
+        # If not, start iterating over 16-bit blocks,
+        # where the first half is consistent (a pointer?)
+        # and the second half is maybe the value we're looking for
+        block_address = memory.read_u32(ADDRESSES.previous_area_blocks_ptr)
+        prefix = memory.read_u32(block_address)
+        for _ in range(32):  # Limited iteration as extra safety for infinite loops
+            # Check if the current block is a valid level id
+            block_address += 8
+            previous_area = memory.read_u32(block_address)
+            if previous_area in cls.__ALL_ENTRANCE_IDS:
+                # Valid id. Assume this is our address
+                cls._previous_area_address = block_address
+                return previous_area
+
+            # Check if the next block is still part of the dynamic data
+            block_address += 8
+            next_prefix = memory.read_u32(block_address)
+            if next_prefix != prefix:
+                return 0  # We went the entire dynamic data structure w/o finding a valid ID !
+        return 0
 
 
 def dump_spoiler_logs(

@@ -27,7 +27,7 @@ print("Seed set to:", seed_string)
 @dataclass(frozen=True)
 class Addresses:
     version_string: str
-    prev_area: tuple[int, ...]
+    previous_area_blocks_ptr: int
     current_area: int
     area_load_state: int
     player_ptr: int
@@ -97,7 +97,7 @@ _addresses_map = {
     "GPH": {
         "D": Addresses(
             version_string="GC DE 0-00",
-            prev_area=(0x80747648,),
+            previous_area_blocks_ptr=TODO,
             current_area=0x80417F50,
             area_load_state=TODO,
             player_ptr=TODO,
@@ -107,7 +107,7 @@ _addresses_map = {
         ),
         "E": Addresses(
             version_string="GC US 0-00",
-            prev_area=(0x8072B648,),
+            previous_area_blocks_ptr=0x80425788,
             current_area=0x8041BEB4,
             area_load_state=0x8041BEC8,
             player_ptr=0x8041BE4C,
@@ -117,7 +117,7 @@ _addresses_map = {
         ),
         "F": Addresses(
             version_string="GC FR 0-00",
-            prev_area=(0x80747648,),
+            previous_area_blocks_ptr=TODO,
             current_area=0x80417F30,
             area_load_state=TODO,
             player_ptr=0x80417EC8,
@@ -127,7 +127,7 @@ _addresses_map = {
         ),
         "P": Addresses(
             version_string="GC EU 0-00",
-            prev_area=(0x80747648,),
+            previous_area_blocks_ptr=TODO,
             current_area=0x80417F10,
             area_load_state=TODO,
             player_ptr=TODO,
@@ -139,7 +139,7 @@ _addresses_map = {
     "RPF": {
         "E": Addresses(
             version_string="Wii US 0-00",
-            prev_area=(0x804542DC, 0x8),
+            previous_area_blocks_ptr=0x804542DC,
             current_area=0x80448D04,
             area_load_state=TODO,
             player_ptr=TODO,
@@ -149,7 +149,7 @@ _addresses_map = {
         ),
         "P": Addresses(
             version_string="Wii EU 0-00",
-            prev_area=(0x804546DC, 0x18),
+            previous_area_blocks_ptr=0x804546DC,
             current_area=0x80449104,
             area_load_state=TODO,
             player_ptr=TODO,
