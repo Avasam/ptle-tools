@@ -19,6 +19,27 @@ To add a changelog entry, add a new file `<issue_or_pr_#>.<type>.md` to the `new
 
 <!-- towncrier release notes start -->
 
+## 0.5.0 - 2024-07-16
+
+### Features
+
+- When being sent to an Animal Temple that you haven't beaten yet, you will now instead be redirected to the Spirit Fight immediately -- by @wossnameGitHub ([#87](https://github.com/Avasam/ptle-tools/issues/87))
+- "Immediate spirit fights" is optional and configurable -- by @Avasam ([#65](https://github.com/Avasam/ptle-tools/issues/65))
+
+### Bugfixes
+
+- Fix Eyes of Doom anti-softlock not working from Mountain Overlook entrance -- by @Avasam ([#75](https://github.com/Avasam/ptle-tools/issues/75))
+- Add back Crash Site to disabled transitions (prevent progress reset) -- by @Avasam ([#77](https://github.com/Avasam/ptle-tools/issues/77))
+
+### Improved Documentation
+
+- Development versions are now automatically packed and uploaded as artefacts. Link added to readme. -- by @Avasam ([#69](https://github.com/Avasam/ptle-tools/issues/69))
+- Initialized the changelog using Towncrier & automatically pack release versions -- by @Avasam ([#70](https://github.com/Avasam/ptle-tools/issues/70))
+
+### Deprecations and Removals
+
+- Update expected Python version for the randomizer to `3.11`. This means the Dolphin version has to be at least <https://github.com/Felk/dolphin/releases/tag/scripting-preview3> ([#67](https://github.com/Avasam/ptle-tools/issues/67))
+
 ## 0.4.0 - 2024-07-13
 
 ### Features
