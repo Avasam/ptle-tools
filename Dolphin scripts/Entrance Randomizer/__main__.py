@@ -30,6 +30,7 @@ from lib.graph_creation import create_graphml
 from lib.shaman_shop import patch_shaman_shop, randomize_shaman_shop
 from lib.utils import (
     PreviousArea,
+    Transition,
     draw_text,
     dump_spoiler_logs,
     highjack_transition,
@@ -98,13 +99,17 @@ async def main_loop():
     state.visited_levels.add(state.current_area_old)
 
     # Skip both Jaguar fights if configured
-    if CONFIGS.SKIP_JAGUAR:
+    # And always load save file to starting area
+    if CONFIGS.SKIP_JAGUAR or state.current_area_new != LevelCRC.JAGUAR:
         if highjack_transition(
             LevelCRC.MAIN_MENU,
-            LevelCRC.JAGUAR,
-            0,
+            None,
+            # If the starting area is Crash Site, we need to avoid resetting progress
+            # Default entrance otherwise
+            LevelCRC.JUNGLE_CANYON,
             starting_area,
         ):
+            PreviousArea.set(Transition(LevelCRC.MAIN_MENU, starting_area))
             return
         if highjack_transition(
                 LevelCRC.GATES_OF_EL_DORADO,
