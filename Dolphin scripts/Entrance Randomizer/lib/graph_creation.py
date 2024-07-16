@@ -124,11 +124,11 @@ def create_edges(transitions_map: Mapping[tuple[int, int], tuple[int, int]]):
 
 def create_graphml(
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
-    temp_disabled_exits: Sequence[tuple[int, int]],
+    shown_disabled_transitions: Sequence[tuple[int, int]],
     seed_string: SeedType,
     starting_area: int,
 ):
-    all_transitions = dict(transitions_map) | {item: item for item in temp_disabled_exits}
+    all_transitions = dict(transitions_map) | {item: item for item in shown_disabled_transitions}
 
     graphml_text = (
         '<?xml version="1.0" encoding="UTF-8"?>'
