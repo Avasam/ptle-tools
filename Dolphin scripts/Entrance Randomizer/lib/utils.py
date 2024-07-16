@@ -211,13 +211,13 @@ class PreviousArea:
         # Dark cave entrance
         Transition(from_=LevelCRC.FLOODED_COURTYARD, to=LevelCRC.NATIVE_JUNGLE): 0x402D3708,
         # Jungle Outpost well
-        # Transition(from_=LevelCRC.TWIN_OUTPOSTS, to=LevelCRC.TWIN_OUTPOSTS_UNDERWATER): 0x9D1A6D4A,
+        # Transition(from_=LevelCRC.TWIN_OUTPOSTS, to=LevelCRC.TWIN_OUTPOSTS_UNDERWATER): 0x9D1A6D4A,  # noqa: E501
         # HACK for CORRECTED_PREV_ID
         Transition(from_=LevelCRC.TWIN_OUTPOSTS, to=0): 0x9D1A6D4A,
         # Burning Outpost well
         Transition(from_=LevelCRC.TWIN_OUTPOSTS, to=LevelCRC.TWIN_OUTPOSTS_UNDERWATER): 0x7C65128A,
         # Jungle Outpost side
-        # Transition(from_=LevelCRC.TWIN_OUTPOSTS_UNDERWATER, to=LevelCRC.TWIN_OUTPOSTS): 0x00D15464,
+        # Transition(from_=LevelCRC.TWIN_OUTPOSTS_UNDERWATER, to=LevelCRC.TWIN_OUTPOSTS): 0x00D15464,  # noqa: E501
         # HACK for CORRECTED_PREV_ID
         Transition(from_=LevelCRC.TWIN_OUTPOSTS_UNDERWATER, to=0): 0x00D15464,
         # Burning Outpost side
