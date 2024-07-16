@@ -1,9 +1,20 @@
+"""
+Expose `transition_infos.json` with static Python classes.
+
+No other information should be found here other than the imported data and helper classes.
+"""
+
 from __future__ import annotations
 
 import json
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING, NamedTuple, TypedDict
+from typing import Literal, NamedTuple, TypeAlias, TypedDict
+
+
+class Transition(NamedTuple):
+    from_: int
+    to: int
 
 
 class ExitJSON(TypedDict):
@@ -19,22 +30,15 @@ class AreaJSON(TypedDict):
     exits: list[ExitJSON]
 
 
-if TYPE_CHECKING:
-    from typing import Literal
-
-    from typing_extensions import TypeAlias
-
-    TransitionInfosJSON: TypeAlias = dict[  # pyright: ignore  # Safe inside TYPE_CHECKING
-        Literal[
-            "Jungle",
-            "Native Territory",
-            "Lost Caverns",
-            "Snowy Mountains",
-        ],
-        list[AreaJSON],  # pyright: ignore  # Safe inside TYPE_CHECKING
-    ]
-else:
-    TransitionInfosJSON = None
+TransitionInfosJSON: TypeAlias = dict[
+    Literal[
+        "Jungle",
+        "Native Territory",
+        "Lost Caverns",
+        "Snowy Mountains",
+    ],
+    list[AreaJSON],
+]
 
 
 @dataclass(frozen=True)

@@ -8,9 +8,9 @@ from itertools import chain
 
 import CONFIGS
 from dolphin import memory  # pyright: ignore[reportMissingModuleSource]
-from lib.transition_infos import transition_infos
+from lib.transition_infos import Transition, transition_infos
 
-__version = "0.4.0"
+__version = "0.5.0"
 """See CHANGELOG.md for version semantics."""
 __dev_version = "local"
 __version__ = f"{__version}-{__dev_version}"
@@ -250,9 +250,21 @@ TEMPLES_WITH_FIGHT = {
 
 SOFTLOCKABLE_ENTRANCES = {
     int(LevelCRC.FLOODED_COURTYARD): 8,  # From st claire: 7
-    int(LevelCRC.EYES_OF_DOOM): 9,
+    int(LevelCRC.EYES_OF_DOOM): 12,  # From Scorpion Temple: 9
     int(LevelCRC.VALLEY_OF_SPIRITS): 8,
     int(LevelCRC.COPACANTI_LAKE): 8,
 }
 """Entrances that can softlock by infinitely running into a door.
 Value is the minimum height boost needed to regain control."""
+
+
+ONE_WAY_TRANSITIONS = (
+    # the White Valley geyser
+    Transition(LevelCRC.WHITE_VALLEY, LevelCRC.MOUNTAIN_SLED_RUN),
+    # the Apu Illapu Shrine geyser
+    Transition(LevelCRC.APU_ILLAPU_SHRINE, LevelCRC.WHITE_VALLEY),
+    # the Apu Illapu Shrine one-way door
+    Transition(LevelCRC.MOUNTAIN_SLED_RUN, LevelCRC.APU_ILLAPU_SHRINE),
+    # the Jungle Canyon waterfall
+    Transition(LevelCRC.CAVERN_LAKE, LevelCRC.JUNGLE_CANYON),
+)

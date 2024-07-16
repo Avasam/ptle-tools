@@ -5,7 +5,6 @@ from collections.abc import MutableSequence, Sequence
 from copy import copy
 from enum import IntEnum, auto
 from itertools import starmap
-from typing import NamedTuple
 
 import CONFIGS
 from lib.constants import *  # noqa: F403
@@ -15,11 +14,6 @@ from lib.utils import follow_pointer_path, state
 
 class NoConnectionFoundError(Exception):
     """Raised when the algorithm fails to find a valid connection to break open."""
-
-
-class Transition(NamedTuple):
-    from_: int
-    to: int
 
 
 class Choice(IntEnum):
@@ -37,18 +31,7 @@ class Priority(IntEnum):
     OPEN = auto()
 
 
-one_way_exits = (
-    # the White Valley geyser
-    Transition(LevelCRC.WHITE_VALLEY, LevelCRC.MOUNTAIN_SLED_RUN),
-    # the Apu Illapu Shrine geyser
-    Transition(LevelCRC.APU_ILLAPU_SHRINE, LevelCRC.WHITE_VALLEY),
-    # the Apu Illapu Shrine one-way door
-    Transition(LevelCRC.MOUNTAIN_SLED_RUN, LevelCRC.APU_ILLAPU_SHRINE),
-    # the Jungle Canyon waterfall
-    Transition(LevelCRC.CAVERN_LAKE, LevelCRC.JUNGLE_CANYON),
-)
-
-closed_door_exits = (
+CLOSED_DOOR_EXITS = (
     # These passages are blocked by literal closed doors
     Transition(LevelCRC.TWIN_OUTPOSTS, LevelCRC.FLOODED_COURTYARD),
     Transition(LevelCRC.SCORPION_TEMPLE, LevelCRC.EYES_OF_DOOM),
@@ -97,7 +80,13 @@ _possible_starting_areas = [
     }
 ]
 
-temp_disabled_exits = [
+SHOWN_DISABLED_TRANSITIONS = (
+    # Until we can set the "previous area id" in memory consistently,
+    # Crash Site is a risk of progress reset
+    (LevelCRC.CRASH_SITE, LevelCRC.JUNGLE_CANYON),
+    (LevelCRC.CRASH_SITE, LevelCRC.PLANE_COCKPIT),
+    (LevelCRC.JUNGLE_CANYON, LevelCRC.CRASH_SITE),
+    (LevelCRC.PLANE_COCKPIT, LevelCRC.CRASH_SITE),
     # Mouth of Inti has 2 connections with Altar of Huitaca, which causes problems,
     # basically it's very easy to get softlocked by the spider web when entering Altar of Huitaca
     # So for now just don't randomize it. That way runs don't just end out of nowhere
@@ -109,7 +98,8 @@ temp_disabled_exits = [
     # So for now just don't randomize it. That way we won't have to worry about that yet
     (LevelCRC.TWIN_OUTPOSTS, LevelCRC.TWIN_OUTPOSTS_UNDERWATER),
     (LevelCRC.TWIN_OUTPOSTS_UNDERWATER, LevelCRC.TWIN_OUTPOSTS),
-]
+)
+"""These disabled exits are to be shown on the graph."""
 
 bypassed_exits = [
     # The 2 CUTSCENE Levels are currently chosen to not be randomized.
@@ -123,8 +113,8 @@ bypassed_exits = [
     (LevelCRC.ALTAR_OF_AGES, LevelCRC.BITTENBINDERS_CAMP),
 ]
 
-disabled_exits = (
-    *temp_disabled_exits,
+DISABLED_TRANSITIONS = (
+    *SHOWN_DISABLED_TRANSITIONS,
     *bypassed_exits,
     # The 3 Spirit Fights are not randomized,
     # because that will cause issues with the transformation cutscene trigger.
@@ -253,7 +243,7 @@ def remove_disabled_exits():
     for area in TRANSITION_INFOS_DICT.values():
         for ex in area.exits:
             current = (area.area_id, ex.area_id)
-            if current in one_way_exits or current in disabled_exits:
+            if current in ONE_WAY_TRANSITIONS or current in DISABLED_TRANSITIONS:
                 delete_exit(area, ex)
 
 
@@ -457,7 +447,7 @@ def check_part_of_loop(
     link_list: MutableSequence[tuple[Transition, Transition]],
 ):
     unchecked_links = copy(link_list)
-    for closed_door_exit in closed_door_exits:
+    for closed_door_exit in CLOSED_DOOR_EXITS:
         for link in unchecked_links:
             if link[1] == closed_door_exit:
                 unchecked_links.remove(link)
@@ -526,7 +516,7 @@ def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
         # 1. you can't make a transition from a level to itself
         # 2. any 2 levels may have a maximum of 1 connection between them (as long as it's 2-way)
 
-        closed_door_levels = [trans.to for trans in closed_door_exits]
+        closed_door_levels = [trans.to for trans in CLOSED_DOOR_EXITS]
         closed_door_levels = list(dict.fromkeys(closed_door_levels))  # remove duplicates
         random.shuffle(closed_door_levels)
 
@@ -544,7 +534,7 @@ def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
         global __current_hub, loose_ends, total_con_left
 
         __current_hub = closed_door_levels[0]  # this list is shuffled, so just pick the first one
-        loose_ends = list(closed_door_exits)
+        loose_ends = list(CLOSED_DOOR_EXITS)
         total_con_left = sum(__connections_left[level] for level in closed_door_levels)
 
         for index in range(1, len(closed_door_levels)):  # we skip the HUB, so we don't start at 0
@@ -602,9 +592,9 @@ def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
         transitions_map.update(link_list)
 
         # the one_way_transitions are added last in order to keep the rest as simple as possible
-        one_way_redirects = list(one_way_exits)
+        one_way_redirects = list(ONE_WAY_TRANSITIONS)
         random.shuffle(one_way_redirects)
-        for original in one_way_exits:
+        for original in ONE_WAY_TRANSITIONS:
             if one_way_redirects[0].to == original.from_:
                 transitions_map[original] = one_way_redirects.pop(1)
             else:
@@ -612,7 +602,7 @@ def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
     else:
         # Ground rules:
         # 1. you can't make a transition from a level to itself
-        _possible_redirections_bucket.extend(one_way_exits)
+        _possible_redirections_bucket.extend(ONE_WAY_TRANSITIONS)
         for area in transition_infos_dict_rando.values():
             for to_og in (exit_.area_id for exit_ in area.exits):
                 original = Transition(from_=area.area_id, to=to_og)
@@ -620,7 +610,7 @@ def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
                 if redirect is not None:
                     transitions_map[original] = redirect
                     _possible_redirections_bucket.remove(redirect)
-        for original in one_way_exits:
+        for original in ONE_WAY_TRANSITIONS:
             redirect = get_random_one_way_redirection(original)
             if redirect is not None:
                 transitions_map[original] = redirect
