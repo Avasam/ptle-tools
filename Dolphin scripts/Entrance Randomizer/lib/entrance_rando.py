@@ -339,9 +339,11 @@ def choose_random_exit(
                 if ex not in relevant_loose_end_exits
             ]
 
-    return (random.choice(preferred_exits)
-            if len(preferred_exits) > 0
-            else random.choice(all_exits_available))
+    return (
+        random.choice(preferred_exits)
+        if len(preferred_exits) > 0
+        else random.choice(all_exits_available)
+    )
 
 
 def connect_two_areas(
