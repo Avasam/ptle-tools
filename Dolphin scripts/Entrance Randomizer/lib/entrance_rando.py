@@ -575,6 +575,9 @@ def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
                 try:
                     find_and_break_open_connection(link_list)
                 except NoConnectionFoundError:
+                    # This reason this exception is caught and not raised again
+                    # is because I still want to generate the graph.
+                    # The graph can be really helpful in the process of fixing bugs.
                     print(" ")
                     print("ATTENTION ATTENTION: THE RANDOMIZER CRASHED!!!")
                     print("Please notify a developer!")
