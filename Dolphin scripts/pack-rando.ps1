@@ -16,9 +16,9 @@ if ($Release) {
   $DevVersion = ''
 }
 else {
-  $DevVersion = git rev-parse --short HEAD
+  $DevVersion = "-$(git rev-parse --short HEAD)"
 }
 $VersionFileContent -replace '^\s*__dev_version.*', "__dev_version = `"$DevVersion`"" | Set-Content $VersionFilePath
 
-Compress-Archive -Path $ScriptsFolder -DestinationPath "$RandoFolderName v$RandoVersion-$DevVersion.zip" -Force
+Compress-Archive -Path $ScriptsFolder -DestinationPath "$RandoFolderName v$RandoVersion$DevVersion.zip" -Force
 Remove-Item -Path $ScriptsFolder -Recurse -ErrorAction SilentlyContinue
