@@ -8,7 +8,7 @@ from itertools import starmap
 
 import CONFIGS
 from lib.constants import *  # noqa: F403
-from lib.transition_infos import Area, Exit
+from lib.transition_infos import Area, Exit, Transition
 from lib.utils import follow_pointer_path, state
 
 
@@ -313,32 +313,35 @@ def choose_random_exit(
     bucket_type: BucketType,
     priority: Priority,
 ):
-    all_exits_available: list[int] = []
-    if bucket_type == BucketType.ORIGIN:
-        all_exits_available = [
-            trans.to for trans in _possible_origins_bucket
-            if trans.from_ == level
-        ]
-    elif bucket_type == BucketType.REDIRECT:
-        all_exits_available = [
-            trans.from_ for trans in _possible_redirections_bucket
-            if trans.to == level
-        ]
+    match bucket_type:
+        case BucketType.ORIGIN:
+            all_exits_available = [
+                trans.to for trans in _possible_origins_bucket
+                if trans.from_ == level
+            ]
+        case BucketType.REDIRECT:
+            all_exits_available = [
+                trans.from_ for trans in _possible_redirections_bucket
+                if trans.to == level
+            ]
+
     relevant_loose_end_exits = [
         loose_end.from_ for loose_end in loose_ends
         if loose_end.to == level
     ]
-    preferred_exits: list[int] = []
-    if priority == Priority.CLOSED:
-        preferred_exits = relevant_loose_end_exits.copy()
-    elif priority == Priority.OPEN:
-        preferred_exits = [
-            ex for ex in all_exits_available
-            if ex not in relevant_loose_end_exits
-        ]
-    if len(preferred_exits) > 0:
-        return random.choice(preferred_exits)
-    return random.choice(all_exits_available)
+
+    match priority:
+        case Priority.CLOSED:
+            preferred_exits = relevant_loose_end_exits.copy()
+        case Priority.OPEN:
+            preferred_exits = [
+                ex for ex in all_exits_available
+                if ex not in relevant_loose_end_exits
+            ]
+
+    return (random.choice(preferred_exits)
+            if len(preferred_exits) > 0
+            else random.choice(all_exits_available))
 
 
 def connect_two_areas(
