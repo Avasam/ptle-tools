@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterable, Mapping, Sequence
+from collections.abc import Container, Iterable, Mapping, Sequence
 from enum import IntEnum, auto
 from pathlib import Path
 
@@ -23,6 +23,7 @@ STARTING_AREA_COLOR = "#ff8000"  # Orange
 UPGRADE_AREAS_COLOR = "#0080ff"  # Blue
 IMPORTANT_STORY_TRIGGER_AREAS_COLOR = "#ff0000"  # Red
 UNRANDOMIZED_EDGE_COLOR = "#000000"  # Black
+CLOSED_DOOR_EDGE_COLOR = "#ff0000"  # Red
 
 UPGRADE_AREAS = {
     LevelCRC.PLANE_COCKPIT,  # Canteen
@@ -128,16 +129,23 @@ def edge_component(
 def create_edges(
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
     shown_disabled_transitions: Iterable[tuple[int, int]],
+    closed_door_exits: Container[tuple[int, int]],
 ):
     connections = list(transitions_map.items())
     connections_two_way: list[tuple[tuple[int, int], tuple[int, int]]] = []
     connections_one_way: list[tuple[tuple[int, int], tuple[int, int]]] = []
+    connections_closed_door: list[tuple[tuple[int, int], tuple[int, int]]] = []
     for pairing in connections:
         reverse = (
             (pairing[1][1], pairing[1][0]),
             (pairing[0][1], pairing[0][0]),
         )
-        if reverse not in connections_two_way:
+        if reverse not in connections_two_way and reverse not in connections_closed_door:
+            if pairing[1] in closed_door_exits:
+                connections_closed_door.append(pairing)
+                continue
+            if reverse[1] in closed_door_exits:
+                continue
             if reverse in connections:
                 connections_two_way.append(pairing)
             else:
@@ -165,12 +173,23 @@ def create_edges(
             LineType.DASHED,
         )
         counter += 1
+    for pairing in connections_closed_door:
+        output_text += edge_component(
+            pairing[1][1],
+            pairing[0][0],
+            counter,
+            Direction.ONEWAY,
+            CLOSED_DOOR_EDGE_COLOR,
+            LineType.SOLID,
+        )
+        counter += 1
     return output_text
 
 
 def create_graphml(
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
     shown_disabled_transitions: Sequence[tuple[int, int]],
+    closed_door_exits: Container[tuple[int, int]],
     seed_string: SeedType,
     starting_area: int,
 ):
@@ -180,7 +199,7 @@ def create_graphml(
         '<?xml version="1.0" encoding="UTF-8"?>'
         + '<graphml><graph id="Graph" uidGraph="1" uidEdge="1">\n'
         + create_vertices(all_transitions, starting_area)
-        + create_edges(all_transitions, shown_disabled_transitions)
+        + create_edges(all_transitions, shown_disabled_transitions, closed_door_exits)
         + "</graph></graphml>"
     )
 

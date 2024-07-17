@@ -1,15 +1,19 @@
 from __future__ import annotations
 
 import random
-from collections.abc import Iterable, MutableMapping, MutableSequence, Sequence, Sized
+from collections.abc import MutableSequence, Sequence
 from copy import copy
 from enum import IntEnum, auto
 from itertools import starmap
 
 import CONFIGS
 from lib.constants import *  # noqa: F403
-from lib.transition_infos import Area
+from lib.transition_infos import Area, Exit, Transition
 from lib.utils import follow_pointer_path, state
+
+
+class NoConnectionFoundError(Exception):
+    """Raised when the algorithm fails to find a valid connection to break open."""
 
 
 class Choice(IntEnum):
@@ -17,10 +21,34 @@ class Choice(IntEnum):
     INBETWEEN = auto()
 
 
+class BucketType(IntEnum):
+    ORIGIN = auto()
+    REDIRECT = auto()
+
+
+class Priority(IntEnum):
+    CLOSED = auto()
+    OPEN = auto()
+
+
+CLOSED_DOOR_EXITS = (
+    # These passages are blocked by literal closed doors
+    Transition(LevelCRC.TWIN_OUTPOSTS, LevelCRC.FLOODED_COURTYARD),
+    Transition(LevelCRC.SCORPION_TEMPLE, LevelCRC.EYES_OF_DOOM),
+    Transition(LevelCRC.MOUNTAIN_OVERLOOK, LevelCRC.EYES_OF_DOOM),
+    Transition(LevelCRC.COPACANTI_LAKE, LevelCRC.VALLEY_OF_SPIRITS),
+    Transition(LevelCRC.MOUNTAIN_SLED_RUN, LevelCRC.COPACANTI_LAKE),
+    # Passage blocked by Stones
+    Transition(LevelCRC.ST_CLAIRE_DAY, LevelCRC.FLOODED_COURTYARD),
+    # Passage blocked by Ice Wall
+    Transition(LevelCRC.EKKEKO_ICE_CAVERN, LevelCRC.VALLEY_OF_SPIRITS),
+    # Passage blocked by reverse Spider Web
+    Transition(LevelCRC.BATTERED_BRIDGE, LevelCRC.ALTAR_OF_HUITACA),
+)
+
 _possible_starting_areas = [
     area for area in ALL_TRANSITION_AREAS
-    # Remove unwanted starting areas from the list of possibilities
-    # Even if they're not used or randomized, it doesn't hurt to mention them here
+    # Remove unwanted starting areas from the list of random possibilities
     if area not in {
         # These areas will instantly softlock you
         LevelCRC.APU_ILLAPU_SHRINE,  # Softlock prevention just shoves you in the geyser anyway
@@ -73,8 +101,21 @@ SHOWN_DISABLED_TRANSITIONS = (
 )
 """These disabled exits are to be shown on the graph."""
 
+bypassed_exits = [
+    # The 2 CUTSCENE Levels are currently chosen to not be randomized.
+    # As of right now both of these cutscenes are hijacked to be skipped entirely.
+    (LevelCRC.JAGUAR, LevelCRC.PLANE_CUTSCENE),
+    (LevelCRC.PLANE_CUTSCENE, LevelCRC.CRASH_SITE),
+    (LevelCRC.SPINJA_LAIR, LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE),
+    (LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE, LevelCRC.VIRACOCHA_MONOLITHS),
+    # This specific one-time, one-way warp is not randomized.
+    # Instead this transition is manually hijacked to send you to Mysterious Temple instead.
+    (LevelCRC.ALTAR_OF_AGES, LevelCRC.BITTENBINDERS_CAMP),
+]
+
 DISABLED_TRANSITIONS = (
     *SHOWN_DISABLED_TRANSITIONS,
+    *bypassed_exits,
     # The 3 Spirit Fights are not randomized,
     # because that will cause issues with the transformation cutscene trigger.
     # Plus it wouldn't really improve anything, given that the Temples are randomized anyway.
@@ -97,20 +138,10 @@ DISABLED_TRANSITIONS = (
     (LevelCRC.PICKAXE_RACE, LevelCRC.NATIVE_VILLAGE),
     (LevelCRC.NATIVE_VILLAGE, LevelCRC.KABOOM),
     (LevelCRC.KABOOM, LevelCRC.NATIVE_VILLAGE),
-    # The 2 CUTSCENE Levels are currently chosen to not be randomized.
-    # As of right now both of these cutscenes are hijacked to be skipped entirely
-    (LevelCRC.JAGUAR, LevelCRC.PLANE_CUTSCENE),
-    (LevelCRC.PLANE_CUTSCENE, LevelCRC.CRASH_SITE),
-    (LevelCRC.SPINJA_LAIR, LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE),
-    (LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE, LevelCRC.VIRACOCHA_MONOLITHS),
-    # Specific one-time, one-way warps are not randomized.
-    # These 3 are handled elsewhere in the randomizer
+    # The Endgame transitions are not randomized.
     # Currently there are no plans to randomize these transitions.
-    (LevelCRC.ALTAR_OF_AGES, LevelCRC.BITTENBINDERS_CAMP),
     (LevelCRC.ST_CLAIRE_DAY, LevelCRC.ST_CLAIRE_NIGHT),
     (LevelCRC.ST_CLAIRE_NIGHT, LevelCRC.ST_CLAIRE_DAY),
-    # The Endgame El Dorado transitions are not randomized.
-    # Currently there are no plans to randomize these transitions.
     (LevelCRC.GATES_OF_EL_DORADO, LevelCRC.JAGUAR),
     (LevelCRC.JAGUAR, LevelCRC.PUSCA),
     (LevelCRC.PUSCA, LevelCRC.GATES_OF_EL_DORADO),
@@ -130,14 +161,14 @@ _transition_infos_dict_rando = TRANSITION_INFOS_DICT.copy()
 _all_possible_transitions_rando = list(ALL_POSSIBLE_TRANSITIONS)
 
 transitions_map: dict[tuple[int, int], Transition] = {}
-"""```python
-{
-    (og_from_id, og_to_id): (og_from_id, og_to_id)
-}
-```"""
 
+link_list: list[tuple[Transition, Transition]] = []
 __connections_left: dict[int, int] = {}
 """Used in randomization process to track per Area how many exits aren't connected yet."""
+
+loose_ends: list[Transition] = []
+sacred_pairs: list[tuple[int, int]] = []
+__current_hub = 0
 
 
 def highjack_transition_rando():
@@ -181,149 +212,282 @@ def highjack_transition_rando():
     return redirect
 
 
-def initialize_connections_left():
-    for area in TRANSITION_INFOS_DICT.values():
-        __connections_left[area.area_id] = len(area.exits)
+def increment_index(
+    old_index: int,
+    max_index: int,
+    inc: int,
+):
+    new_index = old_index + inc
+    if new_index >= max_index:
+        new_index -= max_index
+    elif new_index < 0:
+        new_index += max_index
+    return new_index
+
+
+def delete_exit(area: Area, ex: Exit):
+    _transition_infos_dict_rando[area.area_id] = Area(
+        area.area_id,
+        area.name,
+        area.default_entrance,
+        tuple([x for x in _transition_infos_dict_rando[area.area_id].exits if x != ex]),
+    )
+    _all_possible_transitions_rando.remove((area.area_id, ex.area_id))
 
 
 def remove_disabled_exits():
-    # remove exits from _transition_infos_dict_rando
     for area in TRANSITION_INFOS_DICT.values():
         for ex in area.exits:
             current = (area.area_id, ex.area_id)
             if current in ONE_WAY_TRANSITIONS or current in DISABLED_TRANSITIONS:
-                _transition_infos_dict_rando[area.area_id] = Area(
-                    area.area_id,
-                    area.name,
-                    area.default_entrance,
-                    tuple([
-                        x for x in _transition_infos_dict_rando[area.area_id].exits if x != ex
-                    ]),
-                )
-                __connections_left[area.area_id] -= 1
-
-    # remove exits from _all_possible_transitions_rando
-    for trans in ALL_POSSIBLE_TRANSITIONS:
-        if trans in ONE_WAY_TRANSITIONS or trans in DISABLED_TRANSITIONS:
-            _all_possible_transitions_rando.remove(trans)
+                delete_exit(area, ex)
 
 
-def link_two_levels(first: Area, second: Area):
-    __connections_left[first.area_id] -= 1
-    __connections_left[second.area_id] -= 1
-    return (first, second)
+def initialize_connections_left():
+    for area in _transition_infos_dict_rando.values():
+        __connections_left[area.area_id] = len(area.exits)
 
 
-def unlink_two_levels(first: Area, second: Area):
-    __connections_left[first.area_id] += 1
-    __connections_left[second.area_id] += 1
+def calculate_mirror(
+    original: Transition,
+    redirect: Transition,
+):
+    mirror_original = Transition(from_=redirect.to, to=redirect.from_)
+    mirror_redirect = Transition(from_=original.to, to=original.from_)
+    return mirror_original, mirror_redirect
+
+
+def create_connection(
+    origin: Transition,
+    redirect: Transition,
+):
+    global total_con_left
+
+    if len(loose_ends) > 0 and __current_hub in {origin.from_, redirect.to}:
+        sacred_pairs.append((origin.from_, redirect.to))
+
+    link_list.append((origin, redirect))
+    _possible_origins_bucket.remove(origin)
+    _possible_redirections_bucket.remove(redirect)
+    if redirect in loose_ends:
+        loose_ends.remove(redirect)
+        sacred_pairs.append((origin.from_, redirect.to))
+
+    mirror_origin, mirror_redirect = calculate_mirror(origin, redirect)
+
+    link_list.append((mirror_origin, mirror_redirect))
+    _possible_origins_bucket.remove(mirror_origin)
+    _possible_redirections_bucket.remove(mirror_redirect)
+    if mirror_redirect in loose_ends:
+        loose_ends.remove(mirror_redirect)
+        sacred_pairs.append((origin.from_, redirect.to))
+
+    __connections_left[origin[0]] -= 1
+    __connections_left[mirror_origin[0]] -= 1
+    total_con_left -= 2
+
+
+def delete_connection(
+    origin: Transition,
+    redirect: Transition,
+):
+    global total_con_left
+
+    link_list.remove((origin, redirect))
+    _possible_origins_bucket.append(origin)
+    _possible_redirections_bucket.append(redirect)
+
+    mirror_origin, mirror_redirect = calculate_mirror(origin, redirect)
+
+    link_list.remove((mirror_origin, mirror_redirect))
+    _possible_origins_bucket.append(mirror_origin)
+    _possible_redirections_bucket.append(mirror_redirect)
+
+    __connections_left[origin[0]] += 1
+    __connections_left[mirror_origin[0]] += 1
+    total_con_left += 2
+
+
+def choose_random_exit(
+    level: int,
+    bucket_type: BucketType,
+    priority: Priority,
+):
+    match bucket_type:
+        case BucketType.ORIGIN:
+            all_exits_available = [
+                trans.to for trans in _possible_origins_bucket
+                if trans.from_ == level
+            ]
+        case BucketType.REDIRECT:
+            all_exits_available = [
+                trans.from_ for trans in _possible_redirections_bucket
+                if trans.to == level
+            ]
+
+    relevant_loose_end_exits = [
+        loose_end.from_ for loose_end in loose_ends
+        if loose_end.to == level
+    ]
+
+    match priority:
+        case Priority.CLOSED:
+            preferred_exits = relevant_loose_end_exits.copy()
+        case Priority.OPEN:
+            preferred_exits = [
+                ex for ex in all_exits_available
+                if ex not in relevant_loose_end_exits
+            ]
+
+    return (
+        random.choice(preferred_exits)
+        if len(preferred_exits) > 0
+        else random.choice(all_exits_available)
+    )
+
+
+def connect_two_areas(
+    level_from: int,
+    level_to: int,
+):
+    from_exit = choose_random_exit(level_from, BucketType.ORIGIN, Priority.CLOSED)
+    to_entrance = choose_random_exit(level_to, BucketType.REDIRECT, Priority.OPEN)
+
+    create_connection(
+        origin=Transition(level_from, from_exit),
+        redirect=Transition(to_entrance, level_to),
+    )
 
 
 def connect_to_existing(
-    level_list: Sequence[Area],
     index: int,
-    link_list: list[tuple[Area, Area]],
+    level_list: Sequence[Area],
 ):
-    global total_con_left
-    total_con_left += __connections_left[level_list[index].area_id]
-    levels_available: list[Area] = []
+    global __current_hub
+
+    levels_chosen: list[int] = []
+    current_con_left = __connections_left[level_list[index].area_id]
+    minimum_chosen = 1
+
+    levels_available: list[int] = []
     for i in range(len(level_list)):
         if i == index:
             break
         if __connections_left[level_list[i].area_id] > 0:
-            levels_available.append(level_list[i])
-    amount_chosen = random.randint(
-        1, min(__connections_left[level_list[index].area_id], len(levels_available)),
-    )
-    levels_chosen = random.sample(levels_available, amount_chosen)
+            levels_available.append(level_list[i].area_id)
+
+    if len(loose_ends) > 0:
+        closed_door_level = random.choice([trans.to for trans in loose_ends])
+        levels_chosen.extend([__current_hub, closed_door_level])  # order is important!
+        levels_available.remove(closed_door_level)
+        levels_available.remove(__current_hub)
+        current_con_left -= 2
+        minimum_chosen = 0
+        if __connections_left[__current_hub] == 1:
+            current_con_left -= 1
+
+    amount_chosen = random.randint(minimum_chosen, min(current_con_left, len(levels_available)))
+    levels_chosen.extend(random.sample(levels_available, amount_chosen))
     for level_chosen in levels_chosen:
-        link_list.append(link_two_levels(level_list[index], level_chosen))
-        total_con_left -= 2
+        connect_two_areas(level_chosen, level_list[index].area_id)
+    if len(loose_ends) > 0 and __connections_left[__current_hub] == 0:
+        __current_hub = level_list[index].area_id
+
+
+def insert_area_inbetween(
+    old_origin: Transition,
+    old_redirect: Transition,
+    new_level: int,
+):
+    global sacred_pairs
+    pair = (old_origin.from_, old_redirect.to)
+    mirror_pair = (old_redirect.to, old_origin.from_)
+    if pair in sacred_pairs or mirror_pair in sacred_pairs:
+        sacred_pairs = [x for x in sacred_pairs if x not in {pair, mirror_pair}]
+        sacred_pairs.extend([
+            (new_level, old_origin.from_),
+            (new_level, old_redirect.to),
+        ])
+
+    delete_connection(old_origin, old_redirect)
+
+    new_redirect_entrance = choose_random_exit(new_level, BucketType.REDIRECT, Priority.OPEN)
+    new_redirect = Transition(new_redirect_entrance, new_level)
+    create_connection(old_origin, new_redirect)
+
+    new_origin_exit = choose_random_exit(new_level, BucketType.ORIGIN, Priority.OPEN)
+    new_origin = Transition(new_level, new_origin_exit)
+    create_connection(new_origin, old_redirect)
+
+
+def can_reach_other_side(
+    chosen_link: tuple[Transition, Transition],
+    current_links: MutableSequence[tuple[Transition, Transition]],
+):
+    unchecked_links = copy(current_links)
+    areas_reachable = [chosen_link[0][0]]
+    new_area_reached = True
+    goal_reached = False
+    while new_area_reached and not goal_reached:
+        new_area_reached = False
+        new_links_reached = [x for x in unchecked_links if x[0][0] in areas_reachable]
+        if len(new_links_reached) > 0:
+            new_area_reached = True
+            for new_link in new_links_reached:
+                unchecked_links.remove(new_link)
+                if new_link[1][1] == chosen_link[1][1]:
+                    goal_reached = True
+                    break
+                if new_link[1][1] not in areas_reachable:
+                    areas_reachable.append(new_link[1][1])
+    return goal_reached
 
 
 def check_part_of_loop(
-    link: tuple[Area, Area],
-    link_list: MutableSequence[tuple[Area, Area]],
-    area_list: Sized,
+    chosen_link: tuple[Transition, Transition],
+    link_list: MutableSequence[tuple[Transition, Transition]],
 ):
     unchecked_links = copy(link_list)
-    unchecked_links.remove(link)
-    areas_reachable = [link[0]]
-    new_area_reached = True
-    while new_area_reached:
-        new_area_reached = False
-        new_links_reached = [
-            x for x in unchecked_links if (x[0] in areas_reachable or x[1] in areas_reachable)
-        ]
-        if len(new_links_reached) > 0:
-            new_area_reached = True
-            for nl in new_links_reached:
-                if nl[0] not in areas_reachable:
-                    areas_reachable.append(nl[0])
-                elif nl[1] not in areas_reachable:
-                    areas_reachable.append(nl[1])
-                unchecked_links.remove(nl)
-    return len(areas_reachable) == len(area_list)
-
-
-def break_open_connection(
-    level_list: Sequence[Area],
-    index: int,
-    link_list: list[tuple[Area, Area]],
-):
-    global total_con_left
-    direc = random.choice([-1, 1])
-    link_i = random.randrange(len(link_list))
-    valid_link = False
-    while not valid_link:
-        linked_areas: list[Area] = []
-        for i in range(len(level_list)):
-            if i == index:
+    for closed_door_exit in CLOSED_DOOR_EXITS:
+        for link in unchecked_links:
+            if link[1] == closed_door_exit:
+                unchecked_links.remove(link)
                 break
-            linked_areas.append(level_list[i])
-        valid_link = check_part_of_loop(link_list[link_i], link_list, linked_areas)
+
+    pair = (chosen_link[0].from_, chosen_link[1].to)
+    mirror_pair = (chosen_link[1].to, chosen_link[0].from_)
+
+    if pair in sacred_pairs or mirror_pair in sacred_pairs:
+        return False
+
+    chosen_mirror = calculate_mirror(chosen_link[0], chosen_link[1])
+
+    unchecked_links.remove(chosen_link)
+    unchecked_links.remove(chosen_mirror)
+
+    if can_reach_other_side(chosen_link, unchecked_links):
+        return can_reach_other_side(chosen_mirror, unchecked_links)
+    return False
+
+
+def find_and_break_open_connection(link_list: list[tuple[Transition, Transition]]):
+    direc = random.choice((-1, 1))
+    index = random.randrange(len(link_list))
+    valid_link = False
+    crash_counter = 0
+    while not valid_link:
+        valid_link = check_part_of_loop(link_list[index], link_list)
         if not valid_link:
-            link_i += direc
-            if link_i == len(link_list):
-                link_i = 0
-            elif link_i < 0:
-                link_i += len(link_list)
-    level_a, level_b = link_list.pop(link_i)
-    unlink_two_levels(level_a, level_b)
-    total_con_left += 2
+            index = increment_index(index, len(link_list), direc)
+            crash_counter += 1
+            if crash_counter > len(link_list):
+                raise NoConnectionFoundError
+    delete_connection(link_list[index][0], link_list[index][1])
 
 
-def link_list_to_transitions(
-    link_list: list[tuple[Area, Area]],
-    transitions_map: MutableMapping[tuple[int, int], Transition],
-    origins_bucket: list[Transition],
-    redirections_bucket: list[Transition],
-):
-    for link in link_list:
-        options_original = [
-            trans for trans in origins_bucket
-            if trans.from_ == link[0].area_id
-        ]
-        options_redirect = [
-            trans for trans in redirections_bucket
-            if trans.to == link[1].area_id
-        ]
-        original = random.choice(options_original)
-        redirect = random.choice(options_redirect)
-        transitions_map[original] = redirect
-        origins_bucket.remove(original)
-        redirections_bucket.remove(redirect)
-
-        counterpart_original = Transition(from_=redirect.to, to=redirect.from_)
-        counterpart_redirect = Transition(from_=original.to, to=original.from_)
-        transitions_map[counterpart_original] = counterpart_redirect
-        origins_bucket.remove(counterpart_original)
-        redirections_bucket.remove(counterpart_redirect)
-
-
-def get_random_redirection(original: Transition, all_redirections: Iterable[Transition]):
+def get_random_one_way_redirection(original: Transition):
     possible_redirections = [
-        redirect for redirect in all_redirections
+        redirect for redirect in _possible_redirections_bucket
         if original.from_ != redirect.to  # Prevent looping on itself
     ]
     if len(possible_redirections) > 0:
@@ -331,71 +495,107 @@ def get_random_redirection(original: Transition, all_redirections: Iterable[Tran
     return None
 
 
-def set_transitions_map():  # noqa: PLR0915 # TODO: Break up in smaller functions
+# TODO: Break up in smaller functions before changing anything else
+def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
     transitions_map.clear()
-    initialize_connections_left()
     remove_disabled_exits()
+    initialize_connections_left()
+
     if not CONFIGS.SKIP_JAGUAR:
         starting_default = _transition_infos_dict_rando[starting_area].default_entrance
         tutorial_original = Transition(from_=LevelCRC.JAGUAR, to=LevelCRC.PLANE_CUTSCENE)
         tutorial_redirect = Transition(from_=starting_default, to=starting_area)
         transitions_map[tutorial_original] = tutorial_redirect
 
-    _possible_redirections_bucket = list(starmap(Transition, _all_possible_transitions_rando))
+    global _possible_origins_bucket, _possible_redirections_bucket
+
+    _possible_origins_bucket = list(starmap(Transition, _all_possible_transitions_rando))
+    _possible_redirections_bucket = _possible_origins_bucket.copy()
 
     if CONFIGS.LINKED_TRANSITIONS:
         # Ground rules:
         # 1. you can't make a transition from a level to itself
         # 2. any 2 levels may have a maximum of 1 connection between them (as long as it's 2-way)
 
-        _possible_origins_bucket = list(starmap(Transition, _all_possible_transitions_rando))
+        closed_door_levels = [trans.to for trans in CLOSED_DOOR_EXITS]
+        closed_door_levels = list(dict.fromkeys(closed_door_levels))  # remove duplicates
+        random.shuffle(closed_door_levels)
 
         level_list = [
             area for area in _transition_infos_dict_rando.values()
             if __connections_left[area.area_id] > 0
         ]
         random.shuffle(level_list)
-        level_list.sort(key=lambda a: __connections_left[a.area_id], reverse=True)
-
-        link_list = [link_two_levels(level_list[0], level_list[1])]
-        global total_con_left
-        total_con_left = __connections_left[level_list[0].area_id]
-        total_con_left += __connections_left[level_list[1].area_id]
-
-        index = 2
-        while index < len(level_list):
-            choice = random.choice(tuple(Choice))
-            if total_con_left > 0 and (
-                __connections_left[level_list[index].area_id] == 1 or choice == Choice.CONNECT
-            ):
-                # option 1: connect to one or more existing levels
-                connect_to_existing(level_list, index, link_list)
-            elif __connections_left[level_list[index].area_id] > 1 and (
-                total_con_left == 0 or choice == Choice.INBETWEEN
-            ):
-                # option 2: put the current level inbetween an already established connection
-                total_con_left += __connections_left[level_list[index].area_id]
-                level_a, level_b = link_list.pop(random.randrange(len(link_list)))
-                unlink_two_levels(level_a, level_b)
-                link_list.extend((
-                    link_two_levels(level_list[index], level_a),
-                    link_two_levels(level_list[index], level_b),
-                ))
-                total_con_left -= 2
-            else:
-                # option 3: break open a connection that's part of a level loop,
-                # then restart this iteration
-                break_open_connection(level_list, index, link_list)
-                continue
-            index += 1
-
-        link_list_to_transitions(
-            link_list,
-            transitions_map,
-            _possible_origins_bucket,
-            _possible_redirections_bucket,
+        level_list.sort(
+            key=lambda a: (
+                a.area_id in closed_door_levels, __connections_left[a.area_id],
+            ), reverse=True,
         )
 
+        global __current_hub, loose_ends, total_con_left
+
+        __current_hub = closed_door_levels[0]  # this list is shuffled, so just pick the first one
+        loose_ends = list(CLOSED_DOOR_EXITS)
+        total_con_left = sum(__connections_left[level] for level in closed_door_levels)
+
+        for index in range(1, len(closed_door_levels)):  # we skip the HUB, so we don't start at 0
+            direc = random.choice((-1, 1))
+            index_chosen = random.randrange(index)
+            valid_level = False
+            for loose_end in loose_ends:
+                if loose_end.to == __current_hub:
+                    index_chosen = 0  # at this stage the HUB will always stay as index 0
+                    valid_level = True
+                    break
+            while not valid_level:
+                for loose_end in loose_ends:
+                    if loose_end.to == closed_door_levels[index_chosen]:
+                        valid_level = True
+                        break
+                if not valid_level:
+                    index_chosen = increment_index(index_chosen, index, direc)
+            connect_two_areas(closed_door_levels[index_chosen], closed_door_levels[index])
+
+        index = len(closed_door_levels)  # we skip the closed_door_levels, as they are already done
+        while index < len(level_list):
+            choice = random.choice(tuple(Choice))
+
+            # Option 1: connect to one or more existing levels
+            if total_con_left > 0 and (
+                len(loose_ends) > 0
+                or __connections_left[level_list[index].area_id] == 1
+                or choice == Choice.CONNECT
+            ):
+                total_con_left += __connections_left[level_list[index].area_id]
+                connect_to_existing(index, level_list)
+
+            # Option 2: put the current level inbetween an already established connection
+            elif __connections_left[level_list[index].area_id] > 1:
+                total_con_left += __connections_left[level_list[index].area_id]
+                link_chosen = random.choice(link_list)
+                insert_area_inbetween(link_chosen[0], link_chosen[1], level_list[index].area_id)
+
+            # Option 3: break open a connection that's part of a loop, then restart iteration
+            else:
+                try:
+                    find_and_break_open_connection(link_list)
+                except NoConnectionFoundError:
+                    # This reason this exception is caught and not raised again
+                    # is because I still want to generate the graph.
+                    # The graph can be really helpful in the process of fixing bugs.
+                    print(" ")
+                    print("ATTENTION ATTENTION: THE RANDOMIZER CRASHED!!!")
+                    print("Please notify a developer!")
+                    print(" ")
+                    break
+                continue
+
+            index += 1
+
+        # Once the link_list is completed, it's time to fill the transitions_map:
+        transitions_map.update(link_list)
+
+        # the one_way_transitions are added last in order to keep the rest as simple as possible
         one_way_redirects = list(ONE_WAY_TRANSITIONS)
         random.shuffle(one_way_redirects)
         for original in ONE_WAY_TRANSITIONS:
@@ -410,12 +610,12 @@ def set_transitions_map():  # noqa: PLR0915 # TODO: Break up in smaller function
         for area in _transition_infos_dict_rando.values():
             for to_og in (exit_.area_id for exit_ in area.exits):
                 original = Transition(from_=area.area_id, to=to_og)
-                redirect = get_random_redirection(original, _possible_redirections_bucket)
+                redirect = get_random_one_way_redirection(original)
                 if redirect is not None:
                     transitions_map[original] = redirect
                     _possible_redirections_bucket.remove(redirect)
         for original in ONE_WAY_TRANSITIONS:
-            redirect = get_random_redirection(original, _possible_redirections_bucket)
+            redirect = get_random_one_way_redirection(original)
             if redirect is not None:
                 transitions_map[original] = redirect
                 _possible_redirections_bucket.remove(redirect)
