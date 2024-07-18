@@ -25,6 +25,8 @@ class State:
     current_area_new = 0
     """Area ID of the current frame"""
     visited_levels: ClassVar[set[int]] = set()
+    no_connection_found_error = False
+    """Whether the algorithm fails to find a valid connection to break open."""
 
 
 state = State()

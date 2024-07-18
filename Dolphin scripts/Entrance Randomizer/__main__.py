@@ -21,6 +21,7 @@ from lib.constants import *  # noqa: F403
 from lib.constants import __version__
 from lib.entrance_rando import (
     CLOSED_DOOR_EXITS,
+    NO_CONNECTION_FOUND_ERROR,
     SHOWN_DISABLED_TRANSITIONS,
     highjack_transition_rando,
     set_transitions_map,
@@ -82,6 +83,8 @@ async def main_loop():
         f"From entrance: {hex(previous_area_id).upper()} "
         + (f"({previous_area.name})" if previous_area else ""),
     )
+    if state.no_connection_found_error:
+        draw_text(NO_CONNECTION_FOUND_ERROR)
 
     # Always re-enable Item Swap
     if memory.read_u32(ADDRESSES.item_swap) == 1:

@@ -11,9 +11,11 @@ from lib.constants import *  # noqa: F403
 from lib.transition_infos import Area, Exit, Transition
 from lib.utils import follow_pointer_path, state
 
-
-class NoConnectionFoundError(Exception):
-    """Raised when the algorithm fails to find a valid connection to break open."""
+NO_CONNECTION_FOUND_ERROR = """
+ATTENTION ATTENTION: THE RANDOMIZER ABORTED GENERATION!!!
+(failed to find a valid connection to break open)
+Please notify a developer!
+"""
 
 
 class Choice(IntEnum):
@@ -470,18 +472,19 @@ def check_part_of_loop(
     return False
 
 
-def find_and_break_open_connection(link_list: list[tuple[Transition, Transition]]):
-    direc = random.choice((-1, 1))
+def find_and_break_open_connection(link_list: MutableSequence[tuple[Transition, Transition]]):
+    direction = random.choice((-1, 1))
     index = random.randrange(len(link_list))
     valid_link = False
     crash_counter = 0
     while not valid_link:
         valid_link = check_part_of_loop(link_list[index], link_list)
         if not valid_link:
-            index = increment_index(index, len(link_list), direc)
+            index = increment_index(index, len(link_list), direction)
             crash_counter += 1
             if crash_counter > len(link_list):
-                raise NoConnectionFoundError
+                state.no_connection_found_error = True
+                return
     delete_connection(link_list[index][0], link_list[index][1])
 
 
@@ -577,15 +580,10 @@ def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
 
             # Option 3: break open a connection that's part of a loop, then restart iteration
             else:
-                try:
-                    find_and_break_open_connection(link_list)
-                except NoConnectionFoundError:
-                    # This reason this exception is caught and not raised again
-                    # is because I still want to generate the graph.
-                    # The graph can be really helpful in the process of fixing bugs.
+                find_and_break_open_connection(link_list)
+                if state.no_connection_found_error:
                     print(" ")
-                    print("ATTENTION ATTENTION: THE RANDOMIZER CRASHED!!!")
-                    print("Please notify a developer!")
+                    print(NO_CONNECTION_FOUND_ERROR)
                     print(" ")
                     break
                 continue
