@@ -94,8 +94,6 @@ def prevent_transition_softlocks():
         and height_offset
     ):
         player_z_addr = follow_pointer_path((ADDRESSES.player_ptr, PlayerPtrOffset.PositionZ))
-        # memory.write_f32(player_x_addr, memory.read_f32(player_x_addr) + 30)
-        # memory.write_f32(player_y_addr, memory.read_f32(player_y_addr) + 30)
         memory.write_f32(player_z_addr, memory.read_f32(player_z_addr) + height_offset)
 
 

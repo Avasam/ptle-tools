@@ -13,6 +13,12 @@ DEFAULT_SHOP_PRICES = [2, 4, 8, 16, 32, 1, 2, 3, 4, 5, 10, 10, 10, 9, 7, 7, 8, 0
 MAPLESS_SHOP_PRICES = [0x04, 8, 16, 32, 0x00003, 4, 5, 10, 10, 10, 9, 7, 7, 8]
 """Same as `DEFAULT_SHOP_PRICES` but with 4 lowest prices removed."""
 
+SHOP_INITIALIZED_VALUE = 5
+"""
+The first value of the shaman_shop_struct once initialized.
+This represents the number of Canteen upgrades.
+"""
+
 
 class ShopPriceOffset(IntEnum):
     ExtraHealth1 = 4
@@ -46,10 +52,6 @@ class ShopCountOffset(IntEnum):
     CavernNotes = ShopPriceOffset.CavernNotes - 4
     MountainNotes = ShopPriceOffset.MountainNotes - 4
     MysteryItem = ShopPriceOffset.MysteryItem - 4
-
-
-_shaman_shop_prices = list(DEFAULT_SHOP_PRICES)
-_shaman_shop_prices_string = ""
 
 
 def randint_with_bias(
@@ -88,6 +90,10 @@ def randint_with_bias(
         return round(total / bias)
 
     raise ValueError(f"Invalid {direction=}.")
+
+
+_shaman_shop_prices = list(DEFAULT_SHOP_PRICES)
+_shaman_shop_prices_string = ""
 
 
 def randomize_shaman_shop():
@@ -166,6 +172,9 @@ def randomize_shaman_shop():
 
 
 def patch_shaman_shop():
+    if (memory.read_u32(ADDRESSES.shaman_shop_struct) != SHOP_INITIALIZED_VALUE):
+        return ""
+
     if CONFIGS.DISABLE_MAPS_IN_SHOP:
         for offset in (
                 ShopCountOffset.JungleNotes,
