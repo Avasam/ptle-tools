@@ -206,9 +206,15 @@ def highjack_transition_rando():
         else:
             state.current_area_old = Outpost.BURNING
     elif state.current_area_new == LevelCRC.TWIN_OUTPOSTS:
-        if current_previous_area == 0X00D15464 or current_previous_area == 0XE1AE2BA4:
+        if (
+            current_previous_area == 0X00D15464
+            or current_previous_area == 0XE1AE2BA4
+        ):
             state.current_area_old = LevelCRC.TWIN_OUTPOSTS_UNDERWATER
-        if current_previous_area == 0X00D15464 or current_previous_area == LevelCRC.FLOODED_COURTYARD:
+        if (
+            current_previous_area == 0X00D15464
+            or current_previous_area == LevelCRC.FLOODED_COURTYARD
+        ):
             state.current_area_new = Outpost.JUNGLE
         else:
             state.current_area_new = Outpost.BURNING
@@ -333,7 +339,7 @@ def remove_disabled_exits():
 
 
 def twin_outposts_underwater_prep():
-    # create new area: Jungle Outpost (with 1 exit to Flooded Courtyard and 1 exit to Twin Outposts Underwater)
+    # create new area: Jungle Outpost
     _transition_infos_dict_rando[Outpost.JUNGLE] = Area(
         Outpost.JUNGLE.value,
         "Jungle Outpost",
@@ -343,7 +349,7 @@ def twin_outposts_underwater_prep():
     area = _transition_infos_dict_rando[Outpost.JUNGLE]
     add_exit(area, LevelCRC.FLOODED_COURTYARD)
     add_exit(area, LevelCRC.TWIN_OUTPOSTS_UNDERWATER)
-    # create new area: Burning Outpost (with 1 exit to Turtle Monument and 1 exit to Twin Outposts Underwater)
+    # create new area: Burning Outpost
     _transition_infos_dict_rando[Outpost.BURNING] = Area(
         Outpost.BURNING.value,
         "Burning Outpost",
@@ -353,7 +359,7 @@ def twin_outposts_underwater_prep():
     area = _transition_infos_dict_rando[Outpost.BURNING]
     add_exit(area, LevelCRC.TURTLE_MONUMENT)
     add_exit(area, LevelCRC.TWIN_OUTPOSTS_UNDERWATER)
-    # in area Twin outposts remove all 3 exits (is effectively the same as removing the level entirely)
+    # in area Twin outposts remove all 3 exits
     area = _transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS]
     for i in range(3):
         delete_exit(

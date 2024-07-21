@@ -233,7 +233,9 @@ def create_graphml(
         '<?xml version="1.0" encoding="UTF-8"?>'
         + '<graphml><graph id="Graph" uidGraph="1" uidEdge="1">\n'
         + create_vertices(all_transitions, starting_area)
-        + create_edges(all_transitions, manually_disabled_transitions, closed_door_exits, starting_area)
+        + create_edges(
+            all_transitions, manually_disabled_transitions, closed_door_exits, starting_area
+        )
         + "</graph></graphml>"
     )
 
