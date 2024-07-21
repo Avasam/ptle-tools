@@ -498,6 +498,28 @@ def connect_two_areas(
     )
 
 
+def connect_the_first_levels(
+    closed_door_levels: list[int],
+):
+    for index in range(1, len(closed_door_levels)):  # we skip the HUB, so we don't start at 0
+        direc = random.choice((-1, 1))
+        index_chosen = random.randrange(index)
+        valid_level = False
+        for loose_end in loose_ends:
+            if loose_end.to == __current_hub:
+                index_chosen = 0  # at this stage the HUB will always stay as index 0
+                valid_level = True
+                break
+        while not valid_level:
+            for loose_end in loose_ends:
+                if loose_end.to == closed_door_levels[index_chosen]:
+                    valid_level = True
+                    break
+            if not valid_level:
+                index_chosen = increment_index(index_chosen, index, direc)
+        connect_two_areas(closed_door_levels[index_chosen], closed_door_levels[index])
+
+
 def connect_to_existing(
     index: int,
     level_list: Sequence[Area],
@@ -644,6 +666,47 @@ def find_and_break_open_connection(link_list: MutableSequence[tuple[Transition, 
     delete_connection(link_list[index][0], link_list[index][1])
 
 
+def making_choices_for_levels(
+    start_index: int,
+    level_list: Sequence[Area],
+):
+    global total_con_left
+
+    index = start_index
+    while index < len(level_list):
+        choice = random.choice(tuple(Choice))
+
+        # Option 1: connect to one or more existing levels
+        if total_con_left > 0 and (
+            len(loose_ends) > 0
+            or __connections_left[level_list[index].area_id] == 1
+            or choice == Choice.CONNECT
+        ) and not (
+            CONFIGS.SKIP_WATER_LEVELS
+            and level_list[index].area_id in water_levels
+        ):
+            total_con_left += __connections_left[level_list[index].area_id]
+            connect_to_existing(index, level_list)
+
+        # Option 2: put the current level inbetween an already established connection
+        elif __connections_left[level_list[index].area_id] > 1:
+            total_con_left += __connections_left[level_list[index].area_id]
+            link_chosen = random.choice(link_list)
+            insert_area_inbetween(link_chosen[0], link_chosen[1], level_list[index].area_id)
+
+        # Option 3: break open a connection that's part of a loop, then restart iteration
+        else:
+            find_and_break_open_connection(link_list)
+            if state.no_connection_found_error:
+                print(" ")
+                print(NO_CONNECTION_FOUND_ERROR)
+                print(" ")
+                break
+            continue
+
+        index += 1
+
+
 def remove_water_levels():
     for water_level in water_levels:
         connected_levels: list[int] = []
@@ -651,6 +714,69 @@ def remove_water_levels():
             if link[0].from_ == water_level:
                 connected_levels.append(link[1].to)
         remove_area_inbetween(connected_levels[0], connected_levels[1], water_level)
+
+
+def set_linked_transitions():
+    # Ground rules:
+    # 1. you can't make a transition from a level to itself
+    # 2. any 2 levels may have a maximum of 1 connection between them (as long as it's 2-way)
+
+    global __current_hub, loose_ends, total_con_left
+
+    closed_door_levels = [trans.to for trans in CLOSED_DOOR_EXITS]
+    closed_door_levels = list(dict.fromkeys(closed_door_levels))  # remove duplicates
+    random.shuffle(closed_door_levels)
+    __current_hub = closed_door_levels[0]  # this list is shuffled, so just pick the first one
+    loose_ends = list(CLOSED_DOOR_EXITS)
+    total_con_left = sum(__connections_left[level] for level in closed_door_levels)
+
+    level_list = [
+        area for area in _transition_infos_dict_rando.values()
+        if __connections_left[area.area_id] > 0
+    ]
+
+    random.shuffle(level_list)
+    level_list.sort(
+        key=lambda a: (
+            a.area_id not in closed_door_levels,
+            __connections_left[a.area_id],
+        ), reverse=True,
+    )
+
+    amount_high_prio = len(loose_ends) - (len(closed_door_levels) - 1)
+    high_prio_levels = [area.area_id for area in level_list[:amount_high_prio]]
+
+    random.shuffle(level_list)
+    level_list.sort(
+        key=lambda a: (
+            a.area_id in closed_door_levels,
+            a.area_id in high_prio_levels,
+            a.area_id in manually_affected_levels,
+            __connections_left[a.area_id],
+        ), reverse=True,
+    )
+
+    connect_the_first_levels(closed_door_levels)
+
+    making_choices_for_levels(
+        len(closed_door_levels), # we already did the closed_door_levels
+        level_list,
+    )
+
+    if CONFIGS.SKIP_WATER_LEVELS:
+        remove_water_levels()
+
+    # Once the link_list is completed, it's time to fill the transitions_map:
+    transitions_map.update(link_list)
+
+    # the one_way_transitions are added last in order to keep the rest as simple as possible
+    one_way_redirects = list(ONE_WAY_TRANSITIONS)
+    random.shuffle(one_way_redirects)
+    for original in ONE_WAY_TRANSITIONS:
+        if one_way_redirects[0].to == original.from_:
+            transitions_map[original] = one_way_redirects.pop(1)
+        else:
+            transitions_map[original] = one_way_redirects.pop(0)
 
 
 def get_random_one_way_redirection(original: Transition):
@@ -663,8 +789,7 @@ def get_random_one_way_redirection(original: Transition):
     return None
 
 
-# TODO: Break up in smaller functions before changing anything else
-def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
+def set_transitions_map():
     transitions_map.clear()
     remove_disabled_exits()
     handle_manually_disabled_levels()
@@ -683,111 +808,7 @@ def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
     _possible_redirections_bucket = _possible_origins_bucket.copy()
 
     if CONFIGS.LINKED_TRANSITIONS:
-        # Ground rules:
-        # 1. you can't make a transition from a level to itself
-        # 2. any 2 levels may have a maximum of 1 connection between them (as long as it's 2-way)
-
-        global __current_hub, loose_ends, total_con_left
-
-        closed_door_levels = [trans.to for trans in CLOSED_DOOR_EXITS]
-        closed_door_levels = list(dict.fromkeys(closed_door_levels))  # remove duplicates
-        random.shuffle(closed_door_levels)
-        __current_hub = closed_door_levels[0]  # this list is shuffled, so just pick the first one
-        loose_ends = list(CLOSED_DOOR_EXITS)
-        total_con_left = sum(__connections_left[level] for level in closed_door_levels)
-
-        level_list = [
-            area for area in _transition_infos_dict_rando.values()
-            if __connections_left[area.area_id] > 0
-        ]
-
-        random.shuffle(level_list)
-        level_list.sort(
-            key=lambda a: (
-                a.area_id not in closed_door_levels,
-                __connections_left[a.area_id],
-            ), reverse=True,
-        )
-
-        amount_high_prio = len(loose_ends) - (len(closed_door_levels) - 1)
-        high_prio_levels = [area.area_id for area in level_list[:amount_high_prio]]
-
-        random.shuffle(level_list)
-        level_list.sort(
-            key=lambda a: (
-                a.area_id in closed_door_levels,
-                a.area_id in high_prio_levels,
-                a.area_id in manually_affected_levels,
-                __connections_left[a.area_id],
-            ), reverse=True,
-        )
-
-        for index in range(1, len(closed_door_levels)):  # we skip the HUB, so we don't start at 0
-            direc = random.choice((-1, 1))
-            index_chosen = random.randrange(index)
-            valid_level = False
-            for loose_end in loose_ends:
-                if loose_end.to == __current_hub:
-                    index_chosen = 0  # at this stage the HUB will always stay as index 0
-                    valid_level = True
-                    break
-            while not valid_level:
-                for loose_end in loose_ends:
-                    if loose_end.to == closed_door_levels[index_chosen]:
-                        valid_level = True
-                        break
-                if not valid_level:
-                    index_chosen = increment_index(index_chosen, index, direc)
-            connect_two_areas(closed_door_levels[index_chosen], closed_door_levels[index])
-
-        index = len(closed_door_levels)  # we skip the closed_door_levels, as they are already done
-        while index < len(level_list):
-            choice = random.choice(tuple(Choice))
-
-            # Option 1: connect to one or more existing levels
-            if total_con_left > 0 and (
-                len(loose_ends) > 0
-                or __connections_left[level_list[index].area_id] == 1
-                or choice == Choice.CONNECT
-            ) and not (
-                CONFIGS.SKIP_WATER_LEVELS
-                and level_list[index].area_id in water_levels
-            ):
-                total_con_left += __connections_left[level_list[index].area_id]
-                connect_to_existing(index, level_list)
-
-            # Option 2: put the current level inbetween an already established connection
-            elif __connections_left[level_list[index].area_id] > 1:
-                total_con_left += __connections_left[level_list[index].area_id]
-                link_chosen = random.choice(link_list)
-                insert_area_inbetween(link_chosen[0], link_chosen[1], level_list[index].area_id)
-
-            # Option 3: break open a connection that's part of a loop, then restart iteration
-            else:
-                find_and_break_open_connection(link_list)
-                if state.no_connection_found_error:
-                    print(" ")
-                    print(NO_CONNECTION_FOUND_ERROR)
-                    print(" ")
-                    break
-                continue
-
-            index += 1
-
-        if CONFIGS.SKIP_WATER_LEVELS:
-            remove_water_levels()
-
-        # Once the link_list is completed, it's time to fill the transitions_map:
-        transitions_map.update(link_list)
-
-        # the one_way_transitions are added last in order to keep the rest as simple as possible
-        one_way_redirects = list(ONE_WAY_TRANSITIONS)
-        random.shuffle(one_way_redirects)
-        for original in ONE_WAY_TRANSITIONS:
-            if one_way_redirects[0].to == original.from_:
-                transitions_map[original] = one_way_redirects.pop(1)
-            else:
-                transitions_map[original] = one_way_redirects.pop(0)
+        set_linked_transitions()
     else:
         # Ground rules:
         # 1. you can't make a transition from a level to itself
