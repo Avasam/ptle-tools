@@ -149,7 +149,7 @@ def edge_component(
 
 def create_edges(
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
-    shown_disabled_transitions: Iterable[tuple[int, int]],
+    manually_disabled_transitions: Iterable[tuple[int, int]],
     closed_door_exits: Container[tuple[int, int]],
     starting_area: int,
 ):
@@ -192,7 +192,7 @@ def create_edges(
             pairing[1][1],
             counter,
             Direction.TWOWAY,
-            UNRANDOMIZED_EDGE_COLOR if pairing[1] in shown_disabled_transitions else None,
+            UNRANDOMIZED_EDGE_COLOR if pairing[1] in manually_disabled_transitions else None,
             LineType.SOLID,
         )
         counter += 1
@@ -222,18 +222,18 @@ def create_edges(
 
 def create_graphml(
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
-    shown_disabled_transitions: Sequence[tuple[int, int]],
+    manually_disabled_transitions: Sequence[tuple[int, int]],
     closed_door_exits: Container[tuple[int, int]],
     seed_string: SeedType,
     starting_area: int,
 ):
-    all_transitions = dict(transitions_map) | {item: item for item in shown_disabled_transitions}
+    all_transitions = dict(transitions_map) | {item: item for item in manually_disabled_transitions}
 
     graphml_text = (
         '<?xml version="1.0" encoding="UTF-8"?>'
         + '<graphml><graph id="Graph" uidGraph="1" uidEdge="1">\n'
         + create_vertices(all_transitions, starting_area)
-        + create_edges(all_transitions, shown_disabled_transitions, closed_door_exits, starting_area)
+        + create_edges(all_transitions, manually_disabled_transitions, closed_door_exits, starting_area)
         + "</graph></graphml>"
     )
 

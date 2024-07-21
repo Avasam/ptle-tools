@@ -4,7 +4,7 @@ import random
 from collections.abc import MutableSequence, Sequence
 from copy import copy
 from enum import IntEnum, auto
-from itertools import starmap
+from itertools import combinations, starmap
 
 import CONFIGS
 from lib.constants import *  # noqa: F403
@@ -91,16 +91,35 @@ _possible_starting_areas = [
     }
 ]
 
-SHOWN_DISABLED_TRANSITIONS = (
+manually_disabled_levels = (
     # Mouth of Inti has 2 connections with Altar of Huitaca, which causes problems,
     # basically it's very easy to get softlocked by the spider web when entering Altar of Huitaca.
     # So for now just don't randomize it. That way runs don't just end out of nowhere.
-    (LevelCRC.ALTAR_OF_HUITACA, LevelCRC.MOUTH_OF_INTI),
-    (LevelCRC.MOUTH_OF_INTI, LevelCRC.ALTAR_OF_HUITACA),
+    LevelCRC.MOUTH_OF_INTI,
+    # If you happen to enter Crash Site from the default entrance (this can happen due to bugs),
+    # you will be severely punished for it in the form of losing all your stuff.
+    # In order to completely remove the risk Crash Site isn't randomized for now.
+    LevelCRC.CRASH_SITE,
 )
-"""These disabled exits are to be shown on the graph."""
+"""
+    -- Note for developers --
+    You can manually disable levels like this as you please, but there are a few exceptions.
 
-bypassed_exits = [
+    Please don't manually disable levels that fall under one or more of these categories:
+    - Important & complicated story levels (like St. Claire's Camp Night)
+    - Twin Outposts or Twin Outposts Underwater
+    - Levels that contain closed doors (like Eyes of Doom)
+    - Levels that connect to closed doors (like Mountain Sled Run)
+    - Levels with one-way exits such as geysers (like Apu Illapu Shrine)
+    - Levels that connect to underwater levels (if you have them turned off in CONFIGS)
+
+"""
+
+manually_affected_levels: list[int] = []
+
+manually_disabled_transitions: list[tuple[int, int]] = []
+
+bypassed_exits = (
     # The 2 CUTSCENE Levels are currently chosen to not be randomized.
     # As of right now both of these cutscenes are hijacked to be skipped entirely.
     (LevelCRC.JAGUAR, LevelCRC.PLANE_CUTSCENE),
@@ -110,10 +129,9 @@ bypassed_exits = [
     # This specific one-time, one-way warp is not randomized.
     # Instead this transition is manually hijacked to send you to Mysterious Temple instead.
     (LevelCRC.ALTAR_OF_AGES, LevelCRC.BITTENBINDERS_CAMP),
-]
+)
 
-DISABLED_TRANSITIONS = (
-    *SHOWN_DISABLED_TRANSITIONS,
+DISABLED_TRANSITIONS = [
     *bypassed_exits,
     # The 3 Spirit Fights are not randomized,
     # because that causes issues with the transformation cutscene trigger.
@@ -149,7 +167,7 @@ DISABLED_TRANSITIONS = (
     # It will require some special code though.
     (LevelCRC.BETA_VOLCANO, LevelCRC.JUNGLE_CANYON),
     (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
-)
+]
 
 if CONFIGS.SKIP_WATER_LEVELS:
     _possible_starting_areas = [a for a in _possible_starting_areas if a not in water_levels]
@@ -166,6 +184,8 @@ transitions_map: dict[tuple[int, int], Transition] = {}
 link_list: list[tuple[Transition, Transition]] = []
 __connections_left: dict[int, int] = {}
 """Used in randomization process to track per Area how many exits aren't connected yet."""
+
+ethereal_transitions: list[tuple[Transition, Transition]] = []
 
 loose_ends: list[Transition] = []
 sacred_pairs: list[tuple[int, int]] = []
@@ -276,6 +296,32 @@ def delete_exit(area: Area, ex: Exit):
         tuple([x for x in _transition_infos_dict_rando[area.area_id].exits if x != ex]),
     )
     _all_possible_transitions_rando.remove((area.area_id, ex.area_id))
+
+
+def handle_manually_disabled_levels():
+    for disabled_level in manually_disabled_levels:
+        exits = [x for x in _transition_infos_dict_rando[disabled_level].exits]
+        exits_id = [x.area_id for x in exits]
+        pairs = list(combinations(exits_id, 2))
+        for pair in pairs:
+            ethereal_transitions.extend((
+                (Transition(from_=pair[0], to=pair[1]), Transition(from_=pair[0], to=pair[1])),
+                (Transition(from_=pair[1], to=pair[0]), Transition(from_=pair[1], to=pair[0])),
+            ))
+        for ex in exits:
+            trans = (disabled_level, ex.area_id)
+            trans_mirror = (ex.area_id, disabled_level)
+            manually_disabled_transitions.extend((trans, trans_mirror))
+            DISABLED_TRANSITIONS.extend((trans, trans_mirror))
+
+            if ex.area_id not in manually_affected_levels:
+                manually_affected_levels.append(ex.area_id)
+
+            delete_exit(_transition_infos_dict_rando[disabled_level], ex)
+            for other_level_ex in _transition_infos_dict_rando[ex.area_id].exits:
+                if other_level_ex.area_id == disabled_level:
+                    delete_exit(_transition_infos_dict_rando[ex.area_id], other_level_ex)
+                    break
 
 
 def remove_disabled_exits():
@@ -536,6 +582,7 @@ def can_reach_other_side(
     current_links: MutableSequence[tuple[Transition, Transition]],
 ):
     unchecked_links = copy(current_links)
+    unchecked_links.extend(ethereal_transitions)
     areas_reachable = [chosen_link[0][0]]
     new_area_reached = True
     goal_reached = False
@@ -620,6 +667,7 @@ def get_random_one_way_redirection(original: Transition):
 def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
     transitions_map.clear()
     remove_disabled_exits()
+    handle_manually_disabled_levels()
     twin_outposts_underwater_prep()
     initialize_connections_left()
 
@@ -639,26 +687,40 @@ def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
         # 1. you can't make a transition from a level to itself
         # 2. any 2 levels may have a maximum of 1 connection between them (as long as it's 2-way)
 
+        global __current_hub, loose_ends, total_con_left
+
         closed_door_levels = [trans.to for trans in CLOSED_DOOR_EXITS]
         closed_door_levels = list(dict.fromkeys(closed_door_levels))  # remove duplicates
         random.shuffle(closed_door_levels)
+        __current_hub = closed_door_levels[0]  # this list is shuffled, so just pick the first one
+        loose_ends = list(CLOSED_DOOR_EXITS)
+        total_con_left = sum(__connections_left[level] for level in closed_door_levels)
 
         level_list = [
             area for area in _transition_infos_dict_rando.values()
             if __connections_left[area.area_id] > 0
         ]
+
         random.shuffle(level_list)
         level_list.sort(
             key=lambda a: (
-                a.area_id in closed_door_levels, __connections_left[a.area_id],
+                a.area_id not in closed_door_levels,
+                __connections_left[a.area_id],
             ), reverse=True,
         )
 
-        global __current_hub, loose_ends, total_con_left
+        amount_high_prio = len(loose_ends) - (len(closed_door_levels) - 1)
+        high_prio_levels = [area.area_id for area in level_list[:amount_high_prio]]
 
-        __current_hub = closed_door_levels[0]  # this list is shuffled, so just pick the first one
-        loose_ends = list(CLOSED_DOOR_EXITS)
-        total_con_left = sum(__connections_left[level] for level in closed_door_levels)
+        random.shuffle(level_list)
+        level_list.sort(
+            key=lambda a: (
+                a.area_id in closed_door_levels,
+                a.area_id in high_prio_levels,
+                a.area_id in manually_affected_levels,
+                __connections_left[a.area_id],
+            ), reverse=True,
+        )
 
         for index in range(1, len(closed_door_levels)):  # we skip the HUB, so we don't start at 0
             direc = random.choice((-1, 1))

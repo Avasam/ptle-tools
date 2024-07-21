@@ -24,9 +24,9 @@ from lib.entrance_rando import (
     CLOSED_DOOR_EXITS,
     DISABLED_TRANSITIONS,
     NO_CONNECTION_FOUND_ERROR,
-    SHOWN_DISABLED_TRANSITIONS,
     bypassed_exits,
     highjack_transition_rando,
+    manually_disabled_transitions,
     set_transitions_map,
     starting_area,
     transitions_map,
@@ -64,7 +64,7 @@ dump_spoiler_logs(
 )
 create_graphml(
     transitions_map,
-    SHOWN_DISABLED_TRANSITIONS,
+    manually_disabled_transitions,
     CLOSED_DOOR_EXITS,
     seed_string,
     starting_area,
