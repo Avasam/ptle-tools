@@ -85,10 +85,10 @@ _possible_starting_areas = [
 SHOWN_DISABLED_TRANSITIONS = (
     # Until we can set the "previous area id" in memory consistently,
     # Crash Site is a risk of progress reset
-    (LevelCRC.CRASH_SITE, LevelCRC.JUNGLE_CANYON),
-    (LevelCRC.CRASH_SITE, LevelCRC.PLANE_COCKPIT),
-    (LevelCRC.JUNGLE_CANYON, LevelCRC.CRASH_SITE),
-    (LevelCRC.PLANE_COCKPIT, LevelCRC.CRASH_SITE),
+    # (LevelCRC.CRASH_SITE, LevelCRC.JUNGLE_CANYON),
+    # (LevelCRC.CRASH_SITE, LevelCRC.PLANE_COCKPIT),
+    # (LevelCRC.JUNGLE_CANYON, LevelCRC.CRASH_SITE),
+    # (LevelCRC.PLANE_COCKPIT, LevelCRC.CRASH_SITE),
     # Mouth of Inti has 2 connections with Altar of Huitaca, which causes problems,
     # basically it's very easy to get softlocked by the spider web when entering Altar of Huitaca
     # So for now just don't randomize it. That way runs don't just end out of nowhere
@@ -106,12 +106,10 @@ SHOWN_DISABLED_TRANSITIONS = (
 bypassed_exits = [
     # The 2 CUTSCENE Levels are currently chosen to not be randomized.
     # As of right now both of these cutscenes are hijacked to be skipped entirely.
-    # NOTE: Commented out temporarily due to incompatibility
-    # with the current closed door logic
-    # (LevelCRC.JAGUAR, LevelCRC.PLANE_CUTSCENE),
-    # (LevelCRC.PLANE_CUTSCENE, LevelCRC.CRASH_SITE),
-    # (LevelCRC.SPINJA_LAIR, LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE),
-    # (LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE, LevelCRC.VIRACOCHA_MONOLITHS),
+    (LevelCRC.JAGUAR, LevelCRC.PLANE_CUTSCENE),
+    (LevelCRC.PLANE_CUTSCENE, LevelCRC.CRASH_SITE),
+    (LevelCRC.SPINJA_LAIR, LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE),
+    (LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE, LevelCRC.VIRACOCHA_MONOLITHS),
     # This specific one-time, one-way warp is not randomized.
     # Instead this transition is manually hijacked to send you to Mysterious Temple instead.
     (LevelCRC.ALTAR_OF_AGES, LevelCRC.BITTENBINDERS_CAMP),
