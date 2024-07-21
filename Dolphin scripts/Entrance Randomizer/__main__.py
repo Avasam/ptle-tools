@@ -100,6 +100,13 @@ async def main_loop():
             return
         if highjack_transition(LevelCRC.GATES_OF_EL_DORADO, LevelCRC.JAGUAR, LevelCRC.PUSCA):
             return
+        # This does NOT influence how you start the level unfortunately,
+        # but at least it makes sure the Teleporters work right from the get-go.
+        if previous_area_id == LevelCRC.MAIN_MENU and state.current_area_new == starting_area:
+            memory.write_u32(
+                follow_pointer_path(ADDRESSES.prev_area),
+                TRANSITION_INFOS_DICT[starting_area].default_entrance,
+            )
 
     # Standardize the Altar of Ages exit to remove the Altar -> BBCamp transition
     highjack_transition(
