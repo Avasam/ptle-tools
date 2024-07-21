@@ -6,6 +6,7 @@ from pathlib import Path
 
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
+from lib.entrance_rando import TRANSITION_INFOS_DICT_RANDO
 from lib.types_ import SeedType
 
 
@@ -77,7 +78,7 @@ def create_vertices(
         # The same logic applies to the Spirit Fights:
         # these will never appear on the map, therefore we remove the (Harry) suffix.
         area_name = (
-            TRANSITION_INFOS_DICT
+            TRANSITION_INFOS_DICT_RANDO
             [area_id]
             .name
             .replace(" (Day)", "")

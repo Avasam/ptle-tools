@@ -33,9 +33,14 @@ class Priority(IntEnum):
     OPEN = auto()
 
 
+class Outpost(IntEnum):
+    JUNGLE = 1000
+    BURNING = 2000
+
+
 CLOSED_DOOR_EXITS = (
     # These passages are blocked by literal closed doors
-    Transition(LevelCRC.TWIN_OUTPOSTS, LevelCRC.FLOODED_COURTYARD),
+    Transition(Outpost.JUNGLE, LevelCRC.FLOODED_COURTYARD),
     Transition(LevelCRC.SCORPION_TEMPLE, LevelCRC.EYES_OF_DOOM),
     Transition(LevelCRC.MOUNTAIN_OVERLOOK, LevelCRC.EYES_OF_DOOM),
     Transition(LevelCRC.COPACANTI_LAKE, LevelCRC.VALLEY_OF_SPIRITS),
@@ -74,8 +79,6 @@ _possible_starting_areas = [
         LevelCRC.RAFT_BOWLING,
         LevelCRC.PICKAXE_RACE,
         LevelCRC.KABOOM,
-        # See `disabled_exits` below. This is equivalent to spawning in Twin Outposts
-        LevelCRC.TWIN_OUTPOSTS_UNDERWATER,
         # Cutscenes
         LevelCRC.PLANE_CUTSCENE,
         LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE,
@@ -83,23 +86,11 @@ _possible_starting_areas = [
 ]
 
 SHOWN_DISABLED_TRANSITIONS = (
-    # Until we can set the "previous area id" in memory consistently,
-    # Crash Site is a risk of progress reset
-    # (LevelCRC.CRASH_SITE, LevelCRC.JUNGLE_CANYON),
-    # (LevelCRC.CRASH_SITE, LevelCRC.PLANE_COCKPIT),
-    # (LevelCRC.JUNGLE_CANYON, LevelCRC.CRASH_SITE),
-    # (LevelCRC.PLANE_COCKPIT, LevelCRC.CRASH_SITE),
     # Mouth of Inti has 2 connections with Altar of Huitaca, which causes problems,
     # basically it's very easy to get softlocked by the spider web when entering Altar of Huitaca
     # So for now just don't randomize it. That way runs don't just end out of nowhere
     (LevelCRC.ALTAR_OF_HUITACA, LevelCRC.MOUTH_OF_INTI),
     (LevelCRC.MOUTH_OF_INTI, LevelCRC.ALTAR_OF_HUITACA),
-    # Twin Outposts has a very unusual connection with Twin Outposts Underwater,
-    # If randomized normally this may cause the game to be completely unbeatable
-    # because you might never be able to reach Burning Outposts
-    # So for now just don't randomize it. That way we won't have to worry about that yet
-    (LevelCRC.TWIN_OUTPOSTS, LevelCRC.TWIN_OUTPOSTS_UNDERWATER),
-    (LevelCRC.TWIN_OUTPOSTS_UNDERWATER, LevelCRC.TWIN_OUTPOSTS),
 )
 """These disabled exits are to be shown on the graph."""
 
@@ -178,28 +169,54 @@ def highjack_transition_rando():
     if state.current_area_old == state.current_area_new:
         return False
 
+    current_previous_area = memory.read_u32(follow_pointer_path(ADDRESSES.prev_area))
+
+    # Dealing with Twin Outposts
+    if state.current_area_new == LevelCRC.TWIN_OUTPOSTS_UNDERWATER:
+        if current_previous_area == 0X9D1A6D4A:
+            state.current_area_old = Outpost.JUNGLE
+        else:
+            state.current_area_old = Outpost.BURNING
+    elif state.current_area_new == LevelCRC.TWIN_OUTPOSTS:
+        if current_previous_area == 0X00D15464 or current_previous_area == 0XE1AE2BA4:
+            state.current_area_old = LevelCRC.TWIN_OUTPOSTS_UNDERWATER
+        if current_previous_area == 0X00D15464 or current_previous_area == LevelCRC.FLOODED_COURTYARD:
+            state.current_area_new = Outpost.JUNGLE
+        else:
+            state.current_area_new = Outpost.BURNING
+    elif state.current_area_old == LevelCRC.TWIN_OUTPOSTS:
+        if state.current_area_new == LevelCRC.FLOODED_COURTYARD:
+            state.current_area_old = Outpost.JUNGLE
+        else:
+            state.current_area_old = Outpost.BURNING
+
     redirect = transitions_map.get((state.current_area_old, state.current_area_new))
     if not redirect:
         return False
-
-    # Apply Altar of Ages logic to St. Claire's Excavation Camp
-    # Even if the cutscene wasn't actually watched.
-    # Just leaving the Altar is good enough for the rando.
-    if redirect.to in {LevelCRC.ST_CLAIRE_DAY, LevelCRC.ST_CLAIRE_NIGHT}:
-        redirect = Transition(
-            redirect.from_,
-            to=(
-                LevelCRC.ST_CLAIRE_NIGHT
-                if LevelCRC.ALTAR_OF_AGES in state.visited_levels
-                else LevelCRC.ST_CLAIRE_DAY
-            ),
-        )
 
     # Check if you're visiting a Temple for the first time, if so go directly to Spirit Fight
     if CONFIGS.IMMEDIATE_SPIRIT_FIGHTS and redirect.to in TEMPLES_WITH_FIGHT:
         spirit = TEMPLES_WITH_FIGHT[redirect.to]
         if spirit not in state.visited_levels:
             redirect = Transition(from_=redirect.to, to=spirit)
+
+    # how to properly reach underwater
+    if redirect.to == LevelCRC.TWIN_OUTPOSTS_UNDERWATER:
+        if redirect.from_ == Outpost.JUNGLE:
+            redirect = Transition(from_=0X9D1A6D4A, to=redirect.to)
+        else:
+            redirect = Transition(from_=0X7C65128A, to=redirect.to)
+    # how to properly reach Twin Outposts
+    elif redirect.to == Outpost.JUNGLE or redirect.to == Outpost.BURNING:
+        if redirect.from_ == LevelCRC.TWIN_OUTPOSTS_UNDERWATER:
+            if redirect.to == Outpost.JUNGLE:
+                redirect = Transition(from_=0X00D15464, to=LevelCRC.TWIN_OUTPOSTS)
+            else:
+                redirect = Transition(from_=0XE1AE2BA4, to=LevelCRC.TWIN_OUTPOSTS)
+        redirect = Transition(from_=redirect.from_, to=LevelCRC.TWIN_OUTPOSTS)
+    # how to properly reach Flooded Courtyard / Turtle Monument
+    elif redirect.from_ == Outpost.JUNGLE or redirect.from_ == Outpost.BURNING:
+        redirect = Transition(from_=LevelCRC.TWIN_OUTPOSTS, to=redirect.to)
 
     print(
         "highjack_transition_rando |",
@@ -227,6 +244,22 @@ def increment_index(
     return new_index
 
 
+def add_exit(area: Area, ex_id: int):
+    ex = Exit(
+        ex_id,
+        _transition_infos_dict_rando[ex_id].name,
+        None,
+    )
+    _transition_infos_dict_rando[area.area_id] = Area(
+        area.area_id,
+        area.name,
+        area.default_entrance,
+        tuple([x for x in _transition_infos_dict_rando[area.area_id].exits] + [ex]),
+    )
+    global _all_possible_transitions_rando
+    _all_possible_transitions_rando.append(tuple([area.area_id, ex_id]))
+
+
 def delete_exit(area: Area, ex: Exit):
     _transition_infos_dict_rando[area.area_id] = Area(
         area.area_id,
@@ -243,6 +276,56 @@ def remove_disabled_exits():
             current = (area.area_id, ex.area_id)
             if current in ONE_WAY_TRANSITIONS or current in DISABLED_TRANSITIONS:
                 delete_exit(area, ex)
+
+
+def twin_outposts_underwater_prep():
+    # create new area: Jungle Outpost (with 1 exit to Flooded Courtyard and 1 exit to Twin Outposts Underwater)
+    _transition_infos_dict_rando[Outpost.JUNGLE] = Area(
+        Outpost.JUNGLE,
+        "Jungle Outpost",
+        LevelCRC.FLOODED_COURTYARD,
+        tuple(),
+    )
+    area = _transition_infos_dict_rando[Outpost.JUNGLE]
+    add_exit(area, LevelCRC.FLOODED_COURTYARD)
+    add_exit(area, LevelCRC.TWIN_OUTPOSTS_UNDERWATER)
+    # create new area: Burning Outpost (with 1 exit to Turtle Monument and 1 exit to Twin Outposts Underwater)
+    _transition_infos_dict_rando[Outpost.BURNING] = Area(
+        Outpost.BURNING,
+        "Burning Outpost",
+        LevelCRC.TURTLE_MONUMENT,
+        tuple(),
+    )
+    area = _transition_infos_dict_rando[Outpost.BURNING]
+    add_exit(area, LevelCRC.TURTLE_MONUMENT)
+    add_exit(area, LevelCRC.TWIN_OUTPOSTS_UNDERWATER)
+    # in area Twin outposts remove all 3 exits (is effectively the same as removing the level entirely)
+    area = _transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS]
+    for i in range(3):
+        delete_exit(
+            _transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS],
+            _transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS].exits[0],
+        )
+    # in area flooded courtyard replace exit Twin Outposts with exit Outpost.Jungle
+    area = _transition_infos_dict_rando[LevelCRC.FLOODED_COURTYARD]
+    for ex in area.exits:
+        if ex.area_id == LevelCRC.TWIN_OUTPOSTS:
+            delete_exit(area, ex)
+            break
+    add_exit(area, Outpost.JUNGLE)
+    # in area turtle monument replace exit Twin Outposts with exit Outpost.Burning
+    area = _transition_infos_dict_rando[LevelCRC.TURTLE_MONUMENT]
+    for ex in area.exits:
+        if ex.area_id == LevelCRC.TWIN_OUTPOSTS:
+            delete_exit(area, ex)
+            break
+    add_exit(area, Outpost.BURNING)
+    # in area Twin outposts underwater remove the 1 exit it has,
+    # and replace them with 1 exit to Outpost.Jungle and 1 to Outpost.Burning
+    area = _transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS_UNDERWATER]
+    delete_exit(area, area.exits[0])
+    add_exit(area, Outpost.JUNGLE)
+    add_exit(area, Outpost.BURNING)
 
 
 def initialize_connections_left():
@@ -502,6 +585,7 @@ def get_random_one_way_redirection(original: Transition):
 def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
     transitions_map.clear()
     remove_disabled_exits()
+    twin_outposts_underwater_prep()
     initialize_connections_left()
 
     if not CONFIGS.SKIP_JAGUAR:

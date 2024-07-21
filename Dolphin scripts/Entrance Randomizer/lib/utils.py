@@ -7,6 +7,7 @@ from typing import ClassVar
 from dolphin import gui  # pyright: ignore[reportMissingModuleSource]
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
+from lib.entrance_rando import _transition_infos_dict_rando
 from lib.types_ import SeedType
 
 DRAW_TEXT_STEP = 24
@@ -190,10 +191,10 @@ def dump_spoiler_logs(
 ):
     spoiler_logs = f"Starting area: {starting_area_name}\n"
     red_string_list = [
-        f"{TRANSITION_INFOS_DICT[original[0]].name} "
-        + f"({TRANSITION_INFOS_DICT[original[1]].name} exit) "
-        + f"will redirect to: {TRANSITION_INFOS_DICT[redirect[1]].name} "
-        + f"({TRANSITION_INFOS_DICT[redirect[0]].name} entrance)\n"
+        f"{_transition_infos_dict_rando[original[0]].name} "
+        + f"({_transition_infos_dict_rando[original[1]].name} exit) "
+        + f"will redirect to: {_transition_infos_dict_rando[redirect[1]].name} "
+        + f"({_transition_infos_dict_rando[redirect[0]].name} entrance)\n"
         for original, redirect in transitions_map.items()
     ]
     red_string_list.sort()
