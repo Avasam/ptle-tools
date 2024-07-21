@@ -106,10 +106,12 @@ SHOWN_DISABLED_TRANSITIONS = (
 bypassed_exits = [
     # The 2 CUTSCENE Levels are currently chosen to not be randomized.
     # As of right now both of these cutscenes are hijacked to be skipped entirely.
-    (LevelCRC.JAGUAR, LevelCRC.PLANE_CUTSCENE),
-    (LevelCRC.PLANE_CUTSCENE, LevelCRC.CRASH_SITE),
-    (LevelCRC.SPINJA_LAIR, LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE),
-    (LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE, LevelCRC.VIRACOCHA_MONOLITHS),
+    # NOTE: Commented out temporarily due to incompatibility
+    # with the current closed door logic
+    # (LevelCRC.JAGUAR, LevelCRC.PLANE_CUTSCENE),
+    # (LevelCRC.PLANE_CUTSCENE, LevelCRC.CRASH_SITE),
+    # (LevelCRC.SPINJA_LAIR, LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE),
+    # (LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE, LevelCRC.VIRACOCHA_MONOLITHS),
     # This specific one-time, one-way warp is not randomized.
     # Instead this transition is manually hijacked to send you to Mysterious Temple instead.
     (LevelCRC.ALTAR_OF_AGES, LevelCRC.BITTENBINDERS_CAMP),
