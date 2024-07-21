@@ -80,6 +80,14 @@ def create_vertices(
     if starting_area in spirit_fights:
         starting_area = TRANSITION_INFOS_DICT_RANDO[starting_area].exits[0].area_id
 
+    # This should be removed once Beta Volcano fully becomes part of the randomization process
+    if starting_area == LevelCRC.BETA_VOLCANO and starting_area not in area_ids_randomized:
+        holding_list = []
+        for area_id in area_ids_randomized:
+            holding_list.append(area_id)
+        holding_list.append(LevelCRC.BETA_VOLCANO)
+        area_ids_randomized = holding_list
+
     counter_x = 0
     counter_y = 0
     for area_id in area_ids_randomized:
@@ -141,6 +149,7 @@ def create_edges(
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
     shown_disabled_transitions: Iterable[tuple[int, int]],
     closed_door_exits: Container[tuple[int, int]],
+    starting_area: int,
 ):
     connections = list(transitions_map.items())
     connections_two_way: list[tuple[tuple[int, int], tuple[int, int]]] = []
@@ -162,6 +171,17 @@ def create_edges(
             else:
                 connections_one_way.append(pairing)
 
+    # This should be removed once Beta Volcano becomes a full part of the randomization process
+    if starting_area == LevelCRC.BETA_VOLCANO:
+        connections_one_way.append((
+            (LevelCRC.BETA_VOLCANO, LevelCRC.JUNGLE_CANYON),
+            (LevelCRC.BETA_VOLCANO, LevelCRC.JUNGLE_CANYON)
+        ))
+        connections_one_way.append((
+            (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
+            (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT)
+        ))
+
     output_text = ""
     counter = 1  # Can't start at 0 since that's the MAIN_MENU id
     for pairing in connections_two_way:
@@ -180,7 +200,8 @@ def create_edges(
             pairing[1][1],
             counter,
             Direction.ONEWAY,
-            None,
+            # Color should be removed once Volcano becomes a full part of the randomization process
+            UNRANDOMIZED_EDGE_COLOR if pairing[0][0] == LevelCRC.BETA_VOLCANO else None,
             LineType.DASHED,
         )
         counter += 1
@@ -210,7 +231,7 @@ def create_graphml(
         '<?xml version="1.0" encoding="UTF-8"?>'
         + '<graphml><graph id="Graph" uidGraph="1" uidEdge="1">\n'
         + create_vertices(all_transitions, starting_area)
-        + create_edges(all_transitions, shown_disabled_transitions, closed_door_exits)
+        + create_edges(all_transitions, shown_disabled_transitions, closed_door_exits, starting_area)
         + "</graph></graphml>"
     )
 
