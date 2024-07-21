@@ -64,13 +64,13 @@ _possible_starting_areas = [
     # Remove unwanted starting areas from the list of random possibilities
     if area not in {
         # These areas will instantly softlock you
-        LevelCRC.APU_ILLAPU_SHRINE,  # Softlock prevention just shoves you in the geyser anyway
+        LevelCRC.APU_ILLAPU_SHRINE,  # Softlock prevention would shove you in the geyser anyway
         # These areas will give too much progression
         LevelCRC.ST_CLAIRE_DAY,  # gives TNT
         LevelCRC.ST_CLAIRE_NIGHT,  # gives all items + access to El Dorado
         LevelCRC.JAGUAR,  # sends to final bosses
         LevelCRC.PUSCA,  # sends to final bosses
-        # Temples and spirits are effectively duplicates, so we remove half of them here.
+        # Temples and Spirits are mostly equivalent, so we remove half of them here.
         # Spawning in a temple forces you to do the fight anyway. For convenience let's spawn
         # directly in the fight (it's also funnier to start the rando as the animal spirit).
         *(
@@ -78,7 +78,7 @@ _possible_starting_areas = [
             if CONFIGS.IMMEDIATE_SPIRIT_FIGHTS
             else TEMPLES_WITH_FIGHT.values()
         ),
-        # Spawning in a Native Minigame is equivalent to spawning in Native Village
+        # Spawning in a Native Minigame is mostly equivalent to spawning in Native Village
         # as they are currently not randomized.
         LevelCRC.WHACK_A_TUCO,
         LevelCRC.TUCO_SHOOT,
@@ -93,8 +93,8 @@ _possible_starting_areas = [
 
 SHOWN_DISABLED_TRANSITIONS = (
     # Mouth of Inti has 2 connections with Altar of Huitaca, which causes problems,
-    # basically it's very easy to get softlocked by the spider web when entering Altar of Huitaca
-    # So for now just don't randomize it. That way runs don't just end out of nowhere
+    # basically it's very easy to get softlocked by the spider web when entering Altar of Huitaca.
+    # So for now just don't randomize it. That way runs don't just end out of nowhere.
     (LevelCRC.ALTAR_OF_HUITACA, LevelCRC.MOUTH_OF_INTI),
     (LevelCRC.MOUTH_OF_INTI, LevelCRC.ALTAR_OF_HUITACA),
 )
@@ -116,7 +116,7 @@ DISABLED_TRANSITIONS = (
     *SHOWN_DISABLED_TRANSITIONS,
     *bypassed_exits,
     # The 3 Spirit Fights are not randomized,
-    # because that will cause issues with the transformation cutscene trigger.
+    # because that causes issues with the transformation cutscene trigger.
     # Plus it wouldn't really improve anything, given that the Temples are randomized anyway.
     (LevelCRC.MONKEY_TEMPLE, LevelCRC.MONKEY_SPIRIT),
     (LevelCRC.MONKEY_SPIRIT, LevelCRC.MONKEY_TEMPLE),
@@ -125,8 +125,8 @@ DISABLED_TRANSITIONS = (
     (LevelCRC.PENGUIN_TEMPLE, LevelCRC.PENGUIN_SPIRIT),
     (LevelCRC.PENGUIN_SPIRIT, LevelCRC.PENGUIN_TEMPLE),
     # The 5 Native Games are currently chosen to not be randomized.
-    # If we at some point decide to randomize them anyway we'll have to do some rigorous testing
-    # Because it's very much possible this will cause some bugs
+    # If we at some point decide to randomize them anyway we'll have to do some rigorous testing,
+    # because it's very much possible this will cause some bugs.
     (LevelCRC.NATIVE_VILLAGE, LevelCRC.WHACK_A_TUCO),
     (LevelCRC.WHACK_A_TUCO, LevelCRC.NATIVE_VILLAGE),
     (LevelCRC.NATIVE_VILLAGE, LevelCRC.TUCO_SHOOT),
