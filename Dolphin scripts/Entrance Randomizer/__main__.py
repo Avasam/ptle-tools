@@ -20,10 +20,10 @@ import CONFIGS
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
 from lib.entrance_rando import (
-    _transition_infos_dict_rando,
     CLOSED_DOOR_EXITS,
     DISABLED_TRANSITIONS,
     NO_CONNECTION_FOUND_ERROR,
+    _transition_infos_dict_rando,
     bypassed_exits,
     highjack_transition_rando,
     manually_disabled_transitions,

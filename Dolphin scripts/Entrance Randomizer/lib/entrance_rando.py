@@ -765,7 +765,7 @@ def set_linked_transitions():
     connect_the_first_levels(closed_door_levels)
 
     making_choices_for_levels(
-        len(closed_door_levels), # we already did the closed_door_levels
+        len(closed_door_levels),  # we already did the closed_door_levels
         level_list,
     )
 

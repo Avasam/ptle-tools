@@ -6,7 +6,7 @@ from pathlib import Path
 
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
-from lib.entrance_rando import _transition_infos_dict_rando, Outpost
+from lib.entrance_rando import Outpost, _transition_infos_dict_rando
 from lib.types_ import SeedType
 
 
@@ -177,11 +177,11 @@ def create_edges(
     if starting_area == LevelCRC.BETA_VOLCANO:
         connections_one_way.append((
             (LevelCRC.BETA_VOLCANO, LevelCRC.JUNGLE_CANYON),
-            (LevelCRC.BETA_VOLCANO, LevelCRC.JUNGLE_CANYON)
+            (LevelCRC.BETA_VOLCANO, LevelCRC.JUNGLE_CANYON),
         ))
         connections_one_way.append((
             (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
-            (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT)
+            (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
         ))
 
     output_text = ""
@@ -234,7 +234,7 @@ def create_graphml(
         + '<graphml><graph id="Graph" uidGraph="1" uidEdge="1">\n'
         + create_vertices(all_transitions, starting_area)
         + create_edges(
-            all_transitions, manually_disabled_transitions, closed_door_exits, starting_area
+            all_transitions, manually_disabled_transitions, closed_door_exits, starting_area,
         )
         + "</graph></graphml>"
     )
