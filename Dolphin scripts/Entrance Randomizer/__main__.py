@@ -122,9 +122,6 @@ async def main_loop():
         LevelCRC.VIRACOCHA_MONOLITHS,
     )
 
-    # Standardize St. Claire's Excavation Camp
-    highjack_transition(None, LevelCRC.ST_CLAIRE_NIGHT, LevelCRC.ST_CLAIRE_DAY)
-
     # TODO: Skip swim levels (3)
 
     highjack_transition_rando()
