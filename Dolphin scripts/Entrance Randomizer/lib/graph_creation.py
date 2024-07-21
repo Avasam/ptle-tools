@@ -70,6 +70,16 @@ def create_vertices(
             ),
         ),
     )
+
+    # This technically isn't 100% accurate, but it makes the graph more readable
+    spirit_fights = (
+        LevelCRC.MONKEY_SPIRIT,
+        LevelCRC.SCORPION_SPIRIT,
+        LevelCRC.PENGUIN_SPIRIT,
+    )
+    if starting_area in spirit_fights:
+        starting_area = TRANSITION_INFOS_DICT_RANDO[starting_area].exits[0].area_id
+
     counter_x = 0
     counter_y = 0
     for area_id in area_ids_randomized:
