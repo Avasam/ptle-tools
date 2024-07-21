@@ -20,9 +20,12 @@ import CONFIGS
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
 from lib.entrance_rando import (
+    _transition_infos_dict_rando,
     CLOSED_DOOR_EXITS,
+    DISABLED_TRANSITIONS,
     NO_CONNECTION_FOUND_ERROR,
     SHOWN_DISABLED_TRANSITIONS,
+    bypassed_exits,
     highjack_transition_rando,
     set_transitions_map,
     starting_area,
@@ -51,7 +54,14 @@ except KeyError:
     starting_area_name = hex(starting_area).upper() + " (unknown level)"
 
 # Dump spoiler logs and graph
-dump_spoiler_logs(starting_area_name, transitions_map, seed_string)
+dump_spoiler_logs(
+    starting_area_name,
+    transitions_map,
+    seed_string,
+    _transition_infos_dict_rando,
+    bypassed_exits,
+    DISABLED_TRANSITIONS,
+)
 create_graphml(
     transitions_map,
     SHOWN_DISABLED_TRANSITIONS,

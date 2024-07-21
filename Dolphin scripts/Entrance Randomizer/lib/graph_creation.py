@@ -6,7 +6,7 @@ from pathlib import Path
 
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
-from lib.entrance_rando import TRANSITION_INFOS_DICT_RANDO
+from lib.entrance_rando import _transition_infos_dict_rando, Outpost
 from lib.types_ import SeedType
 
 
@@ -78,7 +78,9 @@ def create_vertices(
         LevelCRC.PENGUIN_SPIRIT,
     )
     if starting_area in spirit_fights:
-        starting_area = TRANSITION_INFOS_DICT_RANDO[starting_area].exits[0].area_id
+        starting_area = TRANSITION_INFOS_DICT[starting_area].exits[0].area_id
+    elif starting_area == LevelCRC.TWIN_OUTPOSTS:
+        starting_area = Outpost.JUNGLE
 
     # This should be removed once Beta Volcano fully becomes part of the randomization process
     if starting_area == LevelCRC.BETA_VOLCANO and starting_area not in area_ids_randomized:
@@ -96,7 +98,7 @@ def create_vertices(
         # The same logic applies to the Spirit Fights:
         # these will never appear on the map, therefore we remove the (Harry) suffix.
         area_name = (
-            TRANSITION_INFOS_DICT_RANDO
+            _transition_infos_dict_rando
             [area_id]
             .name
             .replace(" (Day)", "")
@@ -133,8 +135,8 @@ def edge_component(
 ):
     direct_str = str(direct == Direction.ONEWAY).lower()
     return (
-        f'<edge source="{TRANSITION_INFOS_DICT[start].area_id}" '
-        + f'target="{TRANSITION_INFOS_DICT[end].area_id}" '
+        f'<edge source="{_transition_infos_dict_rando[start].area_id}" '
+        + f'target="{_transition_infos_dict_rando[end].area_id}" '
         + f'isDirect="{direct_str}" '
         + f'id="{counter}"'
         + create_own_style({

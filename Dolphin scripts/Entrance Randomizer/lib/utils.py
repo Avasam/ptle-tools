@@ -7,11 +7,6 @@ from typing import ClassVar
 from dolphin import gui  # pyright: ignore[reportMissingModuleSource]
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
-from lib.entrance_rando import (
-    _transition_infos_dict_rando,
-    bypassed_exits,
-    disabled_exits,
-)
 from lib.types_ import SeedType
 
 DRAW_TEXT_STEP = 24
@@ -192,6 +187,9 @@ def dump_spoiler_logs(
     starting_area_name: str,
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
     seed_string: SeedType,
+    _transition_infos_dict_rando: dict[int, Area],
+    bypassed_exits: list[tuple[int, int]],
+    DISABLED_TRANSITIONS: list[tuple[int, int]],
 ):
     spoiler_logs = f"Starting area: {starting_area_name}\n"
     red_string_list = [
@@ -209,7 +207,7 @@ def dump_spoiler_logs(
     non_random_string_list = [
         f"From: {TRANSITION_INFOS_DICT[pair[0]].name}, "
         + f"To: {TRANSITION_INFOS_DICT[pair[1]].name}.\n"
-        for pair in disabled_exits if pair not in bypassed_exits
+        for pair in DISABLED_TRANSITIONS if pair not in bypassed_exits
     ]
     non_random_string_list.sort()
     for string in non_random_string_list:

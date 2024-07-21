@@ -289,7 +289,7 @@ def remove_disabled_exits():
 def twin_outposts_underwater_prep():
     # create new area: Jungle Outpost (with 1 exit to Flooded Courtyard and 1 exit to Twin Outposts Underwater)
     _transition_infos_dict_rando[Outpost.JUNGLE] = Area(
-        Outpost.JUNGLE,
+        Outpost.JUNGLE.value,
         "Jungle Outpost",
         LevelCRC.FLOODED_COURTYARD,
         tuple(),
@@ -299,7 +299,7 @@ def twin_outposts_underwater_prep():
     add_exit(area, LevelCRC.TWIN_OUTPOSTS_UNDERWATER)
     # create new area: Burning Outpost (with 1 exit to Turtle Monument and 1 exit to Twin Outposts Underwater)
     _transition_infos_dict_rando[Outpost.BURNING] = Area(
-        Outpost.BURNING,
+        Outpost.BURNING.value,
         "Burning Outpost",
         LevelCRC.TURTLE_MONUMENT,
         tuple(),
