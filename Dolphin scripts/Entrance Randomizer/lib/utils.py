@@ -81,6 +81,7 @@ def highjack_transition(
             f"Redirecting to: {hex(redirect)}",
         )
         memory.write_u32(ADDRESSES.current_area, redirect)
+        state.current_area_new = redirect
         return True
     return False
 
