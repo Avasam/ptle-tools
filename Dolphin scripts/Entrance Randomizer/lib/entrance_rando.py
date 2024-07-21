@@ -85,10 +85,12 @@ _possible_starting_areas = [
 SHOWN_DISABLED_TRANSITIONS = (
     # Until we can set the "previous area id" in memory consistently,
     # Crash Site is a risk of progress reset
-    (LevelCRC.CRASH_SITE, LevelCRC.JUNGLE_CANYON),
-    (LevelCRC.CRASH_SITE, LevelCRC.PLANE_COCKPIT),
-    (LevelCRC.JUNGLE_CANYON, LevelCRC.CRASH_SITE),
-    (LevelCRC.PLANE_COCKPIT, LevelCRC.CRASH_SITE),
+    # NOTE: Commented out temporarily due to incompatibility
+    # with the current closed door logic
+    # (LevelCRC.CRASH_SITE, LevelCRC.JUNGLE_CANYON),
+    # (LevelCRC.CRASH_SITE, LevelCRC.PLANE_COCKPIT),
+    # (LevelCRC.JUNGLE_CANYON, LevelCRC.CRASH_SITE),
+    # (LevelCRC.PLANE_COCKPIT, LevelCRC.CRASH_SITE),
     # Mouth of Inti has 2 connections with Altar of Huitaca, which causes problems,
     # basically it's very easy to get softlocked by the spider web when entering Altar of Huitaca
     # So for now just don't randomize it. That way runs don't just end out of nowhere
