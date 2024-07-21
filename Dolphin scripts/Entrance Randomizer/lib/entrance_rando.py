@@ -38,6 +38,12 @@ class Outpost(IntEnum):
     BURNING = 2000
 
 
+water_levels = (
+    LevelCRC.TWIN_OUTPOSTS_UNDERWATER,
+    LevelCRC.FLOODED_CAVE,
+    LevelCRC.MYSTERIOUS_TEMPLE,
+)
+
 CLOSED_DOOR_EXITS = (
     # These passages are blocked by literal closed doors
     Transition(Outpost.JUNGLE, LevelCRC.FLOODED_COURTYARD),
@@ -145,6 +151,8 @@ DISABLED_TRANSITIONS = (
     (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
 )
 
+if CONFIGS.SKIP_WATER_LEVELS:
+    _possible_starting_areas = [a for a in _possible_starting_areas if a not in water_levels]
 # Call RNG even if this is unused to not impact randomization of other things for the same seed
 starting_area = random.choice(_possible_starting_areas)
 if CONFIGS.STARTING_AREA is not None:
@@ -505,6 +513,24 @@ def insert_area_inbetween(
     create_connection(new_origin, old_redirect)
 
 
+def remove_area_inbetween(
+    area_one: int,
+    area_two: int,
+    level_to_remove: int,
+):
+    for link in link_list:
+        if link[0].from_ == area_one and link[1].to == level_to_remove:
+            delete_connection(link[0], link[1])
+            break
+
+    for link in link_list:
+        if link[0].from_ == area_two and link[1].to == level_to_remove:
+            delete_connection(link[0], link[1])
+            break
+
+    connect_two_areas(area_one, area_two)
+
+
 def can_reach_other_side(
     chosen_link: tuple[Transition, Transition],
     current_links: MutableSequence[tuple[Transition, Transition]],
@@ -569,6 +595,15 @@ def find_and_break_open_connection(link_list: MutableSequence[tuple[Transition, 
                 state.no_connection_found_error = True
                 return
     delete_connection(link_list[index][0], link_list[index][1])
+
+
+def remove_water_levels():
+    for water_level in water_levels:
+        connected_levels: list[int] = []
+        for link in link_list:
+            if link[0].from_ == water_level:
+                connected_levels.append(link[1].to)
+        remove_area_inbetween(connected_levels[0], connected_levels[1], water_level)
 
 
 def get_random_one_way_redirection(original: Transition):
@@ -652,6 +687,9 @@ def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
                 len(loose_ends) > 0
                 or __connections_left[level_list[index].area_id] == 1
                 or choice == Choice.CONNECT
+            ) and not (
+                CONFIGS.SKIP_WATER_LEVELS
+                and level_list[index].area_id in water_levels
             ):
                 total_con_left += __connections_left[level_list[index].area_id]
                 connect_to_existing(index, level_list)
@@ -673,6 +711,9 @@ def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
                 continue
 
             index += 1
+
+        if CONFIGS.SKIP_WATER_LEVELS:
+            remove_water_levels()
 
         # Once the link_list is completed, it's time to fill the transitions_map:
         transitions_map.update(link_list)
