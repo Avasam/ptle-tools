@@ -7,7 +7,11 @@ from typing import ClassVar
 from dolphin import gui  # pyright: ignore[reportMissingModuleSource]
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
-from lib.entrance_rando import _transition_infos_dict_rando
+from lib.entrance_rando import (
+    _transition_infos_dict_rando,
+    bypassed_exits,
+    disabled_exits,
+)
 from lib.types_ import SeedType
 
 DRAW_TEXT_STEP = 24
@@ -201,17 +205,15 @@ def dump_spoiler_logs(
     for string in red_string_list:
         spoiler_logs += string
 
-    unrandomized_transitions = ALL_POSSIBLE_TRANSITIONS - transitions_map.keys()
-    if len(unrandomized_transitions) > 0:
-        spoiler_logs += "\nUnrandomized transitions:\n"
-        non_random_string_list = [
-            f"From: {TRANSITION_INFOS_DICT[transition[0]].name}, "
-            + f"To: {TRANSITION_INFOS_DICT[transition[1]].name}.\n"
-            for transition in unrandomized_transitions
-        ]
-        non_random_string_list.sort()
-        for string in non_random_string_list:
-            spoiler_logs += string
+    spoiler_logs += "\nUnrandomized transitions:\n"
+    non_random_string_list = [
+        f"From: {TRANSITION_INFOS_DICT[pair[0]].name}, "
+        + f"To: {TRANSITION_INFOS_DICT[pair[1]].name}.\n"
+        for pair in disabled_exits if pair not in bypassed_exits
+    ]
+    non_random_string_list.sort()
+    for string in non_random_string_list:
+        spoiler_logs += string
 
     # TODO (Avasam): Get actual user folder based whether Dolphin Emulator is in AppData/Roaming
     # and if the current installation is portable.
