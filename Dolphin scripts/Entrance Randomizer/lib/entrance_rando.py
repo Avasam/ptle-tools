@@ -289,7 +289,7 @@ def add_exit(area: Area, ex_id: int):
         area.area_id,
         area.name,
         area.default_entrance,
-        tuple(list(transition_infos_dict_rando[area.area_id].exits) + [ex]),
+        tuple([*list(transition_infos_dict_rando[area.area_id].exits), ex]),
     )
     _all_possible_transitions_rando.append((area.area_id, ex_id))
 
@@ -361,7 +361,7 @@ def twin_outposts_underwater_prep():
     add_exit(area, LevelCRC.TWIN_OUTPOSTS_UNDERWATER)
     # in area Twin outposts remove all 3 exits
     area = transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS]
-    for i in range(3):
+    for _i in range(3):
         delete_exit(
             transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS],
             transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS].exits[0],
@@ -715,10 +715,7 @@ def making_choices_for_levels(
 
 def remove_water_levels():
     for water_level in water_levels:
-        connected_levels: list[int] = []
-        for link in link_list:
-            if link[0].from_ == water_level:
-                connected_levels.append(link[1].to)
+        connected_levels = [link[1].to for link in link_list if link[0].from_ == water_level]
         remove_area_inbetween(connected_levels[0], connected_levels[1], water_level)
 
 

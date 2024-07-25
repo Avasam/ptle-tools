@@ -189,7 +189,7 @@ def dump_spoiler_logs(
     seed_string: SeedType,
     transition_infos_dict_rando: dict[int, Area],
     bypassed_exits: list[tuple[int, int]],
-    DISABLED_TRANSITIONS: list[tuple[int, int]],
+    disabled_transitions: list[tuple[int, int]],
 ):
     spoiler_logs = f"Starting area: {starting_area_name}\n"
     red_string_list = [
@@ -207,7 +207,7 @@ def dump_spoiler_logs(
     non_random_string_list = [
         f"From: {TRANSITION_INFOS_DICT[pair[0]].name}, "
         + f"To: {TRANSITION_INFOS_DICT[pair[1]].name}.\n"
-        for pair in DISABLED_TRANSITIONS if pair not in bypassed_exits
+        for pair in disabled_transitions if pair not in bypassed_exits
     ]
     non_random_string_list.sort()
     for string in non_random_string_list:

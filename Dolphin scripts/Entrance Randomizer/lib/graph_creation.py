@@ -84,9 +84,7 @@ def create_vertices(
 
     # This should be removed once Beta Volcano fully becomes part of the randomization process
     if starting_area == LevelCRC.BETA_VOLCANO and starting_area not in area_ids_randomized:
-        holding_list = []
-        for area_id in area_ids_randomized:
-            holding_list.append(area_id)
+        holding_list = list(area_ids_randomized)
         holding_list.append(LevelCRC.BETA_VOLCANO)
         area_ids_randomized = holding_list
 
@@ -175,13 +173,15 @@ def create_edges(
 
     # This should be removed once Beta Volcano becomes a full part of the randomization process
     if starting_area == LevelCRC.BETA_VOLCANO:
-        connections_one_way.append((
-            (LevelCRC.BETA_VOLCANO, LevelCRC.JUNGLE_CANYON),
-            (LevelCRC.BETA_VOLCANO, LevelCRC.JUNGLE_CANYON),
-        ))
-        connections_one_way.append((
-            (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
-            (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
+        connections_one_way.extend((
+            (
+                (LevelCRC.BETA_VOLCANO, LevelCRC.JUNGLE_CANYON),
+                (LevelCRC.BETA_VOLCANO, LevelCRC.JUNGLE_CANYON),
+            ),
+            (
+                (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
+                (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
+            )
         ))
 
     output_text = ""
