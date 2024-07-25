@@ -6,6 +6,7 @@ from pathlib import Path
 
 from lib.constants import *  # noqa: F403
 from lib.constants import __version__
+from lib.entrance_rando import Outpost, transition_infos_dict_rando
 from lib.types_ import SeedType
 
 
@@ -69,6 +70,19 @@ def create_vertices(
             ),
         ),
     )
+
+    # This technically isn't 100% accurate, but it makes the graph more readable
+    if starting_area in TEMPLES_WITH_FIGHT.values():
+        starting_area = TRANSITION_INFOS_DICT[starting_area].exits[0].area_id
+    elif starting_area == LevelCRC.TWIN_OUTPOSTS:
+        starting_area = Outpost.JUNGLE
+
+    # This should be removed once Beta Volcano fully becomes part of the randomization process
+    if starting_area == LevelCRC.BETA_VOLCANO and starting_area not in area_ids_randomized:
+        holding_list = list(area_ids_randomized)
+        holding_list.append(LevelCRC.BETA_VOLCANO)
+        area_ids_randomized = holding_list
+
     counter_x = 0
     counter_y = 0
     for area_id in area_ids_randomized:
@@ -77,7 +91,7 @@ def create_vertices(
         # The same logic applies to the Spirit Fights:
         # these will never appear on the map, therefore we remove the (Harry) suffix.
         area_name = (
-            TRANSITION_INFOS_DICT
+            transition_infos_dict_rando
             [area_id]
             .name
             .replace(" (Day)", "")
@@ -114,8 +128,8 @@ def edge_component(
 ):
     direct_str = str(direct == Direction.ONEWAY).lower()
     return (
-        f'<edge source="{TRANSITION_INFOS_DICT[start].area_id}" '
-        + f'target="{TRANSITION_INFOS_DICT[end].area_id}" '
+        f'<edge source="{transition_infos_dict_rando[start].area_id}" '
+        + f'target="{transition_infos_dict_rando[end].area_id}" '
         + f'isDirect="{direct_str}" '
         + f'id="{counter}"'
         + create_own_style({
@@ -128,8 +142,9 @@ def edge_component(
 
 def create_edges(
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
-    shown_disabled_transitions: Iterable[tuple[int, int]],
+    manually_disabled_transitions: Iterable[tuple[int, int]],
     closed_door_exits: Container[tuple[int, int]],
+    starting_area: int,
 ):
     connections = list(transitions_map.items())
     connections_two_way: list[tuple[tuple[int, int], tuple[int, int]]] = []
@@ -151,6 +166,19 @@ def create_edges(
             else:
                 connections_one_way.append(pairing)
 
+    # This should be removed once Beta Volcano becomes a full part of the randomization process
+    if starting_area == LevelCRC.BETA_VOLCANO:
+        connections_one_way.extend((
+            (
+                (LevelCRC.BETA_VOLCANO, LevelCRC.JUNGLE_CANYON),
+                (LevelCRC.BETA_VOLCANO, LevelCRC.JUNGLE_CANYON),
+            ),
+            (
+                (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
+                (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
+            ),
+        ))
+
     output_text = ""
     counter = 1  # Can't start at 0 since that's the MAIN_MENU id
     for pairing in connections_two_way:
@@ -159,7 +187,7 @@ def create_edges(
             pairing[1][1],
             counter,
             Direction.TWOWAY,
-            UNRANDOMIZED_EDGE_COLOR if pairing[1] in shown_disabled_transitions else None,
+            UNRANDOMIZED_EDGE_COLOR if pairing[1] in manually_disabled_transitions else None,
             LineType.SOLID,
         )
         counter += 1
@@ -169,7 +197,8 @@ def create_edges(
             pairing[1][1],
             counter,
             Direction.ONEWAY,
-            None,
+            # Color should be removed once Volcano becomes a full part of the randomization process
+            UNRANDOMIZED_EDGE_COLOR if pairing[0][0] == LevelCRC.BETA_VOLCANO else None,
             LineType.DASHED,
         )
         counter += 1
@@ -188,18 +217,20 @@ def create_edges(
 
 def create_graphml(
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
-    shown_disabled_transitions: Sequence[tuple[int, int]],
+    manually_disabled_transitions: Sequence[tuple[int, int]],
     closed_door_exits: Container[tuple[int, int]],
     seed_string: SeedType,
     starting_area: int,
 ):
-    all_transitions = dict(transitions_map) | {item: item for item in shown_disabled_transitions}
+    all_transitions = dict(transitions_map) | {item: item for item in manually_disabled_transitions}
 
     graphml_text = (
         '<?xml version="1.0" encoding="UTF-8"?>'
         + '<graphml><graph id="Graph" uidGraph="1" uidEdge="1">\n'
         + create_vertices(all_transitions, starting_area)
-        + create_edges(all_transitions, shown_disabled_transitions, closed_door_exits)
+        + create_edges(
+            all_transitions, manually_disabled_transitions, closed_door_exits, starting_area,
+        )
         + "</graph></graphml>"
     )
 
