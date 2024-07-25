@@ -181,7 +181,7 @@ def create_edges(
             (
                 (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
                 (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
-            )
+            ),
         ))
 
     output_text = ""
