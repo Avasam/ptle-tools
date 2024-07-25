@@ -23,12 +23,12 @@ from lib.entrance_rando import (
     CLOSED_DOOR_EXITS,
     DISABLED_TRANSITIONS,
     NO_CONNECTION_FOUND_ERROR,
-    transition_infos_dict_rando,
     bypassed_exits,
     highjack_transition_rando,
     manually_disabled_transitions,
     set_transitions_map,
     starting_area,
+    transition_infos_dict_rando,
     transitions_map,
 )
 from lib.graph_creation import create_graphml
