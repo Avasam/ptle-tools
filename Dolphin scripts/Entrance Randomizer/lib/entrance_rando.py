@@ -38,13 +38,6 @@ class Outpost(IntEnum):
     BURNING = 2000
 
 
-class WaterExit(IntEnum):
-    JUNGLE_TO_WATER = 0X9D1A6D4A
-    BURNING_TO_WATER = 0X7C65128A
-    WATER_TO_JUNGLE = 0X00D15464
-    WATER_TO_BURNING = 0XE1AE2BA4
-
-
 CLOSED_DOOR_EXITS = (
     # These passages are blocked by literal closed doors
     Transition(Outpost.JUNGLE, LevelCRC.FLOODED_COURTYARD),
