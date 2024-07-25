@@ -45,12 +45,6 @@ class WaterExit(IntEnum):
     WATER_TO_BURNING = 0XE1AE2BA4
 
 
-water_levels = (
-    LevelCRC.TWIN_OUTPOSTS_UNDERWATER,
-    LevelCRC.FLOODED_CAVE,
-    LevelCRC.MYSTERIOUS_TEMPLE,
-)
-
 CLOSED_DOOR_EXITS = (
     # These passages are blocked by literal closed doors
     Transition(Outpost.JUNGLE, LevelCRC.FLOODED_COURTYARD),
@@ -177,7 +171,7 @@ DISABLED_TRANSITIONS = [
 ]
 
 if CONFIGS.SKIP_WATER_LEVELS:
-    _possible_starting_areas = [a for a in _possible_starting_areas if a not in water_levels]
+    _possible_starting_areas = [a for a in _possible_starting_areas if a not in WATER_LEVELS]
 # Call RNG even if this is unused to not impact randomization of other things for the same seed
 starting_area = random.choice(_possible_starting_areas)
 if CONFIGS.STARTING_AREA is not None:
@@ -693,7 +687,7 @@ def making_choices_for_levels(
             or choice == Choice.CONNECT
         ) and not (
             CONFIGS.SKIP_WATER_LEVELS
-            and level_list[index].area_id in water_levels
+            and level_list[index].area_id in WATER_LEVELS
         ):
             total_con_left += __connections_left[level_list[index].area_id]
             connect_to_existing(index, level_list)
@@ -718,7 +712,7 @@ def making_choices_for_levels(
 
 
 def remove_water_levels():
-    for water_level in water_levels:
+    for water_level in WATER_LEVELS:
         connected_levels = [link[1].to for link in link_list if link[0].from_ == water_level]
         remove_area_inbetween(connected_levels[0], connected_levels[1], water_level)
 

@@ -242,6 +242,12 @@ class LevelCRC(IntEnum):
     WHITE_VALLEY = 0x62548B77
 
 
+WATER_LEVELS = (
+    LevelCRC.TWIN_OUTPOSTS_UNDERWATER,
+    LevelCRC.FLOODED_CAVE,
+    LevelCRC.MYSTERIOUS_TEMPLE,
+)
+
 TEMPLES_WITH_FIGHT = {
     LevelCRC.MONKEY_TEMPLE: LevelCRC.MONKEY_SPIRIT,
     LevelCRC.SCORPION_TEMPLE: LevelCRC.SCORPION_SPIRIT,
@@ -256,7 +262,6 @@ SOFTLOCKABLE_ENTRANCES = {
 }
 """Entrances that can softlock by infinitely running into a door.
 Value is the minimum height boost needed to regain control."""
-
 
 ONE_WAY_TRANSITIONS = (
     # the White Valley geyser

@@ -72,12 +72,7 @@ def create_vertices(
     )
 
     # This technically isn't 100% accurate, but it makes the graph more readable
-    spirit_fights = (
-        LevelCRC.MONKEY_SPIRIT,
-        LevelCRC.SCORPION_SPIRIT,
-        LevelCRC.PENGUIN_SPIRIT,
-    )
-    if starting_area in spirit_fights:
+    if starting_area in TEMPLES_WITH_FIGHT.values():
         starting_area = TRANSITION_INFOS_DICT[starting_area].exits[0].area_id
     elif starting_area == LevelCRC.TWIN_OUTPOSTS:
         starting_area = Outpost.JUNGLE
