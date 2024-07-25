@@ -199,14 +199,9 @@ sacred_pairs: list[tuple[int, int]] = []
 __current_hub = 0
 
 
-def highjack_transition_rando():
-    # Early return, faster check. Detect the start of a transition
-    if state.current_area_old == state.current_area_new:
-        return False
-
+def adjust_current_area_old_and_new():
     current_previous_area = memory.read_u32(follow_pointer_path(ADDRESSES.prev_area))
 
-    # Dealing with Twin Outposts
     if state.current_area_new == LevelCRC.TWIN_OUTPOSTS_UNDERWATER:
         if current_previous_area == WaterExit.JUNGLE_TO_WATER:
             state.current_area_old = Outpost.JUNGLE
@@ -224,6 +219,15 @@ def highjack_transition_rando():
             state.current_area_old = Outpost.JUNGLE
         else:
             state.current_area_old = Outpost.BURNING
+
+
+def highjack_transition_rando():
+    # Early return, faster check. Detect the start of a transition
+    if state.current_area_old == state.current_area_new:
+        return False
+
+    # Dealing with Twin Outposts
+    adjust_current_area_old_and_new()
 
     redirect = transitions_map.get((state.current_area_old, state.current_area_new))
     if not redirect:
@@ -289,7 +293,7 @@ def add_exit(area: Area, ex_id: int):
         area.area_id,
         area.name,
         area.default_entrance,
-        tuple([*list(transition_infos_dict_rando[area.area_id].exits), ex]),
+        (*list(transition_infos_dict_rando[area.area_id].exits), ex),
     )
     _all_possible_transitions_rando.append((area.area_id, ex_id))
 
