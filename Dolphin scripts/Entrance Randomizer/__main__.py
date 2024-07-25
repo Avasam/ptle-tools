@@ -23,7 +23,7 @@ from lib.entrance_rando import (
     CLOSED_DOOR_EXITS,
     DISABLED_TRANSITIONS,
     NO_CONNECTION_FOUND_ERROR,
-    _transition_infos_dict_rando,
+    transition_infos_dict_rando,
     bypassed_exits,
     highjack_transition_rando,
     manually_disabled_transitions,
@@ -58,7 +58,7 @@ dump_spoiler_logs(
     starting_area_name,
     transitions_map,
     seed_string,
-    _transition_infos_dict_rando,
+    transition_infos_dict_rando,
     bypassed_exits,
     DISABLED_TRANSITIONS,
 )

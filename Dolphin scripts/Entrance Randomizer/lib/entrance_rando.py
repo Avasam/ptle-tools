@@ -38,6 +38,13 @@ class Outpost(IntEnum):
     BURNING = 2000
 
 
+class WaterExit(IntEnum):
+    JUNGLE_TO_WATER = 0X9D1A6D4A
+    BURNING_TO_WATER = 0X7C65128A
+    WATER_TO_JUNGLE = 0X00D15464
+    WATER_TO_BURNING = 0XE1AE2BA4
+
+
 water_levels = (
     LevelCRC.TWIN_OUTPOSTS_UNDERWATER,
     LevelCRC.FLOODED_CAVE,
@@ -176,7 +183,7 @@ starting_area = random.choice(_possible_starting_areas)
 if CONFIGS.STARTING_AREA is not None:
     starting_area = CONFIGS.STARTING_AREA
 
-_transition_infos_dict_rando = TRANSITION_INFOS_DICT.copy()
+transition_infos_dict_rando = TRANSITION_INFOS_DICT.copy()
 _all_possible_transitions_rando = list(ALL_POSSIBLE_TRANSITIONS)
 
 transitions_map: dict[tuple[int, int], Transition] = {}
@@ -201,20 +208,14 @@ def highjack_transition_rando():
 
     # Dealing with Twin Outposts
     if state.current_area_new == LevelCRC.TWIN_OUTPOSTS_UNDERWATER:
-        if current_previous_area == 0X9D1A6D4A:
+        if current_previous_area == WaterExit.JUNGLE_TO_WATER:
             state.current_area_old = Outpost.JUNGLE
         else:
             state.current_area_old = Outpost.BURNING
     elif state.current_area_new == LevelCRC.TWIN_OUTPOSTS:
-        if (
-            current_previous_area == 0X00D15464
-            or current_previous_area == 0XE1AE2BA4
-        ):
+        if (current_previous_area in {WaterExit.WATER_TO_JUNGLE, WaterExit.WATER_TO_BURNING}):
             state.current_area_old = LevelCRC.TWIN_OUTPOSTS_UNDERWATER
-        if (
-            current_previous_area == 0X00D15464
-            or current_previous_area == LevelCRC.FLOODED_COURTYARD
-        ):
+        if (current_previous_area in {WaterExit.WATER_TO_JUNGLE, LevelCRC.FLOODED_COURTYARD}):
             state.current_area_new = Outpost.JUNGLE
         else:
             state.current_area_new = Outpost.BURNING
@@ -237,19 +238,19 @@ def highjack_transition_rando():
     # how to properly reach underwater
     if redirect.to == LevelCRC.TWIN_OUTPOSTS_UNDERWATER:
         if redirect.from_ == Outpost.JUNGLE:
-            redirect = Transition(from_=0X9D1A6D4A, to=redirect.to)
+            redirect = Transition(from_=WaterExit.JUNGLE_TO_WATER, to=redirect.to)
         else:
-            redirect = Transition(from_=0X7C65128A, to=redirect.to)
+            redirect = Transition(from_=WaterExit.BURNING_TO_WATER, to=redirect.to)
     # how to properly reach Twin Outposts
-    elif redirect.to == Outpost.JUNGLE or redirect.to == Outpost.BURNING:
+    elif redirect.to in {Outpost.JUNGLE, Outpost.BURNING}:
         if redirect.from_ == LevelCRC.TWIN_OUTPOSTS_UNDERWATER:
             if redirect.to == Outpost.JUNGLE:
-                redirect = Transition(from_=0X00D15464, to=LevelCRC.TWIN_OUTPOSTS)
+                redirect = Transition(from_=WaterExit.WATER_TO_JUNGLE, to=LevelCRC.TWIN_OUTPOSTS)
             else:
-                redirect = Transition(from_=0XE1AE2BA4, to=LevelCRC.TWIN_OUTPOSTS)
+                redirect = Transition(from_=WaterExit.WATER_TO_BURNING, to=LevelCRC.TWIN_OUTPOSTS)
         redirect = Transition(from_=redirect.from_, to=LevelCRC.TWIN_OUTPOSTS)
     # how to properly reach Flooded Courtyard / Turtle Monument
-    elif redirect.from_ == Outpost.JUNGLE or redirect.from_ == Outpost.BURNING:
+    elif redirect.from_ in {Outpost.JUNGLE, Outpost.BURNING}:
         redirect = Transition(from_=LevelCRC.TWIN_OUTPOSTS, to=redirect.to)
 
     print(
@@ -281,32 +282,31 @@ def increment_index(
 def add_exit(area: Area, ex_id: int):
     ex = Exit(
         ex_id,
-        _transition_infos_dict_rando[ex_id].name,
+        transition_infos_dict_rando[ex_id].name,
         None,
     )
-    _transition_infos_dict_rando[area.area_id] = Area(
+    transition_infos_dict_rando[area.area_id] = Area(
         area.area_id,
         area.name,
         area.default_entrance,
-        tuple([x for x in _transition_infos_dict_rando[area.area_id].exits] + [ex]),
+        tuple(list(transition_infos_dict_rando[area.area_id].exits) + [ex]),
     )
-    global _all_possible_transitions_rando
-    _all_possible_transitions_rando.append(tuple([area.area_id, ex_id]))
+    _all_possible_transitions_rando.append((area.area_id, ex_id))
 
 
 def delete_exit(area: Area, ex: Exit):
-    _transition_infos_dict_rando[area.area_id] = Area(
+    transition_infos_dict_rando[area.area_id] = Area(
         area.area_id,
         area.name,
         area.default_entrance,
-        tuple([x for x in _transition_infos_dict_rando[area.area_id].exits if x != ex]),
+        tuple([x for x in transition_infos_dict_rando[area.area_id].exits if x != ex]),
     )
     _all_possible_transitions_rando.remove((area.area_id, ex.area_id))
 
 
 def handle_manually_disabled_levels():
     for disabled_level in manually_disabled_levels:
-        exits = [x for x in _transition_infos_dict_rando[disabled_level].exits]
+        exits = list(transition_infos_dict_rando[disabled_level].exits)
         exits_id = [x.area_id for x in exits]
         pairs = list(combinations(exits_id, 2))
         for pair in pairs:
@@ -323,10 +323,10 @@ def handle_manually_disabled_levels():
             if ex.area_id not in manually_affected_levels:
                 manually_affected_levels.append(ex.area_id)
 
-            delete_exit(_transition_infos_dict_rando[disabled_level], ex)
-            for other_level_ex in _transition_infos_dict_rando[ex.area_id].exits:
+            delete_exit(transition_infos_dict_rando[disabled_level], ex)
+            for other_level_ex in transition_infos_dict_rando[ex.area_id].exits:
                 if other_level_ex.area_id == disabled_level:
-                    delete_exit(_transition_infos_dict_rando[ex.area_id], other_level_ex)
+                    delete_exit(transition_infos_dict_rando[ex.area_id], other_level_ex)
                     break
 
 
@@ -340,41 +340,41 @@ def remove_disabled_exits():
 
 def twin_outposts_underwater_prep():
     # create new area: Jungle Outpost
-    _transition_infos_dict_rando[Outpost.JUNGLE] = Area(
+    transition_infos_dict_rando[Outpost.JUNGLE] = Area(
         Outpost.JUNGLE.value,
         "Jungle Outpost",
         LevelCRC.FLOODED_COURTYARD,
-        tuple(),
+        (),
     )
-    area = _transition_infos_dict_rando[Outpost.JUNGLE]
+    area = transition_infos_dict_rando[Outpost.JUNGLE]
     add_exit(area, LevelCRC.FLOODED_COURTYARD)
     add_exit(area, LevelCRC.TWIN_OUTPOSTS_UNDERWATER)
     # create new area: Burning Outpost
-    _transition_infos_dict_rando[Outpost.BURNING] = Area(
+    transition_infos_dict_rando[Outpost.BURNING] = Area(
         Outpost.BURNING.value,
         "Burning Outpost",
         LevelCRC.TURTLE_MONUMENT,
-        tuple(),
+        (),
     )
-    area = _transition_infos_dict_rando[Outpost.BURNING]
+    area = transition_infos_dict_rando[Outpost.BURNING]
     add_exit(area, LevelCRC.TURTLE_MONUMENT)
     add_exit(area, LevelCRC.TWIN_OUTPOSTS_UNDERWATER)
     # in area Twin outposts remove all 3 exits
-    area = _transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS]
+    area = transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS]
     for i in range(3):
         delete_exit(
-            _transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS],
-            _transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS].exits[0],
+            transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS],
+            transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS].exits[0],
         )
     # in area flooded courtyard replace exit Twin Outposts with exit Outpost.Jungle
-    area = _transition_infos_dict_rando[LevelCRC.FLOODED_COURTYARD]
+    area = transition_infos_dict_rando[LevelCRC.FLOODED_COURTYARD]
     for ex in area.exits:
         if ex.area_id == LevelCRC.TWIN_OUTPOSTS:
             delete_exit(area, ex)
             break
     add_exit(area, Outpost.JUNGLE)
     # in area turtle monument replace exit Twin Outposts with exit Outpost.Burning
-    area = _transition_infos_dict_rando[LevelCRC.TURTLE_MONUMENT]
+    area = transition_infos_dict_rando[LevelCRC.TURTLE_MONUMENT]
     for ex in area.exits:
         if ex.area_id == LevelCRC.TWIN_OUTPOSTS:
             delete_exit(area, ex)
@@ -382,14 +382,14 @@ def twin_outposts_underwater_prep():
     add_exit(area, Outpost.BURNING)
     # in area Twin outposts underwater remove the 1 exit it has,
     # and replace them with 1 exit to Outpost.Jungle and 1 to Outpost.Burning
-    area = _transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS_UNDERWATER]
+    area = transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS_UNDERWATER]
     delete_exit(area, area.exits[0])
     add_exit(area, Outpost.JUNGLE)
     add_exit(area, Outpost.BURNING)
 
 
 def initialize_connections_left():
-    for area in _transition_infos_dict_rando.values():
+    for area in transition_infos_dict_rando.values():
         __connections_left[area.area_id] = len(area.exits)
 
 
@@ -737,7 +737,7 @@ def set_linked_transitions():
     total_con_left = sum(__connections_left[level] for level in closed_door_levels)
 
     level_list = [
-        area for area in _transition_infos_dict_rando.values()
+        area for area in transition_infos_dict_rando.values()
         if __connections_left[area.area_id] > 0
     ]
 
@@ -803,7 +803,7 @@ def set_transitions_map():
     initialize_connections_left()
 
     if not CONFIGS.SKIP_JAGUAR:
-        starting_default = _transition_infos_dict_rando[starting_area].default_entrance
+        starting_default = transition_infos_dict_rando[starting_area].default_entrance
         tutorial_original = Transition(from_=LevelCRC.JAGUAR, to=LevelCRC.PLANE_CUTSCENE)
         tutorial_redirect = Transition(from_=starting_default, to=starting_area)
         transitions_map[tutorial_original] = tutorial_redirect
@@ -819,7 +819,7 @@ def set_transitions_map():
         # Ground rules:
         # 1. you can't make a transition from a level to itself
         _possible_redirections_bucket.extend(ONE_WAY_TRANSITIONS)
-        for area in _transition_infos_dict_rando.values():
+        for area in transition_infos_dict_rando.values():
             for to_og in (exit_.area_id for exit_ in area.exits):
                 original = Transition(from_=area.area_id, to=to_og)
                 redirect = get_random_one_way_redirection(original)

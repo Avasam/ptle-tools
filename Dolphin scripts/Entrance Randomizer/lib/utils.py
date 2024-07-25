@@ -187,16 +187,16 @@ def dump_spoiler_logs(
     starting_area_name: str,
     transitions_map: Mapping[tuple[int, int], tuple[int, int]],
     seed_string: SeedType,
-    _transition_infos_dict_rando: dict[int, Area],
+    transition_infos_dict_rando: dict[int, Area],
     bypassed_exits: list[tuple[int, int]],
     DISABLED_TRANSITIONS: list[tuple[int, int]],
 ):
     spoiler_logs = f"Starting area: {starting_area_name}\n"
     red_string_list = [
-        f"{_transition_infos_dict_rando[original[0]].name} "
-        + f"({_transition_infos_dict_rando[original[1]].name} exit) "
-        + f"will redirect to: {_transition_infos_dict_rando[redirect[1]].name} "
-        + f"({_transition_infos_dict_rando[redirect[0]].name} entrance)\n"
+        f"{transition_infos_dict_rando[original[0]].name} "
+        + f"({transition_infos_dict_rando[original[1]].name} exit) "
+        + f"will redirect to: {transition_infos_dict_rando[redirect[1]].name} "
+        + f"({transition_infos_dict_rando[redirect[0]].name} entrance)\n"
         for original, redirect in transitions_map.items()
     ]
     red_string_list.sort()
