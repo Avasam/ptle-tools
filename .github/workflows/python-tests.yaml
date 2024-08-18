@@ -1,0 +1,42 @@
+name: Python tests
+
+on:
+  workflow_dispatch: #  Allows manual triggers
+  push:
+    branches:
+      - main
+    paths:
+      - "**.py"
+      - "**.pyi"
+      - "**/requirements*.txt"
+      - "**/pyproject.toml"
+      - ".github/workflows/python-tests.yaml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "**.py"
+      - "**.pyi"
+      - "**/requirements*.txt"
+      - "**/pyproject.toml"
+      - ".github/workflows/python-tests.yaml"
+
+env:
+  PIP_DISABLE_PIP_VERSION_CHECK: 1
+  FORCE_COLOR: 1
+
+jobs:
+  pyright:
+    name: Run pyright
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get pyright version
+        id: pyright_version
+        run: |
+          PYRIGHT_VERSION=$(grep pyright== 'Dolphin scripts/requirements-dev.txt' | cut -d "#" -f 1 | cut -d \; -f 1 | cut -d = -f 3)
+          echo pyright version: "${PYRIGHT_VERSION}"
+          echo PYRIGHT_VERSION="${PYRIGHT_VERSION}" >> "${GITHUB_OUTPUT}"
+      - uses: jakebailey/pyright-action@v2
+        with:
+          version: ${{ steps.pyright_version.outputs.PYRIGHT_VERSION }}

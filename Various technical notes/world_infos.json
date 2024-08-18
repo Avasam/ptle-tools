@@ -149,7 +149,7 @@
       "asset_id": 46642805,
       "asset_crc32": "02C7 B675",
       "asset_name": "B01",
-      "area_name": "Monkey Temple (Monkey)"
+      "area_name": "Monkey Temple (Spirit)"
     },
     {
       "id": 4,
@@ -242,7 +242,7 @@
       "asset_id": 50715714,
       "asset_crc32": "0305 DC42",
       "asset_name": "C01",
-      "area_name": "Scorpion Temple (Scorpion)"
+      "area_name": "Scorpion Temple (Spirit)"
     },
     {
       "id": 13,
@@ -321,7 +321,7 @@
       "asset_id": 522420018,
       "asset_crc32": "1F23 7F32",
       "asset_name": "S01",
-      "area_name": "Penguin Temple (Penguin)"
+      "area_name": "Penguin Temple (Spirit)"
     },
     {
       "id": 28,
@@ -618,7 +618,7 @@
       "asset_id": null,
       "asset_crc32": "E0F1 09CC",
       "asset_name": "0-quentin",
-      "area_name": "Beta characters (IDEM)"
+      "area_name": "⚠ Beta characters (IDEM)"
     },
     {
       "id": 77,

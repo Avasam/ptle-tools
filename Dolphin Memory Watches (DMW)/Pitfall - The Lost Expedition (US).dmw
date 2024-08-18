@@ -1,6 +1,13 @@
 {
   "watchList": [
     {
+      "address": "803D75E0",
+      "baseIndex": 0,
+      "label": "Aspect Ratio",
+      "typeIndex": 3,
+      "unsigned": true
+    },
+    {
       "address": "8041BEB4",
       "baseIndex": 1,
       "label": "Current Area",
@@ -55,18 +62,99 @@
     {
       "groupEntries": [
         {
-          "address": "8045D9A4",
+          "address": "8045DA3C",
+          "baseIndex": 1,
+          "label": "Code string",
+          "length": 10,
+          "typeIndex": 5,
+          "unsigned": true
+        },
+        {
+          "address": "8045D9B8",
           "baseIndex": 0,
-          "label": "Slow motion",
+          "label": "Stink Bombs",
           "typeIndex": 2,
           "unsigned": false
         },
         {
           "address": "8045D9C0",
           "baseIndex": 0,
-          "label": "Super Punches",
+          "label": "Hyperpunch Mode",
           "typeIndex": 2,
           "unsigned": false
+        },
+        {
+          "address": "8045D9BC",
+          "baseIndex": 0,
+          "label": "Bottomless Canteen",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "8045D9B0",
+          "baseIndex": 0,
+          "label": "Emulator: Pitfall!",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "8045D9B4",
+          "baseIndex": 0,
+          "label": "Emulator: Pitfall II: Lost Caverns",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "groupEntries": [
+            {
+              "address": "8045D990",
+              "baseIndex": 0,
+              "label": "Nicole Outfit",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8045D994",
+              "baseIndex": 0,
+              "label": "Native Outfit",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8045D9AC",
+              "baseIndex": 0,
+              "label": "Old School Harry Outfit",
+              "typeIndex": 2,
+              "unsigned": false
+            }
+          ],
+          "groupName": "Outfits"
+        },
+        {
+          "groupEntries": [
+            {
+              "address": "8045D9A8",
+              "baseIndex": 0,
+              "label": "Global Fast Motion",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8045D9A0",
+              "baseIndex": 0,
+              "label": "Global Slow Motion",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8045D9A4",
+              "baseIndex": 0,
+              "label": "Global Super Slow Motion",
+              "typeIndex": 2,
+              "unsigned": false
+            }
+          ],
+          "groupName": "Global Speed"
         }
       ],
       "groupName": "Cheats"
@@ -139,6 +227,51 @@
             {
               "address": "8041BE4C",
               "baseIndex": 0,
+              "label": "X",
+              "pointerOffsets": [
+                "338"
+              ],
+              "typeIndex": 3,
+              "unsigned": false
+            },
+            {
+              "address": "8041BE4C",
+              "baseIndex": 0,
+              "label": "Y",
+              "pointerOffsets": [
+                "33C"
+              ],
+              "typeIndex": 3,
+              "unsigned": false
+            },
+            {
+              "address": "8041BE4C",
+              "baseIndex": 0,
+              "label": "Z",
+              "pointerOffsets": [
+                "340"
+              ],
+              "typeIndex": 3,
+              "unsigned": false
+            }
+          ],
+          "groupName": "Position"
+        },
+        {
+          "groupEntries": [
+            {
+              "address": "8041BE4C",
+              "baseIndex": 0,
+              "label": "Invincible",
+              "pointerOffsets": [
+                "960"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041BE4C",
+              "baseIndex": 0,
               "label": "Amount",
               "pointerOffsets": [
                 "65C"
@@ -200,7 +333,7 @@
                 },
                 {
                   "groupEntries": [],
-                  "groupName": "01 -> Floor (can't move)"
+                  "groupName": "00/03 -> Fall through"
                 },
                 {
                   "groupEntries": [],
@@ -208,11 +341,11 @@
                 },
                 {
                   "groupEntries": [],
-                  "groupName": "03 -> Fall through floor"
+                  "groupName": "04 -> Sinking"
                 },
                 {
                   "groupEntries": [],
-                  "groupName": "04 -> Sinking"
+                  "groupName": "XX -> Floor (can't move)"
                 }
               ],
               "groupName": "Collide state"
@@ -273,6 +406,16 @@
               "label": "Is Harry visible",
               "pointerOffsets": [
                 "418"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041BE4C",
+              "baseIndex": 0,
+              "label": "Blue attacks",
+              "pointerOffsets": [
+                "1A20"
               ],
               "typeIndex": 2,
               "unsigned": false
@@ -372,23 +515,16 @@
               "unsigned": false
             },
             {
-              "address": "8041A2F0",
+              "address": "8041A248",
               "baseIndex": 0,
-              "label": "Gas Mask",
+              "label": "Slingshot",
               "typeIndex": 2,
               "unsigned": false
             },
             {
-              "address": "8041A280",
+              "address": "8041A264",
               "baseIndex": 0,
-              "label": "Pickaxes",
-              "typeIndex": 2,
-              "unsigned": false
-            },
-            {
-              "address": "8041A2D4",
-              "baseIndex": 0,
-              "label": "Raft",
+              "label": "Torch",
               "typeIndex": 2,
               "unsigned": false
             },
@@ -400,9 +536,23 @@
               "unsigned": false
             },
             {
-              "address": "8041A248",
+              "address": "8041A2F0",
               "baseIndex": 0,
-              "label": "Slingshot",
+              "label": "Gas Mask",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A2D4",
+              "baseIndex": 0,
+              "label": "Raft",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A280",
+              "baseIndex": 0,
+              "label": "Pickaxes",
               "typeIndex": 2,
               "unsigned": false
             },
@@ -414,9 +564,9 @@
               "unsigned": false
             },
             {
-              "address": "8041A264",
+              "address": "8045D9B8",
               "baseIndex": 0,
-              "label": "Torch",
+              "label": "Stink Bombs",
               "typeIndex": 2,
               "unsigned": false
             },
@@ -438,6 +588,129 @@
     },
     {
       "groupEntries": [
+        {
+          "groupEntries": [
+            {
+              "address": "8041BE4C",
+              "baseIndex": 1,
+              "label": "Top Item",
+              "pointerOffsets": [
+                "970",
+                "0"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041BE4C",
+              "baseIndex": 1,
+              "label": "Right Item",
+              "pointerOffsets": [
+                "970",
+                "4"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041BE4C",
+              "baseIndex": 1,
+              "label": "Bottom Item",
+              "pointerOffsets": [
+                "970",
+                "8"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041BE4C",
+              "baseIndex": 1,
+              "label": "Left Item",
+              "pointerOffsets": [
+                "970",
+                "C"
+              ],
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "groupEntries": [],
+              "groupName": "--- Item values ---"
+            },
+            {
+              "address": "8041A21C",
+              "baseIndex": 1,
+              "label": "Empty Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A2FC",
+              "baseIndex": 1,
+              "label": "Canteen Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A238",
+              "baseIndex": 1,
+              "label": "Sling Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A254",
+              "baseIndex": 1,
+              "label": "Torch Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A2A8",
+              "baseIndex": 1,
+              "label": "Shield Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A2E0",
+              "baseIndex": 1,
+              "label": "Gas Mask Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A2C4",
+              "baseIndex": 1,
+              "label": "Raft Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A270",
+              "baseIndex": 1,
+              "label": "Pickaxes ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A28C",
+              "baseIndex": 1,
+              "label": "TNT Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            },
+            {
+              "address": "8041A318",
+              "baseIndex": 1,
+              "label": "Strink Bomb Ptr",
+              "typeIndex": 2,
+              "unsigned": false
+            }
+          ],
+          "groupName": "D-Pad"
+        },
         {
           "groupEntries": [
             {
@@ -500,9 +773,147 @@
           "label": "Explorer Idol Reward",
           "typeIndex": 1,
           "unsigned": false
+        },
+        {
+          "address": "804CB93C",
+          "baseIndex": 0,
+          "label": "Show second health bar",
+          "typeIndex": 2,
+          "unsigned": true
         }
       ],
       "groupName": "Misc"
+    },
+    {
+      "groupEntries": [
+        {
+          "address": "7E009560",
+          "baseIndex": 0,
+          "label": "Extra Health 1",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E009564",
+          "baseIndex": 0,
+          "label": "Extra Health 2",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E009568",
+          "baseIndex": 0,
+          "label": "Extra Health 3",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E00956C",
+          "baseIndex": 0,
+          "label": "Extra Health 4",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E009570",
+          "baseIndex": 0,
+          "label": "Extra Health 5",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E0095B8",
+          "baseIndex": 0,
+          "label": "Canteen Max 1",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E0095BC",
+          "baseIndex": 0,
+          "label": "Canteen Max 2",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E0095C0",
+          "baseIndex": 0,
+          "label": "Canteen Max 3",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E0095C4",
+          "baseIndex": 0,
+          "label": "Canteen Max 4",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E0095C8",
+          "baseIndex": 0,
+          "label": "Canteen Max 5",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E009580",
+          "baseIndex": 0,
+          "label": "Smash Strike",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E009588",
+          "baseIndex": 0,
+          "label": "Super Sling",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E009578",
+          "baseIndex": 0,
+          "label": "Breakdance",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E009598",
+          "baseIndex": 0,
+          "label": "Jungle Notes",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E009590",
+          "baseIndex": 0,
+          "label": "Native Notes",
+          "typeIndex": 2,
+          "unsigned": true
+        },
+        {
+          "address": "7E0095A0",
+          "baseIndex": 0,
+          "label": "Cavern Notes",
+          "typeIndex": 2,
+          "unsigned": true
+        },
+        {
+          "address": "7E0095A8",
+          "baseIndex": 0,
+          "label": "Mountain Notes",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "address": "7E0095B0",
+          "baseIndex": 0,
+          "label": "Mystery Item",
+          "typeIndex": 2,
+          "unsigned": false
+        }
+      ],
+      "groupName": "Shaman Shop"
     }
   ]
 }

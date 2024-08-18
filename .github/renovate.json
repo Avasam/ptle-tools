@@ -1,0 +1,15 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "groupName": "all dependencies",
+  "semanticCommits": "disabled",
+  "separateMajorMinor": false,
+  "suppressNotifications": [
+    "prEditedNotification"
+  ],
+  "pre-commit": {
+    "enabled": true
+  }
+}
