@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
-    "schedule:monthly"
+    "schedule:monthly" // More often than set in .pre-commit-config.yaml
   ],
   "groupName": "all dependencies",
   "semanticCommits": "disabled",
