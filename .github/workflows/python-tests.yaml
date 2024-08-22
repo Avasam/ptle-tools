@@ -40,3 +40,4 @@ jobs:
       - uses: jakebailey/pyright-action@v2
         with:
           version: ${{ steps.pyright_version.outputs.PYRIGHT_VERSION }}
+          extra-args: --threads

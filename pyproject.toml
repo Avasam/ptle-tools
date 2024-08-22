@@ -88,8 +88,19 @@ ignore = [
   # "ISC001", # single-line-implicit-string-concatenation
 
   ###
+  # Rules about missing special documentation. Up to you if you wanna enable these, you must also disable D406, D407
+  ###
+  "DOC201", #	docstring-missing-returns
+  "DOC402", #	docstring-missing-yields
+  "DOC501", #	docstring-missing-exception
+  # "D406", # new-line-after-section-name, conflicts with DOC
+  # "D407", # dashed-underline-after-section, conflicts with DOC
+
+  ###
   # Specific to this project
   ###
+  # Slows down tuple comprehensions in --preview mode https://github.com/astral-sh/ruff/issues/12912
+  "C409", # unnecessary-literal-within-tuple-call
   "CPY001", # missing-copyright-notice: Assume license from root
   # This is a relatively small, low contributors project. Git blame suffice.
   "TD002", # missing-todo-author
