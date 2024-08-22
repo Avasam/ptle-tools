@@ -46,6 +46,7 @@ repos:
     rev: "v1.1.377" # Must match requirements-dev.txt
     hooks:
       - id: pyright
+        args: [--threads]
 
 ci:
   autoupdate_schedule: quarterly # Should already be handled by Renovate
