@@ -4,6 +4,7 @@ Module for awaiting or registering callbacks on all events emitted by Dolphin.
 The odd-looking Protocol classes are just a lot of syntax to essentially describe
 the callback's signature. See https://www.python.org/dev/peps/pep-0544/#callback-protocols
 """
+
 from collections.abc import Callable
 from typing import Protocol, type_check_only
 
@@ -12,7 +13,6 @@ def on_frameadvance(callback: Callable[[], None] | None) -> None:
 
 async def frameadvance() -> None:
     """Awaitable event that completes once the game has rendered a new frame."""
-
 @type_check_only
 class _MemorybreakpointCallback(Protocol):
     def __call__(self, is_write: bool, addr: int, value: int) -> None:
@@ -34,7 +34,6 @@ def on_memorybreakpoint(callback: _MemorybreakpointCallback | None) -> None:
 
 async def memorybreakpoint() -> tuple[bool, int, int]:
     """Awaitable event that completes once a previously added memory breakpoint is hit."""
-
 @type_check_only
 class _SaveStateCallback(Protocol):
     def __call__(self, is_slot: bool, slot: int, /) -> None:

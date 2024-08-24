@@ -4,6 +4,7 @@ Module for programmatic inputs.
 Currently, only for GameCube, Wiimote, Nunchuck buttons and Wii IR (pointing).
 No acceleration or other extensions data yet.
 """
+
 from typing import TypedDict, type_check_only
 
 @type_check_only
