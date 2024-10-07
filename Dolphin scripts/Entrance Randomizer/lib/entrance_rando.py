@@ -4,7 +4,7 @@ import random
 from collections.abc import MutableSequence, Sequence
 from copy import copy
 from enum import IntEnum, auto
-from itertools import starmap
+from itertools import combinations, starmap
 
 import CONFIGS
 from lib.constants import *  # noqa: F403
@@ -33,9 +33,14 @@ class Priority(IntEnum):
     OPEN = auto()
 
 
+class Outpost(IntEnum):
+    JUNGLE = 1000
+    BURNING = 2000
+
+
 CLOSED_DOOR_EXITS = (
     # These passages are blocked by literal closed doors
-    Transition(LevelCRC.TWIN_OUTPOSTS, LevelCRC.FLOODED_COURTYARD),
+    Transition(Outpost.JUNGLE, LevelCRC.FLOODED_COURTYARD),
     Transition(LevelCRC.SCORPION_TEMPLE, LevelCRC.EYES_OF_DOOM),
     Transition(LevelCRC.MOUNTAIN_OVERLOOK, LevelCRC.EYES_OF_DOOM),
     Transition(LevelCRC.COPACANTI_LAKE, LevelCRC.VALLEY_OF_SPIRITS),
@@ -53,13 +58,13 @@ _possible_starting_areas = [
     # Remove unwanted starting areas from the list of random possibilities
     if area not in {
         # These areas will instantly softlock you
-        LevelCRC.APU_ILLAPU_SHRINE,  # Softlock prevention just shoves you in the geyser anyway
+        LevelCRC.APU_ILLAPU_SHRINE,  # Softlock prevention would shove you in the geyser anyway
         # These areas will give too much progression
         LevelCRC.ST_CLAIRE_DAY,  # gives TNT
         LevelCRC.ST_CLAIRE_NIGHT,  # gives all items + access to El Dorado
         LevelCRC.JAGUAR,  # sends to final bosses
         LevelCRC.PUSCA,  # sends to final bosses
-        # Temples and spirits are effectively duplicates, so we remove half of them here.
+        # Temples and Spirits are mostly equivalent, so we remove half of them here.
         # Spawning in a temple forces you to do the fight anyway. For convenience let's spawn
         # directly in the fight (it's also funnier to start the rando as the animal spirit).
         *(
@@ -67,45 +72,48 @@ _possible_starting_areas = [
             if CONFIGS.IMMEDIATE_SPIRIT_FIGHTS
             else TEMPLES_WITH_FIGHT.values()
         ),
-        # Spawning in a Native Minigame is equivalent to spawning in Native Village
+        # Spawning in a Native Minigame is mostly equivalent to spawning in Native Village
         # as they are currently not randomized.
         LevelCRC.WHACK_A_TUCO,
         LevelCRC.TUCO_SHOOT,
         LevelCRC.RAFT_BOWLING,
         LevelCRC.PICKAXE_RACE,
         LevelCRC.KABOOM,
-        # See `disabled_exits` below. This is equivalent to spawning in Twin Outposts
-        LevelCRC.TWIN_OUTPOSTS_UNDERWATER,
         # Cutscenes
         LevelCRC.PLANE_CUTSCENE,
         LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE,
     }
 ]
 
-SHOWN_DISABLED_TRANSITIONS = (
-    # Until we can set the "previous area id" in memory consistently,
-    # Crash Site is a risk of progress reset
-    # NOTE: Commented out temporarily due to incompatibility
-    # with the current closed door logic
-    # (LevelCRC.CRASH_SITE, LevelCRC.JUNGLE_CANYON),
-    # (LevelCRC.CRASH_SITE, LevelCRC.PLANE_COCKPIT),
-    # (LevelCRC.JUNGLE_CANYON, LevelCRC.CRASH_SITE),
-    # (LevelCRC.PLANE_COCKPIT, LevelCRC.CRASH_SITE),
+manually_disabled_levels = (
     # Mouth of Inti has 2 connections with Altar of Huitaca, which causes problems,
-    # basically it's very easy to get softlocked by the spider web when entering Altar of Huitaca
-    # So for now just don't randomize it. That way runs don't just end out of nowhere
-    (LevelCRC.ALTAR_OF_HUITACA, LevelCRC.MOUTH_OF_INTI),
-    (LevelCRC.MOUTH_OF_INTI, LevelCRC.ALTAR_OF_HUITACA),
-    # Twin Outposts has a very unusual connection with Twin Outposts Underwater,
-    # If randomized normally this may cause the game to be completely unbeatable
-    # because you might never be able to reach Burning Outposts
-    # So for now just don't randomize it. That way we won't have to worry about that yet
-    (LevelCRC.TWIN_OUTPOSTS, LevelCRC.TWIN_OUTPOSTS_UNDERWATER),
-    (LevelCRC.TWIN_OUTPOSTS_UNDERWATER, LevelCRC.TWIN_OUTPOSTS),
+    # basically it's very easy to get softlocked by the spider web when entering Altar of Huitaca.
+    # So for now just don't randomize it. That way runs don't just end out of nowhere.
+    LevelCRC.MOUTH_OF_INTI,
+    # If you happen to enter Crash Site from the default entrance (this can happen due to bugs),
+    # you will be severely punished for it in the form of losing all your stuff.
+    # In order to completely remove the risk Crash Site isn't randomized for now.
+    LevelCRC.CRASH_SITE,
 )
-"""These disabled exits are to be shown on the graph."""
+"""
+    -- Note for developers --
+    You can manually disable levels like this as you please, but there are a few exceptions.
 
-bypassed_exits = [
+    Please don't manually disable levels that fall under one or more of these categories:
+    - Important & complicated story levels (like St. Claire's Camp Night)
+    - Twin Outposts or Twin Outposts Underwater
+    - Levels that contain closed doors (like Eyes of Doom)
+    - Levels that connect to closed doors (like Mountain Sled Run)
+    - Levels with one-way exits such as geysers (like Apu Illapu Shrine)
+    - Levels that connect to underwater levels (if you have them turned off in CONFIGS)
+
+"""
+
+manually_affected_levels: list[int] = []
+
+manually_disabled_transitions: list[tuple[int, int]] = []
+
+bypassed_exits = (
     # The 2 CUTSCENE Levels are currently chosen to not be randomized.
     # As of right now both of these cutscenes are hijacked to be skipped entirely.
     (LevelCRC.JAGUAR, LevelCRC.PLANE_CUTSCENE),
@@ -115,13 +123,12 @@ bypassed_exits = [
     # This specific one-time, one-way warp is not randomized.
     # Instead this transition is manually hijacked to send you to Mysterious Temple instead.
     (LevelCRC.ALTAR_OF_AGES, LevelCRC.BITTENBINDERS_CAMP),
-]
+)
 
-DISABLED_TRANSITIONS = (
-    *SHOWN_DISABLED_TRANSITIONS,
+DISABLED_TRANSITIONS = [
     *bypassed_exits,
     # The 3 Spirit Fights are not randomized,
-    # because that will cause issues with the transformation cutscene trigger.
+    # because that causes issues with the transformation cutscene trigger.
     # Plus it wouldn't really improve anything, given that the Temples are randomized anyway.
     (LevelCRC.MONKEY_TEMPLE, LevelCRC.MONKEY_SPIRIT),
     (LevelCRC.MONKEY_SPIRIT, LevelCRC.MONKEY_TEMPLE),
@@ -130,8 +137,8 @@ DISABLED_TRANSITIONS = (
     (LevelCRC.PENGUIN_TEMPLE, LevelCRC.PENGUIN_SPIRIT),
     (LevelCRC.PENGUIN_SPIRIT, LevelCRC.PENGUIN_TEMPLE),
     # The 5 Native Games are currently chosen to not be randomized.
-    # If we at some point decide to randomize them anyway we'll have to do some rigorous testing
-    # Because it's very much possible this will cause some bugs
+    # If we at some point decide to randomize them anyway we'll have to do some rigorous testing,
+    # because it's very much possible this will cause some bugs.
     (LevelCRC.NATIVE_VILLAGE, LevelCRC.WHACK_A_TUCO),
     (LevelCRC.WHACK_A_TUCO, LevelCRC.NATIVE_VILLAGE),
     (LevelCRC.NATIVE_VILLAGE, LevelCRC.TUCO_SHOOT),
@@ -154,14 +161,16 @@ DISABLED_TRANSITIONS = (
     # It will require some special code though.
     (LevelCRC.BETA_VOLCANO, LevelCRC.JUNGLE_CANYON),
     (LevelCRC.BETA_VOLCANO, LevelCRC.PLANE_COCKPIT),
-)
+]
 
+if CONFIGS.SKIP_WATER_LEVELS:
+    _possible_starting_areas = [a for a in _possible_starting_areas if a not in WATER_LEVELS]
 # Call RNG even if this is unused to not impact randomization of other things for the same seed
 starting_area = random.choice(_possible_starting_areas)
 if CONFIGS.STARTING_AREA is not None:
     starting_area = CONFIGS.STARTING_AREA
 
-_transition_infos_dict_rando = TRANSITION_INFOS_DICT.copy()
+transition_infos_dict_rando = TRANSITION_INFOS_DICT.copy()
 _all_possible_transitions_rando = list(ALL_POSSIBLE_TRANSITIONS)
 
 transitions_map: dict[tuple[int, int], Transition] = {}
@@ -170,9 +179,33 @@ link_list: list[tuple[Transition, Transition]] = []
 __connections_left: dict[int, int] = {}
 """Used in randomization process to track per Area how many exits aren't connected yet."""
 
+ethereal_transitions: list[tuple[Transition, Transition]] = []
+
 loose_ends: list[Transition] = []
 sacred_pairs: list[tuple[int, int]] = []
 __current_hub = 0
+
+
+def adjust_current_area_old_and_new():
+    current_previous_area = memory.read_u32(follow_pointer_path(ADDRESSES.prev_area))
+
+    if state.current_area_new == LevelCRC.TWIN_OUTPOSTS_UNDERWATER:
+        if current_previous_area == WaterExit.JUNGLE_TO_WATER:
+            state.current_area_old = Outpost.JUNGLE
+        else:
+            state.current_area_old = Outpost.BURNING
+    elif state.current_area_new == LevelCRC.TWIN_OUTPOSTS:
+        if (current_previous_area in {WaterExit.WATER_TO_JUNGLE, WaterExit.WATER_TO_BURNING}):
+            state.current_area_old = LevelCRC.TWIN_OUTPOSTS_UNDERWATER
+        if (current_previous_area in {WaterExit.WATER_TO_JUNGLE, LevelCRC.FLOODED_COURTYARD}):
+            state.current_area_new = Outpost.JUNGLE
+        else:
+            state.current_area_new = Outpost.BURNING
+    elif state.current_area_old == LevelCRC.TWIN_OUTPOSTS:
+        if state.current_area_new == LevelCRC.FLOODED_COURTYARD:
+            state.current_area_old = Outpost.JUNGLE
+        else:
+            state.current_area_old = Outpost.BURNING
 
 
 def highjack_transition_rando():
@@ -180,28 +213,36 @@ def highjack_transition_rando():
     if state.current_area_old == state.current_area_new:
         return False
 
+    # Dealing with Twin Outposts
+    adjust_current_area_old_and_new()
+
     redirect = transitions_map.get((state.current_area_old, state.current_area_new))
     if not redirect:
         return False
-
-    # Apply Altar of Ages logic to St. Claire's Excavation Camp
-    # Even if the cutscene wasn't actually watched.
-    # Just leaving the Altar is good enough for the rando.
-    if redirect.to in {LevelCRC.ST_CLAIRE_DAY, LevelCRC.ST_CLAIRE_NIGHT}:
-        redirect = Transition(
-            redirect.from_,
-            to=(
-                LevelCRC.ST_CLAIRE_NIGHT
-                if LevelCRC.ALTAR_OF_AGES in state.visited_levels
-                else LevelCRC.ST_CLAIRE_DAY
-            ),
-        )
 
     # Check if you're visiting a Temple for the first time, if so go directly to Spirit Fight
     if CONFIGS.IMMEDIATE_SPIRIT_FIGHTS and redirect.to in TEMPLES_WITH_FIGHT:
         spirit = TEMPLES_WITH_FIGHT[redirect.to]
         if spirit not in state.visited_levels:
             redirect = Transition(from_=redirect.to, to=spirit)
+
+    # how to properly reach underwater
+    if redirect.to == LevelCRC.TWIN_OUTPOSTS_UNDERWATER:
+        if redirect.from_ == Outpost.JUNGLE:
+            redirect = Transition(from_=WaterExit.JUNGLE_TO_WATER, to=redirect.to)
+        else:
+            redirect = Transition(from_=WaterExit.BURNING_TO_WATER, to=redirect.to)
+    # how to properly reach Twin Outposts
+    elif redirect.to in {Outpost.JUNGLE, Outpost.BURNING}:
+        if redirect.from_ == LevelCRC.TWIN_OUTPOSTS_UNDERWATER:
+            if redirect.to == Outpost.JUNGLE:
+                redirect = Transition(from_=WaterExit.WATER_TO_JUNGLE, to=LevelCRC.TWIN_OUTPOSTS)
+            else:
+                redirect = Transition(from_=WaterExit.WATER_TO_BURNING, to=LevelCRC.TWIN_OUTPOSTS)
+        redirect = Transition(from_=redirect.from_, to=LevelCRC.TWIN_OUTPOSTS)
+    # how to properly reach Flooded Courtyard / Turtle Monument
+    elif redirect.from_ in {Outpost.JUNGLE, Outpost.BURNING}:
+        redirect = Transition(from_=LevelCRC.TWIN_OUTPOSTS, to=redirect.to)
 
     print(
         "highjack_transition_rando |",
@@ -229,14 +270,55 @@ def increment_index(
     return new_index
 
 
-def delete_exit(area: Area, ex: Exit):
-    _transition_infos_dict_rando[area.area_id] = Area(
+def add_exit(area: Area, ex_id: int):
+    ex = Exit(
+        ex_id,
+        transition_infos_dict_rando[ex_id].name,
+        None,
+    )
+    transition_infos_dict_rando[area.area_id] = Area(
         area.area_id,
         area.name,
         area.default_entrance,
-        tuple([x for x in _transition_infos_dict_rando[area.area_id].exits if x != ex]),
+        (*list(transition_infos_dict_rando[area.area_id].exits), ex),
+    )
+    _all_possible_transitions_rando.append((area.area_id, ex_id))
+
+
+def delete_exit(area: Area, ex: Exit):
+    transition_infos_dict_rando[area.area_id] = Area(
+        area.area_id,
+        area.name,
+        area.default_entrance,
+        tuple([x for x in transition_infos_dict_rando[area.area_id].exits if x != ex]),
     )
     _all_possible_transitions_rando.remove((area.area_id, ex.area_id))
+
+
+def handle_manually_disabled_levels():
+    for disabled_level in manually_disabled_levels:
+        exits = list(transition_infos_dict_rando[disabled_level].exits)
+        exits_id = [x.area_id for x in exits]
+        pairs = list(combinations(exits_id, 2))
+        for pair in pairs:
+            ethereal_transitions.extend((
+                (Transition(from_=pair[0], to=pair[1]), Transition(from_=pair[0], to=pair[1])),
+                (Transition(from_=pair[1], to=pair[0]), Transition(from_=pair[1], to=pair[0])),
+            ))
+        for ex in exits:
+            trans = (disabled_level, ex.area_id)
+            trans_mirror = (ex.area_id, disabled_level)
+            manually_disabled_transitions.extend((trans, trans_mirror))
+            DISABLED_TRANSITIONS.extend((trans, trans_mirror))
+
+            if ex.area_id not in manually_affected_levels:
+                manually_affected_levels.append(ex.area_id)
+
+            delete_exit(transition_infos_dict_rando[disabled_level], ex)
+            for other_level_ex in transition_infos_dict_rando[ex.area_id].exits:
+                if other_level_ex.area_id == disabled_level:
+                    delete_exit(transition_infos_dict_rando[ex.area_id], other_level_ex)
+                    break
 
 
 def remove_disabled_exits():
@@ -247,8 +329,58 @@ def remove_disabled_exits():
                 delete_exit(area, ex)
 
 
+def twin_outposts_underwater_prep():
+    # create new area: Jungle Outpost
+    transition_infos_dict_rando[Outpost.JUNGLE] = Area(
+        Outpost.JUNGLE.value,
+        "Jungle Outpost",
+        LevelCRC.FLOODED_COURTYARD,
+        (),
+    )
+    area = transition_infos_dict_rando[Outpost.JUNGLE]
+    add_exit(area, LevelCRC.FLOODED_COURTYARD)
+    add_exit(area, LevelCRC.TWIN_OUTPOSTS_UNDERWATER)
+    # create new area: Burning Outpost
+    transition_infos_dict_rando[Outpost.BURNING] = Area(
+        Outpost.BURNING.value,
+        "Burning Outpost",
+        LevelCRC.TURTLE_MONUMENT,
+        (),
+    )
+    area = transition_infos_dict_rando[Outpost.BURNING]
+    add_exit(area, LevelCRC.TURTLE_MONUMENT)
+    add_exit(area, LevelCRC.TWIN_OUTPOSTS_UNDERWATER)
+    # in area Twin outposts remove all 3 exits
+    area = transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS]
+    for _i in range(3):
+        delete_exit(
+            transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS],
+            transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS].exits[0],
+        )
+    # in area flooded courtyard replace exit Twin Outposts with exit Outpost.Jungle
+    area = transition_infos_dict_rando[LevelCRC.FLOODED_COURTYARD]
+    for ex in area.exits:
+        if ex.area_id == LevelCRC.TWIN_OUTPOSTS:
+            delete_exit(area, ex)
+            break
+    add_exit(area, Outpost.JUNGLE)
+    # in area turtle monument replace exit Twin Outposts with exit Outpost.Burning
+    area = transition_infos_dict_rando[LevelCRC.TURTLE_MONUMENT]
+    for ex in area.exits:
+        if ex.area_id == LevelCRC.TWIN_OUTPOSTS:
+            delete_exit(area, ex)
+            break
+    add_exit(area, Outpost.BURNING)
+    # in area Twin outposts underwater remove the 1 exit it has,
+    # and replace them with 1 exit to Outpost.Jungle and 1 to Outpost.Burning
+    area = transition_infos_dict_rando[LevelCRC.TWIN_OUTPOSTS_UNDERWATER]
+    delete_exit(area, area.exits[0])
+    add_exit(area, Outpost.JUNGLE)
+    add_exit(area, Outpost.BURNING)
+
+
 def initialize_connections_left():
-    for area in _transition_infos_dict_rando.values():
+    for area in transition_infos_dict_rando.values():
         __connections_left[area.area_id] = len(area.exits)
 
 
@@ -363,6 +495,28 @@ def connect_two_areas(
     )
 
 
+def connect_the_first_levels(
+    closed_door_levels: list[int],
+):
+    for index in range(1, len(closed_door_levels)):  # we skip the HUB, so we don't start at 0
+        direc = random.choice((-1, 1))
+        index_chosen = random.randrange(index)
+        valid_level = False
+        for loose_end in loose_ends:
+            if loose_end.to == __current_hub:
+                index_chosen = 0  # at this stage the HUB will always stay as index 0
+                valid_level = True
+                break
+        while not valid_level:
+            for loose_end in loose_ends:
+                if loose_end.to == closed_door_levels[index_chosen]:
+                    valid_level = True
+                    break
+            if not valid_level:
+                index_chosen = increment_index(index_chosen, index, direc)
+        connect_two_areas(closed_door_levels[index_chosen], closed_door_levels[index])
+
+
 def connect_to_existing(
     index: int,
     level_list: Sequence[Area],
@@ -424,11 +578,30 @@ def insert_area_inbetween(
     create_connection(new_origin, old_redirect)
 
 
+def remove_area_inbetween(
+    area_one: int,
+    area_two: int,
+    level_to_remove: int,
+):
+    for link in link_list:
+        if link[0].from_ == area_one and link[1].to == level_to_remove:
+            delete_connection(link[0], link[1])
+            break
+
+    for link in link_list:
+        if link[0].from_ == area_two and link[1].to == level_to_remove:
+            delete_connection(link[0], link[1])
+            break
+
+    connect_two_areas(area_one, area_two)
+
+
 def can_reach_other_side(
     chosen_link: tuple[Transition, Transition],
     current_links: MutableSequence[tuple[Transition, Transition]],
 ):
     unchecked_links = copy(current_links)
+    unchecked_links.extend(ethereal_transitions)
     areas_reachable = [chosen_link[0][0]]
     new_area_reached = True
     goal_reached = False
@@ -490,6 +663,116 @@ def find_and_break_open_connection(link_list: MutableSequence[tuple[Transition, 
     delete_connection(link_list[index][0], link_list[index][1])
 
 
+def making_choices_for_levels(
+    start_index: int,
+    level_list: Sequence[Area],
+):
+    global total_con_left
+
+    index = start_index
+    while index < len(level_list):
+        choice = random.choice(tuple(Choice))
+
+        # Option 1: connect to one or more existing levels
+        if total_con_left > 0 and (
+            len(loose_ends) > 0
+            or __connections_left[level_list[index].area_id] == 1
+            or choice == Choice.CONNECT
+        ) and not (
+            CONFIGS.SKIP_WATER_LEVELS
+            and level_list[index].area_id in WATER_LEVELS
+        ):
+            total_con_left += __connections_left[level_list[index].area_id]
+            connect_to_existing(index, level_list)
+
+        # Option 2: put the current level inbetween an already established connection
+        elif __connections_left[level_list[index].area_id] > 1:
+            total_con_left += __connections_left[level_list[index].area_id]
+            link_chosen = random.choice(link_list)
+            insert_area_inbetween(link_chosen[0], link_chosen[1], level_list[index].area_id)
+
+        # Option 3: break open a connection that's part of a loop, then restart iteration
+        else:
+            find_and_break_open_connection(link_list)
+            if state.no_connection_found_error:
+                print(" ")
+                print(NO_CONNECTION_FOUND_ERROR)
+                print(" ")
+                break
+            continue
+
+        index += 1
+
+
+def remove_water_levels():
+    for water_level in WATER_LEVELS:
+        connected_levels = [link[1].to for link in link_list if link[0].from_ == water_level]
+        remove_area_inbetween(connected_levels[0], connected_levels[1], water_level)
+
+
+def set_linked_transitions():
+    # Ground rules:
+    # 1. you can't make a transition from a level to itself
+    # 2. any 2 levels may have a maximum of 1 connection between them (as long as it's 2-way)
+
+    global __current_hub, loose_ends, total_con_left
+
+    closed_door_levels = [trans.to for trans in CLOSED_DOOR_EXITS]
+    closed_door_levels = list(dict.fromkeys(closed_door_levels))  # remove duplicates
+    random.shuffle(closed_door_levels)
+    __current_hub = closed_door_levels[0]  # this list is shuffled, so just pick the first one
+    loose_ends = list(CLOSED_DOOR_EXITS)
+    total_con_left = sum(__connections_left[level] for level in closed_door_levels)
+
+    level_list = [
+        area for area in transition_infos_dict_rando.values()
+        if __connections_left[area.area_id] > 0
+    ]
+
+    random.shuffle(level_list)
+    level_list.sort(
+        key=lambda a: (
+            a.area_id not in closed_door_levels,
+            __connections_left[a.area_id],
+        ), reverse=True,
+    )
+
+    amount_high_prio = len(loose_ends) - (len(closed_door_levels) - 1)
+    high_prio_levels = [area.area_id for area in level_list[:amount_high_prio]]
+
+    random.shuffle(level_list)
+    level_list.sort(
+        key=lambda a: (
+            a.area_id in closed_door_levels,
+            a.area_id in high_prio_levels,
+            a.area_id in manually_affected_levels,
+            __connections_left[a.area_id],
+        ), reverse=True,
+    )
+
+    connect_the_first_levels(closed_door_levels)
+
+    making_choices_for_levels(
+        len(closed_door_levels),  # we already did the closed_door_levels
+        level_list,
+    )
+
+    if CONFIGS.SKIP_WATER_LEVELS:
+        remove_water_levels()
+
+    # Once the link_list is completed, it's time to fill the transitions_map:
+    transitions_map.update(link_list)
+
+    # the one_way_transitions are added last in order to keep the rest as simple as possible
+    one_way_redirects = list(ONE_WAY_TRANSITIONS)
+    random.shuffle(one_way_redirects)
+    for original in ONE_WAY_TRANSITIONS:
+        if one_way_redirects[0].to == original.from_:
+            transitions_map[original] = one_way_redirects.pop(1)
+        else:
+            transitions_map[original] = one_way_redirects.pop(0)
+
+
 def get_random_one_way_redirection(original: Transition):
     possible_redirections = [
         redirect for redirect in _possible_redirections_bucket
@@ -500,14 +783,15 @@ def get_random_one_way_redirection(original: Transition):
     return None
 
 
-# TODO: Break up in smaller functions before changing anything else
-def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
+def set_transitions_map():
     transitions_map.clear()
     remove_disabled_exits()
+    handle_manually_disabled_levels()
+    twin_outposts_underwater_prep()
     initialize_connections_left()
 
     if not CONFIGS.SKIP_JAGUAR:
-        starting_default = _transition_infos_dict_rando[starting_area].default_entrance
+        starting_default = transition_infos_dict_rando[starting_area].default_entrance
         tutorial_original = Transition(from_=LevelCRC.JAGUAR, to=LevelCRC.PLANE_CUTSCENE)
         tutorial_redirect = Transition(from_=starting_default, to=starting_area)
         transitions_map[tutorial_original] = tutorial_redirect
@@ -518,96 +802,12 @@ def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
     _possible_redirections_bucket = _possible_origins_bucket.copy()
 
     if CONFIGS.LINKED_TRANSITIONS:
-        # Ground rules:
-        # 1. you can't make a transition from a level to itself
-        # 2. any 2 levels may have a maximum of 1 connection between them (as long as it's 2-way)
-
-        closed_door_levels = [trans.to for trans in CLOSED_DOOR_EXITS]
-        closed_door_levels = list(dict.fromkeys(closed_door_levels))  # remove duplicates
-        random.shuffle(closed_door_levels)
-
-        level_list = [
-            area for area in _transition_infos_dict_rando.values()
-            if __connections_left[area.area_id] > 0
-        ]
-        random.shuffle(level_list)
-        level_list.sort(
-            key=lambda a: (
-                a.area_id in closed_door_levels, __connections_left[a.area_id],
-            ), reverse=True,
-        )
-
-        global __current_hub, loose_ends, total_con_left
-
-        __current_hub = closed_door_levels[0]  # this list is shuffled, so just pick the first one
-        loose_ends = list(CLOSED_DOOR_EXITS)
-        total_con_left = sum(__connections_left[level] for level in closed_door_levels)
-
-        for index in range(1, len(closed_door_levels)):  # we skip the HUB, so we don't start at 0
-            direc = random.choice((-1, 1))
-            index_chosen = random.randrange(index)
-            valid_level = False
-            for loose_end in loose_ends:
-                if loose_end.to == __current_hub:
-                    index_chosen = 0  # at this stage the HUB will always stay as index 0
-                    valid_level = True
-                    break
-            while not valid_level:
-                for loose_end in loose_ends:
-                    if loose_end.to == closed_door_levels[index_chosen]:
-                        valid_level = True
-                        break
-                if not valid_level:
-                    index_chosen = increment_index(index_chosen, index, direc)
-            connect_two_areas(closed_door_levels[index_chosen], closed_door_levels[index])
-
-        index = len(closed_door_levels)  # we skip the closed_door_levels, as they are already done
-        while index < len(level_list):
-            choice = random.choice(tuple(Choice))
-
-            # Option 1: connect to one or more existing levels
-            if total_con_left > 0 and (
-                len(loose_ends) > 0
-                or __connections_left[level_list[index].area_id] == 1
-                or choice == Choice.CONNECT
-            ):
-                total_con_left += __connections_left[level_list[index].area_id]
-                connect_to_existing(index, level_list)
-
-            # Option 2: put the current level inbetween an already established connection
-            elif __connections_left[level_list[index].area_id] > 1:
-                total_con_left += __connections_left[level_list[index].area_id]
-                link_chosen = random.choice(link_list)
-                insert_area_inbetween(link_chosen[0], link_chosen[1], level_list[index].area_id)
-
-            # Option 3: break open a connection that's part of a loop, then restart iteration
-            else:
-                find_and_break_open_connection(link_list)
-                if state.no_connection_found_error:
-                    print(" ")
-                    print(NO_CONNECTION_FOUND_ERROR)
-                    print(" ")
-                    break
-                continue
-
-            index += 1
-
-        # Once the link_list is completed, it's time to fill the transitions_map:
-        transitions_map.update(link_list)
-
-        # the one_way_transitions are added last in order to keep the rest as simple as possible
-        one_way_redirects = list(ONE_WAY_TRANSITIONS)
-        random.shuffle(one_way_redirects)
-        for original in ONE_WAY_TRANSITIONS:
-            if one_way_redirects[0].to == original.from_:
-                transitions_map[original] = one_way_redirects.pop(1)
-            else:
-                transitions_map[original] = one_way_redirects.pop(0)
+        set_linked_transitions()
     else:
         # Ground rules:
         # 1. you can't make a transition from a level to itself
         _possible_redirections_bucket.extend(ONE_WAY_TRANSITIONS)
-        for area in _transition_infos_dict_rando.values():
+        for area in transition_infos_dict_rando.values():
             for to_og in (exit_.area_id for exit_ in area.exits):
                 original = Transition(from_=area.area_id, to=to_og)
                 redirect = get_random_one_way_redirection(original)
