@@ -1,7 +1,7 @@
 repos:
   # Workaround for https://github.com/adamchainz/pre-commit-dprint/issues/4
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
@@ -30,7 +30,7 @@ repos:
         additional_dependencies: ["dprint@~0.46.0"]
         pass_filenames: false # https://github.com/adamchainz/pre-commit-dprint/issues/3#issuecomment-1483410008
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.6.2" # Must match requirements-dev.txt
+    rev: "v0.8.1" # Must match requirements-dev.txt
     hooks:
       - id: ruff
         args: [--fix]
@@ -43,7 +43,7 @@ repos:
     hooks:
       - id: add-trailing-comma
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: "v1.1.377" # Must match requirements-dev.txt
+    rev: "v1.1.389" # Must match requirements-dev.txt
     hooks:
       - id: pyright
         args: [--threads]

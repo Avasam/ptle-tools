@@ -2,5 +2,5 @@ pre-commit
 # Below must match .pre-commit-config.yaml, this is handled by Renovate
 add-trailing-comma==3.1.0
 autopep8==2.3.1
-pyright==1.1.377
-ruff==0.6.2
+pyright==1.1.389
+ruff==0.8.1
