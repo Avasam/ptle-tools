@@ -16,7 +16,7 @@ NEWSFRAGMENTS_FIR = (
 def main():
     invalid_filenames = [
         filename for filename
-        in listdir(NEWSFRAGMENTS_FIR)
+        in listdir(NEWSFRAGMENTS_FIR)  # noqa: PTH208 # Easier as strings
         if not (NEWS_PATTERN.fullmatch(filename) or filename.endswith(".gitignore"))
     ]
 

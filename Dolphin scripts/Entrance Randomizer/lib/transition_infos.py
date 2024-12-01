@@ -20,7 +20,7 @@ class Transition(NamedTuple):
 class ExitJSON(TypedDict):
     area_id: str
     area_name: str
-    requires: None | list[list[str]]
+    requires: list[list[str]] | None
 
 
 class AreaJSON(TypedDict):
@@ -45,7 +45,7 @@ TransitionInfosJSON: TypeAlias = dict[
 class Exit:
     area_id: int
     area_name: str
-    requires: None | list[list[str]]
+    requires: list[list[str]] | None
 
 
 @dataclass(frozen=True)
