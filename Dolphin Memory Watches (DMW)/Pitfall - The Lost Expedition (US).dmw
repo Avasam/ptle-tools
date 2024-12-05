@@ -780,6 +780,20 @@
           "label": "Show second health bar",
           "typeIndex": 2,
           "unsigned": true
+        },
+        {
+          "address": "8041BEB0",
+          "baseIndex": 0,
+          "label": "In transition",
+          "typeIndex": 2,
+          "unsigned": true
+        },
+        {
+          "address": "80421168",
+          "baseIndex": 0,
+          "label": "Is loading",
+          "typeIndex": 2,
+          "unsigned": true
         }
       ],
       "groupName": "Misc"
