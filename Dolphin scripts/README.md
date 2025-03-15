@@ -17,11 +17,21 @@ General:
 
 Transitions:
 
-- Randomization of almost all basic transitions in the game
+- Randomization of almost all transitions in the game
 - Option to manually choose a starting area, or to get a random starting area
-- Option to make all transitions 2-directional, or to allow 1-directional transitions
+- Option to make all applicable transitions 2-directional, or to allow 1-directional transitions
 - Option to skip both Jaguar fights entirely, or to keep them as normal
+- Option to skip all 3 Underwater levels entirely, or to keep them as normal
 - Option to immediately spawn in the Spirit Fight when entering a temple, or to enter normally
+
+Softlock Prevention:
+
+- The algorithm will never generate a map that consists of multiple disconnected 'islands'
+- There will never be levels completely locked off from the rest due to closed doors
+- You will never run into a dead-end due to closed doors
+- Running into a closed door will give you back control over Harry, so you can at least go back where you came from
+- If you get locked in [Scorpion Temple] with no means of getting out, you will be granted Torch
+- If you get locked in [Apu Illapu Shrine] with no means of getting out, you will be kicked out of the level
 
 Shaman Shop:
 
@@ -44,6 +54,7 @@ Shaman Shop:
 5. Configurations are found in `Scripts/Entrance Randomizer/CONFIGS.py`.
 6. In Dolphin, under "Scripts", click "Add new Scripts" and select `Scripts/Entrance Randomizer/__main__.py`.
 7. Enjoy and watch logs for errors 🙂
+8. If you are using a random seed, to generate a different one simply reload the script.
 
 ### About the `.graphml` file
 
@@ -57,17 +68,18 @@ In order to display the generated map take these steps:
 
 ### Known issues and limitations
 
-- To generate a new random seed, simply reload the script.
+- Some seeds will result in impossible to complete configurations, because you might need some items to progress that you don't have yet.
 - Saving and Loading is not supported by this randomizer. You can still do it, but the results will be unpredictable.
   - This means "audio glitch", where sometimes the in-game music gets messed up and becomes very loud, currently has no solution while playing the randomizer.
-- Some seeds will result in impossible to complete configurations, because you might need some items to progress that you don't have yet.
+- If Harry dies at any point the randomizer becomes somewhat unstable. Some of these negative effects may be resolved by dying once more.
+- When using `LINKED_TRANSITIONS = False`, some of the newer features won't work properly. For instance, when using `SKIP_WATER_LEVELS = True` those water levels won't be skipped.
 - When using `LINKED_TRANSITIONS = False` the generated `.graphml` map will become very hard to read, given the extreme amount of connections that will be drawn.
+- When using `SKIP_JAGUAR = True`, after beating Pusca your maximum health will be reduced to 1.
+- Entering [Eyes of Doom] from a closed entrance may softlock the game, as the Softlock Prevention does not work properly for that specific level.
 - In rare occasions, a transition might send you to the game-intended level instead of the level decided by the randomizer (this is an issue with the script patching the destination).
-- In rare occasions, a transition might not make you enter a level from the correct entrance, but make you enter from the default entrance instead
+- In very rare occasions, a transition might not make you enter a level from the correct entrance, but make you enter from the default entrance instead
   - The odds of this happening increase dramatically if at any point in the run Harry died or a save file was loaded.
-- Some linked transitions are not spawning at the right entrance and use the default entrance instead. Known cases:
-  - Jungle Canyon from Punchau Shrine
-  - Bittenbinder's Camp from Mysterious Temple
+- In even rarer occasions, a transition might make you skip a level entirely, sending you from level_1 to level_3 without showing you level_2 at all.
 
 ### Developing
 
