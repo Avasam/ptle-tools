@@ -27,6 +27,12 @@ Replace `XXXX XXXX` by the `asset_crc32` found in [world_infos.json](/Various%20
 043D75E0 3FE38E39
 ```
 
+Effectors Debug View (by DaveUltra+Avasam):
+
+```txt
+044CBAF4 00000001
+```
+
 _**The codes below are a bit jank because they don't follow pointers and can randomly break**_
 
 Infinite Jumps (by Avasam):
