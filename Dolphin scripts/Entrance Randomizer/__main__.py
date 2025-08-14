@@ -95,8 +95,15 @@ async def main_loop():
     state.visited_levels.add(state.current_area_old)
 
     # Skip both Jaguar fights if configured
-    if CONFIGS.SKIP_JAGUAR:
-        if highjack_transition(LevelCRC.MAIN_MENU, LevelCRC.JAGUAR, starting_area):
+    # And always load save file to starting area
+    if CONFIGS.SKIP_JAGUAR or state.current_area_new != LevelCRC.JAGUAR:
+        # If the starting area is Crash Site, we need to avoid resetting progress
+        # Default entrance otherwise
+        if starting_area != LevelCRC.CRASH_SITE and highjack_transition(
+            LevelCRC.MAIN_MENU,
+            None,
+            starting_area,
+        ):
             return
         if highjack_transition(LevelCRC.GATES_OF_EL_DORADO, LevelCRC.JAGUAR, LevelCRC.PUSCA):
             return
