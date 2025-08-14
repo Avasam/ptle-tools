@@ -38,6 +38,14 @@ and you will fight Jaguar 2 before fighting Pusca.
 default = True
 """
 
+SKIP_WATER_LEVELS: bool = True
+"""
+If True, you will completely skip all 3 underwater levels.
+If False, these 3 levels are included in the randomization process normally.
+
+default = True
+"""
+
 IMMEDIATE_SPIRIT_FIGHTS: bool = True
 """
 If True, entering a Temple for which you haven't completed the spirit fight yet will immediately
