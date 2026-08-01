@@ -68,7 +68,8 @@ class MajorAreas(NamedTuple):
     unused: tuple[Area, ...]
 
 
-def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):  # noqa: N802
+# ruff: ignore[invalid-function-name]
+def major_areas_from_JSON(transition_infos_json: TransitionInfosJSON):
     major_areas = [
         tuple([
             Area(

@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import ClassVar
 
 from dolphin import gui  # pyright: ignore[reportMissingModuleSource]
-from lib.constants import *  # noqa: F403
+from lib.constants import *  # ruff: ignore[undefined-local-with-import-star]
 from lib.constants import __version__
 from lib.types_ import SeedType
 
@@ -91,7 +91,8 @@ def prevent_transition_softlocks():
     if (
         # As far as we're concerned, these are indeed magic numbers.
         # We haven't identified a name for these states yet.
-        state.area_load_state_old == 5 and state.area_load_state_new == 6  # noqa: PLR2004
+        # ruff: ignore[magic-value-comparison]
+        state.area_load_state_old == 5 and state.area_load_state_new == 6
         # TODO: Include "from" transition to only bump player up when needed
         and height_offset
     ):
@@ -115,7 +116,7 @@ def prevent_item_softlock():
 
     # Scorpion Temple
     if (
-        state.area_load_state_new == 5  # noqa: PLR2004
+        state.area_load_state_new == 5  # ruff: ignore[magic-value-comparison]
         and state.current_area_new == LevelCRC.SCORPION_TEMPLE
         and -1 < memory.read_f32(
             follow_pointer_path((ADDRESSES.player_ptr, PlayerPtrOffset.PositionX)),
@@ -133,7 +134,8 @@ def prevent_item_softlock():
 
     # Apu Illapu Shrine
     if (
-        state.area_load_state_new == 6  # noqa: PLR2004, PLR0916
+        # ruff: ignore[magic-value-comparison, too-many-boolean-expressions]
+        state.area_load_state_new == 6
         and state.current_area_new == LevelCRC.APU_ILLAPU_SHRINE
         # Pickaxe (already checked), TNT and Breakdance are an easy out
         and not memory.read_u32(ADDRESSES.backpack_struct + BackpackOffset.TNT)

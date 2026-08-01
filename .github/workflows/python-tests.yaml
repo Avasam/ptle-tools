@@ -30,14 +30,14 @@ jobs:
     name: Run pyright
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Get pyright version
         id: pyright_version
         run: |
           PYRIGHT_VERSION=$(grep pyright== 'Dolphin scripts/requirements-dev.txt' | cut -d "#" -f 1 | cut -d \; -f 1 | cut -d = -f 3)
           echo pyright version: "${PYRIGHT_VERSION}"
           echo PYRIGHT_VERSION="${PYRIGHT_VERSION}" >> "${GITHUB_OUTPUT}"
-      - uses: jakebailey/pyright-action@v2
+      - uses: jakebailey/pyright-action@v3
         with:
           version: ${{ steps.pyright_version.outputs.PYRIGHT_VERSION }}
           extra-args: --threads
