@@ -14,10 +14,11 @@ real_scripts_path = os.path.realpath(dolphin_path / "Scripts")
 print("Real Scripts path:", real_scripts_path)
 sys.path.append(f"{real_scripts_path}/Entrance Randomizer")
 # Wait for the first frame before scanning the game for constants
-await event.frameadvance()  # noqa: F704, PLE1142  # pyright: ignore
+# ruff: ignore[yield-outside-function, await-outside-async]  # pyright: ignore
+await event.frameadvance()
 
 import CONFIGS
-from lib.constants import *  # noqa: F403
+from lib.constants import *  # ruff: ignore[undefined-local-with-import-star]
 from lib.constants import __version__
 from lib.entrance_rando import (
     CLOSED_DOOR_EXITS,
@@ -127,4 +128,5 @@ async def main_loop():
 
 
 while True:
-    await main_loop()  # noqa: F704, PLE1142  # pyright: ignore
+    # ruff: ignore[yield-outside-function, await-outside-async]  # pyright: ignore
+    await main_loop()
