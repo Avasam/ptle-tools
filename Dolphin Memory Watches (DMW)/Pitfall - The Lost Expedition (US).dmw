@@ -269,6 +269,41 @@
                         {
                             "address": "8041BE4C",
                             "baseIndex": 0,
+                            "label": "X",
+                            "pointerOffsets": [
+                                "1A0"
+                            ],
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8041BE4C",
+                            "baseIndex": 0,
+                            "label": "Y",
+                            "pointerOffsets": [
+                                "1A4"
+                            ],
+                            "typeIndex": 3,
+                            "unsigned": false
+                        },
+                        {
+                            "address": "8041BE4C",
+                            "baseIndex": 0,
+                            "label": "Z",
+                            "pointerOffsets": [
+                                "1A8"
+                            ],
+                            "typeIndex": 3,
+                            "unsigned": false
+                        }
+                    ],
+                    "groupName": "Velocity (units/s)"
+                },
+                {
+                    "groupEntries": [
+                        {
+                            "address": "8041BE4C",
+                            "baseIndex": 0,
                             "label": "Invincible",
                             "pointerOffsets": [
                                 "960"
