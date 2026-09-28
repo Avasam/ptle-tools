@@ -40,7 +40,7 @@ jobs:
           7z x \
           '${{ steps.packname.outputs.packname }}.zip' \
           -o'${{ steps.packname.outputs.packname }}'
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: ${{ steps.packname.outputs.packname }}
           path: ${{ steps.packname.outputs.packname }}/*
