@@ -423,7 +423,7 @@
       "asset_id": 1394962713,
       "asset_crc32": "5325 7119",
       "asset_name": "a02b",
-      "area_name": "Plane Crash"
+      "area_name": "Plane Crash (Cutscene)"
     }
   ],
   "Ending": [
@@ -442,13 +442,13 @@
       "area_name": "Ancient El Dorado (Pusca)"
     }
   ],
-  "Warp": [
+  "Teleport Room": [
     {
       "id": 81,
       "asset_id": 3917263996,
       "asset_crc32": "E97C B47C",
       "asset_name": "save_warp_b_master",
-      "area_name": "Teleport"
+      "area_name": "Teleport Room"
     }
   ],
   "Unused": [
