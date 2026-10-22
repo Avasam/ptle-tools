@@ -439,7 +439,7 @@
     },
     {
       "area_id": "0xE97CB47C",
-      "area_name": "Teleports",
+      "area_name": "Teleport Room",
       "default_entrance": "0x239A2165",
       "exits": [
         {

@@ -114,7 +114,7 @@ To add a changelog entry, add a new file `<issue_or_pr_#>.<type>.md` to the `new
 
 - Now comes with a readme! <https://github.com/Avasam/ptle-tools/tree/main/Dolphin%20scripts#entrance-randomizer-prototype>
 - Linked transitions should now be a thing, although: "Non-vanilla transitions will always spawn Harry at the default entrance. This can be a bit confusing when using linked transitions."
-- Crash Site and Teleports have been taken out of randomization (even if I could randomize at least the exits in non-linked transitions, I decided it's easier for now to just keep them vanilla)
+- Crash Site and Teleport Room have been taken out of randomization (even if I could randomize at least the exits in non-linked transitions, I decided it's easier for now to just keep them vanilla)
 - The Altar of Ages shortcut back to BBCamp after the cutscene from the first visit has been disabled. This standardizes exits.
 - St. Claire's Excavation Camp Day and Night are now considered the same map for the Randomizer. And visiting Altar of Ages to get night camp is now enforced.
 - Removed St. Claire's Excavation Camp, Apu Illapu Shrine (aka Spinjas) and Scorpion Temple from possible random starting areas (avoids immediate impossible seeds and getting TNT as your first area).
