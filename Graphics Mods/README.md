@@ -20,3 +20,12 @@ This includes:
 - Canteen' UI
 
 ![Clear HUD demo](./Clear%20HUD%20demo.png)
+
+## Sharp load animation
+
+Renders the load animation pixel art using Force Nearest. By Avasam.
+
+Notice the blurry art and white outline.
+|16x Anisotropic|Force Nearest|
+|-|-|
+|![Load Anisotropic 16x](./Sharp%20load%20animation%20demo%2016x%20Anisotropic.png)|![Load Force Nearest](./Sharp%20load%20animation%20demo%20Force%20Nearest.png)|

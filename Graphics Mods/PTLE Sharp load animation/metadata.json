@@ -1,0 +1,74 @@
+{
+	"meta": {
+		"title": "Sharp load animation",
+		"description": "Renders the load animation pixel art using Force Nearest.",
+		"author": "Avasam"
+	},
+	"groups": [
+		{
+			"name": "Textures",
+			"targets": [
+				{
+					"type": "load_texture",
+					"prettyname": "harry_run_01",
+					"texture_filename": "tex1_32x32_9c34e129c32715d3_ed33768f2818534e_9"
+				},
+				{
+					"type": "load_texture",
+					"prettyname": "harry_run_02",
+					"texture_filename": "tex1_32x32_6d066cd3588eb33c_52636a5d5e5975f6_9"
+				},
+				{
+					"type": "load_texture",
+					"prettyname": "harry_run_03",
+					"texture_filename": "tex1_32x32_62ef270bc4a9afc1_2e23e74471c73050_9"
+				},
+				{
+					"type": "load_texture",
+					"prettyname": "harry_run_04",
+					"texture_filename": "tex1_32x32_cb59516e19d109f8_52636a5d5e5975f6_9"
+				},
+				{
+					"type": "load_texture",
+					"prettyname": "harry_run_05",
+					"texture_filename": "tex1_32x32_4130408174cebbef_2e23e74471c73050_9"
+				},
+				{
+					"type": "load_texture",
+					"prettyname": "harry_run_06",
+					"texture_filename": "tex1_32x32_6a7ec037e869872b_5dbb709af0585d96_9"
+				},
+				{
+					"type": "load_texture",
+					"prettyname": "harry_run_07",
+					"texture_filename": "tex1_32x32_309f3e07cfda7b75_7076d4a00c05131b_9"
+				},
+				{
+					"type": "load_texture",
+					"prettyname": "harry_run_08",
+					"texture_filename": "tex1_32x32_a0a28397e56a66e6_ed33768f2818534e_9"
+				},
+				{
+					"type": "load_texture",
+					"prettyname": "harry_run_09",
+					"texture_filename": "tex1_32x32_744700800b16808b_2e23e74471c73050_9"
+				},
+				{
+					"type": "load_texture",
+					"prettyname": "harry_run_10",
+					"texture_filename": "tex1_32x32_7241b51e0ae58f08_2e23e74471c73050_9"
+				}
+			]
+		}
+	],
+	"features": [
+		{
+			"group": "Textures",
+			"action": "set_texture_properties",
+			"action_data": {
+				"min_filter": "near",
+				"mag_filter": "near"
+			}
+		}
+	]
+}
