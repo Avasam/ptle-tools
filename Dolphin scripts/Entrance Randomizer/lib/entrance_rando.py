@@ -7,7 +7,7 @@ from enum import IntEnum, auto
 from itertools import starmap
 
 import CONFIGS
-from lib.constants import *  # noqa: F403
+from lib.constants import *  # ruff: ignore[undefined-local-with-import-star]
 from lib.transition_infos import Area, Exit, Transition
 from lib.utils import follow_pointer_path, state
 
@@ -501,7 +501,8 @@ def get_random_one_way_redirection(original: Transition):
 
 
 # TODO: Break up in smaller functions before changing anything else
-def set_transitions_map():  # noqa: C901, PLR0912, PLR0914, PLR0915
+# ruff: ignore[complex-structure, too-many-branches, too-many-locals, too-many-statements]
+def set_transitions_map():
     transitions_map.clear()
     remove_disabled_exits()
     initialize_connections_left()

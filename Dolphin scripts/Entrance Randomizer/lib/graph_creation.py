@@ -4,7 +4,7 @@ from collections.abc import Container, Iterable, Mapping, Sequence
 from enum import IntEnum, auto
 from pathlib import Path
 
-from lib.constants import *  # noqa: F403
+from lib.constants import *  # ruff: ignore[undefined-local-with-import-star]
 from lib.constants import __version__
 from lib.types_ import SeedType
 

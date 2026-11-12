@@ -6,7 +6,7 @@ from enum import IntEnum
 from typing import Literal
 
 import CONFIGS
-from lib.constants import *  # noqa: F403
+from lib.constants import *  # ruff: ignore[undefined-local-with-import-star]
 
 MAX_IDOLS = 138
 DEFAULT_SHOP_PRICES = [2, 4, 8, 16, 32, 1, 2, 3, 4, 5, 10, 10, 10, 9, 7, 7, 8, 0]
@@ -133,11 +133,35 @@ def randomize_shaman_shop():
 
             # Strongly bias the distribution towards the middle
             price = randint_with_bias(min_price, max_price, 3, "start")
-            print(f"\n{idols_left=}, {price=}, {min_price=}, {max_price=}, {maximum_min_price=}, {items_left=}\n")  # noqa: E501
+            print(
+                f"\n{
+                    idols_left=
+                }, {
+                    price=
+                }, {
+                    min_price=
+                }, {
+                    max_price=
+                }, {
+                        maximum_min_price=
+                }, {
+                            items_left=
+                }\n",
+            )  # ruff: ignore[line-too-long]
 
             idols_left -= price
             if idols_left < 0:
-                raise RuntimeError(f"Oops, somehow we used too many idols! {idols_left=}, {price=}, {min_price=}, {max_price=}")  # noqa: E501
+                raise RuntimeError(
+                    f"Oops, somehow we used too many idols! {
+                        idols_left=
+                    }, {
+                        price=
+                    }, {
+                        min_price=
+                    }, {
+                        max_price=
+                    }",
+                )  # ruff: ignore[line-too-long]
             _shaman_shop_prices.append(price)
 
             # Try to avoid repeated low prices
@@ -149,7 +173,10 @@ def randomize_shaman_shop():
                 max_price -= 1
 
         if sum(_shaman_shop_prices) != MAX_IDOLS:
-            raise RuntimeError(f"{_shaman_shop_prices=} totals {sum(_shaman_shop_prices)}, which isn't {MAX_IDOLS}.")  # noqa: E501
+            # ruff: ignore[line-too-long]
+            raise RuntimeError(
+                f"{_shaman_shop_prices=} totals {sum(_shaman_shop_prices)}, which isn't {MAX_IDOLS}.",
+            )
 
     random.shuffle(_shaman_shop_prices)
     if CONFIGS.DISABLE_MAPS_IN_SHOP:
