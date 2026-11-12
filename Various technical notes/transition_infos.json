@@ -1008,7 +1008,7 @@
     {
       "area_id": "0x1B8833D3",
       "area_name": "Mountain Sled Run",
-      "default_entrance": "0x8147EA91",
+      "default_entrance": "0x62548B77",
       "exits": [
         {
           "area_id": "0x8147EA91",

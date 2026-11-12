@@ -21,11 +21,14 @@ from lib.constants import *  # noqa: F403
 from lib.constants import __version__
 from lib.entrance_rando import (
     CLOSED_DOOR_EXITS,
+    DISABLED_TRANSITIONS,
     NO_CONNECTION_FOUND_ERROR,
-    SHOWN_DISABLED_TRANSITIONS,
+    bypassed_exits,
     highjack_transition_rando,
+    manually_disabled_transitions,
     set_transitions_map,
     starting_area,
+    transition_infos_dict_rando,
     transitions_map,
 )
 from lib.graph_creation import create_graphml
@@ -51,10 +54,17 @@ except KeyError:
     starting_area_name = hex(starting_area).upper() + " (unknown level)"
 
 # Dump spoiler logs and graph
-dump_spoiler_logs(starting_area_name, transitions_map, seed_string)
+dump_spoiler_logs(
+    starting_area_name,
+    transitions_map,
+    seed_string,
+    transition_infos_dict_rando,
+    bypassed_exits,
+    DISABLED_TRANSITIONS,
+)
 create_graphml(
     transitions_map,
-    SHOWN_DISABLED_TRANSITIONS,
+    manually_disabled_transitions,
     CLOSED_DOOR_EXITS,
     seed_string,
     starting_area,
@@ -100,6 +110,13 @@ async def main_loop():
             return
         if highjack_transition(LevelCRC.GATES_OF_EL_DORADO, LevelCRC.JAGUAR, LevelCRC.PUSCA):
             return
+        # This does NOT influence how you start the level unfortunately,
+        # but at least it makes sure the Teleporters work right from the get-go.
+        if previous_area_id == LevelCRC.MAIN_MENU and state.current_area_new == starting_area:
+            memory.write_u32(
+                follow_pointer_path(ADDRESSES.prev_area),
+                TRANSITION_INFOS_DICT[starting_area].default_entrance,
+            )
 
     # Standardize the Altar of Ages exit to remove the Altar -> BBCamp transition
     highjack_transition(
@@ -114,11 +131,6 @@ async def main_loop():
         LevelCRC.VIRACOCHA_MONOLITHS_CUTSCENE,
         LevelCRC.VIRACOCHA_MONOLITHS,
     )
-
-    # Standardize St. Claire's Excavation Camp
-    highjack_transition(None, LevelCRC.ST_CLAIRE_NIGHT, LevelCRC.ST_CLAIRE_DAY)
-
-    # TODO: Skip swim levels (3)
 
     highjack_transition_rando()
 
