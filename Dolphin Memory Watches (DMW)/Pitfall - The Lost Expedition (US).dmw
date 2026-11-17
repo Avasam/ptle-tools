@@ -1095,6 +1095,14 @@
           "unsigned": false
         },
         {
+          "absoluteBranch": false,
+          "address": "804CB974",
+          "baseIndex": 0,
+          "label": "INV DEBUG",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
           "groupEntries": [],
           "groupName": "--- Effect unknown below ---"
         },
@@ -1132,33 +1140,9 @@
         },
         {
           "absoluteBranch": false,
-          "address": "804CB690",
-          "baseIndex": 0,
-          "label": "Havok Level Geom (needs function call)",
-          "typeIndex": 2,
-          "unsigned": false
-        },
-        {
-          "absoluteBranch": false,
           "address": "8041BE70",
           "baseIndex": 0,
           "label": "Display Timing",
-          "typeIndex": 2,
-          "unsigned": false
-        },
-        {
-          "absoluteBranch": false,
-          "address": "804CB6F0",
-          "baseIndex": 0,
-          "label": "Game Debug Cheats (needs function call, sets cheat flag 3)",
-          "typeIndex": 2,
-          "unsigned": false
-        },
-        {
-          "absoluteBranch": false,
-          "address": "804CB974",
-          "baseIndex": 0,
-          "label": "Cheat flag 3 (set by Game Debug Cheats)",
           "typeIndex": 2,
           "unsigned": false
         }

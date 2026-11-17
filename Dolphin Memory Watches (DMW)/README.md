@@ -68,5 +68,11 @@ $Debug: Depth Complexity View on Z+Start [Avasam]
 *Hold Z and press Start to toggle an overdraw view: the scene drawn as green see-through layers, brighter where more surfaces overlap. Enable only one "on Z+Start" code.
 ```
 
+```txt
+$Debug: INV DEBUG Pause Menu Page [Avasam]
+044CB974 00000001
+*Adds the INV DEBUG page to the pause menu. It lets you pick the item on each D-pad direction, and unlock all six Heroic Moves at any time.
+```
+
 Other PTLE GC codes I found (not mines): <https://etherealgames.com/gcn/p/pitfall-the-lost-expedition/action-replay-codes-us/>
 (TODO: Copy here, and/or even to official Dolphin AR codes?)
