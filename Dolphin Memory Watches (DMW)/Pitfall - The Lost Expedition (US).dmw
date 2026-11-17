@@ -136,6 +136,22 @@
         },
         {
           "absoluteBranch": false,
+          "address": "8045D998",
+          "baseIndex": 0,
+          "label": "No Gravity (Objects Only)",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "absoluteBranch": false,
+          "address": "8045D99C",
+          "baseIndex": 0,
+          "label": "Low Gravity (Objects Only)",
+          "typeIndex": 2,
+          "unsigned": false
+        },
+        {
+          "absoluteBranch": false,
           "address": "8045D9B0",
           "baseIndex": 0,
           "label": "Emulator: Pitfall!",
